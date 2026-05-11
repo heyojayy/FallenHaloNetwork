@@ -3,329 +3,436 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minecraft Server</title>
+
+  <title>Fallen Halo Network</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
     }
 
-    body {
-      background: #ffffff;
-      color: #222;
-      overflow-x: hidden;
+    body{
+      font-family:'Poppins',sans-serif;
+      background:
+      radial-gradient(circle at top left,#d8fffb 0%,#ffffff 35%),
+      radial-gradient(circle at bottom right,#c7f8f4 0%,#ffffff 35%);
+      color:#1f1f1f;
+      overflow-x:hidden;
+    }
+
+    ::selection{
+      background:#7de4db;
+      color:white;
+    }
+
+    /* SCROLLBAR */
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#8debe2;
+      border-radius:20px;
     }
 
     /* NAVBAR */
 
-    nav {
-      width: 100%;
-      padding: 18px 8%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #dff7f5;
+    nav{
+      width:100%;
+      padding:22px 7%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      z-index:1000;
+
+      background:rgba(255,255,255,0.7);
+      backdrop-filter:blur(12px);
+
+      border-bottom:1px solid rgba(120,230,220,0.2);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #57cfc8;
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-size:24px;
+      font-weight:700;
+      color:#61d8cf;
     }
 
-    .logo img {
-      width: 48px;
-      height: 48px;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #eee;
+    .logo img{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      object-fit:cover;
+      background:#ececec;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
+    .nav-links{
+      display:flex;
+      gap:35px;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: 0.2s;
+    .nav-links a{
+      text-decoration:none;
+      color:#333;
+      font-weight:500;
+      position:relative;
+      transition:0.2s;
     }
 
-    .nav-links a:hover {
-      color: #57cfc8;
+    .nav-links a:hover{
+      color:#61d8cf;
     }
 
     /* HERO */
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 8% 80px;
-      gap: 60px;
-      flex-wrap: wrap;
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:140px 7% 90px;
+      gap:70px;
+      flex-wrap:wrap;
+      position:relative;
     }
 
-    .hero-text {
-      flex: 1;
-      min-width: 320px;
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:700px;
+      height:700px;
+      background:#bffff7;
+      filter:blur(130px);
+      opacity:0.3;
+      z-index:-1;
+      animation:float 8s ease-in-out infinite;
     }
 
-    .hero-text h1 {
-      font-size: 64px;
-      line-height: 1.1;
-      margin-bottom: 20px;
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-25px);}
+      100%{transform:translateY(0px);}
     }
 
-    .hero-text span {
-      color: #57cfc8;
+    .hero-left{
+      flex:1;
+      min-width:320px;
+
+      animation:fadeUp 1s ease;
     }
 
-    .hero-text p {
-      color: #666;
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      max-width: 600px;
+    .hero-left h1{
+      font-size:78px;
+      line-height:1;
+      margin-bottom:25px;
+      font-weight:800;
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
+    .gradient{
+      background:linear-gradient(90deg,#5fd7ce,#8cf0e7);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
 
-    .btn {
-      padding: 14px 28px;
-      border-radius: 14px;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      text-decoration: none;
+    .hero-left p{
+      color:#666;
+      line-height:1.9;
+      font-size:18px;
+      max-width:620px;
+      margin-bottom:35px;
     }
 
-    .btn-primary {
-      background: #57cfc8;
-      color: white;
+    .hero-buttons{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
     }
 
-    .btn-primary:hover {
-      background: #42b8b1;
-      transform: translateY(-2px);
+    .btn{
+      padding:15px 32px;
+      border-radius:18px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.25s;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .btn-secondary {
-      background: #f3fdfc;
-      color: #57cfc8;
-      border: 2px solid #57cfc8;
+    .btn-main{
+      background:linear-gradient(135deg,#63ddd3,#8ef3ea);
+      color:white;
+      box-shadow:0 10px 30px rgba(97,216,207,0.35);
     }
 
-    .btn-secondary:hover {
-      background: #57cfc8;
-      color: white;
+    .btn-main:hover{
+      transform:translateY(-4px);
     }
 
-    .hero-image {
-      flex: 1;
-      min-width: 320px;
-      display: flex;
-      justify-content: center;
+    .btn-secondary{
+      border:2px solid #75e4da;
+      color:#63d8ce;
+      background:white;
     }
 
-    .hero-image img {
-      width: 100%;
-      max-width: 550px;
-      border-radius: 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-      object-fit: cover;
-      background: #eee;
+    .btn-secondary:hover{
+      background:#75e4da;
+      color:white;
+    }
+
+    .hero-right{
+      flex:1;
+      min-width:320px;
+      display:flex;
+      justify-content:center;
+
+      animation:fadeUp 1.2s ease;
+    }
+
+    .hero-card{
+      width:100%;
+      max-width:560px;
+      background:rgba(255,255,255,0.65);
+      backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,0.5);
+      border-radius:35px;
+      overflow:hidden;
+      box-shadow:0 25px 60px rgba(0,0,0,0.08);
+    }
+
+    .hero-card img{
+      width:100%;
+      height:360px;
+      object-fit:cover;
+      background:#efefef;
+    }
+
+    .server-status{
+      padding:30px;
+    }
+
+    .server-status h3{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .online{
+      color:#58d4ca;
+      font-weight:600;
     }
 
     /* SECTION */
 
-    section {
-      padding: 90px 8%;
+    section{
+      padding:110px 7%;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
+    .section-title{
+      text-align:center;
+      margin-bottom:65px;
     }
 
-    .section-title h2 {
-      font-size: 42px;
-      margin-bottom: 10px;
+    .section-title h2{
+      font-size:52px;
+      margin-bottom:10px;
     }
 
-    .section-title p {
-      color: #666;
+    .section-title p{
+      color:#666;
     }
 
     /* FEATURES */
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+    .features{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:28px;
     }
 
-    .feature-card {
-      background: #f7ffff;
-      padding: 35px;
-      border-radius: 24px;
-      border: 1px solid #ddf5f3;
-      transition: 0.25s;
+    .feature{
+      background:rgba(255,255,255,0.65);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(125,228,219,0.2);
+
+      padding:35px;
+      border-radius:28px;
+
+      transition:0.3s;
     }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(87, 207, 200, 0.15);
+    .feature:hover{
+      transform:translateY(-8px);
+      box-shadow:0 20px 50px rgba(107,224,215,0.18);
     }
 
-    .feature-card h3 {
-      margin-bottom: 12px;
-      color: #57cfc8;
+    .feature h3{
+      margin-bottom:15px;
+      color:#5ed5cc;
+      font-size:24px;
     }
 
-    .feature-card p {
-      color: #666;
-      line-height: 1.7;
+    .feature p{
+      color:#666;
+      line-height:1.8;
     }
 
     /* GALLERY */
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:25px;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 22px;
-      background: #eee;
+    .gallery img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      border-radius:28px;
+      transition:0.35s;
+      background:#ececec;
+    }
+
+    .gallery img:hover{
+      transform:scale(1.03);
     }
 
     /* STAFF */
 
-    .staff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+    .staff-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:25px;
     }
 
-    .staff-card {
-      background: #f8ffff;
-      border: 1px solid #ddf5f3;
-      padding: 30px;
-      border-radius: 24px;
-      text-align: center;
-      transition: 0.25s;
+    .staff-card{
+      background:rgba(255,255,255,0.72);
+      border:1px solid rgba(125,228,219,0.2);
+
+      padding:35px;
+      border-radius:30px;
+      text-align:center;
+
+      transition:0.3s;
     }
 
-    .staff-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(87, 207, 200, 0.12);
+    .staff-card:hover{
+      transform:translateY(-7px);
+      box-shadow:0 20px 45px rgba(109,224,215,0.16);
     }
 
-    .staff-card img {
-      width: 110px;
-      height: 110px;
-      image-rendering: pixelated;
-      margin-bottom: 18px;
-      border-radius: 18px;
-      background: #eee;
+    .staff-card img{
+      width:120px;
+      height:120px;
+      image-rendering:pixelated;
+      margin-bottom:20px;
+      border-radius:22px;
+      background:#efefef;
     }
 
-    .staff-card h3 {
-      margin-bottom: 5px;
+    .staff-card h3{
+      margin-bottom:6px;
+      font-size:24px;
     }
 
-    .staff-card p {
-      color: #57cfc8;
-      font-weight: 600;
+    .staff-card p{
+      color:#5ed5cc;
+      font-weight:600;
     }
 
     /* FAQ */
 
-    .faq-container {
-      max-width: 900px;
-      margin: auto;
+    .faq{
+      max-width:950px;
+      margin:auto;
     }
 
-    details {
-      background: #f8ffff;
-      border: 1px solid #ddf5f3;
-      border-radius: 18px;
-      padding: 20px 25px;
-      margin-bottom: 18px;
-      transition: 0.2s;
+    details{
+      background:rgba(255,255,255,0.75);
+      border:1px solid rgba(125,228,219,0.2);
+
+      margin-bottom:20px;
+      padding:22px 28px;
+
+      border-radius:22px;
+      transition:0.25s;
     }
 
-    details:hover {
-      box-shadow: 0 6px 20px rgba(87, 207, 200, 0.08);
+    details:hover{
+      box-shadow:0 10px 30px rgba(110,224,215,0.12);
     }
 
-    summary {
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      color: #333;
-      list-style: none;
+    summary{
+      cursor:pointer;
+      font-weight:600;
+      font-size:18px;
+      list-style:none;
     }
 
-    summary::-webkit-details-marker {
-      display: none;
+    summary::-webkit-details-marker{
+      display:none;
     }
 
-    details p {
-      margin-top: 15px;
-      color: #666;
-      line-height: 1.7;
+    details p{
+      margin-top:16px;
+      color:#666;
+      line-height:1.8;
     }
 
     /* FOOTER */
 
-    footer {
-      padding: 40px 8%;
-      text-align: center;
-      background: #f8ffff;
-      color: #666;
-      border-top: 1px solid #ddf5f3;
+    footer{
+      padding:45px;
+      text-align:center;
+      color:#666;
+      border-top:1px solid rgba(125,228,219,0.2);
+      background:rgba(255,255,255,0.6);
+      backdrop-filter:blur(10px);
+    }
+
+    /* ANIMATION */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
     /* MOBILE */
 
-    @media(max-width: 900px) {
-      .hero-text h1 {
-        font-size: 46px;
+    @media(max-width:900px){
+
+      .hero-left h1{
+        font-size:56px;
       }
 
-      .nav-links {
-        display: none;
+      .nav-links{
+        display:none;
       }
+
+      .section-title h2{
+        font-size:42px;
+      }
+
     }
+
   </style>
 </head>
 
@@ -334,10 +441,11 @@
   <!-- NAVBAR -->
 
   <nav>
+
     <div class="logo">
-      <!-- INSERT YOUR LOGO -->
+      <!-- INSERT LOGO HERE -->
       <img src="logo.png" alt="Logo">
-      <div>YourServer</div>
+      <span>Fallen Halo</span>
     </div>
 
     <div class="nav-links">
@@ -346,29 +454,58 @@
       <a href="#staff">Staff</a>
       <a href="#faq">FAQ</a>
     </div>
+
   </nav>
 
   <!-- HERO -->
 
   <section class="hero">
 
-    <div class="hero-text">
-      <h1>Join The <span>Ultimate</span><br>Minecraft Experience</h1>
+    <div class="hero-left">
+
+      <h1>
+        Fallen Halo<br>
+        <span class="gradient">Network</span>
+      </h1>
 
       <p>
-        Explore survival, economy, events, PvP, custom features,
-        and an amazing community on our Minecraft server.
+        Experience the next generation Minecraft server with economy,
+        custom features, exciting events, PvP, and an amazing community.
       </p>
 
       <div class="hero-buttons">
-        <a href="#" class="btn btn-primary">Play Now</a>
-        <a href="#" class="btn btn-secondary">Discord</a>
+
+        <a href="#" class="btn btn-main">
+          Play Now
+        </a>
+
+        <a href="#" class="btn btn-secondary">
+          Discord
+        </a>
+
       </div>
+
     </div>
 
-    <div class="hero-image">
-      <!-- INSERT HERO IMAGE -->
-      <img src="hero-image.png" alt="Minecraft Server">
+    <div class="hero-right">
+
+      <div class="hero-card">
+
+        <!-- HERO IMAGE -->
+        <img src="hero-image.png" alt="Server">
+
+        <div class="server-status">
+
+          <h3>Server Status</h3>
+
+          <p class="online">
+            ● Online — 142 Players
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
 
   </section>
@@ -379,32 +516,32 @@
 
     <div class="section-title">
       <h2>Server Features</h2>
-      <p>Why players love our server</p>
+      <p>Why players love Fallen Halo Network</p>
     </div>
 
     <div class="features">
 
-      <div class="feature-card">
+      <div class="feature">
         <h3>Economy</h3>
         <p>
-          Build shops, trade with players,
-          and become the richest player.
+          Build shops, grind money,
+          and dominate the server economy.
         </p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature">
         <h3>Custom Events</h3>
         <p>
-          Participate in exciting events,
-          giveaways, and tournaments.
+          Participate in tournaments,
+          giveaways, and seasonal events.
         </p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature">
         <h3>Friendly Community</h3>
         <p>
           Meet amazing players and enjoy
-          a fun and welcoming environment.
+          a welcoming Minecraft experience.
         </p>
       </div>
 
@@ -417,15 +554,15 @@
   <section id="gallery">
 
     <div class="section-title">
-      <h2>Server Gallery</h2>
-      <p>Add your own server screenshots here</p>
+      <h2>Gallery</h2>
+      <p>Insert your own screenshots here</p>
     </div>
 
     <div class="gallery">
 
-      <img src="image1.png" alt="Gallery">
-      <img src="image2.png" alt="Gallery">
-      <img src="image3.png" alt="Gallery">
+      <img src="image1.png" alt="">
+      <img src="image2.png" alt="">
+      <img src="image3.png" alt="">
 
     </div>
 
@@ -437,30 +574,26 @@
 
     <div class="section-title">
       <h2>Staff Team</h2>
-      <p>Meet the server staff</p>
+      <p>Meet the team behind Fallen Halo</p>
     </div>
 
     <div class="staff-grid">
 
       <div class="staff-card">
-        <!-- MINECRAFT SKIN HEAD -->
-        <img src="https://mc-heads.net/avatar/Notch" alt="Owner">
-
-        <h3>OwnerName</h3>
+        <img src="https://mc-heads.net/avatar/Notch" alt="">
+        <h3>Xeno</h3>
         <p>Owner</p>
       </div>
 
       <div class="staff-card">
-        <img src="https://mc-heads.net/avatar/Steve" alt="Admin">
-
-        <h3>AdminName</h3>
+        <img src="https://mc-heads.net/avatar/Steve" alt="">
+        <h3>Kael</h3>
         <p>Administrator</p>
       </div>
 
       <div class="staff-card">
-        <img src="https://mc-heads.net/avatar/Alex" alt="Moderator">
-
-        <h3>ModName</h3>
+        <img src="https://mc-heads.net/avatar/Alex" alt="">
+        <h3>Nova</h3>
         <p>Moderator</p>
       </div>
 
@@ -477,26 +610,26 @@
       <p>Click to expand</p>
     </div>
 
-    <div class="faq-container">
+    <div class="faq">
 
       <details>
         <summary>What is the server IP?</summary>
-        <p>play.yourserver.com</p>
+        <p>play.fallenhalo.net</p>
       </details>
 
       <details>
-        <summary>What Minecraft version do you support?</summary>
-        <p>We support Minecraft Java Edition 1.21+</p>
+        <summary>What Minecraft version is supported?</summary>
+        <p>Supports Minecraft Java Edition 1.21+</p>
       </details>
 
       <details>
-        <summary>How do I join the Discord server?</summary>
-        <p>Add your Discord invite link here.</p>
+        <summary>How do I join the Discord?</summary>
+        <p>Insert your Discord invite link here.</p>
       </details>
 
       <details>
         <summary>Is the server cracked?</summary>
-        <p>Answer your cracked/premium information here.</p>
+        <p>Add your cracked/premium information here.</p>
       </details>
 
     </div>
@@ -506,8 +639,8 @@
   <!-- FOOTER -->
 
   <footer>
-    © 2026 YourServer. All Rights Reserved.
+    © 2026 Fallen Halo Network. All Rights Reserved.
   </footer>
 
 </body>
-  </html>
+</html>
