@@ -594,14 +594,14 @@ footer {
             <span class="gradient">Network</span>
         </h1>
         <div class="status">
-            <i class="fas fa-circle"></i> Online • 58 Players
+            <i class="fas fa-circle"></i> Offline • 0 Players
         </div>
 
         <div class="connect-wrap">
             <div class="connect-card">
                 <i class="fas fa-globe"></i>
-                <div class="connect-title">Server Address</div>
-                <div class="connect-value">play.fallenhalo.net</div>
+                <div class="connect-title">Server Address (W.I.P)</div>
+                <div class="connect-value">none</div>
                 <button onclick="copyIP()">
                     <i class="fas fa-copy"></i> Copy IP
                 </button>
@@ -653,15 +653,15 @@ footer {
 <section id="faq">
     <div class="section-title"><h2>✦ FAQ ✦</h2></div>
     <div class="faq-grid">
-        <div class="faq-card"><i class="fas fa-question-circle"></i><h3>What version?</h3><p>Java 1.20 - 1.21+ supported</p></div>
-        <div class="faq-card"><i class="fas fa-shield-alt"></i><h3>Anti cheat?</h3><p>Premium anti-cheat & staff 24/7</p></div>
-        <div class="faq-card"><i class="fas fa-store"></i><h3>Store items?</h3><p>Cosmetics, ranks and crates</p></div>
+        <div class="faq-card"><i class="fas fa-question-circle"></i><h3>Empty FAQ</h3><p>Empty</p></div>
+        <div class="faq-card"><i class="fas fa-shield-alt"></i><h3>Empty FAQ</h3><p>Empty</p></div>
+        <div class="faq-card"><i class="fas fa-store"></i><h3>Empty FAQ</h3><p>Empty</p></div>
     </div>
 </section>
 
 <footer>
-    <p>© 2025 Fallen Halo Network — Where legends are forged</p>
-    <p>✦ play.fallenhalo.net ✦</p>
+    <p>© 2026 Fallen Halo Network — Where legends are forged</p>
+    <p>✦ Server Address (W.I.P)✦</p>
 </footer>
 
 <script>
@@ -692,14 +692,14 @@ function copyIP() {
     const ipText = "play.fallenhalo.net";
     navigator.clipboard.writeText(ipText).then(() => {
         let notif = document.createElement('div');
-        notif.innerText = "✓ Server IP copied! play.fallenhalo.net";
+        notif.innerText = "✓ Server IP copied! Server Address (W.I.P)";
         notif.className = "copy-notify";
         document.body.appendChild(notif);
         setTimeout(() => {
             notif.remove();
         }, 1800);
     }).catch(() => {
-        alert("Copy manually: play.fallenhalo.net");
+        alert("Copy manually: Server Address (W.I.P)");
     });
 }
 
