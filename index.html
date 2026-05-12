@@ -11,7 +11,7 @@
 <style>
 
 /* ========================= */
-/* GLOBAL */
+/* GLOBAL THEME (Tiffany refined) */
 /* ========================= */
 
 *{
@@ -25,8 +25,9 @@
 body{
     font-family:'Poppins',sans-serif;
     overflow-x:hidden;
-    color:#222;
-    background:#f7f9fb;
+    color:#1f2a2a;
+
+    background:linear-gradient(135deg,#e6fffb,#f7fffe,#ffffff);
 }
 
 /* ========================= */
@@ -45,22 +46,39 @@ nav{
 
     padding:18px 7%;
 
-    background:rgba(255,255,255,0.8);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(0,0,0,0.05);
+    background:rgba(235,255,252,0.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(63,199,183,0.15);
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
     font-size:22px;
     font-weight:700;
     color:#3fc7b7;
 }
 
+/* NAV LINKS + HOVER SCALE FIX */
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#2b3b3a;
+    font-weight:500;
+    transition:0.25s;
+    position:relative;
+}
+
+/* 🔥 hover enlarge effect */
+.nav-links a:hover{
+    transform:scale(1.15);
+    color:#3fc7b7;
+}
+
 /* ========================= */
-/* HERO (Tiffany glow) */
+/* HERO */
 /* ========================= */
 
 .hero{
@@ -69,10 +87,7 @@ nav{
     justify-content:center;
     align-items:center;
     text-align:center;
-
     padding:140px 7% 80px;
-
-    background:linear-gradient(135deg,#dffcf9,#ffffff);
 }
 
 .hero h1{
@@ -80,15 +95,14 @@ nav{
     line-height:1;
 }
 
-/* gradient restored */
 .gradient{
-    background:linear-gradient(90deg,#3fc7b7,#a6f7ec);
+    background:linear-gradient(90deg,#3fc7b7,#7ff2e3);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 /* ========================= */
-/* SECTIONS BASE */
+/* SECTIONS */
 /* ========================= */
 
 section{
@@ -96,12 +110,22 @@ section{
 }
 
 /* ========================= */
-/* FEATURES (GREEN TINT) */
+/* SECTION TITLES (hover enlarge FIX) */
 /* ========================= */
 
-#features{
-    background:linear-gradient(180deg,#f1fffb,#ffffff);
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+    transition:0.3s;
 }
+
+.section-title:hover{
+    transform:scale(1.08);
+}
+
+/* ========================= */
+/* FEATURES */
+/* ========================= */
 
 .features{
     display:grid;
@@ -109,12 +133,18 @@ section{
     gap:20px;
 }
 
+/* FEATURE CARD */
 .feature{
     background:rgba(63,199,183,0.08);
-    border:1px solid rgba(63,199,183,0.15);
-
+    border:1px solid rgba(63,199,183,0.2);
     padding:30px;
     border-radius:24px;
+    transition:0.3s;
+}
+
+.feature:hover{
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:0 10px 30px rgba(63,199,183,0.15);
 }
 
 .feature h3{
@@ -123,16 +153,34 @@ section{
 }
 
 .feature p{
-    color:#555;
+    color:#4a5a59;
+    font-size:14px;
 }
 
 /* ========================= */
-/* GALLERY (BLUE TINT) */
+/* BUTTON FIX (IMPORTANT) */
 /* ========================= */
 
-#gallery{
-    background:linear-gradient(180deg,#f0f6ff,#ffffff);
+.btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 18px;
+    border-radius:12px;
+    background:#3fc7b7;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
 }
+
+.btn:hover{
+    transform:scale(1.08);
+    background:#2fb8a9;
+}
+
+/* ========================= */
+/* GALLERY */
+/* ========================= */
 
 .gallery{
     display:grid;
@@ -144,35 +192,34 @@ section{
     width:100%;
     height:240px;
     object-fit:cover;
-    border-radius:24px;
-    border:1px solid rgba(80,140,255,0.15);
+    border-radius:22px;
+    border:1px solid rgba(63,199,183,0.2);
 }
 
 /* ========================= */
-/* STAFF (PURPLE TINT) */
+/* STAFF PREVIEW */
 /* ========================= */
 
-#staff{
-    background:linear-gradient(180deg,#f6f1ff,#ffffff);
-}
-
-.staff-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.staff-card{
-    background:rgba(150,100,255,0.08);
-    border:1px solid rgba(150,100,255,0.15);
-
-    padding:30px;
-    border-radius:24px;
+.staff-preview{
     text-align:center;
 }
 
+.staff-preview a{
+    display:inline-block;
+    padding:14px 22px;
+    background:#3fc7b7;
+    color:white;
+    border-radius:14px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.staff-preview a:hover{
+    transform:scale(1.1);
+}
+
 /* ========================= */
-/* FAQ (PURE WHITE CLEAN) */
+/* FAQ (clean white) */
 /* ========================= */
 
 #faq{
@@ -185,31 +232,23 @@ section{
 }
 
 .faq-item{
-    background:#ffffff;
     border:1px solid rgba(0,0,0,0.08);
-    border-radius:18px;
-    margin-bottom:15px;
-    cursor:pointer;
+    border-radius:16px;
+    margin-bottom:12px;
     overflow:hidden;
 }
 
 .faq-question{
-    padding:22px;
+    padding:20px;
     display:flex;
     justify-content:space-between;
-    font-weight:600;
+    cursor:pointer;
 }
 
 .faq-question span{
     color:#3fc7b7;
-    transition:0.3s;
 }
 
-.faq-item.active .faq-question span{
-    transform:rotate(45deg);
-}
-
-/* smooth dropdown */
 .faq-content{
     max-height:0;
     overflow:hidden;
@@ -217,12 +256,12 @@ section{
 }
 
 .faq-inner p{
-    padding:0 22px 20px;
+    padding:0 20px 18px;
     color:#555;
 }
 
 .faq-item.active .faq-content{
-    max-height:200px;
+    max-height:180px;
 }
 
 /* ========================= */
@@ -232,9 +271,8 @@ section{
 footer{
     text-align:center;
     padding:40px;
-    color:#777;
-    background:#ffffff;
-    border-top:1px solid rgba(0,0,0,0.05);
+    background:#f7fffe;
+    color:#666;
 }
 
 /* ========================= */
@@ -264,45 +302,48 @@ footer{
     <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#gallery">Gallery</a>
-        <a href="#staff">Staff</a>
+        <a href="staff.html">Staff</a>
         <a href="#faq">FAQ</a>
     </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-    <div class="fade-in">
+    <div>
         <h1>Fallen Halo<br><span class="gradient">Network</span></h1>
     </div>
 </section>
 
 <!-- FEATURES -->
 <section id="features">
-    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
+    <div class="section-title fade-in">
         <h2>Features</h2>
     </div>
 
     <div class="features">
         <div class="feature fade-in">
             <h3>Economy System</h3>
-            <p>Earn money through mining, farming and trading.</p>
+            <p>Earn money, build shops and trade.</p>
+            <a class="btn" href="#">Learn More</a>
         </div>
 
         <div class="feature fade-in">
             <h3>Custom Events</h3>
-            <p>Weekly PvP battles and special rewards.</p>
+            <p>Weekly PvP battles and rewards.</p>
+            <a class="btn" href="#">Join Events</a>
         </div>
 
         <div class="feature fade-in">
             <h3>Community</h3>
-            <p>Friendly players and active staff support.</p>
+            <p>Friendly players and active staff.</p>
+            <a class="btn" href="#">Discord</a>
         </div>
     </div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
-    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
+    <div class="section-title fade-in">
         <h2>Gallery</h2>
     </div>
 
@@ -313,23 +354,17 @@ footer{
     </div>
 </section>
 
-<!-- STAFF -->
-<section id="staff">
-    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
+<!-- STAFF BUTTON PAGE -->
+<section>
+    <div class="staff-preview fade-in">
         <h2>Staff Team</h2>
-    </div>
-
-    <div class="staff-grid">
-        <div class="staff-card fade-in">
-            <img src="https://mc-heads.net/avatar/Notch">
-            <p>Owner</p>
-        </div>
+        <a href="staff.html">View Staff Page</a>
     </div>
 </section>
 
 <!-- FAQ -->
 <section id="faq">
-    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
+    <div class="section-title fade-in">
         <h2>FAQ</h2>
     </div>
 
@@ -357,7 +392,7 @@ footer{
 
 <script>
 
-/* fade in */
+/* fade */
 const observer = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
         if(e.isIntersecting){
