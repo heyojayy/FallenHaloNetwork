@@ -18,11 +18,8 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    scroll-behavior:smooth;
     -webkit-tap-highlight-color:transparent;
-}
-
-html{
-    scroll-behavior:smooth; /* 🔥 IMPORTANT: restores auto scroll */
 }
 
 body{
@@ -63,6 +60,7 @@ nav{
 
     font-size:22px;
     font-weight:700;
+
     color:#55d2c8;
 }
 
@@ -70,23 +68,6 @@ nav{
     width:50px;
     height:50px;
     border-radius:16px;
-}
-
-/* NAV LINKS FIX */
-.nav-links{
-    display:flex;
-    gap:25px;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#333;
-    font-weight:500;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:#55d2c8;
 }
 
 /* ========================= */
@@ -111,6 +92,7 @@ nav{
     min-width:300px;
 }
 
+/* ✅ GRADIENT FIX RESTORED */
 .hero-left h1{
     font-size:70px;
     line-height:1;
@@ -194,7 +176,7 @@ section{
 }
 
 /* ========================= */
-/* FAQ (FIXED) */
+/* FAQ */
 /* ========================= */
 
 .faq{
@@ -226,7 +208,7 @@ section{
     transform:rotate(45deg);
 }
 
-/* smooth animation fix */
+/* smooth animation */
 .faq-content{
     max-height:0;
     overflow:hidden;
@@ -253,7 +235,7 @@ footer{
 }
 
 /* ========================= */
-/* FADE IN ANIMATION */
+/* FADE IN */
 /* ========================= */
 
 .fade-in{
@@ -290,7 +272,9 @@ footer{
 <!-- HERO -->
 <section class="hero">
     <div class="hero-left fade-in">
-        <h1>Fallen Halo<br><span class="gradient">Network</span></h1>
+        <h1>Fallen Halo<br>
+            <span class="gradient">Network</span>
+        </h1>
     </div>
 </section>
 
@@ -364,7 +348,7 @@ footer{
 
 <script>
 
-/* FADE IN */
+/* fade in */
 const observer = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
         if(e.isIntersecting){
@@ -377,7 +361,7 @@ document.querySelectorAll(".fade-in").forEach(el=>{
     observer.observe(el);
 });
 
-/* FAQ FIX */
+/* FAQ toggle */
 document.querySelectorAll(".faq-item").forEach(item=>{
     item.addEventListener("click",()=>{
         item.classList.toggle("active");
