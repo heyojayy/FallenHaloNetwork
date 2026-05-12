@@ -26,10 +26,7 @@ body{
     font-family:'Poppins',sans-serif;
     overflow-x:hidden;
     color:#222;
-
-    background:
-    radial-gradient(circle at top left,#d7fffb 0%,#ffffff 40%),
-    radial-gradient(circle at bottom right,#c8faf5 0%,#ffffff 40%);
+    background:#f7f9fb;
 }
 
 /* ========================= */
@@ -46,48 +43,24 @@ nav{
     justify-content:space-between;
     align-items:center;
 
-    padding:20px 7%;
+    padding:18px 7%;
 
-    background:rgba(255,255,255,0.75);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(120,230,220,0.15);
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,0,0,0.05);
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
-
+    gap:10px;
     font-size:22px;
     font-weight:700;
-    color:#55d2c8;
-}
-
-.logo img{
-    width:50px;
-    height:50px;
-    border-radius:16px;
-}
-
-/* NAV LINKS */
-.nav-links{
-    display:flex;
-    gap:22px;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#333;
-    font-weight:500;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:#55d2c8;
+    color:#3fc7b7;
 }
 
 /* ========================= */
-/* HERO */
+/* HERO (Tiffany glow) */
 /* ========================= */
 
 .hero{
@@ -95,46 +68,40 @@ nav{
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:140px 7% 80px;
-}
-
-.hero-left{
     text-align:center;
+
+    padding:140px 7% 80px;
+
+    background:linear-gradient(135deg,#dffcf9,#ffffff);
 }
 
-.hero-left h1{
+.hero h1{
     font-size:70px;
     line-height:1;
-    margin-bottom:20px;
 }
 
-/* ✅ GRADIENT FIX (RESTORED) */
+/* gradient restored */
 .gradient{
-    background:linear-gradient(90deg,#55d2c8,#9ff6ee);
+    background:linear-gradient(90deg,#3fc7b7,#a6f7ec);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 /* ========================= */
-/* SECTIONS */
+/* SECTIONS BASE */
 /* ========================= */
 
 section{
-    padding:100px 7%;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:50px;
-}
-
-.section-title h2{
-    font-size:48px;
+    padding:110px 7%;
 }
 
 /* ========================= */
-/* FEATURES (WITH DESCRIPTION) */
+/* FEATURES (GREEN TINT) */
 /* ========================= */
+
+#features{
+    background:linear-gradient(180deg,#f1fffb,#ffffff);
+}
 
 .features{
     display:grid;
@@ -143,27 +110,29 @@ section{
 }
 
 .feature{
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(12px);
+    background:rgba(63,199,183,0.08);
+    border:1px solid rgba(63,199,183,0.15);
+
     padding:30px;
     border-radius:24px;
-    border:1px solid rgba(120,230,220,0.15);
 }
 
 .feature h3{
-    color:#55d2c8;
+    color:#2fb8a9;
     margin-bottom:10px;
 }
 
 .feature p{
-    color:#666;
-    font-size:14px;
-    line-height:1.6;
+    color:#555;
 }
 
 /* ========================= */
-/* GALLERY */
+/* GALLERY (BLUE TINT) */
 /* ========================= */
+
+#gallery{
+    background:linear-gradient(180deg,#f0f6ff,#ffffff);
+}
 
 .gallery{
     display:grid;
@@ -176,11 +145,16 @@ section{
     height:240px;
     object-fit:cover;
     border-radius:24px;
+    border:1px solid rgba(80,140,255,0.15);
 }
 
 /* ========================= */
-/* STAFF */
+/* STAFF (PURPLE TINT) */
 /* ========================= */
+
+#staff{
+    background:linear-gradient(180deg,#f6f1ff,#ffffff);
+}
 
 .staff-grid{
     display:grid;
@@ -189,16 +163,21 @@ section{
 }
 
 .staff-card{
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(12px);
+    background:rgba(150,100,255,0.08);
+    border:1px solid rgba(150,100,255,0.15);
+
     padding:30px;
     border-radius:24px;
     text-align:center;
 }
 
 /* ========================= */
-/* FAQ (SMOOTH FIXED ANIMATION) */
+/* FAQ (PURE WHITE CLEAN) */
 /* ========================= */
+
+#faq{
+    background:#ffffff;
+}
 
 .faq{
     max-width:900px;
@@ -206,22 +185,23 @@ section{
 }
 
 .faq-item{
-    background:rgba(255,255,255,0.75);
-    border-radius:22px;
-    margin-bottom:18px;
-    overflow:hidden;
+    background:#ffffff;
+    border:1px solid rgba(0,0,0,0.08);
+    border-radius:18px;
+    margin-bottom:15px;
     cursor:pointer;
+    overflow:hidden;
 }
 
 .faq-question{
-    padding:22px 26px;
+    padding:22px;
     display:flex;
     justify-content:space-between;
     font-weight:600;
 }
 
 .faq-question span{
-    color:#55d2c8;
+    color:#3fc7b7;
     transition:0.3s;
 }
 
@@ -229,22 +209,20 @@ section{
     transform:rotate(45deg);
 }
 
-/* smooth roll animation (IMPORTANT FIX) */
+/* smooth dropdown */
 .faq-content{
     max-height:0;
     overflow:hidden;
-    transition:max-height 0.5s ease;
+    transition:max-height 0.45s ease;
 }
 
 .faq-inner p{
-    padding:0 26px 22px;
-    color:#666;
-    line-height:1.7;
+    padding:0 22px 20px;
+    color:#555;
 }
 
-/* expanded state */
 .faq-item.active .faq-content{
-    max-height:250px;
+    max-height:200px;
 }
 
 /* ========================= */
@@ -254,11 +232,13 @@ section{
 footer{
     text-align:center;
     padding:40px;
-    color:#666;
+    color:#777;
+    background:#ffffff;
+    border-top:1px solid rgba(0,0,0,0.05);
 }
 
 /* ========================= */
-/* FADE IN (STABLE) */
+/* ANIMATION */
 /* ========================= */
 
 .fade-in{
@@ -279,10 +259,7 @@ footer{
 
 <!-- NAV -->
 <nav>
-    <div class="logo">
-        <img src="logo.png">
-        Fallen Halo
-    </div>
+    <div class="logo">Fallen Halo</div>
 
     <div class="nav-links">
         <a href="#features">Features</a>
@@ -294,40 +271,38 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-left fade-in">
-        <h1>Fallen Halo<br>
-            <span class="gradient">Network</span>
-        </h1>
+    <div class="fade-in">
+        <h1>Fallen Halo<br><span class="gradient">Network</span></h1>
     </div>
 </section>
 
 <!-- FEATURES -->
 <section id="features">
-    <div class="section-title fade-in">
+    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
         <h2>Features</h2>
     </div>
 
     <div class="features">
         <div class="feature fade-in">
             <h3>Economy System</h3>
-            <p>Earn money through mining, farming, and trading to build your empire.</p>
+            <p>Earn money through mining, farming and trading.</p>
         </div>
 
         <div class="feature fade-in">
             <h3>Custom Events</h3>
-            <p>Join weekly PvP battles, boss fights, and special seasonal events.</p>
+            <p>Weekly PvP battles and special rewards.</p>
         </div>
 
         <div class="feature fade-in">
             <h3>Community</h3>
-            <p>Friendly and active players with professional staff support 24/7.</p>
+            <p>Friendly players and active staff support.</p>
         </div>
     </div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
-    <div class="section-title fade-in">
+    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
         <h2>Gallery</h2>
     </div>
 
@@ -340,7 +315,7 @@ footer{
 
 <!-- STAFF -->
 <section id="staff">
-    <div class="section-title fade-in">
+    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
         <h2>Staff Team</h2>
     </div>
 
@@ -354,7 +329,7 @@ footer{
 
 <!-- FAQ -->
 <section id="faq">
-    <div class="section-title fade-in">
+    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
         <h2>FAQ</h2>
     </div>
 
@@ -382,7 +357,7 @@ footer{
 
 <script>
 
-/* fade-in animation */
+/* fade in */
 const observer = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
         if(e.isIntersecting){
@@ -395,7 +370,7 @@ document.querySelectorAll(".fade-in").forEach(el=>{
     observer.observe(el);
 });
 
-/* FAQ toggle */
+/* FAQ */
 document.querySelectorAll(".faq-item").forEach(item=>{
     item.addEventListener("click",()=>{
         item.classList.toggle("active");
