@@ -19,7 +19,6 @@
     padding:0;
     box-sizing:border-box;
     scroll-behavior:smooth;
-    -webkit-tap-highlight-color:transparent;
 }
 
 body{
@@ -30,7 +29,37 @@ body{
 }
 
 /* ========================= */
-/* NAVBAR */
+/* ANIMATED BACKGROUND (FEATURE #4) */
+/* ========================= */
+
+.bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#3fc7b7;
+    border-radius:50%;
+    opacity:0.4;
+    animation:float 10s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh); opacity:0;}
+    50%{opacity:0.6;}
+    100%{transform:translateY(-10vh); opacity:0;}
+}
+
+/* ========================= */
+/* NAV */
 /* ========================= */
 
 nav{
@@ -47,95 +76,34 @@ nav{
 
     background:rgba(235,255,252,0.75);
     backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(63,199,183,0.15);
 }
 
-/* LOGO */
 .logo{
     display:flex;
     align-items:center;
     gap:10px;
-
-    font-size:22px;
     font-weight:700;
     color:#3fc7b7;
 }
 
 .logo img{
     width:42px;
-    height:42px;
     border-radius:12px;
 }
 
-/* ========================= */
-/* NAV LINKS (DESKTOP) */
-/* ========================= */
-
-.nav-links{
-    display:flex;
-    gap:18px;
-}
-
-/* PREMIUM HOVER CARD EFFECT */
+/* nav links */
 .nav-links a{
+    margin-left:18px;
     text-decoration:none;
     color:#2b3b3a;
-    font-weight:500;
-
-    padding:8px 14px;
+    padding:8px 12px;
     border-radius:12px;
-
-    transition:0.25s ease;
+    display:inline-block;
 }
 
 .nav-links a:hover{
-    transform:scale(1.12);
     background:rgba(63,199,183,0.12);
-    color:#3fc7b7;
-    box-shadow:0 8px 20px rgba(63,199,183,0.15);
-}
-
-/* ========================= */
-/* HAMBURGER (MOBILE) */
-/* ========================= */
-
-.hamburger{
-    display:none;
-    flex-direction:column;
-    cursor:pointer;
-    gap:5px;
-}
-
-.hamburger div{
-    width:25px;
-    height:3px;
-    background:#3fc7b7;
-    border-radius:5px;
-}
-
-/* MOBILE MENU */
-.mobile-menu{
-    display:none;
-    flex-direction:column;
-    position:absolute;
-    top:70px;
-    right:7%;
-    background:white;
-    padding:15px;
-    border-radius:16px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
-
-.mobile-menu a{
-    padding:10px;
-    text-decoration:none;
-    color:#2b3b3a;
-    border-radius:10px;
-}
-
-.mobile-menu a:hover{
-    background:rgba(63,199,183,0.12);
-    color:#3fc7b7;
+    transform:scale(1.1);
 }
 
 /* ========================= */
@@ -148,12 +116,10 @@ nav{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:140px 7% 80px;
 }
 
 .hero h1{
-    font-size:70px;
-    line-height:1;
+    font-size:65px;
 }
 
 .gradient{
@@ -163,16 +129,40 @@ nav{
 }
 
 /* ========================= */
+/* STATUS WIDGET (FEATURE #1) */
+/* ========================= */
+
+.status{
+    margin-top:20px;
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:999px;
+    background:#dffcf9;
+    color:#2b3b3a;
+    font-weight:600;
+}
+
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
+
+.btn{
+    display:inline-block;
+    margin:8px;
+    padding:10px 16px;
+    border-radius:12px;
+    background:#3fc7b7;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* ========================= */
 /* SECTIONS */
 /* ========================= */
 
 section{
-    padding:110px 7%;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:50px;
+    padding:100px 7%;
 }
 
 /* ========================= */
@@ -181,130 +171,101 @@ section{
 
 .features{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:20px;
 }
 
 .feature{
     background:rgba(63,199,183,0.08);
-    border:1px solid rgba(63,199,183,0.2);
-
-    padding:30px;
     border-radius:24px;
-
-    transition:0.35s ease;
+    padding:25px;
+    transition:0.3s;
 }
 
 .feature:hover{
-    transform:scale(1.06);
-    box-shadow:0 15px 40px rgba(63,199,183,0.18);
+    transform:scale(1.05);
 }
 
 /* ========================= */
-/* BUTTON */
+/* STORE (FEATURE #5) */
 /* ========================= */
 
-.btn{
+.store{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid rgba(63,199,183,0.2);
+}
+
+.price{
+    font-weight:700;
+    color:#3fc7b7;
+}
+
+/* ========================= */
+/* STAFF PREVIEW (FEATURE #6) */
+/* ========================= */
+
+.staff{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.staff-card{
+    text-align:center;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(63,199,183,0.08);
+}
+
+.staff-card img{
+    width:80px;
+    border-radius:16px;
+}
+
+/* ========================= */
+/* DISCORD BUTTON (FEATURE #7) */
+/* ========================= */
+
+.discord{
     display:inline-block;
-    margin-top:10px;
-    padding:10px 16px;
-    background:#3fc7b7;
+    margin-top:20px;
+    padding:12px 18px;
+    background:#5865F2;
     color:white;
     border-radius:12px;
     text-decoration:none;
 }
 
 /* ========================= */
-/* GALLERY */
+/* FADE IN (FEATURE #9) */
 /* ========================= */
 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
+.fade{
+    opacity:0;
+    transform:translateY(40px);
+    transition:0.8s;
 }
 
-.gallery img{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-    border-radius:22px;
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* ========================= */
-/* FAQ */
+/* MOBILE (FEATURE #10) */
 /* ========================= */
 
-#faq{
-    background:#ffffff;
-}
-
-.faq{
-    max-width:900px;
-    margin:auto;
-}
-
-.faq-item{
-    border:1px solid rgba(0,0,0,0.08);
-    border-radius:16px;
-    margin-bottom:12px;
-    overflow:hidden;
-    cursor:pointer;
-}
-
-.faq-question{
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-}
-
-.faq-question span{
-    color:#3fc7b7;
-}
-
-.faq-content{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height 0.45s ease;
-}
-
-.faq-inner p{
-    padding:0 20px 18px;
-    color:#555;
-}
-
-.faq-item.active .faq-content{
-    max-height:200px;
-}
-
-/* ========================= */
-/* FOOTER */
-/* ========================= */
-
-footer{
-    text-align:center;
-    padding:40px;
-    background:#f7fffe;
-    color:#666;
-}
-
-/* ========================= */
-/* MOBILE RESPONSIVE */
-/* ========================= */
-
-@media (max-width:768px){
-
-    .nav-links{
-        display:none;
-    }
-
-    .hamburger{
-        display:flex;
-    }
-
-    .hero h1{
-        font-size:42px;
-    }
+@media(max-width:768px){
+    .hero h1{font-size:38px;}
 }
 
 </style>
@@ -312,9 +273,11 @@ footer{
 
 <body>
 
+<!-- BACKGROUND (FEATURE #4) -->
+<div class="bg" id="bg"></div>
+
 <!-- NAV -->
 <nav>
-
     <div class="logo">
         <img src="https://mc-heads.net/avatar/Steve">
         Fallen Halo
@@ -322,113 +285,98 @@ footer{
 
     <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#faq">FAQ</a>
-        <a href="staff.html">Staff</a>
+        <a href="#store">Store</a>
+        <a href="#staff">Staff</a>
     </div>
-
-    <!-- MOBILE BUTTON -->
-    <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#features">Features</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#faq">FAQ</a>
-    <a href="staff.html">Staff</a>
-</div>
-
 <!-- HERO -->
-<section class="hero">
+<section class="hero fade">
     <div>
         <h1>Fallen Halo<br><span class="gradient">Network</span></h1>
+
+        <!-- SERVER STATUS (FEATURE #1) -->
+        <div class="status">🟢 Online • 23 Players</div>
+
+        <!-- COPY IP (FEATURE #8) -->
+        <div>
+            <button class="btn" onclick="copyIP()">Copy IP</button>
+            <a class="discord" href="#">Join Discord</a>
+        </div>
     </div>
 </section>
 
 <!-- FEATURES -->
-<section id="features">
-    <div class="section-title">
-        <h2>Features</h2>
-    </div>
+<section id="features" class="fade">
+    <h2>Features</h2>
 
     <div class="features">
-        <div class="feature">
-            <h3>Economy</h3>
-            <p>Earn money, trade and grow.</p>
+        <div class="feature">Economy System</div>
+        <div class="feature">Custom Events</div>
+        <div class="feature">Active Community</div>
+    </div>
+</section>
+
+<!-- STORE (FEATURE #5) -->
+<section id="store" class="fade">
+    <h2>Store</h2>
+
+    <div class="store">
+        <div class="card">
+            <h3>VIP Rank</h3>
+            <p class="price">$5</p>
         </div>
 
-        <div class="feature">
-            <h3>Events</h3>
-            <p>Weekly PvP battles and rewards.</p>
-        </div>
-
-        <div class="feature">
-            <h3>Community</h3>
-            <p>Active players & staff team.</p>
+        <div class="card">
+            <h3>MVP Rank</h3>
+            <p class="price">$10</p>
         </div>
     </div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery">
-    <div class="section-title">
-        <h2>Gallery</h2>
-    </div>
+<!-- STAFF (FEATURE #6) -->
+<section id="staff" class="fade">
+    <h2>Staff</h2>
 
-    <div class="gallery">
-        <img src="1.png">
-        <img src="2.png">
-        <img src="3.png">
-    </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-    <div class="section-title">
-        <h2>FAQ</h2>
-    </div>
-
-    <div class="faq">
-
-        <div class="faq-item">
-            <div class="faq-question">
-                What is the IP?
-                <span>+</span>
-            </div>
-            <div class="faq-content">
-                <div class="faq-inner">
-                    <p>play.fallenhalo.net</p>
-                </div>
-            </div>
+    <div class="staff">
+        <div class="staff-card">
+            <img src="https://mc-heads.net/avatar/Notch">
+            <p>Owner</p>
         </div>
 
+        <div class="staff-card">
+            <img src="https://mc-heads.net/avatar/Steve">
+            <p>Admin</p>
+        </div>
     </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-    © 2026 Fallen Halo Network
-</footer>
 
 <script>
 
-/* FAQ */
-document.querySelectorAll(".faq-item").forEach(item=>{
-    item.addEventListener("click",()=>{
-        item.classList.toggle("active");
+/* COPY IP (FEATURE #8) */
+function copyIP(){
+    navigator.clipboard.writeText("play.fallenhalo.net");
+    alert("IP Copied!");
+}
+
+/* ANIMATIONS (FEATURE #9) */
+const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
     });
 });
 
-/* MOBILE MENU */
-function toggleMenu(){
-    const menu = document.getElementById("mobileMenu");
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
+
+/* BACKGROUND DOTS (FEATURE #4) */
+const bg = document.getElementById("bg");
+
+for(let i=0;i<30;i++){
+    let d = document.createElement("div");
+    d.className="dot";
+    d.style.left=Math.random()*100+"%";
+    d.style.animationDuration=(5+Math.random()*10)+"s";
+    bg.appendChild(d);
 }
 
 </script>
