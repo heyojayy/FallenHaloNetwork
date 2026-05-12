@@ -1,513 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minecraft Server</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Fallen Halo Network</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    body {
-      background: #ffffff;
-      color: #222;
-      overflow-x: hidden;
-    }
+<style>
 
-    /* NAVBAR */
+/* ========================= */
+/* GLOBAL */
+/* ========================= */
 
-    nav {
-      width: 100%;
-      padding: 18px 8%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #dff7f5;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+    -webkit-tap-highlight-color:transparent;
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #57cfc8;
-    }
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    color:#222;
 
-    .logo img {
-      width: 48px;
-      height: 48px;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #eee;
-    }
+    background:
+    radial-gradient(circle at top left,#d7fffb 0%,#ffffff 40%),
+    radial-gradient(circle at bottom right,#c8faf5 0%,#ffffff 40%);
+}
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-    }
+/* ========================= */
+/* NAV */
+/* ========================= */
 
-    .nav-links a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: 0.2s;
-    }
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:999;
 
-    .nav-links a:hover {
-      color: #57cfc8;
-    }
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    /* HERO */
+    padding:20px 7%;
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 8% 80px;
-      gap: 60px;
-      flex-wrap: wrap;
-    }
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(14px);
 
-    .hero-text {
-      flex: 1;
-      min-width: 320px;
-    }
+    border-bottom:1px solid rgba(120,230,220,0.15);
+}
 
-    .hero-text h1 {
-      font-size: 64px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
 
-    .hero-text span {
-      color: #57cfc8;
-    }
+    font-size:22px;
+    font-weight:700;
 
-    .hero-text p {
-      color: #666;
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      max-width: 600px;
-    }
+    color:#55d2c8;
+}
 
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
+.logo img{
+    width:50px;
+    height:50px;
 
-    .btn {
-      padding: 14px 28px;
-      border-radius: 14px;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      text-decoration: none;
-    }
+    border-radius:16px;
+    background:#eee;
+}
 
-    .btn-primary {
-      background: #57cfc8;
-      color: white;
-    }
+.nav-links{
+    display:flex;
+    gap:30px;
+}
 
-    .btn-primary:hover {
-      background: #42b8b1;
-      transform: translateY(-2px);
-    }
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
 
-    .btn-secondary {
-      background: #f3fdfc;
-      color: #57cfc8;
-      border: 2px solid #57cfc8;
-    }
+.nav-links a:hover{
+    color:#55d2c8;
+}
 
-    .btn-secondary:hover {
-      background: #57cfc8;
-      color: white;
-    }
+/* ========================= */
+/* HERO */
+/* ========================= */
 
-    .hero-image {
-      flex: 1;
-      min-width: 320px;
-      display: flex;
-      justify-content: center;
-    }
+.hero{
+    min-height:100vh;
 
-    .hero-image img {
-      width: 100%;
-      max-width: 550px;
-      border-radius: 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-      object-fit: cover;
-      background: #eee;
-    }
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
 
-    /* SECTION */
+    gap:60px;
 
-    section {
-      padding: 90px 8%;
-    }
+    padding:140px 7% 80px;
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+.hero-left{
+    flex:1;
+    min-width:300px;
+}
 
-    .section-title h2 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
+.hero-left h1{
+    font-size:70px;
+    line-height:1;
+    margin-bottom:20px;
+}
 
-    .section-title p {
-      color: #666;
-    }
+.gradient{
+    background:linear-gradient(90deg,#55d2c8,#9ff6ee);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
 
-    /* FEATURES */
+.hero-left p{
+    color:#666;
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:30px;
+    max-width:600px;
+}
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
+.btn{
+    padding:14px 28px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
 
-    .feature-card {
-      background: #f7ffff;
-      padding: 35px;
-      border-radius: 24px;
-      border: 1px solid #ddf5f3;
-      transition: 0.25s;
-    }
+.btn-main{
+    background:#55d2c8;
+    color:white;
+}
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(87, 207, 200, 0.15);
-    }
+.btn-main:hover{
+    transform:translateY(-4px);
+}
 
-    .feature-card h3 {
-      margin-bottom: 12px;
-      color: #57cfc8;
-    }
+.btn-secondary{
+    border:2px solid #55d2c8;
+    color:#55d2c8;
+}
 
-    .feature-card p {
-      color: #666;
-      line-height: 1.7;
-    }
+.hero-right{
+    flex:1;
+    min-width:300px;
+}
 
-    /* GALLERY */
+.hero-card{
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(12px);
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
+    border-radius:30px;
+    overflow:hidden;
 
-    .gallery img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 22px;
-      background: #eee;
-    }
+    border:1px solid rgba(120,230,220,0.15);
+}
 
-    /* STAFF */
+.hero-card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    background:#eee;
+}
 
-    .staff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-    }
+.server-status{
+    padding:25px;
+}
 
-    .staff-card {
-      background: #f8ffff;
-      border: 1px solid #ddf5f3;
-      padding: 30px;
-      border-radius: 24px;
-      text-align: center;
-      transition: 0.25s;
-    }
+/* ========================= */
+/* SECTIONS */
+/* ========================= */
 
-    .staff-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(87, 207, 200, 0.12);
-    }
+section{
+    padding:100px 7%;
+}
 
-    .staff-card img {
-      width: 110px;
-      height: 110px;
-      image-rendering: pixelated;
-      margin-bottom: 18px;
-      border-radius: 18px;
-      background: #eee;
-    }
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
 
-    .staff-card h3 {
-      margin-bottom: 5px;
-    }
+.section-title h2{
+    font-size:48px;
+}
 
-    .staff-card p {
-      color: #57cfc8;
-      font-weight: 600;
-    }
+.section-title p{
+    color:#666;
+}
 
-    /* FAQ */
+/* ========================= */
+/* FEATURES */
+/* ========================= */
 
-    .faq-container {
-      max-width: 900px;
-      margin: auto;
-    }
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
 
-    details {
-      background: #f8ffff;
-      border: 1px solid #ddf5f3;
-      border-radius: 18px;
-      padding: 20px 25px;
-      margin-bottom: 18px;
-      transition: 0.2s;
-    }
+.feature{
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(12px);
 
-    details:hover {
-      box-shadow: 0 6px 20px rgba(87, 207, 200, 0.08);
-    }
+    padding:30px;
+    border-radius:24px;
 
-    summary {
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      color: #333;
-      list-style: none;
-    }
+    border:1px solid rgba(120,230,220,0.15);
 
-    summary::-webkit-details-marker {
-      display: none;
-    }
+    transition:0.3s;
+}
 
-    details p {
-      margin-top: 15px;
-      color: #666;
-      line-height: 1.7;
-    }
+.feature:hover{
+    transform:translateY(-6px);
+}
 
-    /* FOOTER */
+/* ========================= */
+/* GALLERY */
+/* ========================= */
 
-    footer {
-      padding: 40px 8%;
-      text-align: center;
-      background: #f8ffff;
-      color: #666;
-      border-top: 1px solid #ddf5f3;
-    }
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
 
-    /* MOBILE */
+.gallery img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
 
-    @media(max-width: 900px) {
-      .hero-text h1 {
-        font-size: 46px;
-      }
+    border-radius:24px;
+}
 
-      .nav-links {
-        display: none;
-      }
-    }
-  </style>
+/* ========================= */
+/* STAFF */
+/* ========================= */
+
+.staff-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.staff-card{
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(12px);
+
+    padding:30px;
+    border-radius:24px;
+
+    text-align:center;
+
+    border:1px solid rgba(120,230,220,0.15);
+}
+
+.staff-card img{
+    width:110px;
+    height:110px;
+    image-rendering:pixelated;
+    border-radius:18px;
+    margin-bottom:15px;
+}
+
+/* ========================= */
+/* FAQ (ROLLING STYLE) */
+/* ========================= */
+
+.faq{
+    max-width:900px;
+    margin:auto;
+}
+
+.faq-item{
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(12px);
+
+    border-radius:22px;
+    margin-bottom:18px;
+
+    border:1px solid rgba(120,230,220,0.15);
+
+    overflow:hidden;
+}
+
+.faq-item summary{
+    padding:22px 26px;
+    cursor:pointer;
+
+    font-weight:600;
+    font-size:18px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    list-style:none;
+}
+
+.faq-item summary::-webkit-details-marker{
+    display:none;
+}
+
+.faq-item summary span{
+    transition:0.3s;
+    font-size:24px;
+    color:#55d2c8;
+}
+
+.faq-item[open] summary span{
+    transform:rotate(45deg);
+}
+
+/* ROLL DOWN ANIMATION */
+
+.faq-content{
+    max-height:0;
+    overflow:hidden;
+
+    transition:max-height 0.5s ease;
+}
+
+.faq-item[open] .faq-content{
+    max-height:200px;
+}
+
+.faq-content p{
+    padding:0 26px 22px;
+    color:#666;
+
+    opacity:0;
+    transform:translateY(-10px);
+
+    transition:0.3s;
+}
+
+.faq-item[open] .faq-content p{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+footer{
+    text-align:center;
+    padding:40px;
+
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(10px);
+
+    border-top:1px solid rgba(120,230,220,0.15);
+
+    color:#666;
+}
+
+/* ========================= */
+/* FADE IN */
+/* ========================= */
+
+.fade-in{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.fade-in.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:900px){
+
+.hero-left h1{
+    font-size:52px;
+}
+
+.nav-links{
+    display:none;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+<!-- NAV -->
 
-  <nav>
+<nav>
     <div class="logo">
-      <!-- INSERT YOUR LOGO -->
-      <img src="logo.png" alt="Logo">
-      <div>YourServer</div>
+        <img src="logo.png">
+        Fallen Halo
     </div>
 
     <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#staff">Staff</a>
-      <a href="#faq">FAQ</a>
+        <a href="#features">Features</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#staff">Staff</a>
+        <a href="#faq">FAQ</a>
     </div>
-  </nav>
+</nav>
 
-  <!-- HERO -->
+<!-- HERO -->
 
-  <section class="hero">
+<section class="hero">
 
-    <div class="hero-text">
-      <h1>Join The <span>Ultimate</span><br>Minecraft Experience</h1>
+    <div class="hero-left fade-in">
+        <h1>Fallen Halo<br><span class="gradient">Network</span></h1>
+        <p>Modern Minecraft server with economy, PvP, events and community.</p>
 
-      <p>
-        Explore survival, economy, events, PvP, custom features,
-        and an amazing community on our Minecraft server.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#" class="btn btn-primary">Play Now</a>
-        <a href="#" class="btn btn-secondary">Discord</a>
-      </div>
+        <a class="btn btn-main" href="#">Play Now</a>
+        <a class="btn btn-secondary" href="#">Discord</a>
     </div>
 
-    <div class="hero-image">
-      <!-- INSERT HERO IMAGE -->
-      <img src="hero-image.png" alt="Minecraft Server">
+    <div class="hero-right fade-in">
+        <div class="hero-card">
+            <img src="hero.png">
+            <div class="server-status">
+                <h3>Server Online</h3>
+            </div>
+        </div>
     </div>
 
-  </section>
+</section>
 
-  <!-- FEATURES -->
+<!-- FEATURES -->
 
-  <section id="features">
-
-    <div class="section-title">
-      <h2>Server Features</h2>
-      <p>Why players love our server</p>
+<section id="features">
+    <div class="section-title fade-in">
+        <h2>Features</h2>
     </div>
 
     <div class="features">
 
-      <div class="feature-card">
-        <h3>Economy</h3>
-        <p>
-          Build shops, trade with players,
-          and become the richest player.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3>Custom Events</h3>
-        <p>
-          Participate in exciting events,
-          giveaways, and tournaments.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3>Friendly Community</h3>
-        <p>
-          Meet amazing players and enjoy
-          a fun and welcoming environment.
-        </p>
-      </div>
+        <div class="feature fade-in">Economy System</div>
+        <div class="feature fade-in">Custom Events</div>
+        <div class="feature fade-in">Friendly Community</div>
 
     </div>
+</section>
 
-  </section>
+<!-- GALLERY -->
 
-  <!-- GALLERY -->
+<section id="gallery">
 
-  <section id="gallery">
-
-    <div class="section-title">
-      <h2>Server Gallery</h2>
-      <p>Add your own server screenshots here</p>
+    <div class="section-title fade-in">
+        <h2>Gallery</h2>
     </div>
 
     <div class="gallery">
 
-      <img src="image1.png" alt="Gallery">
-      <img src="image2.png" alt="Gallery">
-      <img src="image3.png" alt="Gallery">
+        <img class="fade-in" src="1.png">
+        <img class="fade-in" src="2.png">
+        <img class="fade-in" src="3.png">
 
     </div>
 
-  </section>
+</section>
 
-  <!-- STAFF -->
+<!-- STAFF -->
 
-  <section id="staff">
+<section id="staff">
 
-    <div class="section-title">
-      <h2>Staff Team</h2>
-      <p>Meet the server staff</p>
+    <div class="section-title fade-in">
+        <h2>Staff</h2>
     </div>
 
     <div class="staff-grid">
 
-      <div class="staff-card">
-        <!-- MINECRAFT SKIN HEAD -->
-        <img src="https://mc-heads.net/avatar/Notch" alt="Owner">
+        <div class="staff-card fade-in">
+            <img src="https://mc-heads.net/avatar/Notch">
+            <p>Owner</p>
+        </div>
 
-        <h3>OwnerName</h3>
-        <p>Owner</p>
-      </div>
-
-      <div class="staff-card">
-        <img src="https://mc-heads.net/avatar/Steve" alt="Admin">
-
-        <h3>AdminName</h3>
-        <p>Administrator</p>
-      </div>
-
-      <div class="staff-card">
-        <img src="https://mc-heads.net/avatar/Alex" alt="Moderator">
-
-        <h3>ModName</h3>
-        <p>Moderator</p>
-      </div>
+        <div class="staff-card fade-in">
+            <img src="https://mc-heads.net/avatar/Steve">
+            <p>Admin</p>
+        </div>
 
     </div>
 
-  </section>
+</section>
 
-  <!-- FAQ -->
+<!-- FAQ -->
 
-  <section id="faq">
+<section id="faq">
 
-    <div class="section-title">
-      <h2>Frequently Asked Questions</h2>
-      <p>Click to expand</p>
+    <div class="section-title fade-in">
+        <h2>FAQ</h2>
     </div>
 
-    <div class="faq-container">
+    <div class="faq">
 
-      <details>
-        <summary>What is the server IP?</summary>
-        <p>play.yourserver.com</p>
-      </details>
+        <details class="faq-item fade-in">
+            <summary>What is the IP? <span>+</span></summary>
+            <div class="faq-content"><p>play.fallenhalo.net</p></div>
+        </details>
 
-      <details>
-        <summary>What Minecraft version do you support?</summary>
-        <p>We support Minecraft Java Edition 1.21+</p>
-      </details>
-
-      <details>
-        <summary>How do I join the Discord server?</summary>
-        <p>Add your Discord invite link here.</p>
-      </details>
-
-      <details>
-        <summary>Is the server cracked?</summary>
-        <p>Answer your cracked/premium information here.</p>
-      </details>
+        <details class="faq-item fade-in">
+            <summary>Version? <span>+</span></summary>
+            <div class="faq-content"><p>1.21+</p></div>
+        </details>
 
     </div>
 
-  </section>
+</section>
 
-  <!-- FOOTER -->
+<!-- FOOTER -->
 
-  <footer>
-    © 2026 YourServer. All Rights Reserved.
-  </footer>
+<footer class="fade-in">
+    © 2026 Fallen Halo Network
+</footer>
+
+<!-- SCRIPT -->
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
+}
+});
+},{threshold:0.15});
+
+document.querySelectorAll(".fade-in").forEach(el=>{
+observer.observe(el);
+});
+</script>
 
 </body>
-  </html>
+</html>
