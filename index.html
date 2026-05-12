@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Fallen Halo Network</title>
 
@@ -75,6 +75,7 @@ body{
     background:var(--bg);
     color:var(--text);
     overflow-x:hidden;
+
     transition:
     background .35s ease,
     color .35s ease;
@@ -87,6 +88,7 @@ body{
 .background{
     position:fixed;
     inset:0;
+
     z-index:-5;
     overflow:hidden;
 
@@ -105,13 +107,16 @@ body{
     border-radius:50%;
     filter:blur(120px);
     opacity:.45;
+
     animation:float 12s ease-in-out infinite;
 }
 
 .glow.one{
     width:420px;
     height:420px;
+
     background:var(--gradient1);
+
     top:-120px;
     left:-120px;
 }
@@ -119,18 +124,24 @@ body{
 .glow.two{
     width:360px;
     height:360px;
+
     background:var(--gradient2);
+
     right:-120px;
     top:20%;
+
     animation-delay:2s;
 }
 
 .glow.three{
     width:300px;
     height:300px;
+
     background:#bcc9eb;
+
     bottom:-100px;
     left:35%;
+
     animation-delay:4s;
 }
 
@@ -161,9 +172,12 @@ body{
 
 .particles span{
     position:absolute;
+
     width:4px;
     height:4px;
+
     border-radius:50%;
+
     background:rgba(255,255,255,.6);
 
     animation:particle linear infinite;
@@ -199,6 +213,7 @@ nav{
     position:fixed;
     top:0;
     left:0;
+
     width:100%;
 
     z-index:999;
@@ -246,6 +261,7 @@ nav{
 
 .nav-links a{
     color:var(--text);
+
     text-decoration:none;
     font-weight:500;
 
@@ -859,7 +875,7 @@ footer{
         font-size:3.5rem;
     }
 
-    .nav-links a{
+    .nav-links{
         display:none;
     }
 
@@ -921,11 +937,15 @@ footer{
             <span>Fallen Halo Network</span>
         </div>
 
-        <div class="nav-links">
+        <div style="display:flex; align-items:center; gap:25px;">
 
-            <a href="#features">Features</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#faq">FAQ</a>
+            <div class="nav-links">
+
+                <a href="#features">Features</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#faq">FAQ</a>
+
+            </div>
 
             <button class="theme-toggle" id="themeToggle">
                 ☀
@@ -1193,12 +1213,8 @@ footer{
 
 <script>
 
-/* ===================================== */
 /* FAQ */
-/* ===================================== */
 
 const faqItems = document.querySelectorAll('.faq-item');
 
-faqItems.forEach(item => {
-
-    it
+faqItems
