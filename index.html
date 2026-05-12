@@ -6,6 +6,431 @@
 
 <title>Fallen Halo Network</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ========================= */
+/* GLOBAL */
+/* ========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    color:#1f2a2a;
+    background:linear-gradient(135deg,#e6fffb,#f7fffe,#ffffff);
+}
+
+/* ========================= */
+/* BACKGROUND */
+/* ========================= */
+
+.bg{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#3fc7b7;
+    border-radius:50%;
+    opacity:0.35;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0;}
+    50%{opacity:0.6;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:999;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:rgba(235,255,252,0.75);
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(63,199,183,0.15);
+}
+
+/* LOGO */
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+}
+
+/* NAV */
+.nav-links{
+    display:flex;
+    gap:14px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#2b3b3a;
+    padding:8px 14px;
+    border-radius:12px;
+    transition:0.25s ease;
+}
+
+.nav-links a:hover{
+    transform:translateY(-2px) scale(1.12);
+    background:rgba(63,199,183,0.12);
+    color:#3fc7b7;
+}
+
+/* MOBILE */
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+}
+
+.hamburger div{
+    width:25px;
+    height:3px;
+    background:#3fc7b7;
+    border-radius:999px;
+}
+
+.mobile-menu{
+    position:fixed;
+    top:85px;
+    right:7%;
+
+    width:220px;
+    display:flex;
+    flex-direction:column;
+
+    background:white;
+    padding:15px;
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px);
+
+    transition:0.25s ease;
+}
+
+.mobile-menu.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 7% 60px;
+}
+
+.hero h1{
+    font-size:72px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#3fc7b7,#7ff2e3);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* BUTTONS */
+.btn{
+    display:inline-block;
+    margin:8px;
+    padding:11px 18px;
+    border-radius:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.ip-btn{
+    background:#3fc7b7;
+    color:white;
+}
+
+.discord-btn{
+    background:#5865F2;
+    color:white;
+}
+
+/* ========================= */
+/* FEATURES + GALLERY */
+/* ========================= */
+
+.features, .gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
+
+/* ========================= */
+/* ARISTA STYLE INFO SECTION */
+/* ========================= */
+
+.info-section{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
+
+.info-card{
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(63,199,183,0.2);
+
+    border-radius:24px;
+
+    padding:28px;
+
+    text-align:center;
+
+    transition:0.35s ease;
+
+    opacity:0;
+    transform:translateY(40px);
+}
+
+.info-card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.info-card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 20px 50px rgba(63,199,183,0.25);
+}
+
+.info-icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.info-title{
+    font-size:20px;
+    font-weight:700;
+    color:#3fc7b7;
+    margin-bottom:10px;
+}
+
+.info-btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 16px;
+    border-radius:14px;
+    background:#3fc7b7;
+    color:white;
+    font-weight:600;
+    text-decoration:none;
+}
+
+/* RULES */
+.rules{
+    text-align:left;
+    margin-top:10px;
+}
+
+.rules li{
+    margin:8px 0;
+    color:#444;
+    font-size:14px;
+}
+
+/* FAQ */
+.faq-item{
+    background:white;
+    border-radius:18px;
+    margin-bottom:14px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .nav-links{display:none;}
+    .hamburger{display:flex;}
+    .hero h1{font-size:46px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg" id="bg"></div>
+
+<!-- NAV -->
+<nav>
+
+<a href="#" class="logo">
+    <img src="logo.png">
+</a>
+
+<div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#gallery">Gallery</a>
+    <a href="staff.html">Staff</a>
+    <a href="#">Store</a>
+</div>
+
+<div class="hamburger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+</div>
+
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#gallery">Gallery</a>
+    <a href="staff.html">Staff</a>
+    <a href="#">Store</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+<div>
+
+<h1>Fallen Halo<br><span class="gradient">Network</span></h1>
+
+<button class="btn ip-btn" onclick="copyIP()">Copy IP</button>
+<a class="btn discord-btn" href="https://discord.gg/BsU48hu6zQ">Discord</a>
+
+</div>
+
+</section>
+
+<!-- INFO SECTION -->
+<section>
+
+<div class="section-title">
+<h2>Server Info</h2>
+</div>
+
+<div class="info-section">
+
+<div class="info-card">
+<div class="info-icon">📡</div>
+<div class="info-title">Server IP</div>
+<p>play.fallenhalo.net</p>
+<a class="info-btn" onclick="copyIP()">Copy IP</a>
+</div>
+
+<div class="info-card">
+<div class="info-icon">💬</div>
+<div class="info-title">Discord</div>
+<p>Join our community</p>
+<a class="info-btn" href="https://discord.gg/BsU48hu6zQ">Join</a>
+</div>
+
+<div class="info-card">
+<div class="info-icon">📜</div>
+<div class="info-title">Rules</div>
+<ul class="rules">
+<li>No hacking or cheating</li>
+<li>Respect all players</li>
+<li>No spam or toxicity</li>
+<li>No exploiting bugs</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* MENU */
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("show");
+}
+
+/* COPY IP */
+function copyIP(){
+navigator.clipboard.writeText("play.fallenhalo.net");
+alert("IP Copied!");
+}
+
+/* INFO ANIMATION (FIXED ALWAYS WORK) */
+const cards = document.querySelectorAll(".info-card");
+
+const obs = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+cards.forEach(c=>obs.observe(c));
+
+/* BACKGROUND */
+const bg=document.getElementById("bg");
+
+for(let i=0;i<30;i++){
+let d=document.createElement("div");
+d.classList.add("dot");
+d.style.left=Math.random()*100+"%";
+d.style.animationDuration=(5+Math.random()*6)+"s";
+bg.appendChild(d);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fallen Halo Network</title>
+
 <!-- 🖼️ TAB LOGO (FAVICON) -->
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="shortcut icon" href="logo.png">
