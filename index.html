@@ -30,7 +30,7 @@ body{
 }
 
 /* ========================= */
-/* NAV */
+/* NAVBAR */
 /* ========================= */
 
 nav{
@@ -50,10 +50,12 @@ nav{
     border-bottom:1px solid rgba(63,199,183,0.15);
 }
 
+/* LOGO */
 .logo{
     display:flex;
     align-items:center;
     gap:10px;
+
     font-size:22px;
     font-weight:700;
     color:#3fc7b7;
@@ -65,21 +67,74 @@ nav{
     border-radius:12px;
 }
 
-/* NAV LINKS */
+/* ========================= */
+/* NAV LINKS (DESKTOP) */
+/* ========================= */
+
 .nav-links{
     display:flex;
-    gap:22px;
+    gap:18px;
 }
 
+/* PREMIUM HOVER CARD EFFECT */
 .nav-links a{
     text-decoration:none;
     color:#2b3b3a;
     font-weight:500;
-    transition:0.25s;
+
+    padding:8px 14px;
+    border-radius:12px;
+
+    transition:0.25s ease;
 }
 
 .nav-links a:hover{
     transform:scale(1.12);
+    background:rgba(63,199,183,0.12);
+    color:#3fc7b7;
+    box-shadow:0 8px 20px rgba(63,199,183,0.15);
+}
+
+/* ========================= */
+/* HAMBURGER (MOBILE) */
+/* ========================= */
+
+.hamburger{
+    display:none;
+    flex-direction:column;
+    cursor:pointer;
+    gap:5px;
+}
+
+.hamburger div{
+    width:25px;
+    height:3px;
+    background:#3fc7b7;
+    border-radius:5px;
+}
+
+/* MOBILE MENU */
+.mobile-menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:70px;
+    right:7%;
+    background:white;
+    padding:15px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.mobile-menu a{
+    padding:10px;
+    text-decoration:none;
+    color:#2b3b3a;
+    border-radius:10px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(63,199,183,0.12);
     color:#3fc7b7;
 }
 
@@ -145,13 +200,8 @@ section{
     box-shadow:0 15px 40px rgba(63,199,183,0.18);
 }
 
-.feature h3{
-    color:#2fb8a9;
-    margin-bottom:10px;
-}
-
 /* ========================= */
-/* BUTTONS */
+/* BUTTON */
 /* ========================= */
 
 .btn{
@@ -239,18 +289,22 @@ footer{
 }
 
 /* ========================= */
-/* ANIMATION */
+/* MOBILE RESPONSIVE */
 /* ========================= */
 
-.fade-in{
-    opacity:0;
-    transform:translateY(40px);
-    transition:0.8s ease;
-}
+@media (max-width:768px){
 
-.fade-in.show{
-    opacity:1;
-    transform:translateY(0);
+    .nav-links{
+        display:none;
+    }
+
+    .hamburger{
+        display:flex;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
 }
 
 </style>
@@ -260,6 +314,7 @@ footer{
 
 <!-- NAV -->
 <nav>
+
     <div class="logo">
         <img src="https://mc-heads.net/avatar/Steve">
         Fallen Halo
@@ -271,7 +326,23 @@ footer{
         <a href="#faq">FAQ</a>
         <a href="staff.html">Staff</a>
     </div>
+
+    <!-- MOBILE BUTTON -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+    <a href="staff.html">Staff</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -282,53 +353,50 @@ footer{
 
 <!-- FEATURES -->
 <section id="features">
-    <div class="section-title fade-in">
+    <div class="section-title">
         <h2>Features</h2>
     </div>
 
     <div class="features">
-        <div class="feature fade-in">
-            <h3>Economy System</h3>
-            <p>Earn money, trade and build your empire.</p>
-            <a class="btn" href="#">Learn More</a>
+        <div class="feature">
+            <h3>Economy</h3>
+            <p>Earn money, trade and grow.</p>
         </div>
 
-        <div class="feature fade-in">
-            <h3>Custom Events</h3>
-            <p>Weekly PvP battles and boss fights.</p>
-            <a class="btn" href="#">Join</a>
+        <div class="feature">
+            <h3>Events</h3>
+            <p>Weekly PvP battles and rewards.</p>
         </div>
 
-        <div class="feature fade-in">
+        <div class="feature">
             <h3>Community</h3>
-            <p>Active players and friendly staff team.</p>
-            <a class="btn" href="#">Discord</a>
+            <p>Active players & staff team.</p>
         </div>
     </div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
-    <div class="section-title fade-in">
+    <div class="section-title">
         <h2>Gallery</h2>
     </div>
 
     <div class="gallery">
-        <img class="fade-in" src="1.png">
-        <img class="fade-in" src="2.png">
-        <img class="fade-in" src="3.png">
+        <img src="1.png">
+        <img src="2.png">
+        <img src="3.png">
     </div>
 </section>
 
 <!-- FAQ -->
 <section id="faq">
-    <div class="section-title fade-in">
+    <div class="section-title">
         <h2>FAQ</h2>
     </div>
 
     <div class="faq">
 
-        <div class="faq-item fade-in">
+        <div class="faq-item">
             <div class="faq-question">
                 What is the IP?
                 <span>+</span>
@@ -344,24 +412,11 @@ footer{
 </section>
 
 <!-- FOOTER -->
-<footer class="fade-in">
+<footer>
     © 2026 Fallen Halo Network
 </footer>
 
 <script>
-
-/* fade in */
-const observer = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-        if(e.isIntersecting){
-            e.target.classList.add("show");
-        }
-    });
-},{threshold:0.15});
-
-document.querySelectorAll(".fade-in").forEach(el=>{
-    observer.observe(el);
-});
 
 /* FAQ */
 document.querySelectorAll(".faq-item").forEach(item=>{
@@ -369,6 +424,12 @@ document.querySelectorAll(".faq-item").forEach(item=>{
         item.classList.toggle("active");
     });
 });
+
+/* MOBILE MENU */
+function toggleMenu(){
+    const menu = document.getElementById("mobileMenu");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
 
 </script>
 
