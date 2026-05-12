@@ -1,830 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Fallen Halo Network | Premium Minecraft Server</title>
+<title>Fallen Halo Network</title>
 
-<!-- Fonts: Playfair for headings, Inter for body -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* ========================= */
-/* CSS VARIABLES FOR THEMES - USING YOUR EXACT HEX CODES */
-/* ========================= */
-:root {
-    /* LIGHT MODE - Gradient: #e2e6ee → #a6b8e4 */
-    --bg-gradient-start: #e2e6ee;
-    --bg-gradient-end: #a6b8e4;
-    --text-primary: #1a2a3a;
-    --text-secondary: #4a5a7a;
-    --nav-bg: rgba(255, 255, 255, 0.92);
-    --nav-border: rgba(44, 59, 100, 0.15);
-    --card-bg: rgba(255, 255, 255, 0.75);
-    --card-bg-hover: rgba(255, 255, 255, 0.9);
-    --feature-bg: rgba(255, 255, 255, 0.5);
-    --feature-bg-hover: white;
-    --status-bg: rgba(44, 59, 100, 0.08);
-    --status-border: rgba(44, 59, 100, 0.2);
-    --footer-bg: #1a2a3a;
-    --footer-text: #a6b8e4;
-    --dot-color: #2c3b64;
-    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.05);
-    --border-light: rgba(44, 59, 100, 0.12);
-    --accent-color: #2c3b64;
-    --heading-font: 'Playfair Display', 'Georgia', serif;
-    --body-font: 'Inter', 'Poppins', sans-serif;
-    --button-bg: #2c3b64;
-    --button-hover: #1a2a4a;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body.dark {
-    /* DARK MODE - Gradient: #a6b8e4 → #2c3b64 */
-    --bg-gradient-start: #a6b8e4;
-    --bg-gradient-end: #2c3b64;
-    --text-primary: #e8ecf4;
-    --text-secondary: #c5d0e8;
-    --nav-bg: rgba(20, 30, 45, 0.92);
-    --nav-border: rgba(166, 184, 228, 0.25);
-    --card-bg: rgba(44, 59, 100, 0.7);
-    --card-bg-hover: rgba(44, 59, 100, 0.85);
-    --feature-bg: rgba(44, 59, 100, 0.45);
-    --feature-bg-hover: rgba(44, 59, 100, 0.65);
-    --status-bg: rgba(44, 59, 100, 0.35);
-    --status-border: rgba(166, 184, 228, 0.3);
-    --footer-bg: #0f1420;
-    --footer-text: #c5d0e8;
-    --dot-color: #c5d0e8;
-    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.25);
-    --border-light: rgba(166, 184, 228, 0.2);
-    --accent-color: #a6b8e4;
-    --button-bg: #a6b8e4;
-    --button-hover: #c5d0e8;
+html{
+    scroll-behavior:smooth;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0f1117;
+    color:#fff;
+    overflow-x:hidden;
 }
 
-body {
-    font-family: var(--body-font);
-    overflow-x: hidden;
-    color: var(--text-primary);
-    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-    background-attachment: fixed;
-    background-size: 200% 200%;
-    animation: gradientShift 15s ease infinite;
-    transition: background 0.3s ease, color 0.2s ease;
-    min-height: 100vh;
+/* ===================================== */
+/* Animated Background */
+/* ===================================== */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:-2;
+    background:
+    radial-gradient(circle at top,#1c2230 0%,#0f1117 60%);
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 0%; }
-    50% { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
+.glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.4;
+    animation:float 12s ease-in-out infinite;
 }
 
-/* Headings */
-h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title {
-    font-family: var(--heading-font);
-    letter-spacing: -0.2px;
+.glow.one{
+    width:400px;
+    height:400px;
+    background:#e2e6ee;
+    top:-120px;
+    left:-100px;
 }
 
-/* ========================= */
-/* FLOATING DOTS BACKGROUND - FIXED */
-/* ========================= */
-.bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
+.glow.two{
+    width:350px;
+    height:350px;
+    background:#a6b8e4;
+    right:-120px;
+    top:20%;
+    animation-delay:2s;
 }
 
-.dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--dot-color);
-    border-radius: 50%;
-    opacity: 0.35;
-    animation: floatUp linear infinite;
+.glow.three{
+    width:300px;
+    height:300px;
+    background:#c3d0ef;
+    bottom:-100px;
+    left:30%;
+    animation-delay:4s;
 }
 
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) scale(0.8);
-        opacity: 0;
+@keyframes float{
+    0%{
+        transform:translateY(0px) translateX(0px);
     }
-    15% {
-        opacity: 0.4;
+    50%{
+        transform:translateY(-40px) translateX(20px);
     }
-    85% {
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
+    100%{
+        transform:translateY(0px) translateX(0px);
     }
 }
 
-/* ========================= */
-/* NAVBAR */
-/* ========================= */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 7%;
-    background: var(--nav-bg);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--nav-border);
-    transition: background 0.3s ease;
+/* Floating Particles */
+
+.particles{
+    position:absolute;
+    inset:0;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
+.particles span{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:rgba(255,255,255,.6);
+    border-radius:50%;
+    animation:particleMove linear infinite;
 }
 
-.logo img {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-}
-
-.logo-title {
-    font-size: 22px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #2c3b64, #4a6a9a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.logo-sub {
-    font-size: 11px;
-    color: var(--text-secondary);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-primary);
-    padding: 8px 18px;
-    border-radius: 40px;
-    font-weight: 500;
-    font-size: 14px;
-    transition: 0.25s ease;
-}
-
-.nav-links a:hover {
-    background: var(--accent-color);
-    color: white;
-    transform: translateY(-2px);
-}
-
-.theme-toggle {
-    background: rgba(44, 59, 100, 0.15);
-    border: 1px solid rgba(44, 59, 100, 0.25);
-    border-radius: 40px;
-    padding: 8px 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
-    transition: 0.25s ease;
-}
-
-.theme-toggle:hover {
-    background: var(--accent-color);
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* ========================= */
-/* MOBILE MENU - FIXED */
-/* ========================= */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.hamburger div {
-    width: 26px;
-    height: 3px;
-    background: var(--accent-color);
-    border-radius: 999px;
-    transition: 0.3s;
-}
-
-.mobile-menu {
-    position: fixed;
-    top: 75px;
-    right: 5%;
-    width: 220px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 1px solid var(--nav-border);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition: 0.25s ease;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.mobile-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.mobile-menu a {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 500;
-    padding: 10px;
-    border-radius: 16px;
-    font-size: 14px;
-    text-align: center;
-    transition: 0.2s;
-}
-
-.mobile-menu a:hover {
-    background: var(--accent-color);
-    color: white;
-}
-
-.mobile-menu .theme-toggle {
-    width: 100%;
-    justify-content: center;
-    margin-top: 5px;
-    padding: 10px;
-    background: rgba(44, 59, 100, 0.2);
-}
-
-/* ========================= */
-/* HERO SECTION */
-/* ========================= */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 130px 7% 70px;
-}
-
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.title-with-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.server-logo-hero {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border: 3px solid var(--accent-color);
-    transition: transform 0.3s ease;
-}
-
-.server-logo-hero:hover {
-    transform: scale(1.05);
-}
-
-.hero h1 {
-    font-size: 76px;
-    line-height: 1.1;
-    font-weight: 800;
-    color: var(--text-primary);
-    margin: 0;
-}
-
-.gradient {
-    background: linear-gradient(115deg, #2c3b64, #4a6a9a, #2c3b64);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.status {
-    margin-top: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--status-bg);
-    padding: 8px 22px;
-    border-radius: 60px;
-    font-weight: 500;
-    backdrop-filter: blur(4px);
-    border: 1px solid var(--status-border);
-    color: var(--text-primary);
-    font-size: 14px;
-}
-
-.status i {
-    font-size: 14px;
-    color: #2ecc71;
-}
-
-/* ========================= */
-/* CONNECT CARDS */
-/* ========================= */
-.connect-wrap {
-    margin-top: 55px;
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
-}
-
-.connect-card {
-    width: 260px;
-    padding: 22px 18px 24px;
-    border-radius: 32px;
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.connect-card:hover {
-    transform: translateY(-6px);
-    background: var(--card-bg-hover);
-    border-color: var(--accent-color);
-}
-
-.connect-card > i:first-child {
-    font-size: 34px;
-    background: linear-gradient(135deg, #2c3b64, #4a6a9a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 12px;
-}
-
-.connect-title {
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-}
-
-.connect-value {
-    font-size: 13px;
-    font-weight: 500;
-    background: rgba(44, 59, 100, 0.1);
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 40px;
-    color: var(--accent-color);
-    margin: 8px 0 18px;
-    font-family: monospace;
-}
-
-.connect-card button,
-.connect-card a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: var(--button-bg);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 14px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-    font-size: 13px;
-    min-width: 120px;
-    text-decoration: none;
-}
-
-.connect-card button:hover,
-.connect-card a:hover {
-    background: var(--button-hover);
-    transform: translateY(-2px);
-}
-
-.connect-card a.dc {
-    background: #5865F2;
-}
-
-.connect-card a.dc:hover {
-    background: #4752c4;
-}
-
-/* ========================= */
-/* SECTIONS */
-/* ========================= */
-.features-section, .gallery-section, .faq-section {
-    padding: 80px 7% 90px;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.section-title h2 {
-    font-size: 44px;
-    font-weight: 700;
-    background: linear-gradient(120deg, var(--text-primary), var(--accent-color));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* Features Grid */
-.feature-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 35px;
-}
-
-.feature-card {
-    background: var(--feature-bg);
-    backdrop-filter: blur(4px);
-    border-radius: 30px;
-    padding: 28px;
-    width: 260px;
-    text-align: center;
-    transition: 0.3s;
-    border: 1px solid var(--border-light);
-    color: var(--text-primary);
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-color);
-    background: var(--feature-bg-hover);
-    box-shadow: var(--shadow-md);
-}
-
-/* Gallery Grid */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.gallery-card {
-    background: var(--feature-bg);
-    backdrop-filter: blur(4px);
-    border-radius: 36px;
-    padding: 24px;
-    text-align: center;
-    transition: 0.35s ease;
-    border: 1px solid var(--border-light);
-}
-
-.gallery-card:hover {
-    transform: translateY(-12px);
-    border-color: var(--accent-color);
-    background: var(--feature-bg-hover);
-}
-
-.gallery-card img {
-    width: 100%;
-    border-radius: 28px;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    border: 1px solid var(--border-light);
-}
-
-.gallery-card p {
-    margin-top: 20px;
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--accent-color);
-}
-
-/* FAQ Grid */
-.faq-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 35px;
-}
-
-.faq-card {
-    background: var(--feature-bg);
-    backdrop-filter: blur(4px);
-    border-radius: 30px;
-    padding: 28px;
-    width: 300px;
-    text-align: left;
-    transition: 0.3s;
-    border: 1px solid var(--border-light);
-    color: var(--text-primary);
-}
-
-.faq-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-color);
-    background: var(--feature-bg-hover);
-    box-shadow: var(--shadow-md);
-}
-
-.faq-card i {
-    font-size: 28px;
-    color: var(--accent-color);
-    margin-bottom: 12px;
-}
-
-.faq-card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: var(--text-primary);
-}
-
-.faq-card p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.copy-notify {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1a2a3a;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 60px;
-    font-size: 14px;
-    z-index: 2000;
-    white-space: nowrap;
-}
-
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 30px;
-    transition: background 0.3s ease;
-}
-
-footer p {
-    font-size: 14px;
-}
-
-/* ========================= */
-/* MOBILE RESPONSIVE */
-/* ========================= */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 48px;
+@keyframes particleMove{
+    from{
+        transform:translateY(100vh) scale(0);
+        opacity:0;
     }
-    
-    .server-logo-hero {
-        width: 60px;
-        height: 60px;
+    10%{
+        opacity:1;
     }
-    
-    .title-with-logo {
-        gap: 12px;
+    to{
+        transform:translateY(-10vh) scale(1);
+        opacity:0;
     }
-    
-    .nav-links {
-        display: none;
+}
+
+/* ===================================== */
+/* Navbar */
+/* ===================================== */
+
+nav{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+    backdrop-filter:blur(14px);
+    background:rgba(10,10,15,.35);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-container{
+    max-width:1300px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 25px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:1.2rem;
+    font-weight:700;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    object-fit:contain;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+.nav-links a{
+    color:#dfe7f7;
+    text-decoration:none;
+    font-weight:500;
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+/* ===================================== */
+/* Hero */
+/* ===================================== */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:120px 20px 80px;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.hero-logo{
+    width:150px;
+    margin-bottom:25px;
+    filter:drop-shadow(0 0 25px rgba(255,255,255,.25));
+    animation:logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+    0%,100%{
+        transform:translateY(0px);
     }
-    
-    .hamburger {
-        display: flex;
+    50%{
+        transform:translateY(-12px);
     }
-    
-    .connect-card {
-        width: 85%;
-        max-width: 280px;
+}
+
+.hero h1{
+    font-size:5rem;
+    line-height:1;
+    margin-bottom:20px;
+    background:linear-gradient(90deg,#e2e6ee,#a6b8e4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:1.15rem;
+    color:#c7cfdf;
+    line-height:1.8;
+    margin-bottom:40px;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:16px 32px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#e2e6ee,#a6b8e4);
+    color:#111;
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 30px rgba(166,184,228,.35);
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,.15);
+    color:#fff;
+    background:rgba(255,255,255,.05);
+}
+
+.btn-secondary:hover{
+    background:rgba(255,255,255,.1);
+    transform:translateY(-4px);
+}
+
+/* ===================================== */
+/* Sections */
+/* ===================================== */
+
+section{
+    padding:110px 20px;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-title h2{
+    font-size:3rem;
+    margin-bottom:15px;
+    background:linear-gradient(90deg,#e2e6ee,#a6b8e4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.section-title p{
+    color:#bcc6d8;
+}
+
+/* ===================================== */
+/* Features */
+/* ===================================== */
+
+.features-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:28px;
+}
+
+.feature-card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    padding:35px;
+    border-radius:24px;
+    backdrop-filter:blur(18px);
+    transition:.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(166,184,228,.4);
+    box-shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+.feature-icon{
+    width:60px;
+    height:60px;
+    border-radius:16px;
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#e2e6ee,#a6b8e4);
+    color:#111;
+    font-size:1.4rem;
+    font-weight:700;
+}
+
+.feature-card h3{
+    margin-bottom:12px;
+    font-size:1.3rem;
+}
+
+.feature-card p{
+    color:#b8c0cf;
+    line-height:1.7;
+}
+
+/* ===================================== */
+/* Gallery */
+/* ===================================== */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.gallery-item{
+    position:relative;
+    overflow:hidden;
+    border-radius:24px;
+    height:240px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+.gallery-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
+    display:flex;
+    align-items:flex-end;
+    padding:25px;
+}
+
+.gallery-overlay h3{
+    font-size:1.2rem;
+}
+
+/* ===================================== */
+/* FAQ */
+/* ===================================== */
+
+.faq-container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.faq-item{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.faq-question{
+    padding:22px 28px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.faq-answer{
+    padding:0 28px 22px;
+    color:#bcc6d8;
+    line-height:1.8;
+    display:none;
+}
+
+.faq-item.active .faq-answer{
+    display:block;
+}
+
+/* ===================================== */
+/* Footer */
+/* ===================================== */
+
+footer{
+    padding:50px 20px;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.02);
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.footer-left h3{
+    margin-bottom:12px;
+}
+
+.footer-left p{
+    color:#aeb8cb;
+    max-width:500px;
+    line-height:1.8;
+}
+
+.footer-links{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.footer-links a{
+    color:#d7deee;
+    text-decoration:none;
+}
+
+.footer-links a:hover{
+    color:#fff;
+}
+
+/* ===================================== */
+/* Responsive */
+/* ===================================== */
+
+@media(max-width:900px){
+
+    .hero h1{
+        font-size:3.5rem;
     }
-    
-    .gallery-grid {
-        gap: 28px;
-        grid-template-columns: 1fr;
+
+    .nav-links{
+        display:none;
     }
-    
-    .theme-toggle span {
-        display: none;
+
+    .section-title h2{
+        font-size:2.3rem;
     }
-    
-    .theme-toggle {
-        padding: 8px 12px;
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:2.7rem;
     }
-    
-    .section-title h2 {
-        font-size: 32px;
+
+    .hero p{
+        font-size:1rem;
     }
-    
-    .features-section, .gallery-section, .faq-section {
-        padding: 60px 5% 70px;
+
+    .hero-buttons{
+        flex-direction:column;
     }
-    
-    .hero {
-        padding: 100px 5% 60px;
-    }
-    
-    .feature-card, .faq-card {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    footer p {
-        font-size: 12px;
+
+    .btn{
+        width:100%;
     }
 }
 </style>
 </head>
 <body>
 
-<!-- FLOATING DOTS BACKGROUND -->
-<div class="bg" id="bg"></div>
+<!-- Animated Background -->
+<div class="background">
 
-<nav>
-    <a href="#" class="logo">
-        <img src="logo.png" alt="Fallen Halo Logo" onerror="this.src='https://via.placeholder.com/48x48?text=FH'">
-        <div class="logo-text">
-            <div class="logo-title">Fallen Halo</div>
-            <div class="logo-sub">Minecraft Network</div>
-        </div>
-    </a>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
 
-    <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#gallery">Gallery</a>
-        <a href="staff.html">Staff</a>
-        <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
-        <button class="theme-toggle" id="themeToggleBtn">
-            <i class="fas fa-moon"></i>
-            <span>Dark</span>
-        </button>
+    <div class="particles">
+        <span style="left:5%; animation-duration:12s; animation-delay:0s;"></span>
+        <span style="left:15%; animation-duration:18s; animation-delay:2s;"></span>
+        <span style="left:25%; animation-duration:10s; animation-delay:1s;"></span>
+        <span style="left:35%; animation-duration:16s; animation-delay:5s;"></span>
+        <span style="left:45%; animation-duration:20s; animation-delay:3s;"></span>
+        <span style="left:55%; animation-duration:14s; animation-delay:7s;"></span>
+        <span style="left:65%; animation-duration:17s; animation-delay:2s;"></span>
+        <span style="left:75%; animation-duration:11s; animation-delay:4s;"></span>
+        <span style="left:85%; animation-duration:19s; animation-delay:1s;"></span>
+        <span style="left:95%; animation-duration:13s; animation-delay:6s;"></span>
     </div>
 
-    <div class="hamburger" id="hamburgerBtn">
-        <div></div>
-        <div></div>
-        <div></div>
+</div>
+
+<!-- Navbar -->
+<nav>
+    <div class="nav-container">
+
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span>Fallen Halo Network</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#faq">FAQ</a>
+        </div>
+
     </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#features">Features</a>
-    <a href="#gallery">Gallery</a>
-    <a href="staff.html">Staff</a>
-    <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
-    <button class="theme-toggle" id="mobileThemeToggleBtn">
-        <i class="fas fa-moon"></i>
-        <span>Dark Mode</span>
-    </button>
-</div>
-
-<!-- HERO SECTION -->
+<!-- Hero -->
 <section class="hero">
+
     <div class="hero-content">
-        <div class="title-with-logo">
-            <img src="logo.png" alt="Server Logo" class="server-logo-hero" onerror="this.src='https://via.placeholder.com/80x80?text=Logo'">
-            <h1>
-                Fallen Halo<br>
-                <span class="gradient">Network</span>
-            </h1>
-        </div>
-        <div class="status">
-            <i class="fas fa-circle"></i> Offline • 0 Players
+
+        <img src="logo.png" class="hero-logo" alt="Logo">
+
+        <h1>Fallen Halo Network</h1>
+
+        <p>
+            A premium Minecraft experience built for grinders, fighters,
+            builders, and legends. Explore unique gameplay, custom features,
+            and a stunning community-driven world.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-primary">Play Now</a>
+            <a href="#" class="btn btn-secondary">Join Discord</a>
         </div>
 
-        <div class="connect-wrap">
-            <div class="connect-card">
-                <i class="fas fa-globe"></i>
-                <div class="connect-title">Server Address (W.I.P)</div>
-                <div class="connect-value">none</div>
-                <button onclick="copyIP()">
-                    <i class="fas fa-copy"></i> Copy IP
-                </button>
+    </div>
+
+</section>
+
+<!-- Features -->
+<section id="features">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Features</h2>
+            <p>Built to create the best Minecraft experience possible.</p>
+        </div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">⚔</div>
+                <h3>Competitive PvP</h3>
+                <p>
+                    Balanced combat, custom events, and intense fights
+                    designed for both casual and hardcore players.
+                </p>
             </div>
 
-            <div class="connect-card">
-                <i class="fab fa-discord"></i>
-                <div class="connect-title">Join Discord</div>
-                <div class="connect-value">25+ online now</div>
-                <a class="dc" href="https://discord.gg/BsU48hu6zQ" target="_blank">
-                    <i class="fab fa-discord"></i> Join Hub
-                </a>
+            <div class="feature-card">
+                <div class="feature-icon">⛏</div>
+                <h3>Economy System</h3>
+                <p>
+                    Grind, trade, and dominate the economy with player shops,
+                    auctions, and rewarding progression.
+                </p>
             </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">☁</div>
+                <h3>Unique Worlds</h3>
+                <p>
+                    Explore beautiful worlds filled with custom terrain,
+                    hidden areas, and exciting adventures.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✦</div>
+                <h3>Custom Content</h3>
+                <p>
+                    Enjoy unique systems, optimized gameplay, and immersive
+                    features built specifically for Fallen Halo.
+                </p>
+            </div>
+
         </div>
+
     </div>
+
 </section>
 
-<!-- FEATURES SECTION -->
-<section id="features" class="features-section">
-    <div class="section-title"><h2>✦ Server Features ✦</h2></div>
-    <div class="feature-grid">
-        <div class="feature-card"><i class="fas fa-crown" style="font-size:36px;color:var(--accent-color)"></i><h3>Custom Ranks</h3><p>Exclusive perks and commands</p></div>
-        <div class="feature-card"><i class="fas fa-gem" style="font-size:36px;color:var(--accent-color)"></i><h3>Unique Cosmetics</h3><p>Stand out from the crowd</p></div>
-        <div class="feature-card"><i class="fas fa-chart-line" style="font-size:36px;color:var(--accent-color)"></i><h3>Active Economy</h3><p>Player-driven marketplace</p></div>
-        <div class="feature-card"><i class="fas fa-dragon" style="font-size:36px;color:var(--accent-color)"></i><h3>Custom Bosses</h3><p>Epic PvE encounters</p></div>
+<!-- Gallery -->
+<section id="gallery">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Gallery</h2>
+            <p>A glimpse into the Fallen Halo universe.</p>
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="">
+                <div class="gallery-overlay">
+                    <h3>Spawn Area</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="">
+                <div class="gallery-overlay">
+                    <h3>Adventure Zones</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="">
+                <div class="gallery-overlay">
+                    <h3>Community Builds</h3>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
 </section>
 
-<!-- GALLERY SECTION -->
-<section id="gallery" class="gallery-section">
-    <div class="section-title"><h2>✦ Server Gallery ✦</h2></div>
-    <div class="gallery-grid">
-        <div class="gallery-card">
-            <img src="1.png" alt="Gallery Image 1" onerror="this.src='https://placehold.co/600x380/2c3b64/white?text=Spawn+Area'">
-            <p>✦ Spawn Sanctuary ✦</p>
+<!-- FAQ -->
+<section id="faq">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>FAQ</h2>
+            <p>Frequently asked questions about the server.</p>
         </div>
-        <div class="gallery-card">
-            <img src="2.png" alt="Gallery Image 2" onerror="this.src='https://placehold.co/600x380/4a6a9a/white?text=Warzone'">
-            <p>✦ Warzone Arena ✦</p>
+
+        <div class="faq-container">
+
+            <div class="faq-item active">
+                <div class="faq-question">
+                    What version is the server on?
+                    <span>+</span>
+                </div>
+
+                <div class="faq-answer">
+                    The server supports the latest Minecraft versions
+                    with optimized compatibility for smooth gameplay.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is the server pay-to-win?
+                    <span>+</span>
+                </div>
+
+                <div class="faq-answer">
+                    No. Fallen Halo focuses on fair progression and
+                    competitive gameplay for everyone.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I join the community?
+                    <span>+</span>
+                </div>
+
+                <div class="faq-answer">
+                    Join our Discord server and connect with players,
+                    participate in events, and stay updated.
+                </div>
+            </div>
+
         </div>
-        <div class="gallery-card">
-            <img src="3.png" alt="Gallery Image 3" onerror="this.src='https://placehold.co/600x380/a6b8e4/black?text=Events'">
-            <p>✦ Weekly Events ✦</p>
-        </div>
+
     </div>
+
 </section>
 
-<!-- FAQ SECTION -->
-<section id="faq" class="faq-section">
-    <div class="section-title"><h2>✦ Frequently Asked Questions ✦</h2></div>
-    <div class="faq-grid">
-        <div class="faq-card">
-            <i class="fas fa-gamepad"></i>
-            <h3>What Minecraft version?</h3>
-            <p>We support Java Edition 1.20.x up to 1.21+</p>
+<!-- Footer -->
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <h3>Fallen Halo Network</h3>
+            <p>
+                Built for players who want more than just another Minecraft server.
+                Create your legacy in Fallen Halo.
+            </p>
         </div>
-        <div class="faq-card">
-            <i class="fas fa-shield-alt"></i>
-            <h3>Is there an anti-cheat?</h3>
-            <p>Yes! We use premium anti-cheat with 24/7 staff monitoring</p>
+
+        <div class="footer-links">
+            <a href="#">Discord</a>
+            <a href="#">Store</a>
+            <a href="#">Vote</a>
+            <a href="#">Support</a>
         </div>
-        <div class="faq-card">
-            <i class="fas fa-store"></i>
-            <h3>What can I buy from the store?</h3>
-            <p>Ranks, cosmetics, crate keys, and
+
+    </div>
+
+</footer>
+
+<script>
+
+/* FAQ Toggle */
+
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
+
+</script>
+
+</body>
+</html>
