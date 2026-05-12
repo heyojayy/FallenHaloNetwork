@@ -225,27 +225,26 @@ nav{
 }
 
 /* ========================= */
-/* REFINED CONNECT CARDS (compact, smaller, elegant) */
+/* COMPACT & RECTANGULAR BUTTON STYLE (smaller icons, sleek) */
 /* ========================= */
 .connect-wrap{
     margin-top:55px;
     display:flex;
     justify-content:center;
-    gap:24px;
+    gap:28px;
     flex-wrap:wrap;
 }
 
 .connect-card{
-    width:240px;
-    padding:20px 16px;
-    border-radius:28px;
+    width:260px;
+    padding:22px 18px;
+    border-radius:32px;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(14px);
     border: 1px solid rgba(63, 199, 183, 0.35);
     box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255,255,255,0.5) inset;
     transition: all 0.3s ease;
     text-align:center;
-    cursor: default;
 }
 
 .connect-card:hover{
@@ -255,14 +254,15 @@ nav{
     box-shadow: 0 20px 32px -12px rgba(63,199,183,0.3);
 }
 
-/* smaller icon */
-.connect-card i{
-    font-size: 32px;
+/* smaller icon inside card header */
+.connect-card i:first-child{
+    font-size: 34px;
     background: linear-gradient(135deg, #3fc7b7, #2faa9a);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    display: inline-block;
 }
 
 .connect-title{
@@ -281,33 +281,50 @@ nav{
     padding: 4px 14px;
     border-radius: 40px;
     color: #22665c;
-    margin: 8px 0 12px;
+    margin: 8px 0 16px;
     font-family: monospace;
     letter-spacing: 0.3px;
 }
 
+/* ---------- RECTANGULAR BUTTONS with tiny icons ---------- */
 .connect-card button,
 .connect-card a{
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     background: #3fc7b7;
     color: white;
     padding: 8px 20px;
-    border-radius: 40px;
+    border-radius: 14px;   /* rectangular shape, not chunky */
     font-weight: 600;
     border: none;
     cursor: pointer;
     text-decoration: none;
     transition: 0.2s;
     font-size: 13px;
+    width: auto;
+    min-width: 110px;
+    letter-spacing: 0.3px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Smaller icon inside button (reducing icon size) */
+.connect-card button i,
+.connect-card a i{
+    font-size: 12px !important;
+    margin-right: 2px;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    color: white !important;
+    transition: 0.2s;
 }
 
 .connect-card button:hover,
 .connect-card a:hover{
     background: #2aa395;
-    transform: scale(0.96);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(63,199,183,0.25);
 }
 
 .connect-card a.dc{
@@ -318,7 +335,7 @@ nav{
 }
 
 /* ========================= */
-/* SECTIONS (unchanged structure but refined) */
+/* SECTIONS (unchanged but refined) */
 /* ========================= */
 section{
     padding: 80px 7% 90px;
@@ -362,7 +379,7 @@ section{
     text-align:left;
 }
 
-/* GALLERY CARDS - using local images 1.png, 2.png, 3.png */
+/* GALLERY local images */
 .gallery-card img{
     width:100%;
     border-radius:24px;
@@ -406,8 +423,12 @@ footer{
     .hero h1{font-size:48px;}
     .nav-links{display:none;}
     .hamburger{display:flex;}
-    .connect-card{width:85%; max-width:260px;}
+    .connect-card{width:85%; max-width:280px;}
     .connect-wrap{gap:18px;}
+    .connect-card button, .connect-card a{
+        padding: 7px 16px;
+        min-width: 100px;
+    }
 }
 </style>
 </head>
@@ -443,7 +464,7 @@ footer{
 <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
 </div>
 
-<!-- HERO (with compact connection cards) -->
+<!-- HERO with sleek rectangular buttons (smaller icons) -->
 <section class="hero fade">
 <div>
 <h1>
@@ -451,23 +472,27 @@ Fallen Halo<br>
 <span class="gradient">Network</span>
 </h1>
 <div class="status">
-<i class="fas fa-circle"></i> Online • 42 Players
+<i class="fas fa-circle"></i> Online • 58 Players
 </div>
 
-<!-- REFINED CONNECT CARDS: smaller, nice, no duplicate buttons -->
+<!-- refined connect cards: rectangular buttons, tiny icons -->
 <div class="connect-wrap">
 <div class="connect-card">
-<i class="fas fa-server"></i>
-<div class="connect-title">Server IP</div>
+<i class="fas fa-globe"></i>
+<div class="connect-title">Server Address</div>
 <div class="connect-value">play.fallenhalo.net</div>
-<button class="copy" onclick="copyIP()"><i class="fas fa-copy"></i> Copy</button>
+<button class="copy" onclick="copyIP()">
+<i class="fas fa-copy"></i> Copy IP
+</button>
 </div>
 
 <div class="connect-card">
 <i class="fab fa-discord"></i>
-<div class="connect-title">Discord</div>
-<div class="connect-value">Join Community</div>
-<a class="dc" href="https://discord.gg/BsU48hu6zQ" target="_blank"><i class="fab fa-discord"></i> Join</a>
+<div class="connect-title">Join Discord</div>
+<div class="connect-value">25+ online now</div>
+<a class="dc" href="https://discord.gg/BsU48hu6zQ" target="_blank">
+<i class="fab fa-discord"></i> Join Hub
+</a>
 </div>
 </div>
 
@@ -485,20 +510,20 @@ Fallen Halo<br>
 </div>
 </section>
 
-<!-- GALLERY SECTION - now using local images 1.png, 2.png, 3.png -->
+<!-- GALLERY SECTION - local images 1.png, 2.png, 3.png -->
 <section id="gallery">
 <div class="section-title"><h2>✦ Server Gallery ✦</h2></div>
 <div class="gallery-grid">
 <div class="gallery-card">
-<img src="1.png" alt="Fallen Halo Spawn" onerror="this.src='https://placehold.co/400x240/3fc7b7/white?text=Image+1'">
+<img src="1.png" alt="Fallen Halo Spawn" onerror="this.src='https://placehold.co/400x240/3fc7b7/white?text=1.png'">
 <p>✦ Spawn Sanctuary ✦</p>
 </div>
 <div class="gallery-card">
-<img src="2.png" alt="Fallen Halo Warzone" onerror="this.src='https://placehold.co/400x240/2faa9a/white?text=Image+2'">
+<img src="2.png" alt="Fallen Halo Warzone" onerror="this.src='https://placehold.co/400x240/2faa9a/white?text=2.png'">
 <p>⚔️ Warzone Arena ⚔️</p>
 </div>
 <div class="gallery-card">
-<img src="3.png" alt="Fallen Halo Event" onerror="this.src='https://placehold.co/400x240/7ff2e3/black?text=Image+3'">
+<img src="3.png" alt="Fallen Halo Event" onerror="this.src='https://placehold.co/400x240/7ff2e3/black?text=3.png'">
 <p>🏆 Weekly Events 🏆</p>
 </div>
 </div>
@@ -547,7 +572,7 @@ function copyIP(){
     const ipText = "play.fallenhalo.net";
     navigator.clipboard.writeText(ipText).then(() => {
         let notif = document.createElement('div');
-        notif.innerText = "✓ IP Copied! play.fallenhalo.net";
+        notif.innerText = "✓ Server IP copied! play.fallenhalo.net";
         notif.className = "copy-notify";
         document.body.appendChild(notif);
         setTimeout(() => { notif.remove(); }, 1800);
@@ -556,7 +581,7 @@ function copyIP(){
     });
 }
 
-// Close mobile menu on click outside / link click
+// Close mobile menu
 document.querySelectorAll('.mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         document.getElementById("mobileMenu").classList.remove("show");
