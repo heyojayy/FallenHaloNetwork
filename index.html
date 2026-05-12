@@ -30,15 +30,12 @@ body{
 }
 
 /* ========================= */
-/* ANIMATED BACKGROUND */
+/* BACKGROUND */
 /* ========================= */
 
 .bg{
     position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
+    inset:0;
     z-index:-1;
     overflow:hidden;
 }
@@ -91,28 +88,54 @@ nav{
     border-bottom:1px solid rgba(63,199,183,0.15);
 }
 
+/* ========================= */
 /* LOGO */
+/* ========================= */
 
 .logo{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
 
+    text-decoration:none;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    box-shadow:0 5px 18px rgba(63,199,183,0.18);
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+}
+
+.logo-title{
     font-size:22px;
     font-weight:700;
     color:#3fc7b7;
 }
 
-.logo img{
-    width:42px;
-    height:42px;
-    border-radius:12px;
+.logo-sub{
+    font-size:12px;
+    color:#6b7a7a;
+    margin-top:4px;
 }
 
+/* ========================= */
 /* NAV LINKS */
+/* ========================= */
 
 .nav-links{
     display:flex;
+    align-items:center;
     gap:14px;
 }
 
@@ -120,10 +143,11 @@ nav{
     text-decoration:none;
     color:#2b3b3a;
 
-    padding:8px 12px;
+    padding:8px 14px;
     border-radius:12px;
 
     display:inline-block;
+
     transition:0.25s ease;
 }
 
@@ -137,7 +161,7 @@ nav{
 }
 
 /* ========================= */
-/* MOBILE MENU */
+/* MOBILE */
 /* ========================= */
 
 .hamburger{
@@ -156,18 +180,23 @@ nav{
 
 .mobile-menu{
     position:absolute;
-    top:75px;
+    top:78px;
     right:7%;
 
     display:none;
     flex-direction:column;
 
     background:white;
+
     padding:15px;
 
     border-radius:18px;
 
     box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.mobile-menu.show{
+    display:flex;
 }
 
 .mobile-menu a{
@@ -176,8 +205,6 @@ nav{
 
     padding:10px;
     border-radius:10px;
-
-    transition:0.2s;
 }
 
 .mobile-menu a:hover{
@@ -197,6 +224,7 @@ nav{
     align-items:center;
 
     text-align:center;
+
     padding:120px 7% 60px;
 }
 
@@ -230,13 +258,14 @@ nav{
 /* BUTTONS */
 
 .hero-buttons{
-    margin-top:18px;
+    margin-top:20px;
 }
 
 .btn{
     display:inline-block;
 
     margin:8px;
+
     padding:11px 18px;
 
     border:none;
@@ -247,10 +276,10 @@ nav{
 
     cursor:pointer;
 
-    transition:0.3s;
+    transition:0.3s ease;
 }
 
-/* COPY IP */
+/* IP BUTTON */
 
 .ip-btn{
     background:#3fc7b7;
@@ -309,6 +338,7 @@ section{
     border:1px solid rgba(63,199,183,0.2);
 
     padding:30px;
+
     border-radius:24px;
 
     transition:0.35s ease;
@@ -445,7 +475,7 @@ footer{
 @media(max-width:768px){
 
     .hero h1{
-        font-size:44px;
+        font-size:46px;
     }
 
     .nav-links{
@@ -453,10 +483,6 @@ footer{
     }
 
     .hamburger{
-        display:flex;
-    }
-
-    .mobile-menu.show{
         display:flex;
     }
 
@@ -477,20 +503,35 @@ footer{
 <!-- NAVBAR -->
 <nav>
 
-    <div class="logo">
-        <img src="https://mc-heads.net/avatar/Steve">
-        Fallen Halo
-    </div>
+    <!-- CUSTOM LOGO -->
+    <a href="#" class="logo">
 
+        <!-- CHANGE THIS -->
+        <img src="logo.png" alt="Fallen Halo Logo">
+
+        <div class="logo-text">
+            <div class="logo-title">
+                Fallen Halo
+            </div>
+
+            <div class="logo-sub">
+                Minecraft Network
+            </div>
+        </div>
+
+    </a>
+
+    <!-- NAV LINKS -->
     <div class="nav-links">
+
         <a href="#features">Features</a>
         <a href="#gallery">Gallery</a>
         <a href="staff.html">Staff</a>
 
-        <!-- STORE EXTERNAL LINK -->
         <a href="https://store.yourdomain.com" target="_blank">
             Store
         </a>
+
     </div>
 
     <!-- MOBILE BUTTON -->
@@ -525,12 +566,10 @@ footer{
             <span class="gradient">Network</span>
         </h1>
 
-        <!-- SERVER STATUS -->
         <div class="status">
             🟢 Online • 23 Players
         </div>
 
-        <!-- BUTTONS -->
         <div class="hero-buttons">
 
             <button class="btn ip-btn" onclick="copyIP()">
@@ -566,14 +605,14 @@ footer{
         <div class="feature">
             <h3>Custom Events</h3>
             <p>
-                Weekly PvP battles, giveaways, and server tournaments.
+                Weekly PvP battles, giveaways, and tournaments.
             </p>
         </div>
 
         <div class="feature">
             <h3>Community</h3>
             <p>
-                Friendly players and active staff team always ready to help.
+                Friendly players and active staff always ready to help.
             </p>
         </div>
 
@@ -648,20 +687,14 @@ footer{
 
 <script>
 
-/* ========================= */
 /* MOBILE MENU */
-/* ========================= */
-
 function toggleMenu(){
     document
         .getElementById("mobileMenu")
         .classList.toggle("show");
 }
 
-/* ========================= */
 /* COPY IP */
-/* ========================= */
-
 function copyIP(){
 
     navigator.clipboard.writeText(
@@ -671,10 +704,7 @@ function copyIP(){
     alert("IP Copied!");
 }
 
-/* ========================= */
 /* FAQ */
-/* ========================= */
-
 document
 .querySelectorAll(".faq-item")
 .forEach(item=>{
@@ -687,10 +717,7 @@ document
 
 });
 
-/* ========================= */
-/* FADE IN */
-/* ========================= */
-
+/* FADE */
 const observer = new IntersectionObserver(entries=>{
 
     entries.forEach(entry=>{
@@ -709,10 +736,7 @@ document
 .querySelectorAll(".fade")
 .forEach(el=>observer.observe(el));
 
-/* ========================= */
 /* BACKGROUND DOTS */
-/* ========================= */
-
 const bg = document.getElementById("bg");
 
 for(let i=0;i<35;i++){
