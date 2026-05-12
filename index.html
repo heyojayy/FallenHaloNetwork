@@ -80,6 +80,7 @@ body {
     background-attachment: fixed;
     background-size: 200% 200%;
     animation: gradientShift 15s ease infinite;
+    position: relative;
 }
 
 @keyframes gradientShift {
@@ -95,35 +96,85 @@ body.dark {
     animation: gradientShift 15s ease infinite;
 }
 
-/* Headings */
-h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title {
-    font-family: var(--heading-font);
-    letter-spacing: -0.2px;
-}
-
-/* Floating dots */
-.bg {
+/* Animated particles background */
+.particles {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
 }
 
-.dot {
+.particle {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--dot-color);
+    background: rgba(44, 59, 100, 0.15);
     border-radius: 50%;
-    opacity: 0.25;
-    animation: float linear infinite;
+    animation: floatParticle linear infinite;
+    pointer-events: none;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh); opacity: 0; }
-    20% { opacity: 0.4; }
-    100% { transform: translateY(-10vh); opacity: 0; }
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Floating shapes background */
+.floating-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    background: rgba(166, 184, 228, 0.08);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: floatShape 20s ease-in-out infinite;
+}
+
+@keyframes floatShape {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+body.dark .shape {
+    background: rgba(166, 184, 228, 0.06);
+}
+
+/* ========================= */
+/* HEADINGS */
+/* ========================= */
+h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title {
+    font-family: var(--heading-font);
+    letter-spacing: -0.2px;
 }
 
 /* ========================= */
@@ -298,12 +349,42 @@ nav {
     padding: 130px 7% 70px;
 }
 
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.title-with-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.server-logo-hero {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 3px solid var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.server-logo-hero:hover {
+    transform: scale(1.05);
+}
+
 .hero h1 {
     font-size: 76px;
     line-height: 1.1;
     font-weight: 800;
     color: var(--text-primary);
     font-family: var(--heading-font);
+    margin: 0;
 }
 
 .gradient {
@@ -311,10 +392,11 @@ nav {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    display: inline-block;
 }
 
 .status {
-    margin-top: 25px;
+    margin-top: 10px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -590,6 +672,15 @@ footer p {
         font-size: 48px;
     }
     
+    .server-logo-hero {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .title-with-logo {
+        gap: 12px;
+    }
+    
     .nav-links {
         display: none;
     }
@@ -641,7 +732,9 @@ footer p {
 </head>
 <body>
 
-<div class="bg" id="bg"></div>
+<!-- Animated Background Elements -->
+<div class="particles" id="particles"></div>
+<div class="floating-shapes" id="floatingShapes"></div>
 
 <nav>
     <a href="#" class="logo">
@@ -681,13 +774,16 @@ footer p {
     </button>
 </div>
 
-<!-- HERO SECTION -->
+<!-- HERO SECTION with Logo beside title -->
 <section class="hero">
-    <div>
-        <h1>
-            Fallen Halo<br>
-            <span class="gradient">Network</span>
-        </h1>
+    <div class="hero-content">
+        <div class="title-with-logo">
+            <img src="logo.png" alt="Server Logo" class="server-logo-hero" onerror="this.src='https://via.placeholder.com/80x80?text=Logo'">
+            <h1>
+                Fallen Halo<br>
+                <span class="gradient">Network</span>
+            </h1>
+        </div>
         <div class="status">
             <i class="fas fa-circle"></i> Offline • 0 Players
         </div>
@@ -746,60 +842,4 @@ footer p {
 
 <!-- FAQ SECTION -->
 <section id="faq" class="faq-section">
-    <div class="section-title"><h2>✦ FAQ ✦</h2></div>
-    <div class="faq-grid">
-        <div class="faq-card"><i class="fas fa-question-circle"></i><h3>What version?</h3><p>Java 1.20 - 1.21+ supported</p></div>
-        <div class="faq-card"><i class="fas fa-shield-alt"></i><h3>Anti cheat?</h3><p>Premium anti-cheat & staff 24/7</p></div>
-        <div class="faq-card"><i class="fas fa-store"></i><h3>Store items?</h3><p>Cosmetics, ranks and crates</p></div>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Fallen Halo Network — Where legends are forged</p>
-    <p style="font-size: 12px; margin-top: 8px;">✦ Server Address (W.I.P) ✦</p>
-</footer>
-
-<script>
-// Floating background dots
-function createDots() {
-    const bg = document.getElementById('bg');
-    if (!bg) return;
-    const count = 50;
-    for (let i = 0; i < count; i++) {
-        let dot = document.createElement('div');
-        dot.classList.add('dot');
-        let size = Math.random() * 5 + 2;
-        dot.style.width = size + 'px';
-        dot.style.height = size + 'px';
-        dot.style.left = Math.random() * 100 + '%';
-        dot.style.animationDuration = Math.random() * 10 + 6 + 's';
-        dot.style.animationDelay = Math.random() * 15 + 's';
-        bg.appendChild(dot);
-    }
-}
-createDots();
-
-function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("show");
-}
-
-function copyIP() {
-    const ipText = "play.fallenhalo.net";
-    navigator.clipboard.writeText(ipText).then(() => {
-        let notif = document.createElement('div');
-        notif.innerText = "✓ Server IP copied! (WIP)";
-        notif.className = "copy-notify";
-        document.body.appendChild(notif);
-        setTimeout(() => notif.remove(), 1800);
-    }).catch(() => alert("Copy manually"));
-}
-
-// DARK MODE FUNCTION
-function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('dark');
-    const isDark = body.classList.contains('dark');
-    document.querySelectorAll('.theme-toggle').forEach(btn => {
-        const icon = btn.querySelector('i');
- 
+    <div class="section-title"><h2>✦ FAQ ✦</h2></d
