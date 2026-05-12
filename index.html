@@ -96,77 +96,42 @@ body.dark {
     animation: gradientShift 15s ease infinite;
 }
 
-/* Animated particles background */
-.particles {
+/* ========================= */
+/* FLOATING DOTS BACKGROUND (the effect you wanted) */
+/* ========================= */
+.bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
 }
 
-.particle {
+.dot {
     position: absolute;
-    background: rgba(44, 59, 100, 0.15);
+    width: 6px;
+    height: 6px;
+    background: var(--dot-color);
     border-radius: 50%;
-    animation: floatParticle linear infinite;
-    pointer-events: none;
+    opacity: 0.25;
+    animation: floatUp linear infinite;
 }
 
-@keyframes floatParticle {
+@keyframes floatUp {
     0% {
-        transform: translateY(100vh) rotate(0deg);
+        transform: translateY(100vh) scale(0.8);
         opacity: 0;
     }
-    10% {
-        opacity: 0.5;
+    20% {
+        opacity: 0.4;
     }
-    90% {
+    80% {
         opacity: 0.3;
     }
     100% {
-        transform: translateY(-10vh) rotate(360deg);
+        transform: translateY(-10vh) scale(1.2);
         opacity: 0;
     }
-}
-
-/* Floating shapes background */
-.floating-shapes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.shape {
-    position: absolute;
-    background: rgba(166, 184, 228, 0.08);
-    border-radius: 50%;
-    filter: blur(40px);
-    animation: floatShape 20s ease-in-out infinite;
-}
-
-@keyframes floatShape {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    33% {
-        transform: translate(30px, -30px) scale(1.1);
-    }
-    66% {
-        transform: translate(-20px, 20px) scale(0.9);
-    }
-}
-
-body.dark .shape {
-    background: rgba(166, 184, 228, 0.06);
 }
 
 /* ========================= */
@@ -275,11 +240,15 @@ nav {
     transform: translateY(-2px);
 }
 
+/* ========================= */
+/* MOBILE MENU - FIXED */
+/* ========================= */
 .hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+    z-index: 1001;
 }
 
 .hamburger div {
@@ -287,25 +256,26 @@ nav {
     height: 3px;
     background: var(--accent-color);
     border-radius: 999px;
+    transition: 0.3s;
 }
 
 .mobile-menu {
     position: fixed;
-    top: 80px;
-    right: 7%;
-    width: 230px;
+    top: 70px;
+    right: 5%;
+    width: 220px;
     background: var(--nav-bg);
     backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 18px;
+    border-radius: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     border: 1px solid var(--nav-border);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-12px);
-    transition: 0.2s;
+    transition: 0.25s ease;
     z-index: 1000;
 }
 
@@ -320,10 +290,11 @@ nav {
     color: var(--text-primary);
     font-weight: 500;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 14px;
     text-align: center;
     font-family: var(--body-font);
+    transition: 0.2s;
 }
 
 .mobile-menu a:hover {
@@ -335,6 +306,7 @@ nav {
     width: 100%;
     justify-content: center;
     margin-top: 5px;
+    padding: 8px;
 }
 
 /* ========================= */
@@ -605,7 +577,7 @@ nav {
 }
 
 /* ========================= */
-/* FAQ SECTION */
+/* FAQ SECTION - RESTORED */
 /* ========================= */
 .faq-section {
     padding: 80px 7% 90px;
@@ -635,6 +607,24 @@ nav {
     border-color: var(--accent-color);
     background: var(--feature-bg-hover);
     box-shadow: var(--shadow-md);
+}
+
+.faq-card i {
+    font-size: 28px;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+}
+
+.faq-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.faq-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
 }
 
 .copy-notify {
@@ -732,9 +722,8 @@ footer p {
 </head>
 <body>
 
-<!-- Animated Background Elements -->
-<div class="particles" id="particles"></div>
-<div class="floating-shapes" id="floatingShapes"></div>
+<!-- FLOATING DOTS BACKGROUND -->
+<div class="bg" id="bg"></div>
 
 <nav>
     <a href="#" class="logo">
@@ -814,10 +803,10 @@ footer p {
 <section id="features" class="features-section">
     <div class="section-title"><h2>✦ Server Features ✦</h2></div>
     <div class="feature-grid">
-        <div class="feature-card"><i class="fas fa-crown" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-gem" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-chart-line" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-dragon" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
+        <div class="feature-card"><i class="fas fa-crown" style="font-size:36px;color:var(--accent-color)"></i><h3>Custom Ranks</h3><p>Exclusive perks and commands</p></div>
+        <div class="feature-card"><i class="fas fa-gem" style="font-size:36px;color:var(--accent-color)"></i><h3>Unique Cosmetics</h3><p>Stand out from the crowd</p></div>
+        <div class="feature-card"><i class="fas fa-chart-line" style="font-size:36px;color:var(--accent-color)"></i><h3>Active Economy</h3><p>Player-driven marketplace</p></div>
+        <div class="feature-card"><i class="fas fa-dragon" style="font-size:36px;color:var(--accent-color)"></i><h3>Custom Bosses</h3><p>Epic PvE encounters</p></div>
     </div>
 </section>
 
@@ -826,20 +815,23 @@ footer p {
     <div class="section-title"><h2>✦ Server Gallery ✦</h2></div>
     <div class="gallery-grid">
         <div class="gallery-card">
-            <img src="1.png" alt="Gallery Image 1" onerror="this.src='https://placehold.co/600x380/2c3b64/white?text=1.png'">
-            <p>✦ Empty ✦</p>
+            <img src="1.png" alt="Gallery Image 1" onerror="this.src='https://placehold.co/600x380/2c3b64/white?text=Spawn+Area'">
+            <p>✦ Spawn Sanctuary ✦</p>
         </div>
         <div class="gallery-card">
-            <img src="2.png" alt="Gallery Image 2" onerror="this.src='https://placehold.co/600x380/4a6a9a/white?text=2.png'">
-            <p>✦ Empty ✦</p>
+            <img src="2.png" alt="Gallery Image 2" onerror="this.src='https://placehold.co/600x380/4a6a9a/white?text=Warzone'">
+            <p>✦ Warzone Arena ✦</p>
         </div>
         <div class="gallery-card">
-            <img src="3.png" alt="Gallery Image 3" onerror="this.src='https://placehold.co/600x380/a6b8e4/black?text=3.png'">
-            <p>✦ Empty ✦</p>
+            <img src="3.png" alt="Gallery Image 3" onerror="this.src='https://placehold.co/600x380/a6b8e4/black?text=Events'">
+            <p>✦ Weekly Events ✦</p>
         </div>
     </div>
 </section>
 
-<!-- FAQ SECTION -->
+<!-- FAQ SECTION - FULLY RESTORED -->
 <section id="faq" class="faq-section">
-    <div class="section-title"><h2>✦ FAQ ✦</h2></d
+    <div class="section-title"><h2>✦ Frequently Asked Questions ✦</h2></div>
+    <div class="faq-grid">
+        <div class="faq-card">
+            <i class="fas 
