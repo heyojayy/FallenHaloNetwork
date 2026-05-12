@@ -23,39 +23,9 @@
 
 body{
     font-family:'Poppins',sans-serif;
-    overflow-x:hidden;
-    color:#1f2a2a;
     background:linear-gradient(135deg,#e6fffb,#f7fffe,#ffffff);
-}
-
-/* ========================= */
-/* ANIMATED BACKGROUND (FEATURE #4) */
-/* ========================= */
-
-.bg{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    z-index:-1;
-    overflow:hidden;
-}
-
-.dot{
-    position:absolute;
-    width:6px;
-    height:6px;
-    background:#3fc7b7;
-    border-radius:50%;
-    opacity:0.4;
-    animation:float 10s linear infinite;
-}
-
-@keyframes float{
-    0%{transform:translateY(100vh); opacity:0;}
-    50%{opacity:0.6;}
-    100%{transform:translateY(-10vh); opacity:0;}
+    color:#1f2a2a;
+    overflow-x:hidden;
 }
 
 /* ========================= */
@@ -76,6 +46,7 @@ nav{
 
     background:rgba(235,255,252,0.75);
     backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(63,199,183,0.15);
 }
 
 .logo{
@@ -91,19 +62,27 @@ nav{
     border-radius:12px;
 }
 
-/* nav links */
+/* ========================= */
+/* NAV LINKS */
+/* ========================= */
+
 .nav-links a{
-    margin-left:18px;
+    margin-left:16px;
     text-decoration:none;
     color:#2b3b3a;
+
     padding:8px 12px;
     border-radius:12px;
+
     display:inline-block;
+    transition:0.25s;
 }
 
 .nav-links a:hover{
-    background:rgba(63,199,183,0.12);
-    transform:scale(1.1);
+    transform:scale(1.12);
+    background:rgba(63,199,183,0.15);
+    color:#3fc7b7;
+    box-shadow:0 8px 25px rgba(63,199,183,0.2);
 }
 
 /* ========================= */
@@ -129,44 +108,20 @@ nav{
 }
 
 /* ========================= */
-/* STATUS WIDGET (FEATURE #1) */
-/* ========================= */
-
-.status{
-    margin-top:20px;
-    display:inline-block;
-    padding:10px 16px;
-    border-radius:999px;
-    background:#dffcf9;
-    color:#2b3b3a;
-    font-weight:600;
-}
-
-/* ========================= */
-/* BUTTONS */
-/* ========================= */
-
-.btn{
-    display:inline-block;
-    margin:8px;
-    padding:10px 16px;
-    border-radius:12px;
-    background:#3fc7b7;
-    color:white;
-    text-decoration:none;
-    font-weight:600;
-}
-
-/* ========================= */
 /* SECTIONS */
 /* ========================= */
 
 section{
-    padding:100px 7%;
+    padding:110px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
 }
 
 /* ========================= */
-/* FEATURES */
+/* FEATURES (GLOW RESTORED) */
 /* ========================= */
 
 .features{
@@ -177,76 +132,84 @@ section{
 
 .feature{
     background:rgba(63,199,183,0.08);
+    border:1px solid rgba(63,199,183,0.2);
+
+    padding:30px;
     border-radius:24px;
-    padding:25px;
-    transition:0.3s;
+
+    transition:0.35s ease;
 }
 
 .feature:hover{
-    transform:scale(1.05);
+    transform:translateY(-8px) scale(1.05);
+    box-shadow:0 18px 45px rgba(63,199,183,0.25);
+    background:rgba(63,199,183,0.12);
 }
 
 /* ========================= */
-/* STORE (FEATURE #5) */
+/* GALLERY (GLOW RESTORED) */
 /* ========================= */
 
-.store{
+.gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:20px;
 }
 
-.card{
-    background:white;
-    padding:25px;
-    border-radius:20px;
+.gallery img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    border-radius:22px;
+
     border:1px solid rgba(63,199,183,0.2);
+    transition:0.3s;
 }
 
-.price{
-    font-weight:700;
-    color:#3fc7b7;
-}
-
-/* ========================= */
-/* STAFF PREVIEW (FEATURE #6) */
-/* ========================= */
-
-.staff{
-    display:flex;
-    gap:20px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.staff-card{
-    text-align:center;
-    padding:20px;
-    border-radius:20px;
-    background:rgba(63,199,183,0.08);
-}
-
-.staff-card img{
-    width:80px;
-    border-radius:16px;
+.gallery img:hover{
+    transform:scale(1.04);
+    box-shadow:0 18px 45px rgba(63,199,183,0.25);
 }
 
 /* ========================= */
-/* DISCORD BUTTON (FEATURE #7) */
+/* BUTTONS (IP + DISCORD GLOW FIX) */
 /* ========================= */
 
-.discord{
+.btn{
     display:inline-block;
-    margin-top:20px;
-    padding:12px 18px;
-    background:#5865F2;
-    color:white;
+    margin:10px 8px 0;
+    padding:10px 16px;
     border-radius:12px;
     text-decoration:none;
+    font-weight:600;
+
+    transition:0.3s;
+}
+
+/* IP BUTTON */
+.ip-btn{
+    background:#3fc7b7;
+    color:white;
+}
+
+.ip-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 25px rgba(63,199,183,0.35);
+}
+
+/* DISCORD BUTTON */
+.discord-btn{
+    background:#5865F2;
+    color:white;
+}
+
+.discord-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 25px rgba(88,101,242,0.35);
 }
 
 /* ========================= */
-/* FADE IN (FEATURE #9) */
+/* FADE IN */
 /* ========================= */
 
 .fade{
@@ -260,21 +223,10 @@ section{
     transform:translateY(0);
 }
 
-/* ========================= */
-/* MOBILE (FEATURE #10) */
-/* ========================= */
-
-@media(max-width:768px){
-    .hero h1{font-size:38px;}
-}
-
 </style>
 </head>
 
 <body>
-
-<!-- BACKGROUND (FEATURE #4) -->
-<div class="bg" id="bg"></div>
 
 <!-- NAV -->
 <nav>
@@ -285,8 +237,8 @@ section{
 
     <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#store">Store</a>
-        <a href="#staff">Staff</a>
+        <a href="#gallery">Gallery</a>
+        <a href="staff.html">Staff</a>
     </div>
 </nav>
 
@@ -295,20 +247,19 @@ section{
     <div>
         <h1>Fallen Halo<br><span class="gradient">Network</span></h1>
 
-        <!-- SERVER STATUS (FEATURE #1) -->
-        <div class="status">🟢 Online • 23 Players</div>
-
-        <!-- COPY IP (FEATURE #8) -->
+        <!-- IP + DISCORD (GLOW RESTORED) -->
         <div>
-            <button class="btn" onclick="copyIP()">Copy IP</button>
-            <a class="discord" href="#">Join Discord</a>
+            <button class="btn ip-btn" onclick="copyIP()">Copy IP</button>
+            <a class="btn discord-btn" href="#">Discord</a>
         </div>
     </div>
 </section>
 
 <!-- FEATURES -->
 <section id="features" class="fade">
-    <h2>Features</h2>
+    <div class="section-title">
+        <h2>Features</h2>
+    </div>
 
     <div class="features">
         <div class="feature">Economy System</div>
@@ -317,49 +268,28 @@ section{
     </div>
 </section>
 
-<!-- STORE (FEATURE #5) -->
-<section id="store" class="fade">
-    <h2>Store</h2>
-
-    <div class="store">
-        <div class="card">
-            <h3>VIP Rank</h3>
-            <p class="price">$5</p>
-        </div>
-
-        <div class="card">
-            <h3>MVP Rank</h3>
-            <p class="price">$10</p>
-        </div>
+<!-- GALLERY -->
+<section id="gallery" class="fade">
+    <div class="section-title">
+        <h2>Gallery</h2>
     </div>
-</section>
 
-<!-- STAFF (FEATURE #6) -->
-<section id="staff" class="fade">
-    <h2>Staff</h2>
-
-    <div class="staff">
-        <div class="staff-card">
-            <img src="https://mc-heads.net/avatar/Notch">
-            <p>Owner</p>
-        </div>
-
-        <div class="staff-card">
-            <img src="https://mc-heads.net/avatar/Steve">
-            <p>Admin</p>
-        </div>
+    <div class="gallery">
+        <img src="1.png">
+        <img src="2.png">
+        <img src="3.png">
     </div>
 </section>
 
 <script>
 
-/* COPY IP (FEATURE #8) */
+/* COPY IP */
 function copyIP(){
     navigator.clipboard.writeText("play.fallenhalo.net");
     alert("IP Copied!");
 }
 
-/* ANIMATIONS (FEATURE #9) */
+/* FADE */
 const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
         if(e.isIntersecting) e.target.classList.add("show");
@@ -367,17 +297,6 @@ const obs = new IntersectionObserver(entries=>{
 });
 
 document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
-
-/* BACKGROUND DOTS (FEATURE #4) */
-const bg = document.getElementById("bg");
-
-for(let i=0;i<30;i++){
-    let d = document.createElement("div");
-    d.className="dot";
-    d.style.left=Math.random()*100+"%";
-    d.style.animationDuration=(5+Math.random()*10)+"s";
-    bg.appendChild(d);
-}
 
 </script>
 
