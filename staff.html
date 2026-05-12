@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Staff - Fallen Halo</title>
+<title>Fallen Halo Staff</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -19,16 +19,18 @@
     padding:0;
     box-sizing:border-box;
     scroll-behavior:smooth;
+    -webkit-tap-highlight-color:transparent;
 }
 
 body{
     font-family:'Poppins',sans-serif;
     background:linear-gradient(135deg,#e6fffb,#f7fffe,#ffffff);
     color:#1f2a2a;
+    overflow-x:hidden;
 }
 
 /* ========================= */
-/* NAV (MATCH INDEX EXACTLY) */
+/* NAVBAR */
 /* ========================= */
 
 nav{
@@ -45,167 +47,300 @@ nav{
 
     background:rgba(235,255,252,0.75);
     backdrop-filter:blur(14px);
+
     border-bottom:1px solid rgba(63,199,183,0.15);
 }
+
+/* LOGO */
 
 .logo{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
+    text-decoration:none;
+}
+
+.logo img{
+    width:46px;
+    height:46px;
+    border-radius:12px;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+}
+
+.logo-title{
+    font-size:20px;
     font-weight:700;
     color:#3fc7b7;
 }
 
-.logo img{
-    width:42px;
-    border-radius:12px;
+.logo-sub{
+    font-size:12px;
+    color:#6b7a7a;
 }
 
 /* NAV LINKS */
+
+.nav-links{
+    display:flex;
+    gap:14px;
+}
+
 .nav-links a{
-    margin-left:14px;
     text-decoration:none;
     color:#2b3b3a;
 
-    padding:8px 12px;
+    padding:8px 14px;
     border-radius:12px;
-    display:inline-block;
 
     transition:0.25s;
 }
 
 .nav-links a:hover{
-    transform:scale(1.12);
     background:rgba(63,199,183,0.12);
     color:#3fc7b7;
-    box-shadow:0 8px 20px rgba(63,199,183,0.15);
+    transform:translateY(-2px);
 }
 
 /* ========================= */
-/* HEADER */
+/* HAMBURGER */
 /* ========================= */
 
-.header{
-    text-align:center;
-    padding:130px 7% 40px;
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    z-index:1001;
 }
 
-.header h1{
-    font-size:52px;
+.hamburger div{
+    width:25px;
+    height:3px;
+    background:#3fc7b7;
+    border-radius:999px;
+}
+
+/* ========================= */
+/* MOBILE MENU */
+/* ========================= */
+
+.mobile-menu{
+    position:fixed;
+    top:85px;
+    right:7%;
+
+    width:220px;
+
+    display:flex;
+    flex-direction:column;
+
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(14px);
+
+    padding:15px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(63,199,183,0.15);
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px);
+
+    transition:0.25s ease;
+
+    pointer-events:none;
+}
+
+.mobile-menu.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+    pointer-events:auto;
+}
+
+.mobile-menu a{
+    text-decoration:none;
+    color:#2b3b3a;
+
+    padding:12px;
+    border-radius:12px;
+
+    transition:0.2s;
+}
+
+.mobile-menu a:hover{
+    background:rgba(63,199,183,0.12);
     color:#3fc7b7;
 }
 
 /* ========================= */
-/* STAFF GRID */
+/* STAFF SECTION */
 /* ========================= */
+
+section{
+    padding:120px 7%;
+}
+
+.title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:40px;
+}
 
 .staff-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:20px;
-    padding:40px 7%;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:22px;
 }
-
-/* ========================= */
-/* STAFF CARD */
-/* ========================= */
 
 .card{
     background:rgba(63,199,183,0.08);
     border:1px solid rgba(63,199,183,0.2);
 
-    padding:28px;
-    border-radius:24px;
+    padding:25px;
+    border-radius:20px;
 
     text-align:center;
+
     transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-8px) scale(1.05);
-    box-shadow:0 18px 45px rgba(63,199,183,0.2);
+    transform:translateY(-6px) scale(1.03);
+    box-shadow:0 18px 40px rgba(63,199,183,0.2);
 }
 
 .card img{
     width:90px;
-    border-radius:18px;
-    margin-bottom:10px;
+    height:90px;
+    border-radius:12px;
+    margin-bottom:12px;
 }
 
 /* ========================= */
-/* RANK BADGES */
+/* MOBILE */
 /* ========================= */
 
-.rank{
-    display:inline-block;
-    padding:6px 12px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:700;
-    margin-top:8px;
-}
+@media(max-width:768px){
 
-/* COLORS */
-.owner{ background:#ffd36b; color:#4a3b00; }
-.admin{ background:#9fe3ff; color:#00465a; }
-.mod{ background:#d8b6ff; color:#2e005a; }
-.helper{ background:#bfffd0; color:#004a1f; }
+    .nav-links{
+        display:none;
+    }
+
+    .hamburger{
+        display:flex;
+    }
+
+}
 
 </style>
 </head>
 
 <body>
 
-<!-- NAV (UPDATED WITH STORE BUTTON) -->
+<!-- NAVBAR -->
 <nav>
 
-    <div class="logo">
-        <img src="https://mc-heads.net/avatar/Steve">
-        Fallen Halo
-    </div>
+    <a href="index.html" class="logo">
+
+        <img src="logo.png">
+
+        <div class="logo-text">
+            <div class="logo-title">Fallen Halo</div>
+            <div class="logo-sub">Staff Team</div>
+        </div>
+
+    </a>
 
     <div class="nav-links">
-        <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="index.html#gallery">Gallery</a>
-        <a href="store.html">Store</a>
+        <a href="staff.html">Staff</a>
+        <a href="https://store.yourdomain.com" target="_blank">Store</a>
+    </div>
+
+    <!-- HAMBURGER -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
 
 </nav>
 
-<!-- HEADER -->
-<div class="header">
-    <h1>Staff Team</h1>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html#features">Features</a>
+    <a href="index.html#gallery">Gallery</a>
+    <a href="staff.html">Staff</a>
+    <a href="https://store.yourdomain.com" target="_blank">Store</a>
+
 </div>
 
 <!-- STAFF -->
-<div class="staff-grid">
+<section>
 
-    <div class="card">
-        <img src="https://mc-heads.net/avatar/Notch">
-        <h3>Notch</h3>
-        <div class="rank owner">Owner</div>
+    <div class="title">Staff Team</div>
+
+    <div class="staff-grid">
+
+        <div class="card">
+            <img src="https://mc-heads.net/avatar/Steve">
+            <h3>Owner</h3>
+            <p>Steve</p>
+        </div>
+
+        <div class="card">
+            <img src="https://mc-heads.net/avatar/Alex">
+            <h3>Admin</h3>
+            <p>Alex</p>
+        </div>
+
+        <div class="card">
+            <img src="https://mc-heads.net/avatar/Notch">
+            <h3>Moderator</h3>
+            <p>Notch</p>
+        </div>
+
     </div>
 
-    <div class="card">
-        <img src="https://mc-heads.net/avatar/Steve">
-        <h3>Steve</h3>
-        <div class="rank admin">Admin</div>
-    </div>
+</section>
 
-    <div class="card">
-        <img src="https://mc-heads.net/avatar/Alex">
-        <h3>Alex</h3>
-        <div class="rank mod">Moderator</div>
-    </div>
+<script>
 
-    <div class="card">
-        <img src="https://mc-heads.net/avatar/Herobrine">
-        <h3>Herobrine</h3>
-        <div class="rank helper">Helper</div>
-    </div>
+/* TOGGLE MENU */
+function toggleMenu(){
+    document.getElementById("mobileMenu").classList.toggle("show");
+}
 
-</div>
+/* CLOSE ON CLICK */
+document.querySelectorAll("#mobileMenu a").forEach(a=>{
+    a.addEventListener("click",()=>{
+        document.getElementById("mobileMenu").classList.remove("show");
+    });
+});
+
+/* CLOSE ON OUTSIDE CLICK */
+document.addEventListener("click",(e)=>{
+
+    const menu = document.getElementById("mobileMenu");
+    const burger = document.querySelector(".hamburger");
+
+    if(!menu.contains(e.target) && !burger.contains(e.target)){
+        menu.classList.remove("show");
+    }
+
+});
+
+</script>
 
 </body>
 </html>
