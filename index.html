@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Fallen Halo Network</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -21,43 +22,43 @@ html{
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#0f1117;
-    color:#fff;
+    background:#0e1117;
+    color:white;
     overflow-x:hidden;
 }
 
 /* ===================================== */
-/* Animated Background */
+/* BACKGROUND */
 /* ===================================== */
 
 .background{
     position:fixed;
     inset:0;
+    z-index:-5;
     overflow:hidden;
-    z-index:-2;
     background:
-    radial-gradient(circle at top,#1c2230 0%,#0f1117 60%);
+    radial-gradient(circle at top,#1b2130 0%,#0d1016 60%);
 }
 
 .glow{
     position:absolute;
     border-radius:50%;
     filter:blur(120px);
-    opacity:.4;
+    opacity:.45;
     animation:float 12s ease-in-out infinite;
 }
 
 .glow.one{
-    width:400px;
-    height:400px;
+    width:420px;
+    height:420px;
     background:#e2e6ee;
     top:-120px;
-    left:-100px;
+    left:-120px;
 }
 
 .glow.two{
-    width:350px;
-    height:350px;
+    width:360px;
+    height:360px;
     background:#a6b8e4;
     right:-120px;
     top:20%;
@@ -67,9 +68,9 @@ body{
 .glow.three{
     width:300px;
     height:300px;
-    background:#c3d0ef;
+    background:#bcc9eb;
     bottom:-100px;
-    left:30%;
+    left:35%;
     animation-delay:4s;
 }
 
@@ -77,15 +78,19 @@ body{
     0%{
         transform:translateY(0px) translateX(0px);
     }
+
     50%{
-        transform:translateY(-40px) translateX(20px);
+        transform:translateY(-40px) translateX(25px);
     }
+
     100%{
         transform:translateY(0px) translateX(0px);
     }
 }
 
-/* Floating Particles */
+/* ===================================== */
+/* PARTICLES */
+/* ===================================== */
 
 .particles{
     position:absolute;
@@ -96,54 +101,58 @@ body{
     position:absolute;
     width:4px;
     height:4px;
-    background:rgba(255,255,255,.6);
     border-radius:50%;
-    animation:particleMove linear infinite;
+    background:rgba(255,255,255,.7);
+    animation:particle linear infinite;
 }
 
-@keyframes particleMove{
-    from{
-        transform:translateY(100vh) scale(0);
+@keyframes particle{
+
+    0%{
+        transform:translateY(110vh) scale(0);
         opacity:0;
     }
+
     10%{
         opacity:1;
     }
-    to{
+
+    100%{
         transform:translateY(-10vh) scale(1);
         opacity:0;
     }
+
 }
 
 /* ===================================== */
-/* Navbar */
+/* NAVBAR */
 /* ===================================== */
 
 nav{
-    width:100%;
     position:fixed;
+    width:100%;
     top:0;
     left:0;
-    z-index:1000;
-    backdrop-filter:blur(14px);
+    z-index:999;
+    backdrop-filter:blur(18px);
     background:rgba(10,10,15,.35);
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav-container{
     max-width:1300px;
     margin:auto;
+    padding:18px 25px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:18px 25px;
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
-    font-size:1.2rem;
+    gap:14px;
+    font-size:1.15rem;
     font-weight:700;
 }
 
@@ -159,18 +168,34 @@ nav{
 }
 
 .nav-links a{
-    color:#dfe7f7;
+    color:#dfe5f5;
     text-decoration:none;
     font-weight:500;
     transition:.25s;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:#a6b8e4;
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
 }
 
 .nav-links a:hover{
-    color:#fff;
+    color:white;
 }
 
 /* ===================================== */
-/* Hero */
+/* HERO */
 /* ===================================== */
 
 .hero{
@@ -179,44 +204,56 @@ nav{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:120px 20px 80px;
+    padding:130px 20px 80px;
 }
 
 .hero-content{
-    max-width:900px;
+    max-width:950px;
 }
 
 .hero-logo{
     width:150px;
     margin-bottom:25px;
-    filter:drop-shadow(0 0 25px rgba(255,255,255,.25));
     animation:logoFloat 4s ease-in-out infinite;
+    filter:drop-shadow(0 0 35px rgba(255,255,255,.25));
 }
 
 @keyframes logoFloat{
+
     0%,100%{
         transform:translateY(0px);
     }
+
     50%{
         transform:translateY(-12px);
     }
+
 }
 
 .hero h1{
     font-size:5rem;
     line-height:1;
-    margin-bottom:20px;
-    background:linear-gradient(90deg,#e2e6ee,#a6b8e4);
+    margin-bottom:25px;
+    background:linear-gradient(
+        90deg,
+        #e2e6ee,
+        #a6b8e4
+    );
+
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 .hero p{
-    font-size:1.15rem;
-    color:#c7cfdf;
-    line-height:1.8;
+    font-size:1.1rem;
+    line-height:1.9;
+    color:#c3cbda;
     margin-bottom:40px;
 }
+
+/* ===================================== */
+/* BUTTONS */
+/* ===================================== */
 
 .hero-buttons{
     display:flex;
@@ -226,36 +263,96 @@ nav{
 }
 
 .btn{
-    padding:16px 32px;
-    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+    padding:17px 36px;
+    border-radius:18px;
     text-decoration:none;
     font-weight:600;
-    transition:.3s;
+    transition:.35s ease;
+    isolation:isolate;
+}
+
+.btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    padding:1px;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.4),
+        rgba(166,184,228,.7),
+        rgba(255,255,255,.1)
+    );
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+}
+
+.btn::after{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    top:-50%;
+    left:-50%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+
+    transform:rotate(25deg) translateX(-120%);
+    transition:.9s;
+    z-index:-1;
+}
+
+.btn:hover::after{
+    transform:rotate(25deg) translateX(120%);
 }
 
 .btn-primary{
-    background:linear-gradient(135deg,#e2e6ee,#a6b8e4);
-    color:#111;
+    background:
+    linear-gradient(
+        135deg,
+        rgba(226,230,238,.12),
+        rgba(166,184,228,.22)
+    );
+
+    color:white;
+
+    box-shadow:
+    0 10px 35px rgba(166,184,228,.15);
 }
 
 .btn-primary:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 30px rgba(166,184,228,.35);
+    transform:translateY(-5px) scale(1.03);
+
+    box-shadow:
+    0 15px 45px rgba(166,184,228,.25),
+    0 0 60px rgba(166,184,228,.2);
 }
 
 .btn-secondary{
-    border:1px solid rgba(255,255,255,.15);
-    color:#fff;
-    background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.04);
+    color:white;
 }
 
 .btn-secondary:hover{
-    background:rgba(255,255,255,.1);
-    transform:translateY(-4px);
+    transform:translateY(-5px) scale(1.03);
+    background:rgba(255,255,255,.07);
 }
 
 /* ===================================== */
-/* Sections */
+/* SECTIONS */
 /* ===================================== */
 
 section{
@@ -275,7 +372,13 @@ section{
 .section-title h2{
     font-size:3rem;
     margin-bottom:15px;
-    background:linear-gradient(90deg,#e2e6ee,#a6b8e4);
+
+    background:linear-gradient(
+        90deg,
+        #e2e6ee,
+        #a6b8e4
+    );
+
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
@@ -285,7 +388,7 @@ section{
 }
 
 /* ===================================== */
-/* Features */
+/* FEATURES */
 /* ===================================== */
 
 .features-grid{
@@ -295,46 +398,67 @@ section{
 }
 
 .feature-card{
+    position:relative;
+    overflow:hidden;
+
     background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.07);
+
     padding:35px;
-    border-radius:24px;
+    border-radius:26px;
+
     backdrop-filter:blur(18px);
-    transition:.3s;
+
+    transition:
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease;
 }
 
 .feature-card:hover{
     transform:translateY(-8px);
+
     border-color:rgba(166,184,228,.4);
-    box-shadow:0 12px 35px rgba(0,0,0,.25);
+
+    box-shadow:
+    0 18px 45px rgba(0,0,0,.25),
+    0 0 50px rgba(166,184,228,.1);
 }
 
 .feature-icon{
-    width:60px;
-    height:60px;
-    border-radius:16px;
-    margin-bottom:22px;
+    width:65px;
+    height:65px;
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e2e6ee,
+        #a6b8e4
+    );
+
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg,#e2e6ee,#a6b8e4);
+
+    font-size:1.5rem;
     color:#111;
-    font-size:1.4rem;
-    font-weight:700;
+
+    margin-bottom:24px;
 }
 
 .feature-card h3{
-    margin-bottom:12px;
+    margin-bottom:14px;
     font-size:1.3rem;
 }
 
 .feature-card p{
-    color:#b8c0cf;
-    line-height:1.7;
+    line-height:1.8;
+    color:#bcc6d8;
 }
 
 /* ===================================== */
-/* Gallery */
+/* GALLERY */
 /* ===================================== */
 
 .gallery-grid{
@@ -348,14 +472,21 @@ section{
     overflow:hidden;
     border-radius:24px;
     height:240px;
+
     border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s ease;
+}
+
+.gallery-item:hover{
+    transform:translateY(-8px);
 }
 
 .gallery-item img{
     width:100%;
     height:100%;
     object-fit:cover;
-    transition:.4s;
+    transition:.5s ease;
 }
 
 .gallery-item:hover img{
@@ -365,10 +496,18 @@ section{
 .gallery-overlay{
     position:absolute;
     inset:0;
-    background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.75),
+        transparent
+    );
+
     display:flex;
     align-items:flex-end;
-    padding:25px;
+
+    padding:24px;
 }
 
 .gallery-overlay h3{
@@ -393,20 +532,19 @@ section{
 }
 
 .faq-question{
-    padding:22px 28px;
+    padding:24px 28px;
     cursor:pointer;
-    font-weight:600;
-    font-size:1.05rem;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    font-weight:600;
 }
 
 .faq-answer{
-    padding:0 28px 22px;
+    display:none;
+    padding:0 28px 24px;
     color:#bcc6d8;
     line-height:1.8;
-    display:none;
 }
 
 .faq-item.active .faq-answer{
@@ -414,18 +552,19 @@ section{
 }
 
 /* ===================================== */
-/* Footer */
+/* FOOTER */
 /* ===================================== */
 
 footer{
     padding:50px 20px;
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:1px solid rgba(255,255,255,.06);
     background:rgba(255,255,255,.02);
 }
 
 .footer-container{
     max-width:1200px;
     margin:auto;
+
     display:flex;
     justify-content:space-between;
     gap:30px;
@@ -437,34 +576,91 @@ footer{
 }
 
 .footer-left p{
-    color:#aeb8cb;
+    color:#b7c1d3;
     max-width:500px;
     line-height:1.8;
 }
 
 .footer-links{
     display:flex;
-    gap:25px;
+    gap:24px;
     flex-wrap:wrap;
 }
 
 .footer-links a{
-    color:#d7deee;
+    color:#dfe5f5;
     text-decoration:none;
 }
 
 .footer-links a:hover{
-    color:#fff;
+    color:white;
 }
 
 /* ===================================== */
-/* Responsive */
+/* FADE ANIMATION */
+/* ===================================== */
+
+.fade-in{
+    opacity:0;
+    transform:translateY(50px);
+    transition:
+    opacity .9s ease,
+    transform .9s ease;
+}
+
+.fade-in.visible{
+    opacity:1;
+    transform:translateY(0px);
+}
+
+/* ===================================== */
+/* CLICK GLOW */
+/* ===================================== */
+
+.click-glow{
+    position:fixed;
+    width:0;
+    height:0;
+    border-radius:50%;
+    pointer-events:none;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(166,184,228,.35),
+        transparent 70%
+    );
+
+    transform:translate(-50%,-50%);
+    animation:glowBurst .85s ease-out forwards;
+
+    z-index:99999;
+}
+
+@keyframes glowBurst{
+
+    0%{
+        width:0;
+        height:0;
+        opacity:1;
+    }
+
+    100%{
+        width:550px;
+        height:550px;
+        opacity:0;
+    }
+
+}
+
+/* ===================================== */
+/* RESPONSIVE */
 /* ===================================== */
 
 @media(max-width:900px){
 
     .hero h1{
-        font-size:3.5rem;
+        font-size:3.4rem;
     }
 
     .nav-links{
@@ -474,12 +670,13 @@ footer{
     .section-title h2{
         font-size:2.3rem;
     }
+
 }
 
 @media(max-width:600px){
 
     .hero h1{
-        font-size:2.7rem;
+        font-size:2.6rem;
     }
 
     .hero p{
@@ -493,12 +690,15 @@ footer{
     .btn{
         width:100%;
     }
+
 }
+
 </style>
 </head>
 <body>
 
-<!-- Animated Background -->
+<!-- BACKGROUND -->
+
 <div class="background">
 
     <div class="glow one"></div>
@@ -506,26 +706,30 @@ footer{
     <div class="glow three"></div>
 
     <div class="particles">
-        <span style="left:5%; animation-duration:12s; animation-delay:0s;"></span>
-        <span style="left:15%; animation-duration:18s; animation-delay:2s;"></span>
-        <span style="left:25%; animation-duration:10s; animation-delay:1s;"></span>
-        <span style="left:35%; animation-duration:16s; animation-delay:5s;"></span>
-        <span style="left:45%; animation-duration:20s; animation-delay:3s;"></span>
-        <span style="left:55%; animation-duration:14s; animation-delay:7s;"></span>
-        <span style="left:65%; animation-duration:17s; animation-delay:2s;"></span>
-        <span style="left:75%; animation-duration:11s; animation-delay:4s;"></span>
-        <span style="left:85%; animation-duration:19s; animation-delay:1s;"></span>
-        <span style="left:95%; animation-duration:13s; animation-delay:6s;"></span>
+
+        <span style="left:5%; animation-duration:12s;"></span>
+        <span style="left:15%; animation-duration:18s;"></span>
+        <span style="left:25%; animation-duration:11s;"></span>
+        <span style="left:35%; animation-duration:15s;"></span>
+        <span style="left:45%; animation-duration:19s;"></span>
+        <span style="left:55%; animation-duration:13s;"></span>
+        <span style="left:65%; animation-duration:17s;"></span>
+        <span style="left:75%; animation-duration:10s;"></span>
+        <span style="left:85%; animation-duration:16s;"></span>
+        <span style="left:95%; animation-duration:14s;"></span>
+
     </div>
 
 </div>
 
-<!-- Navbar -->
+<!-- NAVBAR -->
+
 <nav>
+
     <div class="nav-container">
 
         <div class="logo">
-            <img src="logo.png" alt="Logo">
+            <img src="logo.png" alt="">
             <span>Fallen Halo Network</span>
         </div>
 
@@ -536,78 +740,117 @@ footer{
         </div>
 
     </div>
+
 </nav>
 
-<!-- Hero -->
-<section class="hero">
+<!-- HERO -->
+
+<section class="hero fade-in">
 
     <div class="hero-content">
 
-        <img src="logo.png" class="hero-logo" alt="Logo">
+        <img src="logo.png" class="hero-logo" alt="">
 
         <h1>Fallen Halo Network</h1>
 
         <p>
-            A premium Minecraft experience built for grinders, fighters,
-            builders, and legends. Explore unique gameplay, custom features,
-            and a stunning community-driven world.
+            A premium Minecraft experience built for grinders,
+            fighters, explorers, and legends. Join a community-driven
+            server packed with unique gameplay and unforgettable adventures.
         </p>
 
         <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Play Now</a>
-            <a href="#" class="btn btn-secondary">Join Discord</a>
+
+            <a href="#" class="btn btn-primary">
+                Play Now
+            </a>
+
+            <a href="#" class="btn btn-secondary">
+                Join Discord
+            </a>
+
         </div>
 
     </div>
 
 </section>
 
-<!-- Features -->
-<section id="features">
+<!-- FEATURES -->
+
+<section id="features" class="fade-in">
 
     <div class="container">
 
         <div class="section-title">
+
             <h2>Features</h2>
-            <p>Built to create the best Minecraft experience possible.</p>
+
+            <p>
+                Built to deliver the best Minecraft experience possible.
+            </p>
+
         </div>
 
         <div class="features-grid">
 
-            <div class="feature-card">
-                <div class="feature-icon">⚔</div>
+            <div class="feature-card fade-in glow-trigger">
+
+                <div class="feature-icon">
+                    ⚔
+                </div>
+
                 <h3>Competitive PvP</h3>
+
                 <p>
-                    Balanced combat, custom events, and intense fights
-                    designed for both casual and hardcore players.
+                    Balanced combat, ranked battles,
+                    custom events, and exciting gameplay.
                 </p>
+
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">⛏</div>
+            <div class="feature-card fade-in glow-trigger">
+
+                <div class="feature-icon">
+                    ⛏
+                </div>
+
                 <h3>Economy System</h3>
+
                 <p>
-                    Grind, trade, and dominate the economy with player shops,
-                    auctions, and rewarding progression.
+                    Grind, trade, and dominate the economy
+                    with player shops and auctions.
                 </p>
+
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">☁</div>
+            <div class="feature-card fade-in glow-trigger">
+
+                <div class="feature-icon">
+                    ☁
+                </div>
+
                 <h3>Unique Worlds</h3>
+
                 <p>
-                    Explore beautiful worlds filled with custom terrain,
-                    hidden areas, and exciting adventures.
+                    Explore breathtaking custom worlds
+                    filled with secrets and adventures.
                 </p>
+
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">✦</div>
+            <div class="feature-card fade-in glow-trigger">
+
+                <div class="feature-icon">
+                    ✦
+                </div>
+
                 <h3>Custom Content</h3>
+
                 <p>
-                    Enjoy unique systems, optimized gameplay, and immersive
-                    features built specifically for Fallen Halo.
+                    Enjoy immersive systems and gameplay
+                    built exclusively for Fallen Halo.
                 </p>
+
             </div>
 
         </div>
@@ -616,37 +859,52 @@ footer{
 
 </section>
 
-<!-- Gallery -->
-<section id="gallery">
+<!-- GALLERY -->
+
+<section id="gallery" class="fade-in">
 
     <div class="container">
 
         <div class="section-title">
+
             <h2>Gallery</h2>
-            <p>A glimpse into the Fallen Halo universe.</p>
+
+            <p>
+                A glimpse into the Fallen Halo universe.
+            </p>
+
         </div>
 
         <div class="gallery-grid">
 
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="gallery-item fade-in glow-trigger">
+
+                <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop">
+
                 <div class="gallery-overlay">
                     <h3>Spawn Area</h3>
                 </div>
+
             </div>
 
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="gallery-item fade-in glow-trigger">
+
+                <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop">
+
                 <div class="gallery-overlay">
                     <h3>Adventure Zones</h3>
                 </div>
+
             </div>
 
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="gallery-item fade-in glow-trigger">
+
+                <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop">
+
                 <div class="gallery-overlay">
                     <h3>Community Builds</h3>
                 </div>
+
             </div>
 
         </div>
@@ -656,18 +914,25 @@ footer{
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+
+<section id="faq" class="fade-in">
 
     <div class="container">
 
         <div class="section-title">
+
             <h2>FAQ</h2>
-            <p>Frequently asked questions about the server.</p>
+
+            <p>
+                Frequently asked questions about the server.
+            </p>
+
         </div>
 
         <div class="faq-container">
 
-            <div class="faq-item active">
+            <div class="faq-item fade-in">
+
                 <div class="faq-question">
                     What version is the server on?
                     <span>+</span>
@@ -675,32 +940,37 @@ footer{
 
                 <div class="faq-answer">
                     The server supports the latest Minecraft versions
-                    with optimized compatibility for smooth gameplay.
+                    with optimized compatibility.
                 </div>
+
             </div>
 
-            <div class="faq-item">
+            <div class="faq-item fade-in">
+
                 <div class="faq-question">
                     Is the server pay-to-win?
                     <span>+</span>
                 </div>
 
                 <div class="faq-answer">
-                    No. Fallen Halo focuses on fair progression and
-                    competitive gameplay for everyone.
+                    No. Fallen Halo focuses on fair progression
+                    and balanced gameplay for everyone.
                 </div>
+
             </div>
 
-            <div class="faq-item">
+            <div class="faq-item fade-in">
+
                 <div class="faq-question">
                     How do I join the community?
                     <span>+</span>
                 </div>
 
                 <div class="faq-answer">
-                    Join our Discord server and connect with players,
+                    Join our Discord server to meet players,
                     participate in events, and stay updated.
                 </div>
+
             </div>
 
         </div>
@@ -709,24 +979,30 @@ footer{
 
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
+
 <footer>
 
     <div class="footer-container">
 
         <div class="footer-left">
+
             <h3>Fallen Halo Network</h3>
+
             <p>
-                Built for players who want more than just another Minecraft server.
-                Create your legacy in Fallen Halo.
+                Built for players who want more than
+                just another Minecraft server.
             </p>
+
         </div>
 
         <div class="footer-links">
+
             <a href="#">Discord</a>
             <a href="#">Store</a>
             <a href="#">Vote</a>
             <a href="#">Support</a>
+
         </div>
 
     </div>
@@ -735,14 +1011,78 @@ footer{
 
 <script>
 
-/* FAQ Toggle */
+/* ===================================== */
+/* FAQ TOGGLE */
+/* ===================================== */
 
 const faqItems = document.querySelectorAll('.faq-item');
 
 faqItems.forEach(item => {
-    item.querySelector('.faq-question').addEventListener('click', () => {
+
+    item.querySelector('.faq-question')
+    .addEventListener('click', () => {
+
         item.classList.toggle('active');
+
     });
+
+});
+
+/* ===================================== */
+/* CLICK GLOW */
+/* ===================================== */
+
+const glowTargets = document.querySelectorAll('.glow-trigger');
+
+glowTargets.forEach(item => {
+
+    item.addEventListener('click', (e) => {
+
+        const glow = document.createElement('div');
+
+        glow.className = 'click-glow';
+
+        glow.style.left = `${e.clientX}px`;
+        glow.style.top = `${e.clientY}px`;
+
+        document.body.appendChild(glow);
+
+        setTimeout(() => {
+            glow.remove();
+        }, 850);
+
+    });
+
+});
+
+/* ===================================== */
+/* FADE IN / OUT ON SCROLL */
+/* ===================================== */
+
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('visible');
+
+        } else {
+
+            entry.target.classList.remove('visible');
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+fadeElements.forEach(el => {
+    observer.observe(el);
 });
 
 </script>
