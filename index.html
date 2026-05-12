@@ -60,7 +60,6 @@ nav{
 
     font-size:22px;
     font-weight:700;
-
     color:#55d2c8;
 }
 
@@ -70,35 +69,46 @@ nav{
     border-radius:16px;
 }
 
+/* NAV LINKS */
+.nav-links{
+    display:flex;
+    gap:22px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#55d2c8;
+}
+
 /* ========================= */
 /* HERO */
 /* ========================= */
 
 .hero{
     min-height:100vh;
-
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-wrap:wrap;
-
-    gap:60px;
-
     padding:140px 7% 80px;
 }
 
 .hero-left{
-    flex:1;
-    min-width:300px;
+    text-align:center;
 }
 
-/* ✅ GRADIENT FIX RESTORED */
 .hero-left h1{
     font-size:70px;
     line-height:1;
     margin-bottom:20px;
 }
 
+/* ✅ GRADIENT FIX (RESTORED) */
 .gradient{
     background:linear-gradient(90deg,#55d2c8,#9ff6ee);
     -webkit-background-clip:text;
@@ -115,7 +125,7 @@ section{
 
 .section-title{
     text-align:center;
-    margin-bottom:60px;
+    margin-bottom:50px;
 }
 
 .section-title h2{
@@ -123,7 +133,7 @@ section{
 }
 
 /* ========================= */
-/* FEATURES */
+/* FEATURES (WITH DESCRIPTION) */
 /* ========================= */
 
 .features{
@@ -138,6 +148,17 @@ section{
     padding:30px;
     border-radius:24px;
     border:1px solid rgba(120,230,220,0.15);
+}
+
+.feature h3{
+    color:#55d2c8;
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:#666;
+    font-size:14px;
+    line-height:1.6;
 }
 
 /* ========================= */
@@ -176,7 +197,7 @@ section{
 }
 
 /* ========================= */
-/* FAQ */
+/* FAQ (SMOOTH FIXED ANIMATION) */
 /* ========================= */
 
 .faq{
@@ -200,28 +221,30 @@ section{
 }
 
 .faq-question span{
-    transition:0.3s;
     color:#55d2c8;
+    transition:0.3s;
 }
 
 .faq-item.active .faq-question span{
     transform:rotate(45deg);
 }
 
-/* smooth animation */
+/* smooth roll animation (IMPORTANT FIX) */
 .faq-content{
     max-height:0;
     overflow:hidden;
-    transition:max-height 0.45s ease;
+    transition:max-height 0.5s ease;
 }
 
 .faq-inner p{
     padding:0 26px 22px;
     color:#666;
+    line-height:1.7;
 }
 
+/* expanded state */
 .faq-item.active .faq-content{
-    max-height:200px;
+    max-height:250px;
 }
 
 /* ========================= */
@@ -235,7 +258,7 @@ footer{
 }
 
 /* ========================= */
-/* FADE IN */
+/* FADE IN (STABLE) */
 /* ========================= */
 
 .fade-in{
@@ -285,9 +308,20 @@ footer{
     </div>
 
     <div class="features">
-        <div class="feature fade-in">Economy System</div>
-        <div class="feature fade-in">Events</div>
-        <div class="feature fade-in">Community</div>
+        <div class="feature fade-in">
+            <h3>Economy System</h3>
+            <p>Earn money through mining, farming, and trading to build your empire.</p>
+        </div>
+
+        <div class="feature fade-in">
+            <h3>Custom Events</h3>
+            <p>Join weekly PvP battles, boss fights, and special seasonal events.</p>
+        </div>
+
+        <div class="feature fade-in">
+            <h3>Community</h3>
+            <p>Friendly and active players with professional staff support 24/7.</p>
+        </div>
     </div>
 </section>
 
@@ -348,7 +382,7 @@ footer{
 
 <script>
 
-/* fade in */
+/* fade-in animation */
 const observer = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
         if(e.isIntersecting){
