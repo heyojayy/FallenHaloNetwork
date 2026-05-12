@@ -11,7 +11,7 @@
 <style>
 
 /* ========================= */
-/* GLOBAL THEME (Tiffany refined) */
+/* GLOBAL */
 /* ========================= */
 
 *{
@@ -31,7 +31,7 @@ body{
 }
 
 /* ========================= */
-/* NAV */
+/* NAV (with player head restored) */
 /* ========================= */
 
 nav{
@@ -52,15 +52,26 @@ nav{
 }
 
 .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
     font-size:22px;
     font-weight:700;
     color:#3fc7b7;
 }
 
-/* NAV LINKS + HOVER SCALE FIX */
+/* 👤 PLAYER HEAD BACK */
+.logo img{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+}
+
+/* NAV LINKS */
 .nav-links{
     display:flex;
-    gap:25px;
+    gap:22px;
 }
 
 .nav-links a{
@@ -68,12 +79,11 @@ nav{
     color:#2b3b3a;
     font-weight:500;
     transition:0.25s;
-    position:relative;
 }
 
-/* 🔥 hover enlarge effect */
+/* 🔥 NAV HOVER SCALE */
 .nav-links a:hover{
-    transform:scale(1.15);
+    transform:scale(1.12);
     color:#3fc7b7;
 }
 
@@ -109,22 +119,13 @@ section{
     padding:110px 7%;
 }
 
-/* ========================= */
-/* SECTION TITLES (hover enlarge FIX) */
-/* ========================= */
-
 .section-title{
     text-align:center;
     margin-bottom:50px;
-    transition:0.3s;
-}
-
-.section-title:hover{
-    transform:scale(1.08);
 }
 
 /* ========================= */
-/* FEATURES */
+/* FEATURES (BOX HOVER FIXED) */
 /* ========================= */
 
 .features{
@@ -133,18 +134,23 @@ section{
     gap:20px;
 }
 
-/* FEATURE CARD */
+/* 🔥 THIS is what you meant */
 .feature{
     background:rgba(63,199,183,0.08);
     border:1px solid rgba(63,199,183,0.2);
+
     padding:30px;
     border-radius:24px;
-    transition:0.3s;
+
+    transition:0.35s ease;
+    cursor:pointer;
 }
 
+/* BIG SMOOTH HOVER BOX EFFECT */
 .feature:hover{
-    transform:translateY(-6px) scale(1.02);
-    box-shadow:0 10px 30px rgba(63,199,183,0.15);
+    transform:scale(1.06);
+    box-shadow:0 15px 40px rgba(63,199,183,0.18);
+    background:rgba(63,199,183,0.12);
 }
 
 .feature h3{
@@ -158,7 +164,7 @@ section{
 }
 
 /* ========================= */
-/* BUTTON FIX (IMPORTANT) */
+/* BUTTON (kept clean, not affecting hover boxes) */
 /* ========================= */
 
 .btn{
@@ -170,12 +176,6 @@ section{
     color:white;
     text-decoration:none;
     font-weight:600;
-    transition:0.3s;
-}
-
-.btn:hover{
-    transform:scale(1.08);
-    background:#2fb8a9;
 }
 
 /* ========================= */
@@ -194,32 +194,15 @@ section{
     object-fit:cover;
     border-radius:22px;
     border:1px solid rgba(63,199,183,0.2);
-}
-
-/* ========================= */
-/* STAFF PREVIEW */
-/* ========================= */
-
-.staff-preview{
-    text-align:center;
-}
-
-.staff-preview a{
-    display:inline-block;
-    padding:14px 22px;
-    background:#3fc7b7;
-    color:white;
-    border-radius:14px;
-    text-decoration:none;
     transition:0.3s;
 }
 
-.staff-preview a:hover{
-    transform:scale(1.1);
+.gallery img:hover{
+    transform:scale(1.03);
 }
 
 /* ========================= */
-/* FAQ (clean white) */
+/* FAQ (UNCHANGED GOOD VERSION) */
 /* ========================= */
 
 #faq{
@@ -236,13 +219,13 @@ section{
     border-radius:16px;
     margin-bottom:12px;
     overflow:hidden;
+    cursor:pointer;
 }
 
 .faq-question{
     padding:20px;
     display:flex;
     justify-content:space-between;
-    cursor:pointer;
 }
 
 .faq-question span{
@@ -261,7 +244,7 @@ section{
 }
 
 .faq-item.active .faq-content{
-    max-height:180px;
+    max-height:200px;
 }
 
 /* ========================= */
@@ -297,12 +280,14 @@ footer{
 
 <!-- NAV -->
 <nav>
-    <div class="logo">Fallen Halo</div>
+    <div class="logo">
+        <img src="https://mc-heads.net/avatar/Steve">
+        Fallen Halo
+    </div>
 
     <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#gallery">Gallery</a>
-        <a href="staff.html">Staff</a>
         <a href="#faq">FAQ</a>
     </div>
 </nav>
@@ -324,19 +309,16 @@ footer{
         <div class="feature fade-in">
             <h3>Economy System</h3>
             <p>Earn money, build shops and trade.</p>
-            <a class="btn" href="#">Learn More</a>
         </div>
 
         <div class="feature fade-in">
             <h3>Custom Events</h3>
             <p>Weekly PvP battles and rewards.</p>
-            <a class="btn" href="#">Join Events</a>
         </div>
 
         <div class="feature fade-in">
             <h3>Community</h3>
             <p>Friendly players and active staff.</p>
-            <a class="btn" href="#">Discord</a>
         </div>
     </div>
 </section>
@@ -351,14 +333,6 @@ footer{
         <img class="fade-in" src="1.png">
         <img class="fade-in" src="2.png">
         <img class="fade-in" src="3.png">
-    </div>
-</section>
-
-<!-- STAFF BUTTON PAGE -->
-<section>
-    <div class="staff-preview fade-in">
-        <h2>Staff Team</h2>
-        <a href="staff.html">View Staff Page</a>
     </div>
 </section>
 
