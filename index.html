@@ -6,7 +6,7 @@
 
 <title>Fallen Halo Network | Premium Minecraft Server</title>
 
-<!-- Primary Font: Poppins for body, plus a classy serif for headings -->
+<!-- Fonts: Playfair for headings, Inter for body -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="icon" type="image/png" href="logo.png">
@@ -14,53 +14,52 @@
 <style>
 
 /* ========================= */
-/* CSS VARIABLES FOR THEMES */
+/* CSS VARIABLES FOR THEMES (Original light gradient restored) */
 /* ========================= */
 :root {
-    /* Light Mode (default) - Softer, lighter gradient */
-    --bg-gradient-start: #E8FFFF;
-    --bg-gradient-end: #FFFFFF;
-    --text-primary: #1a2a2a;
-    --text-secondary: #4a6a6a;
-    --nav-bg: rgba(255, 255, 255, 0.72);
-    --nav-border: rgba(63, 199, 183, 0.25);
-    --card-bg: rgba(255, 255, 255, 0.65);
-    --card-bg-hover: rgba(255, 255, 255, 0.9);
-    --feature-bg: rgba(245, 255, 250, 0.6);
+    /* Light Mode - Original lighter gradient */
+    --bg-gradient-start: #e6fffb;
+    --bg-gradient-end: #ffffff;
+    --text-primary: #1f2a2a;
+    --text-secondary: #5a6e6e;
+    --nav-bg: rgba(255, 255, 255, 0.75);
+    --nav-border: rgba(63, 199, 183, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-bg-hover: rgba(255, 255, 255, 0.85);
+    --feature-bg: rgba(255, 255, 240, 0.5);
     --feature-bg-hover: white;
-    --status-bg: rgba(63, 199, 183, 0.08);
-    --status-border: rgba(63, 199, 183, 0.35);
+    --status-bg: rgba(63, 199, 183, 0.12);
+    --status-border: rgba(63, 199, 183, 0.4);
     --footer-bg: #0d1f1c;
-    --footer-text: #b8d4ce;
+    --footer-text: #a2c2bc;
     --dot-color: #3fc7b7;
-    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.05);
     --border-light: rgba(63, 199, 183, 0.2);
     --ad-text: #1a6e62;
-    --ad-text-glow: #3fc7b7;
     --heading-font: 'Playfair Display', 'Georgia', serif;
     --body-font: 'Inter', 'Poppins', sans-serif;
 }
 
 body.dark {
-    /* Dark Mode - deep rich tones */
+    /* Dark Mode */
     --bg-gradient-start: #0a1f2a;
     --bg-gradient-end: #0a1518;
     --text-primary: #e8f0f0;
     --text-secondary: #a8c0c0;
     --nav-bg: rgba(10, 25, 28, 0.85);
     --nav-border: rgba(63, 199, 183, 0.25);
-    --card-bg: rgba(18, 35, 35, 0.7);
-    --card-bg-hover: rgba(28, 50, 50, 0.85);
-    --feature-bg: rgba(15, 35, 35, 0.5);
-    --feature-bg-hover: #1a302f;
+    --card-bg: rgba(20, 35, 35, 0.7);
+    --card-bg-hover: rgba(30, 50, 50, 0.85);
+    --feature-bg: rgba(20, 35, 30, 0.5);
+    --feature-bg-hover: #1a2f2f;
     --status-bg: rgba(63, 199, 183, 0.15);
     --status-border: rgba(63, 199, 183, 0.3);
-    --footer-bg: #051010;
-    --footer-text: #7fa8a3;
+    --footer-bg: #051212;
+    --footer-text: #6e8f8a;
     --dot-color: #3fc7b7;
-    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.2);
     --border-light: rgba(63, 199, 183, 0.15);
     --ad-text: #9fe3da;
 }
@@ -83,20 +82,11 @@ body {
     background-size: 200% 200%;
 }
 
-/* Gentle, looping gradient animation - never stops */
 @keyframes subtleGradientShift {
-    0% {
-        background-position: 0% 0%;
-    }
-    33% {
-        background-position: 100% 0%;
-    }
-    66% {
-        background-position: 100% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
+    0% { background-position: 0% 0%; }
+    33% { background-position: 100% 0%; }
+    66% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
 }
 
 body.dark {
@@ -106,8 +96,8 @@ body.dark {
     background-size: 200% 200%;
 }
 
-/* Headings get the elegant serif font */
-h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title, .title {
+/* Headings get elegant serif font */
+h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title {
     font-family: var(--heading-font);
     letter-spacing: -0.2px;
 }
@@ -127,7 +117,7 @@ h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title, .title {
     height: 6px;
     background: var(--dot-color);
     border-radius: 50%;
-    opacity: 0.2;
+    opacity: 0.25;
     animation: float linear infinite;
 }
 
@@ -138,7 +128,7 @@ h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title, .title {
 }
 
 /* ========================= */
-/* INFINITE SCROLLING AD TICKER (never stops, continues on hover) */
+/* INFINITE SCROLLING AD - FIXED: never stops on hover, no blank gaps */
 /* ========================= */
 .ad-ticker {
     background: rgba(63, 199, 183, 0.1);
@@ -152,14 +142,13 @@ h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title, .title {
     width: 100%;
 }
 
-.ad-ticker-track {
+.ad-ticker-wrapper {
     display: flex;
     width: fit-content;
-    animation: scrollAdsLinear 28s linear infinite;
-    will-change: transform;
+    animation: scrollAdsLinear 30s linear infinite;
 }
 
-.ad-ticker-track span {
+.ad-ticker-wrapper span {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -172,19 +161,16 @@ h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title, .title {
     font-family: var(--body-font);
 }
 
-.ad-ticker-track i {
+.ad-ticker-wrapper i {
     color: #3fc7b7;
     font-size: 13px;
-    width: 18px;
 }
 
-.ad-ticker-track .highlight {
+.ad-ticker-wrapper .highlight {
     color: #3fc7b7;
     font-weight: 700;
-    text-shadow: 0 0 6px rgba(63,199,183,0.3);
 }
 
-/* Infinite linear scroll - never stops, no pause on hover */
 @keyframes scrollAdsLinear {
     0% {
         transform: translateX(0);
@@ -194,7 +180,6 @@ h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title, .title {
     }
 }
 
-/* No hover stop — it keeps rolling */
 /* ========================= */
 /* NAVBAR */
 /* ========================= */
@@ -334,9 +319,25 @@ nav {
     transform: translateY(0);
 }
 
-.mobile-menu a, .mobile-menu button {
+.mobile-menu a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 20px;
+    transition: 0.2s;
+    font-family: var(--body-font);
+}
+
+.mobile-menu a:hover {
+    background: #3fc7b7;
+    color: white;
+}
+
+.mobile-menu .theme-toggle {
     width: 100%;
-    text-align: center;
+    justify-content: center;
+    margin-top: 5px;
 }
 
 /* ========================= */
@@ -535,7 +536,7 @@ section {
     text-align: left;
 }
 
-/* GALLERY */
+/* GALLERY - Only one, no duplication */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -622,7 +623,7 @@ footer {
     .theme-toggle {
         padding: 8px 12px;
     }
-    .ad-ticker-track span {
+    .ad-ticker-wrapper span {
         font-size: 11px;
         margin: 0 16px;
     }
@@ -706,10 +707,10 @@ footer {
         </div>
 
         <!-- ========================= -->
-        <!-- INFINITE SCROLLING WORD AD (NEVER STOPS / NO HOVER PAUSE) -->
+        <!-- FIXED INFINITE SCROLLING AD - no hover stop, seamless loop -->
         <!-- ========================= -->
         <div class="ad-ticker">
-            <div class="ad-ticker-track" id="adTrack">
+            <div class="ad-ticker-wrapper">
                 <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">COMING SOON</span></span>
                 <span><i class="fas fa-crown"></i> <span class="highlight">CUSTOM RANKS</span> AVAILABLE</span>
                 <span><i class="fas fa-gem"></i> EXCLUSIVE <span class="highlight">COSMETICS</span></span>
@@ -734,7 +735,7 @@ footer {
     </div>
 </section>
 
-<!-- FEATURES, GALLERY, FAQ (fully preserved) -->
+<!-- FEATURES SECTION -->
 <section id="features">
     <div class="section-title"><h2>✦ Server Features ✦</h2></div>
     <div class="feature-grid">
@@ -745,15 +746,26 @@ footer {
     </div>
 </section>
 
+<!-- GALLERY SECTION - ONLY ONE, NO DUPLICATION -->
 <section id="gallery">
     <div class="section-title"><h2>✦ Server Gallery ✦</h2></div>
     <div class="gallery-grid">
-        <div class="gallery-card"><img src="1.png" alt="Gallery 1" onerror="this.src='https://placehold.co/600x380/3fc7b7/white?text=1.png'"><p>✦ Empty ✦</p></div>
-        <div class="gallery-card"><img src="2.png" alt="Gallery 2" onerror="this.src='https://placehold.co/600x380/2faa9a/white?text=2.png'"><p>✦ Empty ✦</p></div>
-        <div class="gallery-card"><img src="3.png" alt="Gallery 3" onerror="this.src='https://placehold.co/600x380/7ff2e3/black?text=3.png'"><p>✦ Empty ✦</p></div>
+        <div class="gallery-card">
+            <img src="1.png" alt="Fallen Halo Image One" onerror="this.src='https://placehold.co/600x380/3fc7b7/white?text=1.png'">
+            <p>✦ Empty ✦</p>
+        </div>
+        <div class="gallery-card">
+            <img src="2.png" alt="Fallen Halo Image Two" onerror="this.src='https://placehold.co/600x380/2faa9a/white?text=2.png'">
+            <p>✦ Empty ✦</p>
+        </div>
+        <div class="gallery-card">
+            <img src="3.png" alt="Fallen Halo Image Three" onerror="this.src='https://placehold.co/600x380/7ff2e3/black?text=3.png'">
+            <p>✦ Empty ✦</p>
+        </div>
     </div>
 </section>
 
+<!-- FAQ SECTION -->
 <section id="faq">
     <div class="section-title"><h2>✦ FAQ ✦</h2></div>
     <div class="faq-grid">
@@ -765,7 +777,7 @@ footer {
 
 <footer>
     <p>© 2026 Fallen Halo Network — Where legends are forged</p>
-    <p>✦ Server Address (W.I.P)✦</p>
+    <p style="font-size: 12px; margin-top: 8px;">✦ Server Address (W.I.P) ✦</p>
 </footer>
 
 <script>
@@ -844,889 +856,6 @@ window.addEventListener('click', (e) => {
         menu.classList.remove('show');
 });
 
-loadTheme();
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fallen Halo Network | Premium Minecraft Server</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="icon" type="image/png" href="logo.png">
-
-<style>
-
-/* ========================= */
-/* CSS VARIABLES FOR THEMES */
-/* ========================= */
-:root {
-    /* Light Mode (default) - New Gradient: #C0EBFF > #AFFCF8 */
-    --bg-gradient-start: #C0EBFF;
-    --bg-gradient-end: #AFFCF8;
-    --text-primary: #1f2a2a;
-    --text-secondary: #5a6e6e;
-    --nav-bg: rgba(255, 255, 255, 0.75);
-    --nav-border: rgba(63, 199, 183, 0.3);
-    --card-bg: rgba(255, 255, 255, 0.7);
-    --card-bg-hover: rgba(255, 255, 255, 0.85);
-    --feature-bg: rgba(255, 255, 240, 0.5);
-    --feature-bg-hover: white;
-    --status-bg: rgba(63, 199, 183, 0.12);
-    --status-border: rgba(63, 199, 183, 0.4);
-    --footer-bg: #0d1f1c;
-    --footer-text: #a2c2bc;
-    --dot-color: #3fc7b7;
-    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.05);
-    --border-light: rgba(63, 199, 183, 0.2);
-    --ad-text: #1a5c52;
-    --ad-text-glow: #3fc7b7;
-}
-
-body.dark {
-    /* Dark Mode - Darker version of the gradient */
-    --bg-gradient-start: #0a3a4a;
-    --bg-gradient-end: #0d2a3a;
-    --text-primary: #e0e5e5;
-    --text-secondary: #9aaeb0;
-    --nav-bg: rgba(13, 25, 25, 0.85);
-    --nav-border: rgba(63, 199, 183, 0.25);
-    --card-bg: rgba(20, 35, 35, 0.7);
-    --card-bg-hover: rgba(30, 50, 50, 0.85);
-    --feature-bg: rgba(20, 35, 30, 0.5);
-    --feature-bg-hover: #1a2f2f;
-    --status-bg: rgba(63, 199, 183, 0.15);
-    --status-border: rgba(63, 199, 183, 0.3);
-    --footer-bg: #051212;
-    --footer-text: #6e8f8a;
-    --dot-color: #3fc7b7;
-    --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.2);
-    --border-light: rgba(63, 199, 183, 0.15);
-    --ad-text: #7ff2e3;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
-    color: var(--text-primary);
-    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-    background-attachment: fixed;
-    animation: gradientShift 15s ease infinite;
-    background-size: 200% 200%;
-}
-
-/* Looping gradient animation */
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 0%;
-    }
-    25% {
-        background-position: 100% 0%;
-    }
-    50% {
-        background-position: 100% 100%;
-    }
-    75% {
-        background-position: 0% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
-}
-
-body.dark {
-    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-    background-attachment: fixed;
-    animation: gradientShift 15s ease infinite;
-    background-size: 200% 200%;
-}
-
-/* Floating dots background */
-.bg {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--dot-color);
-    border-radius: 50%;
-    opacity: 0.25;
-    animation: float linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(100vh); opacity: 0; }
-    20% { opacity: 0.5; }
-    100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* ========================= */
-/* ANIMATED WORD CLOUD / SCROLLING AD SECTION */
-/* ========================= */
-.ad-ticker {
-    background: rgba(63, 199, 183, 0.15);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(63, 199, 183, 0.3);
-    border-bottom: 1px solid rgba(63, 199, 183, 0.3);
-    padding: 12px 0;
-    margin-top: 20px;
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-}
-
-.ad-ticker-track {
-    display: inline-block;
-    animation: scrollAds 25s linear infinite;
-    white-space: nowrap;
-}
-
-.ad-ticker-track span {
-    display: inline-block;
-    margin: 0 20px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ad-text);
-    letter-spacing: 0.5px;
-}
-
-.ad-ticker-track i {
-    margin-right: 8px;
-    color: #3fc7b7;
-    font-size: 12px;
-}
-
-.ad-ticker-track .highlight {
-    color: #3fc7b7;
-    font-weight: 700;
-}
-
-@keyframes scrollAds {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-.ad-ticker:hover .ad-ticker-track {
-    animation-play-state: paused;
-}
-
-/* ========================= */
-/* NAVBAR */
-/* ========================= */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 7%;
-    background: var(--nav-bg);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--nav-border);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-}
-
-.logo img {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(63, 199, 183, 0.2);
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-}
-
-.logo-title {
-    font-size: 22px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #2faa9a, #3fc7b7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.logo-sub {
-    font-size: 11px;
-    color: var(--text-secondary);
-    letter-spacing: 0.5px;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-primary);
-    padding: 8px 18px;
-    border-radius: 40px;
-    font-weight: 500;
-    transition: 0.25s ease;
-}
-
-.nav-links a:hover {
-    background: #3fc7b7;
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-    background: rgba(63, 199, 183, 0.15);
-    border: 1px solid rgba(63, 199, 183, 0.3);
-    border-radius: 40px;
-    padding: 8px 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
-    transition: 0.25s ease;
-    font-family: 'Poppins', sans-serif;
-}
-
-.theme-toggle:hover {
-    background: #3fc7b7;
-    color: white;
-    transform: translateY(-2px);
-}
-
-.theme-toggle i {
-    font-size: 14px;
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger div {
-    width: 26px;
-    height: 3px;
-    background: #3fc7b7;
-    border-radius: 999px;
-}
-
-.mobile-menu {
-    position: fixed;
-    top: 80px;
-    right: 7%;
-    width: 230px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    border: 1px solid var(--nav-border);
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition: 0.2s;
-    z-index: 1000;
-}
-
-.mobile-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.mobile-menu a {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 500;
-    padding: 10px;
-    border-radius: 20px;
-    transition: 0.2s;
-}
-
-.mobile-menu a:hover {
-    background: #3fc7b7;
-    color: white;
-}
-
-.mobile-menu .theme-toggle {
-    width: 100%;
-    justify-content: center;
-    margin-top: 5px;
-}
-
-/* ========================= */
-/* HERO SECTION */
-/* ========================= */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 130px 7% 70px;
-}
-
-.hero h1 {
-    font-size: 76px;
-    line-height: 1.1;
-    font-weight: 800;
-    color: var(--text-primary);
-}
-
-.gradient {
-    background: linear-gradient(115deg, #3fc7b7, #7ff2e3, #2faa9a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.status {
-    margin-top: 25px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--status-bg);
-    padding: 8px 22px;
-    border-radius: 60px;
-    font-weight: 600;
-    backdrop-filter: blur(4px);
-    border: 1px solid var(--status-border);
-    color: var(--text-primary);
-}
-
-.status i {
-    font-size: 14px;
-    color: #2ecc71;
-}
-
-/* ========================= */
-/* CONNECT CARDS */
-/* ========================= */
-.connect-wrap {
-    margin-top: 55px;
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
-}
-
-.connect-card {
-    width: 260px;
-    padding: 22px 18px 24px;
-    border-radius: 32px;
-    background: var(--card-bg);
-    backdrop-filter: blur(14px);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.connect-card:hover {
-    transform: translateY(-6px);
-    background: var(--card-bg-hover);
-    border-color: #3fc7b7;
-}
-
-.connect-card > i:first-child {
-    font-size: 34px;
-    background: linear-gradient(135deg, #3fc7b7, #2faa9a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 12px;
-}
-
-.connect-title {
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-}
-
-.connect-value {
-    font-size: 13px;
-    font-weight: 500;
-    background: rgba(63, 199, 183, 0.12);
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 40px;
-    color: #3fc7b7;
-    margin: 8px 0 18px;
-    font-family: monospace;
-}
-
-.connect-card button,
-.connect-card a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #3fc7b7;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 14px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.2s;
-    font-size: 13px;
-    min-width: 120px;
-}
-
-.connect-card button i,
-.connect-card a i {
-    font-size: 12px;
-}
-
-.connect-card button:hover,
-.connect-card a:hover {
-    background: #2aa395;
-    transform: translateY(-2px);
-}
-
-.connect-card a.dc {
-    background: #5865F2;
-}
-
-.connect-card a.dc:hover {
-    background: #4752c4;
-}
-
-/* ========================= */
-/* SECTIONS */
-/* ========================= */
-section {
-    padding: 80px 7% 90px;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.section-title h2 {
-    font-size: 44px;
-    font-weight: 700;
-    background: linear-gradient(120deg, var(--text-primary), #3fc7b7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.feature-grid,
-.gallery-grid,
-.faq-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 35px;
-}
-
-.feature-card,
-.faq-card {
-    background: var(--feature-bg);
-    backdrop-filter: blur(4px);
-    border-radius: 30px;
-    padding: 28px;
-    width: 260px;
-    text-align: center;
-    transition: 0.3s;
-    border: 1px solid var(--border-light);
-    color: var(--text-primary);
-}
-
-.feature-card:hover,
-.faq-card:hover {
-    transform: translateY(-10px);
-    border-color: #3fc7b7;
-    background: var(--feature-bg-hover);
-}
-
-.faq-card {
-    width: 300px;
-    text-align: left;
-}
-
-/* GALLERY */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.gallery-card {
-    background: var(--feature-bg);
-    backdrop-filter: blur(4px);
-    border-radius: 36px;
-    padding: 24px;
-    text-align: center;
-    transition: 0.35s ease;
-    border: 1px solid var(--border-light);
-}
-
-.gallery-card:hover {
-    transform: translateY(-12px);
-    border-color: #3fc7b7;
-    background: var(--feature-bg-hover);
-}
-
-.gallery-card img {
-    width: 100%;
-    border-radius: 28px;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    border: 1px solid var(--border-light);
-}
-
-.gallery-card p {
-    margin-top: 20px;
-    font-weight: 600;
-    font-size: 18px;
-    color: #3fc7b7;
-}
-
-.copy-notify {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    background: #1e2a2a;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 60px;
-    transform: translateX(-50%);
-    z-index: 2000;
-    font-size: 14px;
-}
-
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 30px;
-}
-
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 48px;
-    }
-    .nav-links {
-        display: none;
-    }
-    .hamburger {
-        display: flex;
-    }
-    .connect-card {
-        width: 85%;
-        max-width: 280px;
-    }
-    .gallery-grid {
-        gap: 28px;
-        grid-template-columns: 1fr;
-    }
-    .theme-toggle span {
-        display: none;
-    }
-    .theme-toggle {
-        padding: 8px 12px;
-    }
-    .ad-ticker-track span {
-        font-size: 11px;
-        margin: 0 12px;
-    }
-}
-</style>
-</head>
-<body>
-
-<div class="bg" id="bg"></div>
-
-<nav>
-    <a href="#" class="logo">
-        <img src="logo.png" alt="Fallen Halo Logo" onerror="this.src='https://via.placeholder.com/48x48?text=FH'">
-        <div class="logo-text">
-            <div class="logo-title">Fallen Halo</div>
-            <div class="logo-sub">Minecraft Network</div>
-        </div>
-    </a>
-
-    <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#gallery">Gallery</a>
-        <a href="staff.html">Staff</a>
-        <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <i class="fas fa-moon"></i>
-            <span>Dark</span>
-        </button>
-    </div>
-
-    <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</nav>
-
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#features">Features</a>
-    <a href="#gallery">Gallery</a>
-    <a href="staff.html">Staff</a>
-    <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-moon"></i>
-        <span>Dark Mode</span>
-    </button>
-</div>
-
-<!-- HERO SECTION -->
-<section class="hero">
-    <div>
-        <h1>
-            Fallen Halo<br>
-            <span class="gradient">Network</span>
-        </h1>
-        <div class="status">
-            <i class="fas fa-circle"></i> Offline • 0 Players
-        </div>
-
-        <div class="connect-wrap">
-            <div class="connect-card">
-                <i class="fas fa-globe"></i>
-                <div class="connect-title">Server Address (W.I.P)</div>
-                <div class="connect-value">none</div>
-                <button onclick="copyIP()">
-                    <i class="fas fa-copy"></i> Copy IP
-                </button>
-            </div>
-
-            <div class="connect-card">
-                <i class="fab fa-discord"></i>
-                <div class="connect-title">Join Discord</div>
-                <div class="connect-value">25+ online now</div>
-                <a class="dc" href="https://discord.gg/BsU48hu6zQ" target="_blank">
-                    <i class="fab fa-discord"></i> Join Hub
-                </a>
-            </div>
-        </div>
-
-        <!-- ========================= -->
-        <!-- SCROLLING WORD CLOUD / AD TICKER (like AristaMC) -->
-        <!-- ========================= -->
-        <div class="ad-ticker">
-            <div class="ad-ticker-track">
-                <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">COMING SOON</span></span>
-                <span><i class="fas fa-crown"></i> <span class="highlight">CUSTOM RANKS</span> AVAILABLE</span>
-                <span><i class="fas fa-gem"></i> EXCLUSIVE <span class="highlight">COSMETICS</span></span>
-                <span><i class="fas fa-calendar-alt"></i> WEEKLY <span class="highlight">EVENTS</span></span>
-                <span><i class="fas fa-users"></i> <span class="highlight">ACTIVE COMMUNITY</span> 500+ MEMBERS</span>
-                <span><i class="fas fa-shield-alt"></i> <span class="highlight">ANTI-CHEAT</span> PROTECTION</span>
-                <span><i class="fas fa-chart-line"></i> <span class="highlight">PLAYER ECONOMY</span> & SHOPS</span>
-                <span><i class="fas fa-dragon"></i> <span class="highlight">CUSTOM BOSSES</span> & DUNGEONS</span>
-                <span><i class="fas fa-gift"></i> DAILY <span class="highlight">REWARDS</span></span>
-                <!-- Duplicate for seamless loop -->
-                <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">COMING SOON</span></span>
-                <span><i class="fas fa-crown"></i> <span class="highlight">CUSTOM RANKS</span> AVAILABLE</span>
-                <span><i class="fas fa-gem"></i> EXCLUSIVE <span class="highlight">COSMETICS</span></span>
-                <span><i class="fas fa-calendar-alt"></i> WEEKLY <span class="highlight">EVENTS</span></span>
-                <span><i class="fas fa-users"></i> <span class="highlight">ACTIVE COMMUNITY</span> 500+ MEMBERS</span>
-                <span><i class="fas fa-shield-alt"></i> <span class="highlight">ANTI-CHEAT</span> PROTECTION</span>
-                <span><i class="fas fa-chart-line"></i> <span class="highlight">PLAYER ECONOMY</span> & SHOPS</span>
-                <span><i class="fas fa-dragon"></i> <span class="highlight">CUSTOM BOSSES</span> & DUNGEONS</span>
-                <span><i class="fas fa-gift"></i> DAILY <span class="highlight">REWARDS</span></span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FEATURES SECTION -->
-<section id="features">
-    <div class="section-title"><h2>✦ Server Features ✦</h2></div>
-    <div class="feature-grid">
-        <div class="feature-card"><i class="fas fa-crown" style="font-size:36px;color:#3fc7b7"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-gem" style="font-size:36px;color:#3fc7b7"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-chart-line" style="font-size:36px;color:#3fc7b7"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-dragon" style="font-size:36px;color:#3fc7b7"></i><h3>Unavailable</h3><p>None</p></div>
-    </div>
-</section>
-
-<!-- GALLERY SECTION -->
-<section id="gallery">
-    <div class="section-title"><h2>✦ Server Gallery ✦</h2></div>
-    <div class="gallery-grid">
-        <div class="gallery-card">
-            <img src="1.png" alt="Fallen Halo Image One" onerror="this.src='https://placehold.co/600x380/3fc7b7/white?text=1.png'">
-            <p>✦ Empty ✦</p>
-        </div>
-        <div class="gallery-card">
-            <img src="2.png" alt="Fallen Halo Image Two" onerror="this.src='https://placehold.co/600x380/2faa9a/white?text=2.png'">
-            <p>✦ Empty ✦</p>
-        </div>
-        <div class="gallery-card">
-            <img src="3.png" alt="Fallen Halo Image Three" onerror="this.src='https://placehold.co/600x380/7ff2e3/black?text=3.png'">
-            <p>✦ Empty ✦</p>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ SECTION -->
-<section id="faq">
-    <div class="section-title"><h2>✦ FAQ ✦</h2></div>
-    <div class="faq-grid">
-        <div class="faq-card"><i class="fas fa-question-circle"></i><h3>Empty FAQ</h3><p>Empty</p></div>
-        <div class="faq-card"><i class="fas fa-shield-alt"></i><h3>Empty FAQ</h3><p>Empty</p></div>
-        <div class="faq-card"><i class="fas fa-store"></i><h3>Empty FAQ</h3><p>Empty</p></div>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Fallen Halo Network — Where legends are forged</p>
-    <p>✦ Server Address (W.I.P)✦</p>
-</footer>
-
-<script>
-// Floating background dots
-function createDots() {
-    const bg = document.getElementById('bg');
-    if (!bg) return;
-    const count = 70;
-    for (let i = 0; i < count; i++) {
-        let dot = document.createElement('div');
-        dot.classList.add('dot');
-        let size = Math.random() * 6 + 2;
-        dot.style.width = size + 'px';
-        dot.style.height = size + 'px';
-        dot.style.left = Math.random() * 100 + '%';
-        dot.style.animationDuration = Math.random() * 8 + 5 + 's';
-        dot.style.animationDelay = Math.random() * 15 + 's';
-        bg.appendChild(dot);
-    }
-}
-createDots();
-
-function toggleMenu() {
-    document.getElementById("mobileMenu").classList.toggle("show");
-}
-
-function copyIP() {
-    const ipText = "play.fallenhalo.net";
-    navigator.clipboard.writeText(ipText).then(() => {
-        let notif = document.createElement('div');
-        notif.innerText = "✓ Server IP copied! Server Address (W.I.P)";
-        notif.className = "copy-notify";
-        document.body.appendChild(notif);
-        setTimeout(() => {
-            notif.remove();
-        }, 1800);
-    }).catch(() => {
-        alert("Copy manually: Server Address (W.I.P)");
-    });
-}
-
-// DARK MODE FUNCTION
-function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('dark');
-    
-    // Update all theme buttons
-    const buttons = document.querySelectorAll('.theme-toggle');
-    const isDark = body.classList.contains('dark');
-    
-    buttons.forEach(btn => {
-        const icon = btn.querySelector('i');
-        const text = btn.querySelector('span');
-        
-        if (isDark) {
-            icon.className = 'fas fa-sun';
-            if (text) text.textContent = window.innerWidth <= 768 ? 'Light' : 'Light';
-        } else {
-            icon.className = 'fas fa-moon';
-            if (text) text.textContent = window.innerWidth <= 768 ? 'Dark' : 'Dark';
-        }
-    });
-    
-    // Save preference
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-}
-
-// Load saved theme
-function loadTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark');
-        const buttons = document.querySelectorAll('.theme-toggle');
-        buttons.forEach(btn => {
-            const icon = btn.querySelector('i');
-            const text = btn.querySelector('span');
-            icon.className = 'fas fa-sun';
-            if (text) text.textContent = window.innerWidth <= 768 ? 'Light' : 'Light';
-        });
-    }
-}
-
-// Close mobile menu when clicking outside
-document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.getElementById("mobileMenu").classList.remove("show");
-    });
-});
-
-window.addEventListener('click', function(e) {
-    const menu = document.getElementById("mobileMenu");
-    if (!e.target.closest('.hamburger') && !e.target.closest('#mobileMenu') && menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-    }
-});
-
-// Initialize
 loadTheme();
 </script>
 
