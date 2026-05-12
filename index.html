@@ -36,7 +36,6 @@
     --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.05);
     --border-light: rgba(44, 59, 100, 0.15);
-    --ad-text: #2c3b64;
     --accent-color: #2c3b64;
     --heading-font: 'Playfair Display', 'Georgia', serif;
     --body-font: 'Inter', 'Poppins', sans-serif;
@@ -62,7 +61,6 @@ body.dark {
     --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.2);
     --border-light: rgba(166, 184, 228, 0.15);
-    --ad-text: #c5d0e8;
     --accent-color: #a6b8e4;
 }
 
@@ -126,70 +124,6 @@ h1, h2, h3, .logo-title, .section-title h2, .gradient, .connect-title {
     0% { transform: translateY(100vh); opacity: 0; }
     20% { opacity: 0.4; }
     100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* ========================= */
-/* SHORTENED SCROLLING AD - FITS MOBILE */
-/* ========================= */
-.ad-ticker {
-    background: rgba(44, 59, 100, 0.08);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(44, 59, 100, 0.2);
-    border-bottom: 1px solid rgba(44, 59, 100, 0.2);
-    padding: 10px 0;
-    margin-top: 35px;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-}
-
-.ad-ticker-wrapper {
-    display: flex;
-    width: fit-content;
-    animation: scrollAdsLinear 20s linear infinite;
-}
-
-.ad-ticker-wrapper span {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin: 0 8px;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--ad-text);
-    letter-spacing: 0.2px;
-    white-space: nowrap;
-    font-family: var(--body-font);
-}
-
-.ad-ticker-wrapper i {
-    color: var(--accent-color);
-    font-size: 9px;
-}
-
-.ad-ticker-wrapper .highlight {
-    color: var(--accent-color);
-    font-weight: 700;
-}
-
-@keyframes scrollAdsLinear {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-@media (min-width: 769px) {
-    .ad-ticker {
-        padding: 14px 0;
-        margin-top: 40px;
-    }
-    .ad-ticker-wrapper span {
-        font-size: 13px;
-        margin: 0 20px;
-        gap: 6px;
-    }
-    .ad-ticker-wrapper i {
-        font-size: 12px;
-    }
 }
 
 /* ========================= */
@@ -702,10 +636,6 @@ footer p {
     footer p {
         font-size: 12px;
     }
-    
-    .ad-ticker {
-        margin-top: 25px;
-    }
 }
 </style>
 </head>
@@ -781,27 +711,6 @@ footer p {
                 </a>
             </div>
         </div>
-
-        <!-- SHORTENED SCROLLING AD -->
-        <div class="ad-ticker">
-            <div class="ad-ticker-wrapper">
-                <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">SOON</span></span>
-                <span><i class="fas fa-crown"></i> <span class="highlight">RANKS</span></span>
-                <span><i class="fas fa-gem"></i> <span class="highlight">COSMETICS</span></span>
-                <span><i class="fas fa-calendar-alt"></i> <span class="highlight">EVENTS</span></span>
-                <span><i class="fas fa-users"></i> <span class="highlight">COMMUNITY</span></span>
-                <span><i class="fas fa-shield-alt"></i> <span class="highlight">ANTI-CHEAT</span></span>
-                <span><i class="fas fa-gift"></i> <span class="highlight">REWARDS</span></span>
-                <!-- Duplicate for seamless loop -->
-                <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">SOON</span></span>
-                <span><i class="fas fa-crown"></i> <span class="highlight">RANKS</span></span>
-                <span><i class="fas fa-gem"></i> <span class="highlight">COSMETICS</span></span>
-                <span><i class="fas fa-calendar-alt"></i> <span class="highlight">EVENTS</span></span>
-                <span><i class="fas fa-users"></i> <span class="highlight">COMMUNITY</span></span>
-                <span><i class="fas fa-shield-alt"></i> <span class="highlight">ANTI-CHEAT</span></span>
-                <span><i class="fas fa-gift"></i> <span class="highlight">REWARDS</span></span>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -812,4 +721,85 @@ footer p {
         <div class="feature-card"><i class="fas fa-crown" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
         <div class="feature-card"><i class="fas fa-gem" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
         <div class="feature-card"><i class="fas fa-chart-line" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
-        <div class="feature-card"><i class="fas fa-dragon" style="font
+        <div class="feature-card"><i class="fas fa-dragon" style="font-size:36px;color:var(--accent-color)"></i><h3>Unavailable</h3><p>None</p></div>
+    </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="gallery-section">
+    <div class="section-title"><h2>✦ Server Gallery ✦</h2></div>
+    <div class="gallery-grid">
+        <div class="gallery-card">
+            <img src="1.png" alt="Gallery Image 1" onerror="this.src='https://placehold.co/600x380/2c3b64/white?text=1.png'">
+            <p>✦ Empty ✦</p>
+        </div>
+        <div class="gallery-card">
+            <img src="2.png" alt="Gallery Image 2" onerror="this.src='https://placehold.co/600x380/4a6a9a/white?text=2.png'">
+            <p>✦ Empty ✦</p>
+        </div>
+        <div class="gallery-card">
+            <img src="3.png" alt="Gallery Image 3" onerror="this.src='https://placehold.co/600x380/a6b8e4/black?text=3.png'">
+            <p>✦ Empty ✦</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section id="faq" class="faq-section">
+    <div class="section-title"><h2>✦ FAQ ✦</h2></div>
+    <div class="faq-grid">
+        <div class="faq-card"><i class="fas fa-question-circle"></i><h3>What version?</h3><p>Java 1.20 - 1.21+ supported</p></div>
+        <div class="faq-card"><i class="fas fa-shield-alt"></i><h3>Anti cheat?</h3><p>Premium anti-cheat & staff 24/7</p></div>
+        <div class="faq-card"><i class="fas fa-store"></i><h3>Store items?</h3><p>Cosmetics, ranks and crates</p></div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Fallen Halo Network — Where legends are forged</p>
+    <p style="font-size: 12px; margin-top: 8px;">✦ Server Address (W.I.P) ✦</p>
+</footer>
+
+<script>
+// Floating background dots
+function createDots() {
+    const bg = document.getElementById('bg');
+    if (!bg) return;
+    const count = 50;
+    for (let i = 0; i < count; i++) {
+        let dot = document.createElement('div');
+        dot.classList.add('dot');
+        let size = Math.random() * 5 + 2;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.animationDuration = Math.random() * 10 + 6 + 's';
+        dot.style.animationDelay = Math.random() * 15 + 's';
+        bg.appendChild(dot);
+    }
+}
+createDots();
+
+function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("show");
+}
+
+function copyIP() {
+    const ipText = "play.fallenhalo.net";
+    navigator.clipboard.writeText(ipText).then(() => {
+        let notif = document.createElement('div');
+        notif.innerText = "✓ Server IP copied! (WIP)";
+        notif.className = "copy-notify";
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 1800);
+    }).catch(() => alert("Copy manually"));
+}
+
+// DARK MODE FUNCTION
+function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('dark');
+    const isDark = body.classList.contains('dark');
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        const icon = btn.querySelector('i');
+ 
