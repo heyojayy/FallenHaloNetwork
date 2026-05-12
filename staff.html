@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fallen Halo Staff</title>
+<title>Fallen Halo | Staff Team</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
 
@@ -19,199 +20,478 @@
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
 }
 
 body{
-    background:linear-gradient(135deg,#e6fffb,#ffffff);
+    background:linear-gradient(135deg,#e6fffb,#f7fffe,#ffffff);
     color:#1f2a2a;
+    overflow-x:hidden;
+}
+
+/* floating dots background (same as main site) */
+.bg{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    overflow:hidden;
+}
+
+.dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#3fc7b7;
+    border-radius:50%;
+    opacity:0.3;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh); opacity:0;}
+    20%{opacity:0.6;}
+    100%{transform:translateY(-10vh); opacity:0;}
 }
 
 /* ========================= */
-/* SECTION */
+/* NAVBAR (same as main site) */
+/* ========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:999;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 7%;
+    background:rgba(255, 255, 255, 0.75);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(63,199,183,0.3);
+    box-shadow:0 4px 20px rgba(0,0,0,0.02);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    object-fit:cover;
+    border-radius:16px;
+    box-shadow:0 10px 20px rgba(63,199,183,0.2);
+    transition:0.2s;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+}
+
+.logo-title{
+    font-size:22px;
+    font-weight:700;
+    background: linear-gradient(135deg, #2faa9a, #3fc7b7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.logo-sub{
+    font-size:11px;
+    color:#6b7a7a;
+    letter-spacing:0.5px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#2b3b3a;
+    padding:8px 18px;
+    border-radius:40px;
+    font-weight:500;
+    transition:0.25s ease;
+}
+
+.nav-links a:hover{
+    background:#3fc7b7;
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(63,199,183,0.3);
+}
+
+.nav-links a.active{
+    background:#3fc7b7;
+    color:white;
+    box-shadow:0 6px 14px rgba(63,199,183,0.25);
+}
+
+/* mobile menu */
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+}
+.hamburger div{
+    width:26px;
+    height:3px;
+    background:#3fc7b7;
+    border-radius:999px;
+}
+.mobile-menu{
+    position:fixed;
+    top:80px;
+    right:7%;
+    width:230px;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(20px);
+    border-radius:24px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    border:1px solid rgba(63,199,183,0.3);
+    box-shadow:0 20px 35px rgba(0,0,0,0.08);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-12px);
+    transition:0.2s;
+    z-index:1000;
+}
+.mobile-menu.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+.mobile-menu a{
+    text-decoration:none;
+    color:#1f2a2a;
+    font-weight:500;
+    padding:10px;
+    border-radius:20px;
+    transition:0.2s;
+}
+.mobile-menu a:hover{
+    background:#3fc7b7;
+    color:white;
+}
+
+/* ========================= */
+/* STAFF SECTION */
 /* ========================= */
 
 section{
-    padding:120px 7%;
+    padding:130px 7% 90px;
 }
 
 .title{
     text-align:center;
-    font-size:42px;
-    margin-bottom:40px;
-    color:#3fc7b7;
+    font-size:48px;
+    font-weight:800;
+    margin-bottom:50px;
+    background:linear-gradient(115deg, #1f2a2a, #3fc7b7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    letter-spacing:-0.5px;
 }
 
 /* ========================= */
-/* STAFF GRID */
+/* STAFF GRID & CARDS (ORIGINAL PREMIUM UI PRESERVED) */
 /* ========================= */
 
 .staff-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:35px;
+    max-width:1300px;
+    margin:0 auto;
 }
-
-/* ========================= */
-/* STAFF CARD (NEW PREMIUM UI) */
-/* ========================= */
 
 .card{
     position:relative;
-
     background:white;
-    border-radius:22px;
-
-    padding:22px;
-
+    border-radius:28px;
+    padding:28px 20px 24px;
     text-align:center;
-
-    transition:0.35s ease;
-
+    transition:0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     border:2px solid rgba(63,199,183,0.2);
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.05);
-
+    box-shadow:0 15px 35px rgba(0,0,0,0.05);
     overflow:hidden;
+    backdrop-filter:blur(2px);
 }
 
-/* glow effect */
+/* premium glow effect */
 .card::before{
     content:"";
     position:absolute;
     inset:-2px;
-
     background:linear-gradient(135deg,#3fc7b7,#7ff2e3);
-
     opacity:0;
-
-    transition:0.4s;
-
+    transition:0.5s ease;
     z-index:0;
+    border-radius:28px;
 }
 
 .card:hover::before{
-    opacity:0.15;
+    opacity:0.2;
 }
 
-/* hover animation */
 .card:hover{
-    transform:translateY(-10px) scale(1.03);
-    box-shadow:0 20px 50px rgba(63,199,183,0.25);
+    transform:translateY(-12px) scale(1.02);
+    box-shadow:0 30px 50px rgba(63,199,183,0.28);
+    border-color:rgba(63,199,183,0.5);
 }
 
-/* avatar */
+/* avatar styling */
 .card img{
-    width:90px;
-    height:90px;
-    border-radius:16px;
-
-    margin-bottom:12px;
-
+    width:110px;
+    height:110px;
+    border-radius:28px;
+    object-fit:cover;
+    margin-bottom:16px;
     position:relative;
     z-index:1;
+    border:3px solid rgba(63,199,183,0.3);
+    transition:0.2s;
+    background:#f0fcf9;
+}
+
+.card:hover img{
+    border-color:#3fc7b7;
+    transform:scale(1.02);
 }
 
 /* name */
 .card h3{
-    margin-bottom:5px;
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:6px;
     position:relative;
     z-index:1;
+    color:#1a2c2a;
 }
 
-/* rank */
+/* rank badge */
 .rank{
-    font-size:13px;
-    font-weight:600;
-
-    padding:4px 10px;
-    border-radius:999px;
-
+    font-size:12px;
+    font-weight:700;
+    padding:5px 14px;
+    border-radius:60px;
     display:inline-block;
-
-    margin-bottom:10px;
-
+    margin-bottom:14px;
     position:relative;
     z-index:1;
+    letter-spacing:0.5px;
 }
 
-/* bio */
+/* bio description */
 .card p{
     font-size:13px;
-    color:#666;
-
+    color:#5a6e6e;
     position:relative;
     z-index:1;
-
-    margin-top:8px;
+    margin-top:10px;
+    line-height:1.5;
+    padding:0 8px;
 }
 
 /* ========================= */
-/* RANK COLORS */
+/* RANK COLORS (preserved exactly) */
 /* ========================= */
 
 .owner{
     color:#ff4d4d;
-    background:rgba(255,77,77,0.1);
+    background:rgba(255,77,77,0.12);
+    border:1px solid rgba(255,77,77,0.3);
 }
 
 .admin{
     color:#ff9f1c;
-    background:rgba(255,159,28,0.1);
+    background:rgba(255,159,28,0.12);
+    border:1px solid rgba(255,159,28,0.3);
 }
 
 .mod{
     color:#3fc7b7;
-    background:rgba(63,199,183,0.12);
+    background:rgba(63,199,183,0.15);
+    border:1px solid rgba(63,199,183,0.3);
+}
+
+/* extra staff role (helper) */
+.helper{
+    color:#9b59b6;
+    background:rgba(155,89,182,0.12);
+    border:1px solid rgba(155,89,182,0.3);
 }
 
 /* ========================= */
-/* MOBILE */
+/* RESPONSIVE */
 /* ========================= */
 
 @media(max-width:768px){
     .title{
-        font-size:32px;
+        font-size:36px;
+    }
+    .nav-links{
+        display:none;
+    }
+    .hamburger{
+        display:flex;
+    }
+    .staff-grid{
+        gap:22px;
+    }
+    .card{
+        padding:22px 16px;
+    }
+    .card img{
+        width:85px;
+        height:85px;
+    }
+    section{
+        padding:110px 5% 60px;
     }
 }
-
 </style>
 </head>
-
 <body>
 
+<div class="bg" id="bg"></div>
+
+<!-- ========================= -->
+<!-- NAVBAR (fully integrated) -->
+<!-- ========================= -->
+<nav>
+<a href="index.html" class="logo">
+<img src="logo.png" alt="Fallen Halo Logo" onerror="this.src='https://via.placeholder.com/48x48?text=FH'">
+<div class="logo-text">
+<div class="logo-title">Fallen Halo</div>
+<div class="logo-sub">Minecraft Network</div>
+</div>
+</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="index.html#features">Features</a>
+<a href="index.html#gallery">Gallery</a>
+<a href="staff.html" class="active">Staff</a>
+<a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
+</div>
+
+<div class="hamburger" onclick="toggleMenu()">
+<div></div><div></div><div></div>
+</div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="index.html#features">Features</a>
+<a href="index.html#gallery">Gallery</a>
+<a href="staff.html">Staff</a>
+<a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
+</div>
+
+<!-- ========================= -->
+<!-- STAFF SECTION (original premium cards + extra members for realism) -->
+<!-- ========================= -->
 <section>
-
-    <div class="title">Staff Team</div>
-
+    <div class="title">✦ Meet Our Guardians ✦</div>
     <div class="staff-grid">
 
         <!-- OWNER -->
         <div class="card">
-            <img src="https://mc-heads.net/avatar/Steve">
-            <div class="rank owner">OWNER</div>
+            <img src="https://mc-heads.net/avatar/Steve" alt="Steve">
+            <div class="rank owner">★ OWNER ★</div>
             <h3>Steve</h3>
             <p>Founder of Fallen Halo Network. Handles development & management.</p>
         </div>
 
         <!-- ADMIN -->
         <div class="card">
-            <img src="https://mc-heads.net/avatar/Alex">
-            <div class="rank admin">ADMIN</div>
+            <img src="https://mc-heads.net/avatar/Alex" alt="Alex">
+            <div class="rank admin">⚡ ADMIN ⚡</div>
             <h3>Alex</h3>
             <p>Manages server operations, events and community support.</p>
         </div>
 
         <!-- MOD -->
         <div class="card">
-            <img src="https://mc-heads.net/avatar/Notch">
-            <div class="rank mod">MOD</div>
+            <img src="https://mc-heads.net/avatar/Notch" alt="Notch">
+            <div class="rank mod">🛡️ MODERATOR 🛡️</div>
             <h3>Notch</h3>
             <p>Helps players, enforces rules and keeps server clean.</p>
         </div>
 
-    </div>
+        <!-- extra HELPER (demonstrates expansion) -->
+        <div class="card">
+            <img src="https://mc-heads.net/avatar/HeroBrine" alt="HeroBrine">
+            <div class="rank helper">✨ HELPER ✨</div>
+            <h3>HeroBrine</h3>
+            <p>Welcomes new players & guides them through our custom features.</p>
+        </div>
 
+    </div>
 </section>
+
+<!-- optional decorative footer -->
+<footer style="text-align:center; padding:30px 20px; background:rgba(0,0,0,0.02); margin-top:20px; border-top:1px solid rgba(63,199,183,0.2);">
+    <p style="color:#3c5a5a;">⚡ Fallen Halo Network — dedicated staff, unforgettable adventures ⚡</p>
+</footer>
+
+<script>
+// Floating background dots (consistent with main site)
+function createDots(){
+    const bg = document.getElementById('bg');
+    if(!bg) return;
+    const count = 70;
+    for(let i=0;i<count;i++){
+        let dot = document.createElement('div');
+        dot.classList.add('dot');
+        let size = Math.random() * 6 + 2;
+        dot.style.width = size+'px';
+        dot.style.height = size+'px';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.animationDuration = Math.random() * 8 + 5 + 's';
+        dot.style.animationDelay = Math.random() * 15 + 's';
+        bg.appendChild(dot);
+    }
+}
+createDots();
+
+// Toggle mobile menu
+function toggleMenu(){
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("show");
+}
+
+// Close mobile menu when clicking any link inside
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById("mobileMenu").classList.remove("show");
+    });
+});
+
+// Close mobile menu when clicking outside
+window.addEventListener('click', function(e) {
+    const menu = document.getElementById("mobileMenu");
+    if(!e.target.closest('.hamburger') && !e.target.closest('#mobileMenu') && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+    }
+});
+</script>
 
 </body>
 </html>
