@@ -225,7 +225,7 @@ nav{
 }
 
 /* ========================= */
-/* COMPACT & RECTANGULAR BUTTON STYLE (smaller icons, sleek) */
+/* CONNECT CARDS - PERFECTLY ALIGNED ICONS & BUTTONS */
 /* ========================= */
 .connect-wrap{
     margin-top:55px;
@@ -237,7 +237,7 @@ nav{
 
 .connect-card{
     width:260px;
-    padding:22px 18px;
+    padding:22px 18px 24px;
     border-radius:32px;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(14px);
@@ -245,6 +245,9 @@ nav{
     box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255,255,255,0.5) inset;
     transition: all 0.3s ease;
     text-align:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .connect-card:hover{
@@ -254,8 +257,8 @@ nav{
     box-shadow: 0 20px 32px -12px rgba(63,199,183,0.3);
 }
 
-/* smaller icon inside card header */
-.connect-card i:first-child{
+/* Header icon inside card */
+.connect-card > i:first-child{
     font-size: 34px;
     background: linear-gradient(135deg, #3fc7b7, #2faa9a);
     -webkit-background-clip: text;
@@ -281,12 +284,12 @@ nav{
     padding: 4px 14px;
     border-radius: 40px;
     color: #22665c;
-    margin: 8px 0 16px;
+    margin: 8px 0 18px;
     font-family: monospace;
     letter-spacing: 0.3px;
 }
 
-/* ---------- RECTANGULAR BUTTONS with tiny icons ---------- */
+/* BUTTONS - rectangular, perfectly aligned icons + text */
 .connect-card button,
 .connect-card a{
     display: inline-flex;
@@ -296,7 +299,7 @@ nav{
     background: #3fc7b7;
     color: white;
     padding: 8px 20px;
-    border-radius: 14px;   /* rectangular shape, not chunky */
+    border-radius: 14px;
     font-weight: 600;
     border: none;
     cursor: pointer;
@@ -304,20 +307,23 @@ nav{
     transition: 0.2s;
     font-size: 13px;
     width: auto;
-    min-width: 110px;
+    min-width: 120px;
     letter-spacing: 0.3px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-/* Smaller icon inside button (reducing icon size) */
+/* Force icons inside buttons to be identical size & alignment */
 .connect-card button i,
 .connect-card a i{
-    font-size: 12px !important;
-    margin-right: 2px;
+    font-size: 13px !important;
+    width: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: none !important;
     -webkit-background-clip: unset !important;
     color: white !important;
-    transition: 0.2s;
+    margin-right: 4px;
 }
 
 .connect-card button:hover,
@@ -327,6 +333,7 @@ nav{
     box-shadow: 0 6px 12px rgba(63,199,183,0.25);
 }
 
+/* Discord button specific */
 .connect-card a.dc{
     background: #5865F2;
 }
@@ -334,8 +341,14 @@ nav{
     background: #4752c4;
 }
 
+/* Ensure both buttons have identical height and flex alignment */
+.connect-card button,
+.connect-card a.dc {
+    line-height: 1;
+}
+
 /* ========================= */
-/* SECTIONS (unchanged but refined) */
+/* SECTIONS */
 /* ========================= */
 section{
     padding: 80px 7% 90px;
@@ -427,7 +440,10 @@ footer{
     .connect-wrap{gap:18px;}
     .connect-card button, .connect-card a{
         padding: 7px 16px;
-        min-width: 100px;
+        min-width: 110px;
+    }
+    .connect-card button i, .connect-card a i{
+        font-size: 12px !important;
     }
 }
 </style>
@@ -464,7 +480,7 @@ footer{
 <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
 </div>
 
-<!-- HERO with sleek rectangular buttons (smaller icons) -->
+<!-- HERO with perfectly aligned buttons (icons + text) -->
 <section class="hero fade">
 <div>
 <h1>
@@ -475,7 +491,7 @@ Fallen Halo<br>
 <i class="fas fa-circle"></i> Online • 58 Players
 </div>
 
-<!-- refined connect cards: rectangular buttons, tiny icons -->
+<!-- connect cards - icons and buttons aligned -->
 <div class="connect-wrap">
 <div class="connect-card">
 <i class="fas fa-globe"></i>
