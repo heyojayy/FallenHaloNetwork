@@ -16,8 +16,9 @@
 /* CSS VARIABLES FOR THEMES */
 /* ========================= */
 :root {
-    /* Light Mode (default) */
-    --bg-gradient: radial-gradient(circle at 10% 30%, #edfff9, #ffffff 80%);
+    /* Light Mode (default) - New Gradient: #C0EBFF > #AFFCF8 */
+    --bg-gradient-start: #C0EBFF;
+    --bg-gradient-end: #AFFCF8;
     --text-primary: #1f2a2a;
     --text-secondary: #5a6e6e;
     --nav-bg: rgba(255, 255, 255, 0.75);
@@ -34,11 +35,14 @@
     --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.05);
     --border-light: rgba(63, 199, 183, 0.2);
+    --ad-text: #1a5c52;
+    --ad-text-glow: #3fc7b7;
 }
 
 body.dark {
-    /* Dark Mode */
-    --bg-gradient: radial-gradient(circle at 10% 30%, #0a1a1a, #0d1117 80%);
+    /* Dark Mode - Darker version of the gradient */
+    --bg-gradient-start: #0a3a4a;
+    --bg-gradient-end: #0d2a3a;
     --text-primary: #e0e5e5;
     --text-secondary: #9aaeb0;
     --nav-bg: rgba(13, 25, 25, 0.85);
@@ -55,6 +59,7 @@ body.dark {
     --shadow-sm: 0 12px 28px -8px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 20px 35px rgba(0, 0, 0, 0.2);
     --border-light: rgba(63, 199, 183, 0.15);
+    --ad-text: #7ff2e3;
 }
 
 * {
@@ -63,22 +68,51 @@ body.dark {
     box-sizing: border-box;
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     color: var(--text-primary);
-    background: var(--bg-gradient);
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    background-attachment: fixed;
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+}
+
+/* Looping gradient animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+body.dark {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    background-attachment: fixed;
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
 }
 
 /* Floating dots background */
 .bg {
     position: fixed;
     inset: 0;
-    z-index: -2;
+    z-index: -1;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .dot {
@@ -87,14 +121,68 @@ body {
     height: 6px;
     background: var(--dot-color);
     border-radius: 50%;
-    opacity: 0.3;
+    opacity: 0.25;
     animation: float linear infinite;
 }
 
 @keyframes float {
     0% { transform: translateY(100vh); opacity: 0; }
-    20% { opacity: 0.6; }
+    20% { opacity: 0.5; }
     100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* ========================= */
+/* ANIMATED WORD CLOUD / SCROLLING AD SECTION */
+/* ========================= */
+.ad-ticker {
+    background: rgba(63, 199, 183, 0.15);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(63, 199, 183, 0.3);
+    border-bottom: 1px solid rgba(63, 199, 183, 0.3);
+    padding: 12px 0;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.ad-ticker-track {
+    display: inline-block;
+    animation: scrollAds 25s linear infinite;
+    white-space: nowrap;
+}
+
+.ad-ticker-track span {
+    display: inline-block;
+    margin: 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ad-text);
+    letter-spacing: 0.5px;
+}
+
+.ad-ticker-track i {
+    margin-right: 8px;
+    color: #3fc7b7;
+    font-size: 12px;
+}
+
+.ad-ticker-track .highlight {
+    color: #3fc7b7;
+    font-weight: 700;
+}
+
+@keyframes scrollAds {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.ad-ticker:hover .ad-ticker-track {
+    animation-play-state: paused;
 }
 
 /* ========================= */
@@ -541,6 +629,10 @@ footer {
     .theme-toggle {
         padding: 8px 12px;
     }
+    .ad-ticker-track span {
+        font-size: 11px;
+        margin: 0 12px;
+    }
 }
 </style>
 </head>
@@ -616,6 +708,33 @@ footer {
                 </a>
             </div>
         </div>
+
+        <!-- ========================= -->
+        <!-- SCROLLING WORD CLOUD / AD TICKER (like AristaMC) -->
+        <!-- ========================= -->
+        <div class="ad-ticker">
+            <div class="ad-ticker-track">
+                <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">COMING SOON</span></span>
+                <span><i class="fas fa-crown"></i> <span class="highlight">CUSTOM RANKS</span> AVAILABLE</span>
+                <span><i class="fas fa-gem"></i> EXCLUSIVE <span class="highlight">COSMETICS</span></span>
+                <span><i class="fas fa-calendar-alt"></i> WEEKLY <span class="highlight">EVENTS</span></span>
+                <span><i class="fas fa-users"></i> <span class="highlight">ACTIVE COMMUNITY</span> 500+ MEMBERS</span>
+                <span><i class="fas fa-shield-alt"></i> <span class="highlight">ANTI-CHEAT</span> PROTECTION</span>
+                <span><i class="fas fa-chart-line"></i> <span class="highlight">PLAYER ECONOMY</span> & SHOPS</span>
+                <span><i class="fas fa-dragon"></i> <span class="highlight">CUSTOM BOSSES</span> & DUNGEONS</span>
+                <span><i class="fas fa-gift"></i> DAILY <span class="highlight">REWARDS</span></span>
+                <!-- Duplicate for seamless loop -->
+                <span><i class="fas fa-tag"></i> SEASON 2 <span class="highlight">COMING SOON</span></span>
+                <span><i class="fas fa-crown"></i> <span class="highlight">CUSTOM RANKS</span> AVAILABLE</span>
+                <span><i class="fas fa-gem"></i> EXCLUSIVE <span class="highlight">COSMETICS</span></span>
+                <span><i class="fas fa-calendar-alt"></i> WEEKLY <span class="highlight">EVENTS</span></span>
+                <span><i class="fas fa-users"></i> <span class="highlight">ACTIVE COMMUNITY</span> 500+ MEMBERS</span>
+                <span><i class="fas fa-shield-alt"></i> <span class="highlight">ANTI-CHEAT</span> PROTECTION</span>
+                <span><i class="fas fa-chart-line"></i> <span class="highlight">PLAYER ECONOMY</span> & SHOPS</span>
+                <span><i class="fas fa-dragon"></i> <span class="highlight">CUSTOM BOSSES</span> & DUNGEONS</span>
+                <span><i class="fas fa-gift"></i> DAILY <span class="highlight">REWARDS</span></span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -640,7 +759,7 @@ footer {
         </div>
         <div class="gallery-card">
             <img src="2.png" alt="Fallen Halo Image Two" onerror="this.src='https://placehold.co/600x380/2faa9a/white?text=2.png'">
-            <p>✦ Empty ✦</p></p>
+            <p>✦ Empty ✦</p>
         </div>
         <div class="gallery-card">
             <img src="3.png" alt="Fallen Halo Image Three" onerror="this.src='https://placehold.co/600x380/7ff2e3/black?text=3.png'">
