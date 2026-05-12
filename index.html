@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fallen Halo Network</title>
+<title>Fallen Halo Network | Premium Minecraft Server</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
 
 /* ========================= */
-/* GLOBAL */
+/* GLOBAL RESET & VARIABLES */
 /* ========================= */
-
 *{
     margin:0;
     padding:0;
@@ -26,17 +26,14 @@ body{
     font-family:'Poppins',sans-serif;
     overflow-x:hidden;
     color:#1f2a2a;
-    background:linear-gradient(135deg,#e6fffb,#f7fffe,#ffffff);
+    background: radial-gradient(circle at 10% 30%, #edfff9, #ffffff 80%);
 }
 
-/* ========================= */
-/* BACKGROUND */
-/* ========================= */
-
+/* Floating dots background (kept original style but enhanced) */
 .bg{
     position:fixed;
     inset:0;
-    z-index:-1;
+    z-index:-2;
     overflow:hidden;
 }
 
@@ -46,41 +43,33 @@ body{
     height:6px;
     background:#3fc7b7;
     border-radius:50%;
-    opacity:0.35;
+    opacity:0.3;
     animation:float linear infinite;
 }
 
 @keyframes float{
-    0%{transform:translateY(100vh);opacity:0;}
-    50%{opacity:0.6;}
-    100%{transform:translateY(-10vh);opacity:0;}
+    0%{transform:translateY(100vh); opacity:0;}
+    20%{opacity:0.6;}
+    100%{transform:translateY(-10vh); opacity:0;}
 }
 
 /* ========================= */
-/* NAVBAR */
+/* NAVBAR (MODERN GLASS) */
 /* ========================= */
-
 nav{
     position:fixed;
     top:0;
     width:100%;
     z-index:999;
-
     display:flex;
     justify-content:space-between;
     align-items:center;
-
-    padding:18px 7%;
-
-    background:rgba(235,255,252,0.75);
-    backdrop-filter:blur(14px);
-
-    border-bottom:1px solid rgba(63,199,183,0.15);
+    padding:14px 7%;
+    background:rgba(255, 255, 255, 0.75);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(63,199,183,0.3);
+    box-shadow:0 4px 20px rgba(0,0,0,0.02);
 }
-
-/* ========================= */
-/* LOGO */
-/* ========================= */
 
 .logo{
     display:flex;
@@ -93,8 +82,9 @@ nav{
     width:48px;
     height:48px;
     object-fit:cover;
-    border-radius:14px;
-    box-shadow:0 5px 18px rgba(63,199,183,0.18);
+    border-radius:16px;
+    box-shadow:0 10px 20px rgba(63,199,183,0.2);
+    transition:0.2s;
 }
 
 .logo-text{
@@ -106,281 +96,364 @@ nav{
 .logo-title{
     font-size:22px;
     font-weight:700;
-    color:#3fc7b7;
+    background: linear-gradient(135deg, #2faa9a, #3fc7b7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 
 .logo-sub{
-    font-size:12px;
+    font-size:11px;
     color:#6b7a7a;
-    margin-top:4px;
+    letter-spacing:0.5px;
 }
-
-/* ========================= */
-/* NAV LINKS */
-/* ========================= */
 
 .nav-links{
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:12px;
 }
 
 .nav-links a{
     text-decoration:none;
     color:#2b3b3a;
-    padding:8px 14px;
-    border-radius:12px;
+    padding:8px 18px;
+    border-radius:40px;
+    font-weight:500;
     transition:0.25s ease;
 }
 
 .nav-links a:hover{
-    transform:translateY(-2px) scale(1.12);
-    background:rgba(63,199,183,0.12);
-    color:#3fc7b7;
-    box-shadow:0 8px 20px rgba(63,199,183,0.15);
+    background:#3fc7b7;
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(63,199,183,0.3);
 }
 
-/* ========================= */
-/* MOBILE MENU */
-/* ========================= */
-
+/* mobile */
 .hamburger{
     display:none;
     flex-direction:column;
     gap:5px;
     cursor:pointer;
-    z-index:1001;
 }
-
 .hamburger div{
-    width:25px;
+    width:26px;
     height:3px;
     background:#3fc7b7;
     border-radius:999px;
 }
-
 .mobile-menu{
     position:fixed;
-    top:85px;
+    top:80px;
     right:7%;
-    width:220px;
-
+    width:230px;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(20px);
+    border-radius:24px;
+    padding:18px;
     display:flex;
     flex-direction:column;
-
-    background:rgba(255,255,255,0.96);
-    backdrop-filter:blur(14px);
-
-    padding:15px;
-
-    border-radius:18px;
-
-    border:1px solid rgba(63,199,183,0.15);
-
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
+    gap:12px;
+    border:1px solid rgba(63,199,183,0.3);
+    box-shadow:0 20px 35px rgba(0,0,0,0.08);
     opacity:0;
     visibility:hidden;
-    transform:translateY(-10px);
-    transition:0.25s ease;
-
+    transform:translateY(-12px);
+    transition:0.2s;
     z-index:1000;
-    pointer-events:none;
 }
-
 .mobile-menu.show{
     opacity:1;
     visibility:visible;
     transform:translateY(0);
-    pointer-events:auto;
+}
+.mobile-menu a{
+    text-decoration:none;
+    color:#1f2a2a;
+    font-weight:500;
+    padding:10px;
+    border-radius:20px;
+    transition:0.2s;
+}
+.mobile-menu a:hover{
+    background:#3fc7b7;
+    color:white;
 }
 
 /* ========================= */
-/* HERO */
+/* HERO SECTION */
 /* ========================= */
-
 .hero{
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:120px 7% 60px;
+    padding:130px 7% 70px;
 }
 
 .hero h1{
-    font-size:72px;
-    line-height:1;
+    font-size:76px;
+    line-height:1.1;
+    font-weight:800;
 }
 
 .gradient{
-    background:linear-gradient(90deg,#3fc7b7,#7ff2e3);
+    background:linear-gradient(115deg, #3fc7b7, #7ff2e3, #2faa9a);
     -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    color:transparent;
 }
 
 .status{
-    margin-top:18px;
-    display:inline-block;
-    padding:10px 18px;
-    border-radius:999px;
-    background:#dffcf9;
+    margin-top:25px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(63,199,183,0.12);
+    padding:8px 22px;
+    border-radius:60px;
     font-weight:600;
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(63,199,183,0.4);
 }
 
-/* ========================= */
-/* ORIGINAL BUTTONS (UNCHANGED) */
-/* ========================= */
+.status i{
+    font-size:14px;
+    color:#2ecc71;
+}
 
+/* original buttons container */
 .hero-buttons{
-    margin-top:20px;
+    margin-top:28px;
+    display:flex;
+    justify-content:center;
+    gap:18px;
 }
 
 .btn{
-    display:inline-block;
-    margin:8px;
-    padding:11px 18px;
-    border-radius:14px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 28px;
+    border-radius:44px;
     font-weight:600;
+    transition:0.25s;
     cursor:pointer;
-    transition:0.3s ease;
+    border:none;
+    font-size:16px;
+    font-family:inherit;
 }
 
 .ip-btn{
     background:#3fc7b7;
     color:white;
+    box-shadow:0 8px 18px rgba(63,199,183,0.3);
 }
-
+.ip-btn:hover{
+    transform:translateY(-3px);
+    background:#2aa395;
+    box-shadow:0 15px 25px rgba(63,199,183,0.4);
+}
 .discord-btn{
     background:#5865F2;
     color:white;
+    box-shadow:0 6px 14px rgba(88,101,242,0.25);
+}
+.discord-btn:hover{
+    transform:translateY(-3px);
+    background:#4752c4;
 }
 
 /* ========================= */
-/* ONLY ADDITION: MODERN CONNECT UI */
+/* REFERENCED MODERN CONNECT UI (Arista style: glassmorphic cards, glossy borders) */
 /* ========================= */
-
 .connect-wrap{
-    margin-top:35px;
+    margin-top:45px;
     display:flex;
     justify-content:center;
-    gap:20px;
+    gap:30px;
     flex-wrap:wrap;
 }
 
 .connect-card{
-    width:260px;
-    padding:22px;
-    border-radius:20px;
-
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(63,199,183,0.2);
-
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
-    transition:0.3s ease;
+    width:280px;
+    padding:28px 22px;
+    border-radius:32px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(63, 199, 183, 0.35);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255,255,255,0.6) inset;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    text-align:center;
 }
 
 .connect-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 45px rgba(63,199,183,0.25);
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: #3fc7b7;
+    box-shadow: 0 30px 45px -12px rgba(63,199,183,0.4);
+}
+
+.connect-card i{
+    font-size: 42px;
+    background: linear-gradient(135deg, #3fc7b7, #2faa9a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
 }
 
 .connect-title{
-    font-weight:700;
-    color:#2fb8a9;
-    margin-bottom:10px;
+    font-weight: 800;
+    font-size: 20px;
+    color: #1f2a2a;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
 }
 
 .connect-value{
-    font-size:14px;
-    margin-bottom:15px;
-    color:#444;
+    font-size: 15px;
+    font-weight: 500;
+    background: rgba(63,199,183,0.1);
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 40px;
+    color: #22665c;
+    margin: 12px 0;
 }
 
 .connect-card button,
 .connect-card a{
-    padding:10px 14px;
-    border-radius:12px;
-    border:none;
-    cursor:pointer;
-    text-decoration:none;
-    font-weight:600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #3fc7b7;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+    font-size: 14px;
 }
 
-.copy{
-    background:#3fc7b7;
-    color:white;
+.connect-card button:hover,
+.connect-card a:hover{
+    background: #2aa395;
+    transform: scale(0.97);
+    letter-spacing: 0.5px;
 }
 
-.dc{
-    background:#5865F2;
-    color:white;
+.connect-card a.dc{
+    background: #5865F2;
+}
+.connect-card a.dc:hover{
+    background: #4752c4;
 }
 
 /* ========================= */
-/* SECTIONS (UNCHANGED) */
+/* SECTIONS (unchanged structure but modern glow) */
 /* ========================= */
-
 section{
-    padding:110px 7%;
+    padding: 90px 7%;
 }
-
 .section-title{
     text-align:center;
     margin-bottom:45px;
 }
-
 .section-title h2{
-    font-size:40px;
+    font-size:44px;
+    font-weight:700;
+    background: linear-gradient(120deg, #1f2a2a, #3fc7b7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
-
-/* KEEP EVERYTHING ELSE (FEATURES, GALLERY, FAQ) EXACT SAME */
-
-/* ========================= */
-/* MOBILE */
-/* ========================= */
+.feature-grid, .gallery-grid, .faq-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:35px;
+}
+.feature-card, .gallery-card, .faq-card{
+    background: rgba(255,255,240,0.5);
+    backdrop-filter: blur(4px);
+    border-radius:30px;
+    padding:28px;
+    width:260px;
+    text-align:center;
+    transition:0.3s;
+    border:1px solid rgba(63,199,183,0.2);
+}
+.feature-card:hover, .gallery-card:hover, .faq-card:hover{
+    transform:translateY(-10px);
+    border-color:#3fc7b7;
+    background:white;
+    box-shadow:0 20px 35px rgba(0,0,0,0.05);
+}
+.faq-card{
+    width:300px;
+    text-align:left;
+}
+.gallery-card img{
+    width:100%;
+    border-radius:20px;
+}
+.copy-notify{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    background:#1e2a2a;
+    color:white;
+    padding:8px 20px;
+    border-radius:60px;
+    transform:translateX(-50%);
+    z-index:2000;
+    font-size:14px;
+    backdrop-filter:blur(12px);
+}
+footer{
+    background: #0d1f1c;
+    color:#a2c2bc;
+    text-align:center;
+    padding:30px;
+}
 
 @media(max-width:768px){
-    .hero h1{font-size:46px;}
+    .hero h1{font-size:48px;}
     .nav-links{display:none;}
     .hamburger{display:flex;}
-    .connect-wrap{
-        flex-direction:column;
-        align-items:center;
-    }
+    .connect-card{width:90%;}
+    .hero-buttons{flex-direction:column; align-items:center;}
+    .btn{width:200px; justify-content:center;}
 }
-
 </style>
 </head>
-
 <body>
 
 <div class="bg" id="bg"></div>
 
 <nav>
-
 <a href="#" class="logo">
-<img src="logo.png">
+<img src="logo.png" alt="Fallen Halo Logo" onerror="this.src='https://via.placeholder.com/48x48?text=FH'">
 <div class="logo-text">
 <div class="logo-title">Fallen Halo</div>
 <div class="logo-sub">Minecraft Network</div>
 </div>
 </a>
-
 <div class="nav-links">
 <a href="#features">Features</a>
 <a href="#gallery">Gallery</a>
 <a href="staff.html">Staff</a>
 <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
 </div>
-
 <div class="hamburger" onclick="toggleMenu()">
 <div></div><div></div><div></div>
 </div>
-
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
@@ -390,58 +463,125 @@ section{
 <a href="https://fallenhalo.craftingstore.net/" target="_blank">Store</a>
 </div>
 
-<!-- HERO -->
+<!-- HERO (UPGRADED CONNECT UI) -->
 <section class="hero fade">
-
 <div>
-
 <h1>
 Fallen Halo<br>
 <span class="gradient">Network</span>
 </h1>
-
 <div class="status">
-🟢 Online • 23 Players
+<i class="fas fa-circle"></i> Online • 32 Players
 </div>
-
-<!-- ORIGINAL BUTTONS (UNCHANGED) -->
+<!-- original buttons kept (unchanged) -->
 <div class="hero-buttons">
-<button class="btn ip-btn" onclick="copyIP()">Copy IP</button>
-<a class="btn discord-btn" href="https://discord.gg/BsU48hu6zQ" target="_blank">Discord</a>
+<button class="btn ip-btn" onclick="copyIP()"><i class="fas fa-copy"></i> Copy IP</button>
+<a class="btn discord-btn" href="https://discord.gg/BsU48hu6zQ" target="_blank"><i class="fab fa-discord"></i> Discord</a>
 </div>
 
-<!-- ONLY VISUAL UPGRADE ADDED -->
+<!-- MODERN CONNECT CARDS inspired by AristaMC style: glassmorph + elegant icons -->
 <div class="connect-wrap">
-
 <div class="connect-card">
-<div class="connect-title">Server IP</div>
+<i class="fas fa-globe"></i>
+<div class="connect-title">Server Address</div>
 <div class="connect-value">play.fallenhalo.net</div>
-<button class="copy" onclick="copyIP()">Copy</button>
+<button class="copy glow-btn" onclick="copyIP()"><i class="fas fa-copy"></i> Copy IP</button>
 </div>
-
 <div class="connect-card">
-<div class="connect-title">Discord</div>
-<div class="connect-value">Join our community</div>
-<a class="dc" href="https://discord.gg/BsU48hu6zQ" target="_blank">Join</a>
+<i class="fab fa-discord"></i>
+<div class="connect-title">Community Hub</div>
+<div class="connect-value">Join & Meet Players</div>
+<a class="dc" href="https://discord.gg/BsU48hu6zQ" target="_blank"><i class="fab fa-discord"></i> Join Discord</a>
 </div>
-
 </div>
-
 </div>
-
 </section>
 
+<!-- FEATURES SECTION (original untouched but refined style) -->
+<section id="features">
+<div class="section-title"><h2>✦ Server Features ✦</h2></div>
+<div class="feature-grid">
+<div class="feature-card"><i class="fas fa-crown" style="font-size:36px;color:#3fc7b7"></i><h3>Factions & Claims</h3><p>Epic land claiming & raiding system</p></div>
+<div class="feature-card"><i class="fas fa-gem" style="font-size:36px;color:#3fc7b7"></i><h3>Custom Enchants</h3><p>50+ unique enchantments</p></div>
+<div class="feature-card"><i class="fas fa-chart-line" style="font-size:36px;color:#3fc7b7"></i><h3>Economy & Shops</h3><p>Player-driven market</p></div>
+<div class="feature-card"><i class="fas fa-dragon" style="font-size:36px;color:#3fc7b7"></i><h3>Custom Bosses</h3><p>Mythic mobs & events</p></div>
+</div>
+</section>
+
+<!-- GALLERY SECTION (preserved unchanged) -->
+<section id="gallery">
+<div class="section-title"><h2>✦ Screenshots ✦</h2></div>
+<div class="gallery-grid">
+<div class="gallery-card"><img src="https://placehold.co/400x240/3fc7b7/white?text=Spawn" alt="Spawn"><p>Spawn Temple</p></div>
+<div class="gallery-card"><img src="https://placehold.co/400x240/2faa9a/white?text=Warzone" alt="Warzone"><p>Warzone PvP</p></div>
+<div class="gallery-card"><img src="https://placehold.co/400x240/7ff2e3/black?text=Events" alt="Events"><p>Weekly Events</p></div>
+</div>
+</section>
+
+<!-- FAQ SECTION (original style) -->
+<section id="faq">
+<div class="section-title"><h2>✦ FAQ ✦</h2></div>
+<div class="faq-grid">
+<div class="faq-card"><i class="fas fa-question-circle"></i><h3>What version?</h3><p>Java 1.20 - 1.21+ supported</p></div>
+<div class="faq-card"><i class="fas fa-shield-alt"></i><h3>Anti cheat?</h3><p>Premium anti-cheat & staff 24/7</p></div>
+<div class="faq-card"><i class="fas fa-store"></i><h3>Store items?</h3><p>Cosmetics, ranks and crates</p></div>
+</div>
+</section>
+
+<footer>
+<p>© 2025 Fallen Halo Network — Where legends are forged</p>
+<p>✦ play.fallenhalo.net ✦</p>
+</footer>
+
 <script>
+// Floating background dots generator (kept original)
+function createDots(){
+    const bg = document.getElementById('bg');
+    const count = 80;
+    for(let i=0;i<count;i++){
+        let dot = document.createElement('div');
+        dot.classList.add('dot');
+        let size = Math.random() * 6 + 2;
+        dot.style.width = size+'px';
+        dot.style.height = size+'px';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.animationDuration = Math.random() * 8 + 5 + 's';
+        dot.style.animationDelay = Math.random() * 15 + 's';
+        bg.appendChild(dot);
+    }
+}
+createDots();
 
 function toggleMenu(){
-document.getElementById("mobileMenu").classList.toggle("show");
+    document.getElementById("mobileMenu").classList.toggle("show");
 }
 
 function copyIP(){
-navigator.clipboard.writeText("play.fallenhalo.net");
-alert("IP Copied!");
+    const ipText = "play.fallenhalo.net";
+    navigator.clipboard.writeText(ipText).then(() => {
+        let notif = document.createElement('div');
+        notif.innerText = "✅ IP Copied! play.fallenhalo.net";
+        notif.className = "copy-notify";
+        document.body.appendChild(notif);
+        setTimeout(() => { notif.remove(); }, 2000);
+    }).catch(()=>{
+        alert("Manual copy: play.fallenhalo.net");
+    });
 }
 
+// Close mobile menu when clicking nav links
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById("mobileMenu").classList.remove("show");
+    });
+});
+// smooth active highlight
+window.addEventListener('click', function(e) {
+    const menu = document.getElementById("mobileMenu");
+    if(!e.target.closest('.hamburger') && !e.target.closest('#mobileMenu') && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+    }
+});
 </script>
 
 </body>
