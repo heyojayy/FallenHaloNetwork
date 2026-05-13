@@ -436,7 +436,7 @@ section{
     fill: none;
 }
 
-/* Unavailable Mode Styles (applied via JS) */
+/* Unavailable Mode Styles */
 .unavailable-mode .feature-card,
 .unavailable-mode .gallery-item,
 .unavailable-mode .faq-item {
@@ -451,6 +451,17 @@ section{
 
 .unavailable-mode .gallery-item img {
     filter: grayscale(0.5);
+}
+
+/* ALWAYS VISIBLE - NO FADE ON CONTENT */
+.features-grid, .gallery-grid, .faq-container {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.feature-card, .gallery-item, .faq-item {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .gallery-grid{
@@ -533,18 +544,6 @@ section{
 }
 .faq-item.active .faq-question svg{
     transform: rotate(45deg);
-}
-
-/* fade-in/out animation for scroll */
-.fade-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1);
-}
-
-.fade-scroll.fade-visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* ========== MODERN COOL FOOTER ========== */
@@ -691,7 +690,7 @@ section{
 
 <main>
     <!-- HERO -->
-    <section class="hero fade-scroll fade-visible">
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-logo">
                 <img src="logo.png" alt="Fallen Halo Network Logo">
@@ -712,7 +711,7 @@ section{
     </section>
 
     <!-- FEATURES -->
-    <section id="features" class="fade-scroll">
+    <section id="features">
         <div class="container">
             <div class="section-title"><h2>Features</h2><p id="features-subtitle">Built to deliver the best Minecraft experience.</p></div>
             <div class="features-grid">
@@ -741,7 +740,7 @@ section{
     </section>
 
     <!-- GALLERY -->
-    <section id="gallery" class="fade-scroll">
+    <section id="gallery">
         <div class="container">
             <div class="section-title"><h2>Gallery</h2><p id="gallery-subtitle">A glimpse into Fallen Halo.</p></div>
             <div class="gallery-grid">
@@ -753,8 +752,9 @@ section{
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="fade-scroll">
+    <section id="faq">
         <div class="container">
             <div class="section-title"><h2>FAQ</h2><p id="faq-subtitle">Frequently asked questions.</p></div>
             <div class="faq-container">
- 
+                <div class="faq-item">
+                    <div class="faq-question">What version is the server on?<svg viewBox="0 0 24 24" fi
