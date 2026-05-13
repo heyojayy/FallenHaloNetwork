@@ -340,8 +340,8 @@ nav{
 
 .staff-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 45px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
     justify-items: center;
     align-items: start;
 }
@@ -354,7 +354,8 @@ nav{
     overflow: hidden;
     transition: 0.35s ease;
     width: 100%;
-    max-width: 380px;
+    max-width: 360px;
+    text-align: center;
 }
 
 .staff-card:hover{
@@ -362,39 +363,71 @@ nav{
     box-shadow: 0 25px 50px var(--shadow);
 }
 
-.model-container{
-    width: 100%;
-    height: 320px;
-    background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
-    position: relative;
-    overflow: hidden;
+/* Head/Bubble container */
+.head-container{
+    padding: 35px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.05), transparent);
 }
 
-.model-container canvas{
-    width: 100%;
-    height: 100%;
+.head-bubble{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.3s ease;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.head-bubble canvas{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
     display: block;
 }
 
+/* Rank glow effects */
+.staff-card[data-rank="Founder"] .head-bubble{
+    box-shadow: 0 0 30px rgba(255,215,0,0.4);
+    border-color: #ffd700;
+}
+
+.staff-card[data-rank="Executive"] .head-bubble{
+    box-shadow: 0 0 30px rgba(255,85,85,0.4);
+    border-color: #ff5555;
+}
+
+.staff-card[data-rank="Head Management"] .head-bubble{
+    box-shadow: 0 0 30px rgba(85,255,85,0.4);
+    border-color: #55ff55;
+}
+
 .staff-info{
-    padding: 24px 28px 32px;
+    padding: 20px 24px 32px;
     text-align: center;
 }
 
 .staff-name{
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
     margin-bottom: 8px;
     letter-spacing: -0.3px;
 }
 
 .staff-rank{
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    padding: 6px 16px;
+    padding: 5px 14px;
     border-radius: 30px;
     display: inline-block;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -402,24 +435,20 @@ nav{
 .rank-badge-founder{
     background: var(--rank-founder);
     color: #1a1a2e;
-    box-shadow: 0 0 15px rgba(255,215,0,0.3);
 }
 .rank-badge-executive{
     background: var(--rank-executive);
     color: white;
-    box-shadow: 0 0 15px rgba(255,85,85,0.3);
 }
 .rank-badge-head{
     background: var(--rank-head);
     color: #1a1a2e;
-    box-shadow: 0 0 15px rgba(85,255,85,0.3);
 }
 
 .staff-description{
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-soft);
-    line-height: 1.7;
-    margin-bottom: 8px;
+    line-height: 1.6;
 }
 
 /* fade-in */
@@ -526,183 +555,165 @@ nav{
 <script type="module">
     import * as THREE from 'three';
     
-    // Staff Data - Using visual themes instead of external skins
+    // Staff Data with custom colors for each head
     const staffMembers = [
         { 
             name: "Ange1XDem0n", 
             rank: "Founder", 
             description: "Creator & Visionary behind Fallen Halo Network. Leading the server with passion and dedication since day one.",
-            theme: {
-                primary: 0xffd700,
-                secondary: 0xffaa00,
-                accent: 0xff6600,
-                skin: 0xffccaa,
-                outfit: 0x8B0000
-            }
+            headColor: 0xffd700,
+            eyeColor: 0xffaa00,
+            accentColor: 0xff6600
         },
         { 
             name: "its_apex", 
             rank: "Executive", 
             description: "Executive Director managing operations, community growth, and strategic partnerships.",
-            theme: {
-                primary: 0xff4444,
-                secondary: 0xcc3333,
-                accent: 0xff8888,
-                skin: 0xffccaa,
-                outfit: 0x2c3e50
-            }
+            headColor: 0xff4444,
+            eyeColor: 0xff8888,
+            accentColor: 0xcc3333
         },
         { 
             name: "abwyss", 
             rank: "Head Management", 
             description: "Head of Management overseeing staff, player relations, and server quality assurance.",
-            theme: {
-                primary: 0x44ff44,
-                secondary: 0x33cc33,
-                accent: 0x88ff88,
-                skin: 0xffccaa,
-                outfit: 0x1a3a3a
-            }
+            headColor: 0x44ff44,
+            eyeColor: 0x88ff88,
+            accentColor: 0x33cc33
         }
     ];
 
-    // Create a simple, beautiful 3D model with custom colors
-    function createModel(container, theme, rank) {
+    // Create a simple Minecraft-style head
+    function createMinecraftHead(container, staff, rank) {
         container.innerHTML = '';
         
         // Setup Scene
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
+        
+        const size = Math.min(container.clientWidth, container.clientHeight);
+        renderer.setSize(size, size);
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
         
-        // Lighting
+        // Simple lighting
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         scene.add(ambientLight);
         
         const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
-        mainLight.position.set(5, 10, 7);
+        mainLight.position.set(3, 5, 4);
         scene.add(mainLight);
         
         const fillLight = new THREE.PointLight(0x88aaff, 0.5);
-        fillLight.position.set(-2, 2, 4);
+        fillLight.position.set(-2, 2, 3);
         scene.add(fillLight);
         
         const backLight = new THREE.PointLight(0xffaa66, 0.3);
-        backLight.position.set(0, 2, -4);
+        backLight.position.set(0, 1, -3);
         scene.add(backLight);
         
-        // Create Minecraft-style character
-        const character = new THREE.Group();
+        // Create head group
+        const headGroup = new THREE.Group();
         
-        // Materials
-        const skinMat = new THREE.MeshStandardMaterial({ color: theme.skin, roughness: 0.3 });
-        const outfitMat = new THREE.MeshStandardMaterial({ color: theme.outfit, roughness: 0.4 });
-        const armorMat = new THREE.MeshStandardMaterial({ color: theme.primary, metalness: 0.8, roughness: 0.2 });
+        // Head cube (Minecraft style)
+        const headGeo = new THREE.BoxGeometry(0.9, 0.9, 0.9);
+        const headMat = new THREE.MeshStandardMaterial({ color: staff.headColor, roughness: 0.2, metalness: 0.1 });
+        const head = new THREE.Mesh(headGeo, headMat);
+        headGroup.add(head);
         
-        // Body
-        const bodyGeo = new THREE.BoxGeometry(0.7, 1.1, 0.5);
-        const body = new THREE.Mesh(bodyGeo, outfitMat);
-        body.position.y = 0;
-        character.add(body);
+        // Eyes
+        const eyeGeo = new THREE.BoxGeometry(0.2, 0.2, 0.1);
+        const eyeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0.3 });
+        const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+        leftEye.position.set(-0.25, 0.2, 0.46);
+        const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+        rightEye.position.set(0.25, 0.2, 0.46);
+        headGroup.add(leftEye);
+        headGroup.add(rightEye);
         
-        // Chest Armor
-        const chestGeo = new THREE.BoxGeometry(0.72, 0.9, 0.52);
-        const chest = new THREE.Mesh(chestGeo, armorMat);
-        chest.position.y = 0.05;
-        character.add(chest);
+        // Pupils
+        const pupilGeo = new THREE.BoxGeometry(0.1, 0.1, 0.05);
+        const pupilMat = new THREE.MeshStandardMaterial({ color: 0x000000 });
+        const leftPupil = new THREE.Mesh(pupilGeo, pupilMat);
+        leftPupil.position.set(-0.25, 0.18, 0.5);
+        const rightPupil = new THREE.Mesh(pupilGeo, pupilMat);
+        rightPupil.position.set(0.25, 0.18, 0.5);
+        headGroup.add(leftPupil);
+        headGroup.add(rightPupil);
         
-        // Head
-        const headGeo = new THREE.BoxGeometry(0.7, 0.7, 0.7);
-        const head = new THREE.Mesh(headGeo, skinMat);
-        head.position.y = 0.9;
-        character.add(head);
+        // Mouth (simple smile)
+        const mouthGeo = new THREE.BoxGeometry(0.3, 0.08, 0.1);
+        const mouthMat = new THREE.MeshStandardMaterial({ color: 0x8B4513 });
+        const mouth = new THREE.Mesh(mouthGeo, mouthMat);
+        mouth.position.set(0, -0.1, 0.46);
+        headGroup.add(mouth);
         
-        // Rank-specific headwear
+        // Rank-specific accessory
         if (rank === "Founder") {
             // Crown
-            const crownBase = new THREE.CylinderGeometry(0.48, 0.52, 0.15, 8);
+            const crownBase = new THREE.CylinderGeometry(0.55, 0.6, 0.2, 8);
             const crownMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, emissive: 0xffaa00, emissiveIntensity: 0.2 });
             const crown = new THREE.Mesh(crownBase, crownMat);
-            crown.position.y = 1.28;
-            character.add(crown);
+            crown.position.y = 0.55;
+            headGroup.add(crown);
+            
+            // Crown spikes
+            for (let i = 0; i < 5; i++) {
+                const angle = (i / 5) * Math.PI * 2;
+                const spikeGeo = new THREE.ConeGeometry(0.08, 0.22, 6);
+                const spike = new THREE.Mesh(spikeGeo, crownMat);
+                spike.position.set(Math.cos(angle) * 0.56, 0.66, Math.sin(angle) * 0.56);
+                headGroup.add(spike);
+            }
         } else if (rank === "Executive") {
-            // Helmet
-            const helmetGeo = new THREE.BoxGeometry(0.74, 0.25, 0.74);
-            const helmetMat = new THREE.MeshStandardMaterial({ color: 0xcc3333, metalness: 0.7 });
-            const helmet = new THREE.Mesh(helmetGeo, helmetMat);
-            helmet.position.y = 1.2;
-            character.add(helmet);
+            // Helmet visor
+            const visorGeo = new THREE.BoxGeometry(0.65, 0.15, 0.2);
+            const visorMat = new THREE.MeshStandardMaterial({ color: 0xcc3333, metalness: 0.8 });
+            const visor = new THREE.Mesh(visorGeo, visorMat);
+            visor.position.set(0, 0.45, 0.46);
+            headGroup.add(visor);
         } else if (rank === "Head Management") {
-            // Headpiece
-            const headpieceGeo = new THREE.BoxGeometry(0.68, 0.12, 0.68);
-            const headpieceMat = new THREE.MeshStandardMaterial({ color: 0x33aa33, metalness: 0.6 });
-            const headpiece = new THREE.Mesh(headpieceGeo, headpieceMat);
-            headpiece.position.y = 1.25;
-            character.add(headpiece);
+            // Head antenna
+            const antennaGeo = new THREE.CylinderGeometry(0.05, 0.08, 0.3, 6);
+            const antennaMat = new THREE.MeshStandardMaterial({ color: 0x33cc33, metalness: 0.6 });
+            const antenna = new THREE.Mesh(antennaGeo, antennaMat);
+            antenna.position.set(0, 0.55, 0);
+            headGroup.add(antenna);
+            
+            // Antenna ball
+            const ballGeo = new THREE.SphereGeometry(0.08, 8, 8);
+            const ballMat = new THREE.MeshStandardMaterial({ color: 0x55ff55, emissive: 0x55ff55, emissiveIntensity: 0.2 });
+            const ball = new THREE.Mesh(ballGeo, ballMat);
+            ball.position.set(0, 0.72, 0);
+            headGroup.add(ball);
         }
         
-        // Legs
-        const legGeo = new THREE.BoxGeometry(0.25, 0.55, 0.25);
-        const legMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 0.5 });
-        const leftLeg = new THREE.Mesh(legGeo, legMat);
-        leftLeg.position.set(-0.2, -0.55, 0);
-        const rightLeg = new THREE.Mesh(legGeo, legMat);
-        rightLeg.position.set(0.2, -0.55, 0);
-        character.add(leftLeg);
-        character.add(rightLeg);
-        
-        // Boots
-        const bootGeo = new THREE.BoxGeometry(0.3, 0.2, 0.35);
-        const bootMat = new THREE.MeshStandardMaterial({ color: theme.primary, metalness: 0.6 });
-        const leftBoot = new THREE.Mesh(bootGeo, bootMat);
-        leftBoot.position.set(-0.2, -0.82, 0);
-        const rightBoot = new THREE.Mesh(bootGeo, bootMat);
-        rightBoot.position.set(0.2, -0.82, 0);
-        character.add(leftBoot);
-        character.add(rightBoot);
-        
-        // Arms
-        const armGeo = new THREE.BoxGeometry(0.25, 0.7, 0.25);
-        const leftArm = new THREE.Mesh(armGeo, outfitMat);
-        leftArm.position.set(-0.5, 0.25, 0);
-        const rightArm = new THREE.Mesh(armGeo, outfitMat);
-        rightArm.position.set(0.5, 0.25, 0);
-        character.add(leftArm);
-        character.add(rightArm);
-        
-        // Shoulder Pads
-        const padGeo = new THREE.SphereGeometry(0.2, 8, 8);
-        const padMat = new THREE.MeshStandardMaterial({ color: theme.primary, metalness: 0.7 });
-        const leftPad = new THREE.Mesh(padGeo, padMat);
-        leftPad.position.set(-0.6, 0.6, 0);
-        leftPad.scale.set(0.6, 0.35, 0.5);
-        const rightPad = new THREE.Mesh(padGeo, padMat);
-        rightPad.position.set(0.6, 0.6, 0);
-        rightPad.scale.set(0.6, 0.35, 0.5);
-        character.add(leftPad);
-        character.add(rightPad);
-        
-        scene.add(character);
+        scene.add(headGroup);
         
         // Position camera
-        camera.position.set(1.2, 1.1, 2.2);
-        camera.lookAt(0, 0.5, 0);
+        camera.position.set(0, 0.2, 1.8);
+        camera.lookAt(0, 0.2, 0);
         
-        // Static render loop
+        // Simple rotation animation (very subtle)
+        let time = 0;
+        
         function animate() {
             requestAnimationFrame(animate);
+            time += 0.005;
+            // Very subtle gentle bob
+            headGroup.position.y = Math.sin(time) * 0.02;
+            headGroup.rotation.y = Math.sin(time * 0.5) * 0.1;
             renderer.render(scene, camera);
         }
         animate();
         
-        // Handle resize
+        // Handle resize to maintain square aspect ratio
         const resizeObserver = new ResizeObserver(() => {
-            camera.aspect = container.clientWidth / container.clientHeight;
+            const newSize = Math.min(container.clientWidth, container.clientHeight);
+            camera.aspect = 1;
             camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setSize(newSize, newSize);
         });
         resizeObserver.observe(container);
     }
@@ -717,11 +728,25 @@ nav{
         for (const staff of staffMembers) {
             const card = document.createElement('div');
             card.className = 'staff-card fade-in';
+            card.setAttribute('data-rank', staff.rank);
             
-            const modelDiv = document.createElement('div');
-            modelDiv.className = 'model-container';
-            modelDiv.id = `model-${staff.name.replace(/\s/g, '')}`;
+            // Head bubble container
+            const headContainer = document.createElement('div');
+            headContainer.className = 'head-container';
             
+            const bubble = document.createElement('div');
+            bubble.className = 'head-bubble';
+            
+            const canvasContainer = document.createElement('div');
+            canvasContainer.style.width = '140px';
+            canvasContainer.style.height = '140px';
+            canvasContainer.style.borderRadius = '50%';
+            canvasContainer.style.overflow = 'hidden';
+            
+            bubble.appendChild(canvasContainer);
+            headContainer.appendChild(bubble);
+            
+            // Info section
             const infoDiv = document.createElement('div');
             infoDiv.className = 'staff-info';
             
@@ -745,13 +770,13 @@ nav{
                 <div class="staff-description">${staff.description}</div>
             `;
             
-            card.appendChild(modelDiv);
+            card.appendChild(headContainer);
             card.appendChild(infoDiv);
             grid.appendChild(card);
             
-            // Create 3D model
+            // Create 3D head inside canvas container
             setTimeout(() => {
-                createModel(modelDiv, staff.theme, staff.rank);
+                createMinecraftHead(canvasContainer, staff, staff.rank);
             }, 100);
         }
     }
