@@ -545,31 +545,14 @@ nav{
     // You can use any Minecraft username to fetch their 3D skin
     const staffData = {
         owners: [
-            { name: "FallenHero", rank: "owner", description: "Founder & Lead Developer", since: "2021", skinUser: "Notch" },
-            { name: "HaloKnight", rank: "owner", description: "Co-Founder & Community Director", since: "2021", skinUser: "Dream" }
+            { name: "Ange1XDem0n", rank: "founder", description: "Founder & Lead Developer", since: "2026", skinUser: "Ange1XDem0n" }
         ],
         admins: [
-            { name: "ShadowBlade", rank: "admin", description: "Head of Security & Anti-Cheat", since: "2022", skinUser: "Technoblade" },
-            { name: "Phoenix", rank: "admin", description: "Event Coordinator", since: "2022", skinUser: "Ph1LzA" },
-            { name: "Storm", rank: "admin", description: "Plugin Developer", since: "2023", skinUser: "TommyInnit" }
+            { name: "its_apex", rank: "executive", description: "Head of Security & Anti-Cheat", since: "2026", skinUser: "atrillun" }
         ],
         mods: [
-            { name: "Luna", rank: "mod", description: "Senior Moderator", since: "2023", skinUser: "xNestorio" },
-            { name: "Frost", rank: "mod", description: "Chat & Support Lead", since: "2023", skinUser: "Fruitberries" },
-            { name: "Ember", rank: "mod", description: "Discord Manager", since: "2024", skinUser: "Purpled" },
-            { name: "Thunder", rank: "mod", description: "Gameplay Moderator", since: "2024", skinUser: "ClownPierce" }
+            { name: "abwyss", rank: "management", description: "Senior Management", since: "2026", skinUser: "ibeella" }
         ],
-        helpers: [
-            { name: "Aura", rank: "helper", description: "Community Support", since: "2024", skinUser: "Grian" },
-            { name: "Mist", rank: "helper", description: "New Player Guide", since: "2024", skinUser: "MumboJumbo" },
-            { name: "Breeze", rank: "helper", description: "Ticket Handler", since: "2025", skinUser: "SmallishBeans" }
-        ],
-        builders: [
-            { name: "CraftMaster", rank: "builder", description: "Head Builder", since: "2022", skinUser: "BdoubleO100" },
-            { name: "PixelArtisan", rank: "builder", description: "Terraformer", since: "2023", skinUser: "GoodTimesWithScar" },
-            { name: "BlockWizard", rank: "builder", description: "Interior Designer", since: "2024", skinUser: "Keralis" },
-            { name: "VoxelKing", rank: "builder", description: "Redstone Engineer", since: "2024", skinUser: "EthosLab" }
-        ]
     };
 
     // Function to load Minecraft skin and create 3D model
@@ -714,9 +697,9 @@ nav{
                 const infoDiv = document.createElement('div');
                 infoDiv.className = 'staff-info';
                 
-                const rankDisplay = staff.rank === 'owner' ? '👑 OWNER' : 
-                                   staff.rank === 'admin' ? '⚡ ADMIN' :
-                                   staff.rank === 'mod' ? '🛡️ MODERATOR' :
+                const rankDisplay = staff.rank === 'owner' ? '👑 Founder' : 
+                                   staff.rank === 'admin' ? '⚡ Executive' :
+                                   staff.rank === 'mod' ? '🛡️ Management' :
                                    staff.rank === 'helper' ? '💬 HELPER' : '🏗️ BUILDER';
                 
                 infoDiv.innerHTML = `
