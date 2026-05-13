@@ -53,17 +53,18 @@ body{
     font-family:'Poppins',sans-serif;
     color:var(--text);
     overflow-x:hidden;
-    transition: color 0.35s ease, background 0.35s ease;
+    /* SMOOTH TRANSITION FOR ALL COLOR CHANGES */
+    transition: color 0.4s cubic-bezier(0.2, 0.95, 0.3, 1.05);
 }
 
-/* ANIMATED GRADIENT BACKGROUND */
+/* SMOOTH BACKGROUND GRADIENT TRANSITION */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background: radial-gradient(ellipse at 30% 40%, var(--bg-mid) 0%, var(--bg-start) 50%, var(--bg-end) 100%);
     z-index: -6;
-    transition: background 0.7s cubic-bezier(0.2, 0.95, 0.3, 1.05);
+    transition: background 0.5s cubic-bezier(0.2, 0.95, 0.3, 1.05);
     will-change: background;
 }
 
@@ -71,7 +72,7 @@ body.light-mode::before {
     background: radial-gradient(ellipse at 70% 30%, var(--bg-mid) 0%, var(--bg-start) 60%, var(--bg-end) 100%);
 }
 
-/* floating orbs */
+/* SMOOTH FLOATING ORBS TRANSITION */
 .glow-bg{
     position:fixed;
     inset:0;
@@ -83,7 +84,7 @@ body.light-mode::before {
     border-radius:50%;
     filter:blur(140px);
     opacity:0.55;
-    transition: background 0.6s ease, transform 0.4s ease;
+    transition: background 0.5s cubic-bezier(0.2, 0.95, 0.3, 1.05), transform 0.4s ease;
     animation: floatOrb 18s infinite alternate ease-in-out;
 }
 .glow-sphere.one{
@@ -138,7 +139,7 @@ nav{
     backdrop-filter: blur(20px);
     background: var(--navbar-bg);
     border-bottom: 1px solid var(--card-border);
-    transition: background 0.3s, border-color 0.3s;
+    transition: background 0.4s cubic-bezier(0.2, 0.95, 0.3, 1.05), border-color 0.4s cubic-bezier(0.2, 0.95, 0.3, 1.05);
 }
 
 .nav-container{
@@ -166,7 +167,7 @@ nav{
     height: 48px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px var(--shadow));
-    transition: filter 0.3s;
+    transition: filter 0.3s ease;
 }
 
 .logo .logo-text{
@@ -175,6 +176,7 @@ nav{
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
+    transition: background 0.4s ease;
 }
 
 .nav-right{
@@ -195,7 +197,7 @@ nav{
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
-    transition: 0.2s;
+    transition: color 0.3s ease, opacity 0.2s;
     position: relative;
     opacity: 0.9;
 }
@@ -208,7 +210,7 @@ nav{
     width: 0%;
     height: 2px;
     background: linear-gradient(90deg, var(--gradient1-start), var(--gradient2-start));
-    transition: 0.3s;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover::after{
@@ -229,7 +231,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.2, 0.95, 0.3, 1.05);
     backdrop-filter: blur(8px);
     padding: 0;
 }
@@ -240,12 +242,16 @@ nav{
     stroke: var(--text);
     stroke-width: 1.8;
     fill: none;
-    transition: stroke 0.2s;
+    transition: stroke 0.3s ease, transform 0.2s ease;
 }
 
 .theme-toggle:hover{
     transform: translateY(-2px);
     box-shadow: 0 6px 18px var(--shadow);
+}
+
+.theme-toggle:hover svg{
+    transform: rotate(15deg);
 }
 
 /* responsive */
@@ -284,7 +290,7 @@ nav{
     margin-bottom: 28px;
     animation: logoFloat 4.5s ease-in-out infinite;
     filter: drop-shadow(0 0 28px var(--shadow));
-    transition: filter 0.3s;
+    transition: filter 0.3s ease;
 }
 @keyframes logoFloat{
     0%,100%{ transform:translateY(0px);}
@@ -305,6 +311,7 @@ nav{
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: smoothGradientFlow 8s ease infinite;
+    transition: background 0.4s ease;
 }
 
 @keyframes smoothGradientFlow {
@@ -320,6 +327,7 @@ nav{
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    transition: color 0.3s ease;
 }
 .btn{
     padding: 16px 38px;
@@ -330,7 +338,7 @@ nav{
     background: var(--card);
     border: 1px solid var(--card-border);
     color: var(--text);
-    transition: 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.2, 0.95, 0.3, 1.05);
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -342,6 +350,7 @@ nav{
     stroke: currentColor;
     stroke-width: 1.8;
     fill: none;
+    transition: stroke 0.2s ease;
 }
 .btn-primary{
     background: linear-gradient(110deg, rgba(166,184,228,0.18), rgba(226,230,238,0.08));
@@ -378,9 +387,11 @@ section{
     -webkit-text-fill-color: transparent;
     animation: smoothGradientFlow 8s ease infinite;
     margin-bottom: 14px;
+    transition: background 0.4s ease;
 }
 .section-title p{
     color: var(--text-soft);
+    transition: color 0.3s ease;
 }
 
 .features-grid{
@@ -394,7 +405,7 @@ section{
     padding: 38px 30px;
     border-radius: 36px;
     backdrop-filter: blur(12px);
-    transition: 0.35s;
+    transition: all 0.35s cubic-bezier(0.2, 0.95, 0.3, 1.05);
     cursor: pointer;
 }
 .feature-card:hover{
@@ -410,6 +421,7 @@ section{
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
+    transition: background 0.3s ease;
 }
 .feature-icon svg{
     width: 34px;
@@ -447,7 +459,7 @@ section{
     height: 270px;
     position: relative;
     border: 1px solid var(--card-border);
-    transition: 0.3s;
+    transition: all 0.35s cubic-bezier(0.2, 0.95, 0.3, 1.05);
     cursor: pointer;
 }
 .gallery-item:hover{
@@ -457,7 +469,7 @@ section{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: 0.5s;
+    transition: transform 0.5s ease, filter 0.3s ease;
 }
 .gallery-item:hover img{
     transform: scale(1.07);
@@ -486,6 +498,7 @@ section{
     border-radius: 30px;
     overflow: hidden;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.95, 0.3, 1.05);
 }
 .faq-question{
     padding: 24px 30px;
@@ -493,20 +506,21 @@ section{
     justify-content: space-between;
     font-weight: 600;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 .faq-question svg{
     width: 20px;
     height: 20px;
     stroke: var(--text);
     stroke-width: 2;
-    transition: transform 0.35s ease;
+    transition: transform 0.35s ease, stroke 0.2s ease;
 }
 .faq-answer{
     max-height: 0;
     padding: 0 30px;
     opacity: 0;
     overflow: hidden;
-    transition: 0.4s;
+    transition: max-height 0.4s ease, opacity 0.35s ease, padding 0.35s ease;
     color: var(--text-soft);
 }
 .faq-item.active .faq-answer{
@@ -518,7 +532,7 @@ section{
     transform: rotate(45deg);
 }
 
-/* fade-in animation for scroll - FIXED */
+/* fade-in animation for scroll */
 .fade-on-scroll {
     opacity: 0;
     transform: translateY(40px);
@@ -537,7 +551,7 @@ section{
     backdrop-filter: blur(20px);
     border-top: 1px solid var(--card-border);
     padding: 3rem 2rem 1.5rem;
-    transition: 0.3s;
+    transition: all 0.4s cubic-bezier(0.2, 0.95, 0.3, 1.05);
 }
 .footer-inner{
     max-width: 1280px;
@@ -554,11 +568,13 @@ section{
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    transition: background 0.4s ease;
 }
 .footer-brand p{
     max-width: 340px;
     color: var(--text-soft);
     line-height: 1.5;
+    transition: color 0.3s ease;
 }
 .footer-links-grid{
     display: flex;
@@ -569,13 +585,14 @@ section{
     margin-bottom: 18px;
     font-size: 1.1rem;
     font-weight: 600;
+    transition: color 0.2s ease;
 }
 .footer-col a{
     display: block;
     color: var(--text-soft);
     text-decoration: none;
     margin: 12px 0;
-    transition: 0.2s;
+    transition: all 0.2s ease;
     font-size: 0.9rem;
     cursor: pointer;
 }
@@ -597,7 +614,7 @@ section{
     align-items: center;
     justify-content: center;
     border: 1px solid var(--card-border);
-    transition: 0.2s;
+    transition: all 0.25s cubic-bezier(0.2, 0.95, 0.3, 1.05);
     cursor: pointer;
 }
 .social-icon-set a svg{
@@ -606,11 +623,14 @@ section{
     stroke: var(--text);
     stroke-width: 1.7;
     fill: none;
-    transition: stroke 0.2s;
+    transition: stroke 0.2s ease, transform 0.2s ease;
 }
 .social-icon-set a:hover{
     transform: translateY(-4px);
     background: var(--btn-hover);
+}
+.social-icon-set a:hover svg{
+    transform: scale(1.1);
 }
 .footer-bottom{
     text-align: center;
@@ -619,6 +639,7 @@ section{
     border-top: 1px solid var(--card-border);
     font-size: 0.8rem;
     color: var(--text-soft);
+    transition: all 0.3s ease;
 }
 
 /* click glow */
@@ -637,4 +658,4 @@ section{
 @keyframes glowPop{
     0%{ width: 0px; height: 0px; opacity: 0.7; }
     100%{ width: 500px; height: 500px; opacity: 0; }
-}
+    }
