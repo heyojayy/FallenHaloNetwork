@@ -743,11 +743,35 @@ footer{
 /* FADE */
 /* ===================================== */
 
+
+<style>
+
+/* fade animation */
+
 .fade-in{
-    opacity:1;
-    transform:translateY(0px);
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+    transition:
+    opacity .9s ease,
+    transform .9s ease;
+
+    will-change:opacity, transform;
+
 }
 
+.fade-in.visible{
+
+    opacity:1;
+
+    transform:translateY(0px);
+
+}
+
+</style>
+    
 /* ===================================== */
 /* CLICK GLOW */
 /* ===================================== */
