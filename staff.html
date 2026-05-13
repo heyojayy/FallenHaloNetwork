@@ -12,29 +12,11 @@
 <link rel="shortcut icon" href="logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 
 <style>
-
-/* ===================================== */
-/* ROOT COLORS + ANIMATED GRADIENT */
-/* ===================================== */
-
+/* Staff page specific styles */
 :root{
-    --bg-start: #0a0c12;
-    --bg-mid: #111827;
-    --bg-end: #0f172a;
-    --text: #ffffff;
-    --text-soft: #cbd5e1;
-    --card: rgba(255,255,255,.04);
-    --card-border: rgba(255,255,255,.07);
-    --navbar-bg: rgba(5,7,12,.65);
-    --gradient1-start: #e2e6ee;
-    --gradient1-end: #c5d3f0;
-    --gradient2-start: #a6b8e4;
-    --gradient2-end: #7a9ad6;
-    --shadow: rgba(166,184,228,.15);
-    --btn-hover: rgba(166,184,228,.12);
-    --accent-glow: #a6b8e4;
     --rank-founder-start: #f7971e;
     --rank-founder-end: #ffd200;
     --rank-executive-start: #e65c00;
@@ -43,23 +25,8 @@
     --rank-head-end: #0083b0;
 }
 
-/* LIGHT MODE */
+/* LIGHT MODE staff colors */
 body.light-mode{
-    --bg-start: #f0f4fa;
-    --bg-mid: #e8edf6;
-    --bg-end: #dfe6f2;
-    --text: #0f172a;
-    --text-soft: #334155;
-    --card: rgba(255,255,255,.8);
-    --card-border: rgba(0,0,0,.06);
-    --navbar-bg: rgba(255,255,255,.75);
-    --gradient1-start: #8ca3dd;
-    --gradient1-end: #6b8bc9;
-    --gradient2-start: #5d79be;
-    --gradient2-end: #4a61a3;
-    --shadow: rgba(93,121,190,.2);
-    --btn-hover: rgba(93,121,190,.12);
-    --accent-glow: #5d79be;
     --rank-founder-start: #e6a017;
     --rank-founder-end: #c9a03d;
     --rank-executive-start: #c9510c;
@@ -67,233 +34,6 @@ body.light-mode{
     --rank-head-start: #0d8ba8;
     --rank-head-end: #0c6b85;
 }
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Poppins',sans-serif;
-    color:var(--text);
-    overflow-x:hidden;
-    transition: color 0.35s ease, background 0.35s ease;
-}
-
-/* ANIMATED GRADIENT BACKGROUND */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 40%, var(--bg-mid) 0%, var(--bg-start) 50%, var(--bg-end) 100%);
-    z-index: -6;
-    transition: background 0.7s cubic-bezier(0.2, 0.95, 0.3, 1.05);
-    will-change: background;
-}
-
-body.light-mode::before {
-    background: radial-gradient(ellipse at 70% 30%, var(--bg-mid) 0%, var(--bg-start) 60%, var(--bg-end) 100%);
-}
-
-/* floating orbs */
-.glow-bg{
-    position:fixed;
-    inset:0;
-    z-index:-5;
-    pointer-events:none;
-}
-.glow-sphere{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(140px);
-    opacity:0.55;
-    transition: background 0.6s ease, transform 0.4s ease;
-    animation: floatOrb 18s infinite alternate ease-in-out;
-}
-.glow-sphere.one{
-    width:550px;
-    height:550px;
-    background: var(--gradient1-start);
-    top:-180px;
-    left:-120px;
-}
-.glow-sphere.two{
-    width:500px;
-    height:500px;
-    background: var(--gradient2-start);
-    bottom:-120px;
-    right:-80px;
-    animation-delay: -5s;
-}
-.glow-sphere.three{
-    width:400px;
-    height:400px;
-    background: var(--gradient2-end);
-    bottom:15%;
-    left:15%;
-    opacity:0.35;
-    animation-delay: -10s;
-}
-body.light-mode .glow-sphere.one{
-    background: #b7c9f0;
-}
-body.light-mode .glow-sphere.two{
-    background: #6d8ed1;
-}
-body.light-mode .glow-sphere.three{
-    background: #8aa9df;
-}
-
-@keyframes floatOrb {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, -30px) scale(1.08); }
-}
-
-/* ===================================== */
-/* HORIZONTAL NAVBAR - EDGE ALIGNMENT */
-/* ===================================== */
-
-nav{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    backdrop-filter: blur(20px);
-    background: var(--navbar-bg);
-    border-bottom: 1px solid var(--card-border);
-    transition: background 0.3s, border-color 0.3s;
-}
-
-.nav-container{
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: -0.2px;
-    flex-shrink: 0;
-}
-
-.logo img{
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 8px var(--shadow));
-    transition: filter 0.3s;
-}
-
-.logo .logo-text{
-    background: linear-gradient(135deg, var(--gradient1-start), var(--gradient2-end));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-}
-
-.nav-right{
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-shrink: 0;
-}
-
-.nav-links{
-    display: flex;
-    align-items: center;
-    gap: 32px;
-}
-
-.nav-links a{
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: 0.2s;
-    position: relative;
-    opacity: 0.9;
-}
-
-.nav-links a::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--gradient1-start), var(--gradient2-start));
-    transition: 0.3s;
-}
-
-.nav-links a:hover::after{
-    width: 100%;
-}
-
-.nav-links a:hover{
-    opacity: 1;
-}
-
-.theme-toggle{
-    width: 46px;
-    height: 46px;
-    border-radius: 30px;
-    border: 1px solid var(--card-border);
-    background: var(--card);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.25s ease;
-    backdrop-filter: blur(8px);
-    padding: 0;
-}
-
-.theme-toggle svg{
-    width: 22px;
-    height: 22px;
-    stroke: var(--text);
-    stroke-width: 1.8;
-    fill: none;
-    transition: stroke 0.2s;
-}
-
-.theme-toggle:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px var(--shadow);
-}
-
-/* responsive */
-@media (max-width: 680px) {
-    .nav-container { padding: 12px 20px; flex-wrap: wrap; }
-    .nav-links { gap: 18px; }
-    .nav-right { gap: 16px; }
-    .logo .logo-text { font-size: 0.9rem; }
-    .logo img { width: 38px; height: 38px; }
-}
-@media (max-width: 550px) {
-    .nav-links { gap: 12px; }
-    .nav-links a { font-size: 0.8rem; }
-    .theme-toggle { width: 40px; height: 40px; }
-}
-
-/* ===================================== */
-/* STAFF PAGE SPECIFIC */
-/* ===================================== */
 
 .hero{
     min-height: 40vh;
@@ -459,127 +199,12 @@ nav{
     line-height: 1.6;
 }
 
-/* fade-in/out animation for scroll - FIXED */
-.fade-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1);
-}
-
-.fade-scroll.fade-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ========== MODERN COOL FOOTER ========== */
+/* Footer override for staff page */
 .cool-footer{
     margin-top: 0;
-    background: rgba(0,0,0,0.2);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid var(--card-border);
-    padding: 3rem 2rem 1.5rem;
-    transition: 0.3s;
-}
-.footer-inner{
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 50px;
-}
-.footer-brand h3{
-    font-size: 1.7rem;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, var(--gradient1-start), var(--gradient2-start));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.footer-brand p{
-    max-width: 340px;
-    color: var(--text-soft);
-    line-height: 1.5;
-}
-.footer-links-grid{
-    display: flex;
-    gap: 56px;
-    flex-wrap: wrap;
-}
-.footer-col h4{
-    margin-bottom: 18px;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-.footer-col a{
-    display: block;
-    color: var(--text-soft);
-    text-decoration: none;
-    margin: 12px 0;
-    transition: 0.2s;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-.footer-col a:hover{
-    color: var(--gradient2-start);
-    transform: translateX(5px);
-}
-.social-icon-set{
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-}
-.social-icon-set a{
-    background: var(--card);
-    width: 44px;
-    height: 44px;
-    border-radius: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--card-border);
-    transition: 0.2s;
-    cursor: pointer;
-}
-.social-icon-set a svg{
-    width: 22px;
-    height: 22px;
-    stroke: var(--text);
-    stroke-width: 1.7;
-    fill: none;
-    transition: stroke 0.2s;
-}
-.social-icon-set a:hover{
-    transform: translateY(-4px);
-    background: var(--btn-hover);
-}
-.footer-bottom{
-    text-align: center;
-    margin-top: 3rem;
-    padding-top: 1.8rem;
-    border-top: 1px solid var(--card-border);
-    font-size: 0.8rem;
-    color: var(--text-soft);
-}
-
-/* click glow */
-.click-glow{
-    position: fixed;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    pointer-events: none;
-    background: radial-gradient(circle, var(--accent-glow), transparent 75%);
-    transform: translate(-50%, -50%);
-    animation: glowPop 0.85s ease-out forwards;
-    z-index: 10000;
-    opacity: 0.6;
-}
-@keyframes glowPop{
-    0%{ width: 0px; height: 0px; opacity: 0.7; }
-    100%{ width: 500px; height: 500px; opacity: 0; }
 }
 </style>
+
 </head>
 <body>
 
@@ -619,7 +244,7 @@ nav{
         </div>
     </section>
 
-    <section class="staff-section fade-scroll">
+    <section class="staff-section">
         <div class="container">
             <div class="staff-grid" id="staff-grid"></div>
         </div>
@@ -627,7 +252,7 @@ nav{
 </main>
 
 <!-- FOOTER -->
-<footer class="cool-footer fade-scroll">
+<footer class="cool-footer fade-on-scroll">
     <div class="footer-inner">
         <div class="footer-brand">
             <h3>FALLEN HALO NETWORK</h3>
@@ -681,6 +306,20 @@ nav{
         }
     ];
 
+    // Apply theme from localStorage FIRST
+    const savedTheme = localStorage.getItem('theme');
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const sunSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
+    const moonSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        if (themeBtn) themeBtn.innerHTML = moonSvg;
+    } else {
+        document.body.classList.remove('light-mode');
+        if (themeBtn) themeBtn.innerHTML = sunSvg;
+    }
+
     // Render staff cards with 2D Minecraft heads
     function renderStaffCards() {
         const grid = document.getElementById('staff-grid');
@@ -690,7 +329,7 @@ nav{
         
         for (const staff of staffMembers) {
             const card = document.createElement('div');
-            card.className = 'staff-card';
+            card.className = 'staff-card fade-on-scroll';
             card.setAttribute('data-rank', staff.rank);
             
             const headContainer = document.createElement('div');
@@ -741,8 +380,68 @@ nav{
             card.appendChild(infoDiv);
             grid.appendChild(card);
         }
+        
+        // Apply fade-on-scroll to new staff cards
+        const newFadeElements = document.querySelectorAll('.fade-on-scroll');
+        newFadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top < windowHeight - 50 && rect.bottom > 50) {
+                el.classList.add('fade-in-view');
+            }
+        });
     }
     
     renderStaffCards();
 
-    // Click glow effec
+    // Click glow effect
+    function createGlow(e) { 
+        let g = document.createElement('div'); 
+        g.className = 'click-glow'; 
+        g.style.left = e.clientX + 'px'; 
+        g.style.top = e.clientY + 'px'; 
+        document.body.appendChild(g); 
+        setTimeout(() => g.remove(), 850); 
+    }
+    
+    document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a, .staff-card').forEach(el => {
+        if (el) el.addEventListener('click', createGlow);
+    });
+
+    // Fade on scroll - WORKS WITH DYNAMIC CONTENT
+    function checkFadeIn() {
+        const fadeElements = document.querySelectorAll('.fade-on-scroll');
+        fadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top < windowHeight - 50 && rect.bottom > 50) {
+                el.classList.add('fade-in-view');
+            } else {
+                el.classList.remove('fade-in-view');
+            }
+        });
+    }
+    
+    // Initial check and listen to scroll
+    setTimeout(checkFadeIn, 100);
+    window.addEventListener('scroll', checkFadeIn);
+    window.addEventListener('resize', checkFadeIn);
+
+    // Theme toggle
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('light-mode')) {
+                document.body.classList.remove('light-mode');
+                themeBtn.innerHTML = sunSvg;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.add('light-mode');
+                themeBtn.innerHTML = moonSvg;
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
