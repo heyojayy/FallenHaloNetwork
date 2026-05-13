@@ -7,6 +7,10 @@
 
 <title>Fallen Halo Network | Staff Team</title>
 
+<!-- favicon / tab icon -->
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="shortcut icon" href="logo.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -68,7 +72,6 @@ body.light-mode{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    cursor: none;
 }
 
 html{
@@ -79,66 +82,7 @@ body{
     font-family:'Poppins',sans-serif;
     color:var(--text);
     overflow-x:hidden;
-    transition: color 0.35s ease;
-}
-
-/* Disable custom cursor on mobile/touch devices */
-@media (max-width: 768px) {
-    * {
-        cursor: auto !important;
-    }
-    .custom-cursor {
-        display: none !important;
-    }
-}
-
-/* Custom Cursor Styles */
-.custom-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease-out;
-}
-
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--gradient2-start);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: width 0.2s, height 0.2s, background 0.2s;
-}
-
-.cursor-ring {
-    width: 32px;
-    height: 32px;
-    border: 2px solid var(--gradient2-start);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: width 0.3s, height 0.3s, border-color 0.2s, border-width 0.2s;
-}
-
-/* Hover effect for clickable elements */
-a:hover ~ .custom-cursor .cursor-ring,
-button:hover ~ .custom-cursor .cursor-ring,
-.staff-card:hover ~ .custom-cursor .cursor-ring {
-    width: 48px;
-    height: 48px;
-    border-color: var(--gradient1-start);
-    border-width: 3px;
-}
-
-a:hover ~ .custom-cursor .cursor-dot,
-button:hover ~ .custom-cursor .cursor-dot,
-.staff-card:hover ~ .custom-cursor .cursor-dot {
-    width: 12px;
-    height: 12px;
-    background: var(--gradient1-start);
+    transition: color 0.35s ease, background 0.35s ease;
 }
 
 /* ANIMATED GRADIENT BACKGROUND */
@@ -515,16 +459,19 @@ nav{
     line-height: 1.6;
 }
 
-.fade-in{
+/* fade-in/out animation for scroll - FIXED */
+.fade-scroll {
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s ease;
-}
-.fade-in.visible{
-    opacity: 1;
-    transform: translateY(0px);
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1);
 }
 
+.fade-scroll.fade-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========== MODERN COOL FOOTER ========== */
 .cool-footer{
     margin-top: 0;
     background: rgba(0,0,0,0.2);
@@ -614,6 +561,24 @@ nav{
     font-size: 0.8rem;
     color: var(--text-soft);
 }
+
+/* click glow */
+.click-glow{
+    position: fixed;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, var(--accent-glow), transparent 75%);
+    transform: translate(-50%, -50%);
+    animation: glowPop 0.85s ease-out forwards;
+    z-index: 10000;
+    opacity: 0.6;
+}
+@keyframes glowPop{
+    0%{ width: 0px; height: 0px; opacity: 0.7; }
+    100%{ width: 500px; height: 500px; opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -624,11 +589,7 @@ nav{
     <div class="glow-sphere three"></div>
 </div>
 
-<div class="custom-cursor">
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-</div>
-
+<!-- NAVBAR -->
 <nav>
     <div class="nav-container">
         <div class="logo">
@@ -651,21 +612,22 @@ nav{
 </nav>
 
 <main>
-    <section class="hero fade-in visible">
+    <section class="hero">
         <div class="hero-content">
             <h1>Leadership Team</h1>
             <p>The dedicated individuals guiding Fallen Halo Network to greatness.</p>
         </div>
     </section>
 
-    <section class="staff-section fade-in">
+    <section class="staff-section fade-scroll">
         <div class="container">
             <div class="staff-grid" id="staff-grid"></div>
         </div>
     </section>
 </main>
 
-<footer class="cool-footer fade-in">
+<!-- FOOTER -->
+<footer class="cool-footer fade-scroll">
     <div class="footer-inner">
         <div class="footer-brand">
             <h3>FALLEN HALO NETWORK</h3>
@@ -694,6 +656,7 @@ nav{
 </footer>
 
 <script>
+    // Staff Data with Minecraft usernames for 2D heads
     const staffMembers = [
         { 
             name: "Ange1XDem0n", 
@@ -718,6 +681,7 @@ nav{
         }
     ];
 
+    // Render staff cards with 2D Minecraft heads
     function renderStaffCards() {
         const grid = document.getElementById('staff-grid');
         if (!grid) return;
@@ -726,7 +690,7 @@ nav{
         
         for (const staff of staffMembers) {
             const card = document.createElement('div');
-            card.className = 'staff-card fade-in';
+            card.className = 'staff-card';
             card.setAttribute('data-rank', staff.rank);
             
             const headContainer = document.createElement('div');
@@ -761,4 +725,24 @@ nav{
                 rankDisplay = `EXECUTIVE`;
             } else {
                 rankClass = 'rank-badge-head';
-  
+                rankDisplay = `HEAD MANAGEMENT`;
+            }
+            
+            infoDiv.innerHTML = `
+                <div class="staff-name">${staff.name}</div>
+                <div class="staff-rank ${rankClass}">
+                    ${staff.icon}
+                    ${rankDisplay}
+                </div>
+                <div class="staff-description">${staff.description}</div>
+            `;
+            
+            card.appendChild(headContainer);
+            card.appendChild(infoDiv);
+            grid.appendChild(card);
+        }
+    }
+    
+    renderStaffCards();
+
+    // Click glow effec
