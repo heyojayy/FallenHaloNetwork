@@ -5,61 +5,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fallen Halo Network</title>
+<title>Fallen Halo Network | Sidebar Nav & Gradient Transition</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 /* ===================================== */
-/* ROOT COLORS */
+/* ROOT COLORS + GRADIENT TRANSITION */
 /* ===================================== */
 
 :root{
-
-    --bg:#0d1016;
-    --bg2:#151b28;
-
-    --text:#ffffff;
-    --text-soft:#bcc6d8;
-
-    --card:rgba(255,255,255,.05);
-    --card-border:rgba(255,255,255,.08);
-
-    --navbar:rgba(10,10,15,.35);
-
-    --gradient1:#e2e6ee;
-    --gradient2:#a6b8e4;
-
-    --shadow:rgba(166,184,228,.18);
-
+    /* Dark mode base (fallback) */
+    --bg-start: #0d1016;
+    --bg-end: #151b28;
+    --text: #ffffff;
+    --text-soft: #bcc6d8;
+    --card: rgba(255,255,255,.05);
+    --card-border: rgba(255,255,255,.08);
+    --navbar-bg: rgba(10,10,15,.55);
+    --gradient1: #e2e6ee;
+    --gradient2: #a6b8e4;
+    --shadow: rgba(166,184,228,.18);
+    --btn-hover: rgba(166,184,228,.25);
 }
 
-/* LIGHT MODE */
-
+/* LIGHT MODE - fresh color palette */
 body.light-mode{
-
-    --bg:#eef2f9;
-    --bg2:#dce5f7;
-
-    --text:#111827;
-    --text-soft:#4b5563;
-
-    --card:rgba(255,255,255,.75);
-    --card-border:rgba(0,0,0,.06);
-
-    --navbar:rgba(255,255,255,.55);
-
-    --gradient1:#8ca3dd;
-    --gradient2:#5d79be;
-
-    --shadow:rgba(93,121,190,.15);
-
+    --bg-start: #eef2f9;
+    --bg-end: #dce5f7;
+    --text: #111827;
+    --text-soft: #2c3e66;
+    --card: rgba(255,255,255,.75);
+    --card-border: rgba(0,0,0,.08);
+    --navbar-bg: rgba(255,255,255,.65);
+    --gradient1: #8ca3dd;
+    --gradient2: #5d79be;
+    --shadow: rgba(93,121,190,.2);
+    --btn-hover: rgba(93,121,190,.2);
 }
-
-/* ===================================== */
-/* GLOBAL */
-/* ===================================== */
 
 *{
     margin:0;
@@ -73,1210 +57,762 @@ html{
 
 body{
     font-family:'Poppins',sans-serif;
-    background:var(--bg);
+    background: var(--bg-start);
     color:var(--text);
     overflow-x:hidden;
-
-    transition:
-    background .35s ease,
-    color .35s ease;
+    transition: background 0.6s cubic-bezier(0.23, 1, 0.32, 1), color 0.4s ease;
 }
 
-/* remove mobile blue highlight */
-
-button,
-a,
-div{
-    -webkit-tap-highlight-color:transparent;
+/* GRADIENT BACKGROUND WITH SMOOTH MORPHING */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, var(--bg-end) 0%, var(--bg-start) 100%);
+    z-index: -6;
+    transition: background 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    will-change: background;
 }
 
-/* ===================================== */
-/* BACKGROUND */
-/* ===================================== */
+body.light-mode::before {
+    background: radial-gradient(circle at 70% 80%, var(--bg-end) 5%, var(--bg-start) 95%);
+}
 
-.background{
+/* extra floating glow for depth */
+.glow-bg{
     position:fixed;
     inset:0;
-
     z-index:-5;
-    overflow:hidden;
-
-    background:
-    radial-gradient(
-        circle at top,
-        var(--bg2) 0%,
-        var(--bg) 60%
-    );
+    pointer-events:none;
 }
-
-.glow{
+.glow-sphere{
     position:absolute;
     border-radius:50%;
-    filter:blur(120px);
-    opacity:.45;
-
-    animation:float 12s ease-in-out infinite;
+    filter:blur(130px);
+    opacity:0.5;
+    transition: background 0.6s, transform 0.3s;
 }
-
-.glow.one{
-    width:420px;
-    height:420px;
+.glow-sphere.one{
+    width:500px;
+    height:500px;
     background:var(--gradient1);
-
-    top:-120px;
-    left:-120px;
+    top:-150px;
+    left:-100px;
 }
-
-.glow.two{
-    width:360px;
-    height:360px;
+.glow-sphere.two{
+    width:450px;
+    height:450px;
     background:var(--gradient2);
-
-    right:-120px;
-    top:20%;
-
-    animation-delay:2s;
+    bottom:-80px;
+    right:-50px;
 }
-
-.glow.three{
-    width:300px;
-    height:300px;
-
+.glow-sphere.three{
+    width:380px;
+    height:380px;
     background:#bcc9eb;
-
-    bottom:-100px;
-    left:35%;
-
-    animation-delay:4s;
+    bottom:20%;
+    left:20%;
+    opacity:0.35;
+}
+body.light-mode .glow-sphere.one{
+    background:#a0b5e0;
+}
+body.light-mode .glow-sphere.two{
+    background:#5d79be;
+}
+body.light-mode .glow-sphere.three{
+    background:#9bb1dc;
 }
 
-@keyframes float{
+/* ========= SIDEBAR NAVIGATION (vertical left) ========= */
+.side-nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid var(--card-border);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.5rem 2rem 1.8rem;
+    transition: background 0.4s, border-color 0.3s;
+    box-shadow: 4px 0 25px rgba(0,0,0,0.08);
+}
 
-    0%{
-        transform:translateY(0px) translateX(0px);
+.nav-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.logo-side {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.3px;
+}
+.logo-side img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px var(--shadow));
+}
+.logo-side span {
+    background: linear-gradient(135deg, var(--gradient1), var(--gradient2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links-side {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.nav-links-side a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.85;
+    transition: 0.25s;
+    letter-spacing: 0.3px;
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+}
+.nav-links-side a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0%;
+    height: 2.5px;
+    background: linear-gradient(90deg, var(--gradient1), var(--gradient2));
+    transition: 0.3s ease;
+}
+.nav-links-side a:hover::after {
+    width: 100%;
+}
+.nav-links-side a:hover {
+    opacity: 1;
+    transform: translateX(6px);
+}
+
+.theme-toggle-side {
+    margin-top: 2rem;
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+    color: var(--text);
+}
+.theme-toggle-side:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px var(--shadow);
+}
+.social-mini {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+.social-mini a {
+    background: var(--card);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--card-border);
+    transition: 0.2s;
+}
+.social-mini a:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+}
+
+/* main content shift */
+.main-content {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    position: relative;
+    z-index: 2;
+}
+
+/* responsive: on smaller screens sidebar collapses to top nav? but keep side style */
+@media (max-width: 780px) {
+    .side-nav {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: auto;
+        top: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1rem 1.5rem;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1100;
+        backdrop-filter: blur(20px);
     }
-
-    50%{
-        transform:translateY(-40px) translateX(25px);
+    .nav-header {
+        flex-direction: row;
+        align-items: center;
     }
-
-    100%{
-        transform:translateY(0px) translateX(0px);
+    .nav-links-side {
+        flex-direction: row;
+        margin-top: 0;
+        gap: 1.5rem;
     }
-
-}
-
-/* ===================================== */
-/* PARTICLES */
-/* ===================================== */
-
-.particles{
-    position:absolute;
-    inset:0;
-}
-
-.particles span{
-    position:absolute;
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.6);
-
-    animation:particle linear infinite;
-}
-
-body.light-mode .particles span{
-    background:rgba(93,121,190,.35);
-}
-
-@keyframes particle{
-
-    0%{
-        transform:translateY(110vh) scale(0);
-        opacity:0;
+    .theme-toggle-side, .social-mini {
+        margin-top: 0;
+        width: auto;
     }
-
-    10%{
-        opacity:1;
+    .social-mini {
+        margin-left: auto;
     }
-
-    100%{
-        transform:translateY(-10vh) scale(1);
-        opacity:0;
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 90px;
     }
-
+    .hero {
+        padding-top: 100px;
+    }
+}
+@media (max-width: 650px) {
+    .side-nav {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .nav-links-side {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+    .social-mini {
+        order: 2;
+    }
 }
 
 /* ===================================== */
-/* NAVBAR */
+/* HERO & GLOBAL ELEMENTS */
 /* ===================================== */
-
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-
-    z-index:999;
-
-    backdrop-filter:blur(18px);
-
-    background:var(--navbar);
-
-    border-bottom:1px solid var(--card-border);
-}
-
-.nav-container{
-    max-width:1300px;
-    margin:auto;
-
-    padding:18px 25px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:14px;
-
-    font-size:1.15rem;
-    font-weight:700;
-}
-
-.logo img{
-    width:48px;
-    height:48px;
-    object-fit:contain;
-}
-
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:30px;
-}
-
-.nav-links a{
-    color:var(--text);
-
-    text-decoration:none;
-    font-weight:500;
-
-    position:relative;
-}
-
-.nav-links a::after{
-    content:"";
-
-    position:absolute;
-    left:0;
-    bottom:-6px;
-
-    width:0%;
-    height:2px;
-
-    background:var(--gradient2);
-
-    transition:.3s;
-}
-
-.nav-links a:hover::after{
-    width:100%;
-}
-
-/* ===================================== */
-/* THEME BUTTON */
-/* ===================================== */
-
-.theme-toggle{
-    width:48px;
-    height:48px;
-
-    border-radius:14px;
-
-    border:1px solid var(--card-border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:1.2rem;
-
-    transition:.3s ease;
-
-    backdrop-filter:blur(12px);
-}
-
-.theme-toggle:hover{
-    transform:translateY(-3px);
-}
-
-/* ===================================== */
-/* HERO */
-/* ===================================== */
-
 .hero{
-    min-height:100vh;
-
+    min-height: 92vh;
     display:flex;
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
-    padding:130px 20px 80px;
+    padding:100px 20px 80px;
 }
-
 .hero-content{
     max-width:950px;
 }
-
 .hero-logo{
-    width:150px;
-
+    width:140px;
     margin-bottom:25px;
-
     animation:logoFloat 4s ease-in-out infinite;
-
-    filter:drop-shadow(0 0 35px rgba(255,255,255,.2));
+    filter:drop-shadow(0 0 28px var(--shadow));
 }
-
 @keyframes logoFloat{
-
-    0%,100%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-12px);
-    }
-
+    0%,100%{ transform:translateY(0px);}
+    50%{ transform:translateY(-12px);}
 }
-
 .hero h1{
-    font-size:5rem;
-    line-height:1;
-
-    margin-bottom:24px;
-
-    background:
-    linear-gradient(
-        90deg,
-        var(--gradient1),
-        var(--gradient2)
-    );
-
+    font-size:4.8rem;
+    line-height:1.1;
+    margin-bottom:20px;
+    background: linear-gradient(130deg, var(--gradient1), var(--gradient2));
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
-
 .hero p{
-    font-size:1.08rem;
-    line-height:1.9;
-
+    font-size:1.1rem;
     color:var(--text-soft);
-
     margin-bottom:42px;
 }
-
-/* ===================================== */
-/* BUTTONS */
-/* ===================================== */
-
+.btn{
+    padding:14px 32px;
+    border-radius:40px;
+    font-weight:600;
+    text-decoration:none;
+    backdrop-filter:blur(12px);
+    background:var(--card);
+    border:1px solid var(--card-border);
+    color:var(--text);
+    transition: 0.25s ease;
+    display:inline-block;
+}
+.btn-primary{
+    background: linear-gradient(120deg, rgba(166,184,228,0.2), rgba(226,230,238,0.15));
+}
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px var(--shadow);
+}
 .hero-buttons{
     display:flex;
     justify-content:center;
-    gap:20px;
+    gap:22px;
     flex-wrap:wrap;
 }
 
-.btn{
-    position:relative;
-    overflow:hidden;
-
-    padding:17px 36px;
-
-    border-radius:18px;
-
-    text-decoration:none;
-    font-weight:600;
-
-    color:var(--text);
-
-    transition:.35s ease;
-
-    backdrop-filter:blur(14px);
-
-    background:var(--card);
-
-    border:1px solid var(--card-border);
-}
-
-.btn:hover{
-    transform:translateY(-5px);
-
-    box-shadow:
-    0 12px 35px var(--shadow);
-}
-
-.btn-primary{
-    background:
-    linear-gradient(
-        135deg,
-        rgba(226,230,238,.12),
-        rgba(166,184,228,.22)
-    );
-}
-
-/* ===================================== */
-/* SECTIONS */
-/* ===================================== */
-
+/* sections */
 section{
-    padding:110px 20px;
+    padding:90px 20px;
 }
-
 .container{
     max-width:1250px;
     margin:auto;
 }
-
 .section-title{
     text-align:center;
-    margin-bottom:70px;
+    margin-bottom:60px;
 }
-
 .section-title h2{
-    font-size:3rem;
-    margin-bottom:14px;
-
-    background:
-    linear-gradient(
-        90deg,
-        var(--gradient1),
-        var(--gradient2)
-    );
-
+    font-size:2.8rem;
+    background: linear-gradient(90deg, var(--gradient1), var(--gradient2));
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    margin-bottom:12px;
 }
-
-.section-title p{
-    color:var(--text-soft);
-}
-
-/* ===================================== */
-/* FEATURES */
-/* ===================================== */
-
 .features-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:28px;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:30px;
 }
-
 .feature-card{
     background:var(--card);
-
     border:1px solid var(--card-border);
-
-    padding:35px;
-
-    border-radius:26px;
-
-    backdrop-filter:blur(16px);
-
-    transition:.35s ease;
+    padding:36px;
+    border-radius:32px;
+    backdrop-filter:blur(12px);
+    transition:0.3s;
 }
-
 .feature-card:hover{
     transform:translateY(-8px);
-
-    box-shadow:
-    0 18px 45px rgba(0,0,0,.12),
-    0 0 50px var(--shadow);
+    box-shadow:0 18px 40px var(--shadow);
 }
-
 .feature-icon{
-    width:65px;
-    height:65px;
-
-    border-radius:18px;
-
-    background:
-    linear-gradient(
-        135deg,
-        var(--gradient1),
-        var(--gradient2)
-    );
-
+    width:64px;
+    height:64px;
+    background:linear-gradient(135deg, var(--gradient1), var(--gradient2));
+    border-radius:22px;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    color:white;
-
-    font-size:1.5rem;
-
+    font-size:1.8rem;
     margin-bottom:22px;
+    color:white;
 }
-
-.feature-card h3{
-    margin-bottom:14px;
-    font-size:1.3rem;
-}
-
-.feature-card p{
-    line-height:1.8;
-    color:var(--text-soft);
-}
-
-/* ===================================== */
-/* GALLERY */
-/* ===================================== */
-
+/* gallery */
 .gallery-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    gap:28px;
 }
-
 .gallery-item{
-    position:relative;
-
+    border-radius:28px;
     overflow:hidden;
-
-    border-radius:24px;
-
-    height:240px;
-
+    height:260px;
+    position:relative;
     border:1px solid var(--card-border);
-
-    transition:.35s ease;
+    transition:0.3s;
 }
-
 .gallery-item:hover{
     transform:translateY(-8px);
 }
-
 .gallery-item img{
     width:100%;
     height:100%;
-
     object-fit:cover;
-
-    transition:.5s ease;
+    transition:0.4s;
 }
-
 .gallery-item:hover img{
-    transform:scale(1.08);
+    transform:scale(1.06);
 }
-
 .gallery-overlay{
     position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,.75),
-        transparent
-    );
-
-    display:flex;
-    align-items:flex-end;
-
-    padding:24px;
+    bottom:0;
+    left:0;
+    right:0;
+    background:linear-gradient(to top, #000000aa, transparent);
+    padding:20px;
+    color:white;
+    font-weight:600;
 }
-
-/* ===================================== */
 /* FAQ */
-/* ===================================== */
-
 .faq-container{
+    max-width:780px;
+    margin:auto;
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:18px;
 }
-
 .faq-item{
     background:var(--card);
-
     border:1px solid var(--card-border);
-
-    border-radius:18px;
-
+    border-radius:28px;
     overflow:hidden;
 }
-
 .faq-question{
-    padding:24px 28px;
-
-    cursor:pointer;
-
+    padding:22px 28px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
-
     font-weight:600;
-
-    user-select:none;
+    cursor:pointer;
 }
-
-.faq-question span{
-    transition:transform .35s ease;
-}
-
 .faq-answer{
     max-height:0;
-
-    overflow:hidden;
-
     padding:0 28px;
-
-    color:var(--text-soft);
-
-    line-height:1.8;
-
     opacity:0;
-
-    transition:
-    max-height .45s ease,
-    opacity .35s ease,
-    padding .35s ease;
+    overflow:hidden;
+    transition:0.4s;
+    color:var(--text-soft);
 }
-
 .faq-item.active .faq-answer{
-    max-height:250px;
-
-    opacity:1;
-
+    max-height:220px;
     padding:0 28px 24px;
+    opacity:1;
 }
-
 .faq-item.active .faq-question span{
     transform:rotate(45deg);
 }
-
-/* ===================================== */
-/* FOOTER */
-/* ===================================== */
-
-footer{
-    padding:50px 20px;
-
-    border-top:1px solid var(--card-border);
-
-    background:rgba(255,255,255,.02);
+/* new cool footer (glassmorphism + animated border) */
+.cool-footer{
+    margin-top: 60px;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--card-border);
+    padding: 3rem 2rem 2rem;
+    transition: 0.3s;
 }
-
-.footer-container{
-    max-width:1200px;
-    margin:auto;
-
-    display:flex;
-    justify-content:space-between;
-    gap:30px;
-    flex-wrap:wrap;
+.footer-inner{
+    max-width: 1250px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 45px;
 }
-
-.footer-left h3{
-    margin-bottom:12px;
+.footer-brand h3{
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    background: linear-gradient(to right, var(--gradient1), var(--gradient2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
-.footer-left p{
-    color:var(--text-soft);
-    max-width:500px;
-    line-height:1.8;
+.footer-brand p{
+    max-width: 320px;
+    color: var(--text-soft);
+    line-height: 1.5;
 }
-
-.footer-links{
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
+.footer-links-glow{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
-
-.footer-btn{
-    padding:13px 22px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    color:var(--text);
-
-    background:var(--card);
-
-    border:1px solid var(--card-border);
-
-    transition:.3s ease;
-
-    backdrop-filter:blur(12px);
+.footer-col h4{
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
-
-.footer-btn:hover{
-    transform:translateY(-4px);
-
-    box-shadow:
-    0 10px 30px var(--shadow);
+.footer-col a{
+    display: block;
+    color: var(--text-soft);
+    text-decoration: none;
+    margin: 10px 0;
+    transition: 0.2s;
 }
-
-/* ===================================== */
-/* FADE */
-/* ===================================== */
-
+.footer-col a:hover{
+    color: var(--gradient2);
+    transform: translateX(6px);
+}
+.social-icons {
+    display: flex;
+    gap: 18px;
+    margin-top: 20px;
+}
+.social-icons a{
+    background: var(--card);
+    width: 42px;
+    height: 42px;
+    border-radius: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--card-border);
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.25s;
+}
+.social-icons a:hover{
+    background: var(--btn-hover);
+    transform: translateY(-4px);
+}
+.footer-bottom{
+    text-align: center;
+    margin-top: 2.8rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--card-border);
+    font-size: 0.8rem;
+    color: var(--text-soft);
+}
+/* fade-in & click effect */
 .fade-in{
-
     opacity:0;
-
-    transform:translateY(60px);
-
-    transition:
-    opacity .9s ease,
-    transform .9s ease;
-
-    will-change:opacity, transform;
-
+    transform:translateY(45px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s ease;
 }
-
 .fade-in.visible{
-
     opacity:1;
-
     transform:translateY(0px);
-
 }
-
-/* ===================================== */
-/* CLICK GLOW */
-/* ===================================== */
-
 .click-glow{
     position:fixed;
-
     width:0;
     height:0;
-
     border-radius:50%;
-
     pointer-events:none;
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(166,184,228,.35),
-        transparent 70%
-    );
-
+    background: radial-gradient(circle, rgba(166,184,228,0.45), transparent 75%);
     transform:translate(-50%,-50%);
-
-    animation:glowBurst .85s ease-out forwards;
-
-    z-index:99999;
+    animation:popGlow 0.8s ease-out forwards;
+    z-index:10000;
 }
-
-@keyframes glowBurst{
-
-    0%{
-        width:0;
-        height:0;
-        opacity:1;
-    }
-
-    100%{
-        width:550px;
-        height:550px;
-        opacity:0;
-    }
-
+@keyframes popGlow{
+    0%{ width:0; height:0; opacity:0.6;}
+    100%{ width:400px; height:400px; opacity:0;}
 }
-
-/* ===================================== */
-/* RESPONSIVE */
-/* ===================================== */
-
-@media(max-width:900px){
-
-    .hero h1{
-        font-size:3.5rem;
-    }
-
-    .nav-links{
-        display:flex;
-        gap:18px;
-    }
-
-}
-
-@media(max-width:700px){
-
-    .nav-links{
-        display:none;
-    }
-
-    .hero h1{
-        font-size:2.7rem;
-    }
-
-    .hero-buttons{
-        flex-direction:column;
-    }
-
-    .btn{
-        width:100%;
-    }
-
-}
-
 </style>
 </head>
 <body>
 
-<!-- BACKGROUND -->
-
-<div class="background">
-
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
-
-    <div class="particles">
-
-        <span style="left:5%; animation-duration:12s;"></span>
-        <span style="left:15%; animation-duration:18s;"></span>
-        <span style="left:25%; animation-duration:11s;"></span>
-        <span style="left:35%; animation-duration:15s;"></span>
-        <span style="left:45%; animation-duration:19s;"></span>
-        <span style="left:55%; animation-duration:13s;"></span>
-        <span style="left:65%; animation-duration:17s;"></span>
-        <span style="left:75%; animation-duration:10s;"></span>
-        <span style="left:85%; animation-duration:16s;"></span>
-        <span style="left:95%; animation-duration:14s;"></span>
-
-    </div>
-
+<div class="glow-bg">
+    <div class="glow-sphere one"></div>
+    <div class="glow-sphere two"></div>
+    <div class="glow-sphere three"></div>
 </div>
 
-<!-- NAVBAR -->
-
-<nav>
-
-    <div class="nav-container">
-
-        <div class="logo">
-            <img src="logo.png" alt="">
-            <span>Fallen Halo Network</span>
+<!-- SIDEBAR NAVIGATION (left) -->
+<aside class="side-nav">
+    <div class="nav-header">
+        <div class="logo-side">
+            <img src="logo.png" alt="Fallen Halo Logo" onerror="this.src='https://placehold.co/64x64/1e293b/ffffff?text=FH'">
+            <span>Fallen Halo</span>
         </div>
-
-        <div class="nav-right">
-
-            <div class="nav-links">
-
-                <a href="#features">Features</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#faq">FAQ</a>
-
-            </div>
-
-            <button class="theme-toggle" id="themeToggle">
-                ☀
-            </button>
-
-        </div>
-
     </div>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="hero fade-in visible">
-
-    <div class="hero-content">
-
-        <img src="logo.png" class="hero-logo" alt="">
-
-        <h1>Fallen Halo Network</h1>
-
-        <p>
-            A premium Minecraft experience built for grinders,
-            fighters, explorers, and legends.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="#" class="btn btn-primary">
-                Play Now
-            </a>
-
-            <a href="#" class="btn">
-                Join Discord
-            </a>
-
-        </div>
-
+    <div class="nav-links-side">
+        <a href="#features">⚔ Features</a>
+        <a href="#gallery">✨ Gallery</a>
+        <a href="#faq">❓ FAQ</a>
     </div>
-
-</section>
-
-<!-- FEATURES -->
-
-<section id="features" class="fade-in">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>Features</h2>
-
-            <p>
-                Built to deliver the best Minecraft experience.
-            </p>
-
+    <div>
+        <div class="theme-toggle-side" id="themeToggleSide">
+            <span id="themeIcon">☀️</span> Light / Dark
         </div>
-
-        <div class="features-grid">
-
-            <div class="feature-card glow-trigger fade-in">
-
-                <div class="feature-icon">⚔</div>
-
-                <h3>Competitive PvP</h3>
-
-                <p>
-                    Ranked battles, custom events,
-                    and balanced combat.
-                </p>
-
-            </div>
-
-            <div class="feature-card glow-trigger fade-in">
-
-                <div class="feature-icon">⛏</div>
-
-                <h3>Economy System</h3>
-
-                <p>
-                    Trade, grind, and dominate
-                    the server economy.
-                </p>
-
-            </div>
-
-            <div class="feature-card glow-trigger fade-in">
-
-                <div class="feature-icon">☁</div>
-
-                <h3>Unique Worlds</h3>
-
-                <p>
-                    Explore stunning custom maps
-                    and hidden secrets.
-                </p>
-
-            </div>
-
-            <div class="feature-card glow-trigger fade-in">
-
-                <div class="feature-icon">✦</div>
-
-                <h3>Custom Content</h3>
-
-                <p>
-                    Exclusive gameplay systems
-                    built for Fallen Halo.
-                </p>
-
-            </div>
-
+        <div class="social-mini">
+            <a href="#">Discord</a>
+            <a href="#">Store</a>
         </div>
-
     </div>
+</aside>
 
-</section>
-
-<!-- GALLERY -->
-
-<section id="gallery" class="fade-in">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>Gallery</h2>
-
-            <p>
-                A glimpse into Fallen Halo.
-            </p>
-
-        </div>
-
-        <div class="gallery-grid">
-
-            <div class="gallery-item glow-trigger fade-in">
-
-                <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop">
-
-                <div class="gallery-overlay">
-                    <h3>Spawn Area</h3>
-                </div>
-
+<main class="main-content">
+    <!-- HERO -->
+    <section class="hero fade-in visible">
+        <div class="hero-content">
+            <img src="logo.png" class="hero-logo" alt="logo" onerror="this.src='https://placehold.co/140x140/2d3a5e/white?text=FH'">
+            <h1>Fallen Halo Network</h1>
+            <p>A premium Minecraft experience built for grinders, fighters, explorers, and legends.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">▶ Play Now</a>
+                <a href="#" class="btn">🎧 Join Discord</a>
             </div>
-
-            <div class="gallery-item glow-trigger fade-in">
-
-                <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop">
-
-                <div class="gallery-overlay">
-                    <h3>Adventure Zones</h3>
-                </div>
-
-            </div>
-
-            <div class="gallery-item glow-trigger fade-in">
-
-                <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop">
-
-                <div class="gallery-overlay">
-                    <h3>Community Builds</h3>
-                </div>
-
-            </div>
-
         </div>
+    </section>
 
-    </div>
-
-</section>
-
-<!-- FAQ -->
-
-<section id="faq" class="fade-in">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>FAQ</h2>
-
-            <p>
-                Frequently asked questions.
-            </p>
-
-        </div>
-
-        <div class="faq-container">
-
-            <div class="faq-item fade-in">
-
-                <div class="faq-question">
-                    What version is the server on?
-                    <span>+</span>
-                </div>
-
-                <div class="faq-answer">
-                    The server supports modern Minecraft versions.
-                </div>
-
+    <!-- FEATURES -->
+    <section id="features" class="fade-in">
+        <div class="container">
+            <div class="section-title"><h2>Features</h2><p>Built to deliver the best Minecraft experience.</p></div>
+            <div class="features-grid">
+                <div class="feature-card glow-trigger"><div class="feature-icon">⚔</div><h3>Competitive PvP</h3><p>Ranked battles, custom events, and balanced combat.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon">⛏</div><h3>Economy System</h3><p>Trade, grind, and dominate the server economy.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon">☁</div><h3>Unique Worlds</h3><p>Explore stunning custom maps and hidden secrets.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon">✦</div><h3>Custom Content</h3><p>Exclusive gameplay systems built for Fallen Halo.</p></div>
             </div>
+        </div>
+    </section>
 
-            <div class="faq-item fade-in">
-
-                <div class="faq-question">
-                    Is the server pay-to-win?
-                    <span>+</span>
-                </div>
-
-                <div class="faq-answer">
-                    No. The server is focused on fair gameplay.
-                </div>
-
+    <!-- GALLERY -->
+    <section id="gallery" class="fade-in">
+        <div class="container">
+            <div class="section-title"><h2>Gallery</h2><p>A glimpse into Fallen Halo.</p></div>
+            <div class="gallery-grid">
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="spawn"><div class="gallery-overlay"><h3>Spawn Area</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="adventure"><div class="gallery-overlay"><h3>Adventure Zones</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="community"><div class="gallery-overlay"><h3>Community Builds</h3></div></div>
             </div>
+        </div>
+    </section>
 
-            <div class="faq-item fade-in">
-
-                <div class="faq-question">
-                    How do I join the community?
-                    <span>+</span>
-                </div>
-
-                <div class="faq-answer">
-                    Join our Discord server and meet the community.
-                </div>
-
+    <!-- FAQ -->
+    <section id="faq" class="fade-in">
+        <div class="container">
+            <div class="section-title"><h2>FAQ</h2><p>Frequently asked questions.</p></div>
+            <div class="faq-container">
+                <div class="faq-item"><div class="faq-question">What version is the server on?<span>+</span></div><div class="faq-answer">The server supports modern Minecraft versions (1.19 – 1.20+).</div></div>
+                <div class="faq-item"><div class="faq-question">Is the server pay-to-win?<span>+</span></div><div class="faq-answer">No. The server is focused on fair gameplay, only cosmetics.</div></div>
+                <div class="faq-item"><div class="faq-question">How do I join the community?<span>+</span></div><div class="faq-answer">Join our Discord server and meet the community! Link in footer.</div></div>
             </div>
-
         </div>
+    </section>
 
-    </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="fade-in">
-
-    <div class="footer-container">
-
-        <div class="footer-left">
-
-            <h3>Fallen Halo Network</h3>
-
-            <p>
-                Built for players who want more
-                than just another Minecraft server.
-            </p>
-
+    <!-- COOL FOOTER (glass & interactive) -->
+    <footer class="cool-footer fade-in">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>FALLEN HALO NETWORK</h3>
+                <p>Beyond the ordinary. A next-gen Minecraft realm where legends rise.</p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">🎮</a>
+                    <a href="#">💬</a>
+                </div>
+            </div>
+            <div class="footer-links-glow">
+                <div class="footer-col"><h4>Explore</h4><a href="#features">Features</a><a href="#gallery">Gallery</a><a href="#faq">Help</a></div>
+                <div class="footer-col"><h4>Community</h4><a href="#">Discord</a><a href="#">Forums</a><a href="#">Vote for us</a></div>
+                <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Support</a></div>
+            </div>
         </div>
-
-        <div class="footer-links">
-
-            <a href="#" class="footer-btn">
-                Discord
-            </a>
-
-            <a href="#" class="footer-btn">
-                Store
-            </a>
-
-            <a href="#" class="footer-btn">
-                Vote
-            </a>
-
-            <a href="#" class="footer-btn">
-                Support
-            </a>
-
+        <div class="footer-bottom">
+            © 2025 Fallen Halo Network — Crafted with ⚡ for true adventurers.
         </div>
-
-    </div>
-
-</footer>
+    </footer>
+</main>
 
 <script>
-
-/* FAQ */
-
-const faqItems = document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item => {
-
-    item.querySelector('.faq-question')
-    .addEventListener('click', () => {
-
-        item.classList.toggle('active');
-
+    // FAQ toggles
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const q = item.querySelector('.faq-question');
+        q.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
     });
 
-});
-
-/* CLICK GLOW */
-
-const glowTargets = document.querySelectorAll('.glow-trigger');
-
-glowTargets.forEach(item => {
-
-    item.addEventListener('click', (e) => {
-
-        const glow = document.createElement('div');
-
-        glow.className = 'click-glow';
-
-        glow.style.left = `${e.clientX}px`;
-        glow.style.top = `${e.clientY}px`;
-
-        document.body.appendChild(glow);
-
-        setTimeout(() => {
-            glow.remove();
-        }, 850);
-
+    // CLICK GLOW EFFECT (galactic)
+    const glowTriggers = document.querySelectorAll('.glow-trigger, .btn, .footer-btn, .social-icons a, .theme-toggle-side');
+    function createGlow(e) {
+        const glowDiv = document.createElement('div');
+        glowDiv.className = 'click-glow';
+        glowDiv.style.left = `${e.clientX}px`;
+        glowDiv.style.top = `${e.clientY}px`;
+        document.body.appendChild(glowDiv);
+        setTimeout(() => glowDiv.remove(), 800);
+    }
+    glowTriggers.forEach(el => {
+        el.addEventListener('click', (e) => {
+            createGlow(e);
+        });
     });
-
-});
-
-/* FADE IN / OUT */
-
-const fadeElements = document.querySelectorAll('.fade-in');
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add('visible');
-
-        } else {
-
-            entry.target.classList.remove('visible');
-
+    document.body.addEventListener('click', (e) => {
+        if(!e.target.closest('.glow-trigger') && !e.target.closest('.btn') && !e.target.closest('.theme-toggle-side') && !e.target.closest('.social-icons a')){
+            // optional extra spark only for interactive zones, but we keep only for main cta? limited
         }
-
     });
 
-},{
-    threshold:0.12
-});
+    // FADE IN OBSERVER
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) entry.target.classList.add('visible');
+            else entry.target.classList.remove('visible');
+        });
+    }, { threshold: 0.12 });
+    fadeElements.forEach(el => observer.observe(el));
 
-fadeElements.forEach(el => {
-    observer.observe(el);
-});
+    // THEME TOGGLE (gradient + smooth transition + localStorage)
+    const themeBtn = document.getElementById('themeToggleSide');
+    const iconSpan = document.getElementById('themeIcon');
 
-/* THEME TOGGLE */
-
-const themeToggle = document.getElementById('themeToggle');
-
-if(localStorage.getItem('theme') === 'light'){
-
-    document.body.classList.add('light-mode');
-    themeToggle.innerHTML = '🌙';
-
-} else {
-
-    themeToggle.innerHTML = '☀';
-
-}
-
-themeToggle.addEventListener('click', () => {
-
-    document.body.classList.toggle('light-mode');
-
-    if(document.body.classList.contains('light-mode')){
-
-        themeToggle.innerHTML = '🌙';
-
-        localStorage.setItem('theme', 'light');
-
-    } else {
-
-        themeToggle.innerHTML = '☀';
-
-        localStorage.setItem('theme', 'dark');
-
+    function setTheme(isLight) {
+        if(isLight) {
+            document.body.classList.add('light-mode');
+            if(iconSpan) iconSpan.innerHTML = '🌙';
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.body.classList.remove('light-mode');
+            if(iconSpan) iconSpan.innerHTML = '☀️';
+            localStorage.setItem('theme', 'dark');
+        }
     }
 
-});
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'light') {
+        setTheme(true);
+    } else {
+        setTheme(false);
+    }
 
+    themeBtn.addEventListener('click', () => {
+        const isLight = document.body.classList.contains('light-mode');
+        if(isLight) {
+            setTheme(false);
+        } else {
+            setTheme(true);
+        }
+        // additional ripple: add custom gradient transition on pseudo-element
+        const bodyElem = document.body;
+        bodyElem.style.transition = 'background 0.45s ease-out';
+        setTimeout(() => { bodyElem.style.transition = ''; }, 500);
+    });
+
+    // optional smooth gradient morph for background overlay
+    const style = document.createElement('style');
+    style.textContent = `
+        body::before { transition: background 0.65s cubic-bezier(0.2, 0.9, 0.4, 1.1) !important; }
+        .glow-sphere { transition: background 0.6s ease, opacity 0.4s; }
+    `;
+    document.head.appendChild(style);
+
+    // also make all interactive anchors glow on click
+    document.querySelectorAll('a, .faq-question').forEach(el => {
+        el.addEventListener('click', (e) => {
+            if(!e.target.closest('.click-glow')) createGlow(e);
+        });
+    });
+    // fix broken image fallback logo 
+    const allImgs = document.querySelectorAll('img');
+    allImgs.forEach(img => {
+        img.onerror = function() {
+            if(!this.dataset.fallback) {
+                this.src = 'https://placehold.co/140x140/2c3e55/white?text=FH';
+                this.dataset.fallback = 'true';
+            }
+        };
+    });
 </script>
-
 </body>
 </html>
