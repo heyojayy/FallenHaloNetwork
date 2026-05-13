@@ -81,6 +81,14 @@ body{
     color .35s ease;
 }
 
+/* remove mobile blue highlight */
+
+button,
+a,
+div{
+    -webkit-tap-highlight-color:transparent;
+}
+
 /* ===================================== */
 /* BACKGROUND */
 /* ===================================== */
@@ -98,8 +106,6 @@ body{
         var(--bg2) 0%,
         var(--bg) 60%
     );
-
-    transition:background .4s ease;
 }
 
 .glow{
@@ -114,7 +120,6 @@ body{
 .glow.one{
     width:420px;
     height:420px;
-
     background:var(--gradient1);
 
     top:-120px;
@@ -124,7 +129,6 @@ body{
 .glow.two{
     width:360px;
     height:360px;
-
     background:var(--gradient2);
 
     right:-120px;
@@ -223,8 +227,6 @@ nav{
     background:var(--navbar);
 
     border-bottom:1px solid var(--card-border);
-
-    transition:.35s ease;
 }
 
 .nav-container{
@@ -251,6 +253,12 @@ nav{
     width:48px;
     height:48px;
     object-fit:contain;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
 }
 
 .nav-links{
@@ -314,8 +322,6 @@ nav{
     transition:.3s ease;
 
     backdrop-filter:blur(12px);
-
-    -webkit-tap-highlight-color:transparent;
 }
 
 .theme-toggle:hover{
@@ -350,10 +356,6 @@ nav{
     animation:logoFloat 4s ease-in-out infinite;
 
     filter:drop-shadow(0 0 35px rgba(255,255,255,.2));
-}
-
-body.light-mode .hero-logo{
-    filter:drop-shadow(0 0 25px rgba(93,121,190,.18));
 }
 
 @keyframes logoFloat{
@@ -423,62 +425,16 @@ body.light-mode .hero-logo{
     isolation:isolate;
 
     backdrop-filter:blur(14px);
+
+    background:var(--card);
+
+    border:1px solid var(--card-border);
 }
 
-.btn::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    border-radius:inherit;
-
-    padding:1px;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,.4),
-        rgba(166,184,228,.7),
-        rgba(255,255,255,.1)
-    );
-
-    -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite:xor;
-            mask-composite:exclude;
-}
-
-.btn::after{
-    content:"";
-
-    position:absolute;
-
-    width:200%;
-    height:200%;
-
-    top:-50%;
-    left:-50%;
-
-    background:
-    linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.18),
-        transparent
-    );
-
-    transform:rotate(25deg) translateX(-120%);
-
-    transition:.9s;
-
-    z-index:-1;
-}
-
-.btn:hover::after{
-    transform:rotate(25deg) translateX(120%);
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:
+    0 12px 35px var(--shadow);
 }
 
 .btn-primary{
@@ -488,25 +444,6 @@ body.light-mode .hero-logo{
         rgba(226,230,238,.12),
         rgba(166,184,228,.22)
     );
-
-    box-shadow:
-    0 12px 35px var(--shadow);
-}
-
-.btn-primary:hover{
-    transform:translateY(-5px) scale(1.03);
-
-    box-shadow:
-    0 15px 45px var(--shadow),
-    0 0 60px var(--shadow);
-}
-
-.btn-secondary{
-    background:var(--card);
-}
-
-.btn-secondary:hover{
-    transform:translateY(-5px) scale(1.03);
 }
 
 /* ===================================== */
@@ -557,9 +494,6 @@ section{
 }
 
 .feature-card{
-    position:relative;
-    overflow:hidden;
-
     background:var(--card);
 
     border:1px solid var(--card-border);
@@ -575,8 +509,6 @@ section{
 
 .feature-card:hover{
     transform:translateY(-8px);
-
-    border-color:rgba(166,184,228,.3);
 
     box-shadow:
     0 18px 45px rgba(0,0,0,.12),
@@ -693,10 +625,6 @@ section{
     border-radius:18px;
 
     overflow:hidden;
-
-    transition:
-    border-color .3s ease,
-    box-shadow .3s ease;
 }
 
 .faq-question{
@@ -711,10 +639,6 @@ section{
     font-weight:600;
 
     user-select:none;
-
-    -webkit-tap-highlight-color:transparent;
-
-    outline:none;
 }
 
 .faq-question span{
@@ -738,13 +662,6 @@ section{
     max-height .45s ease,
     opacity .35s ease,
     padding .35s ease;
-}
-
-.faq-item.active{
-    border-color:rgba(166,184,228,.25);
-
-    box-shadow:
-    0 10px 35px var(--shadow);
 }
 
 .faq-item.active .faq-answer{
@@ -793,30 +710,40 @@ footer{
 
 .footer-links{
     display:flex;
-    gap:24px;
+    gap:16px;
     flex-wrap:wrap;
 }
 
-.footer-links a{
-    color:var(--text);
+.footer-btn{
+    padding:13px 22px;
+
+    border-radius:14px;
+
     text-decoration:none;
+
+    color:var(--text);
+
+    background:var(--card);
+
+    border:1px solid var(--card-border);
+
+    transition:.3s ease;
+
+    backdrop-filter:blur(12px);
+}
+
+.footer-btn:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 10px 30px var(--shadow);
 }
 
 /* ===================================== */
-/* FADE ANIMATION */
+/* FADE */
 /* ===================================== */
 
 .fade-in{
-    opacity:0;
-
-    transform:translateY(50px);
-
-    transition:
-    opacity .9s ease,
-    transform .9s ease;
-}
-
-.fade-in.visible{
     opacity:1;
     transform:translateY(0px);
 }
@@ -876,15 +803,20 @@ footer{
     }
 
     .nav-links{
-        display:none;
+        display:flex;
+        gap:18px;
     }
 
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
+
+    .nav-links{
+        display:none;
+    }
 
     .hero h1{
-        font-size:2.6rem;
+        font-size:2.7rem;
     }
 
     .hero-buttons{
@@ -937,7 +869,7 @@ footer{
             <span>Fallen Halo Network</span>
         </div>
 
-        <div style="display:flex; align-items:center; gap:25px;">
+        <div class="nav-right">
 
             <div class="nav-links">
 
@@ -959,7 +891,7 @@ footer{
 
 <!-- HERO -->
 
-<section class="hero fade-in">
+<section class="hero">
 
     <div class="hero-content">
 
@@ -978,7 +910,7 @@ footer{
                 Play Now
             </a>
 
-            <a href="#" class="btn btn-secondary">
+            <a href="#" class="btn">
                 Join Discord
             </a>
 
@@ -990,7 +922,7 @@ footer{
 
 <!-- FEATURES -->
 
-<section id="features" class="fade-in">
+<section id="features">
 
     <div class="container">
 
@@ -1006,7 +938,7 @@ footer{
 
         <div class="features-grid">
 
-            <div class="feature-card fade-in glow-trigger">
+            <div class="feature-card glow-trigger">
 
                 <div class="feature-icon">⚔</div>
 
@@ -1019,7 +951,7 @@ footer{
 
             </div>
 
-            <div class="feature-card fade-in glow-trigger">
+            <div class="feature-card glow-trigger">
 
                 <div class="feature-icon">⛏</div>
 
@@ -1032,7 +964,7 @@ footer{
 
             </div>
 
-            <div class="feature-card fade-in glow-trigger">
+            <div class="feature-card glow-trigger">
 
                 <div class="feature-icon">☁</div>
 
@@ -1045,7 +977,7 @@ footer{
 
             </div>
 
-            <div class="feature-card fade-in glow-trigger">
+            <div class="feature-card glow-trigger">
 
                 <div class="feature-icon">✦</div>
 
@@ -1066,7 +998,7 @@ footer{
 
 <!-- GALLERY -->
 
-<section id="gallery" class="fade-in">
+<section id="gallery">
 
     <div class="container">
 
@@ -1082,7 +1014,7 @@ footer{
 
         <div class="gallery-grid">
 
-            <div class="gallery-item fade-in glow-trigger">
+            <div class="gallery-item glow-trigger">
 
                 <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop">
 
@@ -1092,7 +1024,7 @@ footer{
 
             </div>
 
-            <div class="gallery-item fade-in glow-trigger">
+            <div class="gallery-item glow-trigger">
 
                 <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop">
 
@@ -1102,7 +1034,7 @@ footer{
 
             </div>
 
-            <div class="gallery-item fade-in glow-trigger">
+            <div class="gallery-item glow-trigger">
 
                 <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop">
 
@@ -1120,7 +1052,7 @@ footer{
 
 <!-- FAQ -->
 
-<section id="faq" class="fade-in">
+<section id="faq">
 
     <div class="container">
 
@@ -1136,7 +1068,7 @@ footer{
 
         <div class="faq-container">
 
-            <div class="faq-item fade-in">
+            <div class="faq-item">
 
                 <div class="faq-question">
                     What version is the server on?
@@ -1149,7 +1081,7 @@ footer{
 
             </div>
 
-            <div class="faq-item fade-in">
+            <div class="faq-item">
 
                 <div class="faq-question">
                     Is the server pay-to-win?
@@ -1162,7 +1094,7 @@ footer{
 
             </div>
 
-            <div class="faq-item fade-in">
+            <div class="faq-item">
 
                 <div class="faq-question">
                     How do I join the community?
@@ -1200,10 +1132,21 @@ footer{
 
         <div class="footer-links">
 
-            <a href="#">Discord</a>
-            <a href="#">Store</a>
-            <a href="#">Vote</a>
-            <a href="#">Support</a>
+            <a href="#" class="footer-btn">
+                Discord
+            </a>
+
+            <a href="#" class="footer-btn">
+                Store
+            </a>
+
+            <a href="#" class="footer-btn">
+                Vote
+            </a>
+
+            <a href="#" class="footer-btn">
+                Support
+            </a>
 
         </div>
 
@@ -1217,4 +1160,67 @@ footer{
 
 const faqItems = document.querySelectorAll('.faq-item');
 
-faqItems
+faqItems.forEach(item => {
+
+    item.querySelector('.faq-question')
+    .addEventListener('click', () => {
+
+        item.classList.toggle('active');
+
+    });
+
+});
+
+/* CLICK GLOW */
+
+const glowTargets = document.querySelectorAll('.glow-trigger');
+
+glowTargets.forEach(item => {
+
+    item.addEventListener('click', (e) => {
+
+        const glow = document.createElement('div');
+
+        glow.className = 'click-glow';
+
+        glow.style.left = `${e.clientX}px`;
+        glow.style.top = `${e.clientY}px`;
+
+        document.body.appendChild(glow);
+
+        setTimeout(() => {
+            glow.remove();
+        }, 850);
+
+    });
+
+});
+
+/* THEME TOGGLE */
+
+const themeToggle = document.getElementById('themeToggle');
+
+/* load saved theme */
+
+if(localStorage.getItem('theme') === 'light'){
+
+    document.body.classList.add('light-mode');
+    themeToggle.innerHTML = '🌙';
+
+} else {
+
+    themeToggle.innerHTML = '☀';
+
+}
+
+/* toggle */
+
+themeToggle.addEventListener('click', () => {
+
+    document.body.classList.toggle('light-mode');
+
+    if(document.body.classList.contains('light-mode')){
+
+        themeToggle.innerHTML = '🌙';
+
+    
