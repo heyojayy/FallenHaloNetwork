@@ -114,10 +114,7 @@ body{
 /* Hover effect for clickable elements */
 a:hover ~ .custom-cursor .cursor-ring,
 button:hover ~ .custom-cursor .cursor-ring,
-.btn:hover ~ .custom-cursor .cursor-ring,
-.feature-card:hover ~ .custom-cursor .cursor-ring,
-.gallery-item:hover ~ .custom-cursor .cursor-ring,
-.faq-item:hover ~ .custom-cursor .cursor-ring {
+.btn:hover ~ .custom-cursor .cursor-ring {
     width: 48px;
     height: 48px;
     border-color: var(--gradient1-start);
@@ -433,7 +430,7 @@ nav{
     flex-wrap: wrap;
 }
 
-/* sections */
+/* sections - UNAVAILABLE STYLE */
 section{
     padding: 100px 24px;
 }
@@ -458,10 +455,56 @@ section{
 .section-title p{
     color: var(--text-soft);
 }
+
+/* Unavailable Overlay */
+.unavailable-wrapper {
+    position: relative;
+}
+
+.unavailable-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: not-allowed;
+}
+
+.unavailable-text {
+    text-align: center;
+    padding: 20px;
+}
+
+.unavailable-text svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    stroke: var(--gradient2-start);
+}
+
+.unavailable-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.unavailable-text p {
+    font-size: 0.9rem;
+    color: var(--text-soft);
+}
+
 .features-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 32px;
+    position: relative;
 }
 .feature-card{
     background: var(--card);
@@ -471,6 +514,8 @@ section{
     backdrop-filter: blur(12px);
     transition: 0.35s;
     cursor: pointer;
+    position: relative;
+    opacity: 0.5;
 }
 .feature-card:hover{
     transform: translateY(-10px);
@@ -493,10 +538,12 @@ section{
     stroke-width: 1.7;
     fill: none;
 }
+
 .gallery-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+    position: relative;
 }
 .gallery-item{
     border-radius: 32px;
@@ -506,6 +553,7 @@ section{
     border: 1px solid var(--card-border);
     transition: 0.3s;
     cursor: pointer;
+    opacity: 0.5;
 }
 .gallery-item:hover{
     transform: translateY(-8px);
@@ -515,6 +563,7 @@ section{
     height: 100%;
     object-fit: cover;
     transition: 0.5s;
+    filter: grayscale(0.5);
 }
 .gallery-item:hover img{
     transform: scale(1.07);
@@ -524,17 +573,19 @@ section{
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
     padding: 24px;
     font-weight: 600;
     color: white;
 }
+
 .faq-container{
     max-width: 800px;
     margin: auto;
     display: flex;
     flex-direction: column;
     gap: 18px;
+    position: relative;
 }
 .faq-item{
     background: var(--card);
@@ -542,6 +593,7 @@ section{
     border-radius: 30px;
     overflow: hidden;
     cursor: pointer;
+    opacity: 0.5;
 }
 .faq-question{
     padding: 24px 30px;
@@ -572,6 +624,22 @@ section{
 }
 .faq-item.active .faq-question svg{
     transform: rotate(45deg);
+}
+
+/* Disable click events on unavailable items */
+.feature-card, .gallery-item, .faq-item {
+    pointer-events: none;
+}
+
+/* fade-in */
+.fade-in{
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s ease;
+}
+.fade-in.visible{
+    opacity: 1;
+    transform: translateY(0px);
 }
 
 /* ========== MODERN COOL FOOTER ========== */
@@ -650,6 +718,7 @@ section{
     stroke: var(--text);
     stroke-width: 1.7;
     fill: none;
+    transition: stroke 0.2s;
 }
 .social-icon-set a:hover{
     transform: translateY(-4px);
@@ -664,16 +733,7 @@ section{
     color: var(--text-soft);
 }
 
-/* fade-in + click glow */
-.fade-in{
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s ease;
-}
-.fade-in.visible{
-    opacity: 1;
-    transform: translateY(0px);
-}
+/* click glow */
 .click-glow{
     position: fixed;
     width: 0;
@@ -752,52 +812,95 @@ section{
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES - UNAVAILABLE -->
     <section id="features" class="fade-in">
         <div class="container">
-            <div class="section-title"><h2>Features</h2><p>Built to deliver the best Minecraft experience.</p></div>
+            <div class="section-title"><h2>Features</h2><p>Coming soon...</p></div>
             <div class="features-grid">
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.59V19h8.41l7.83-7.76z" stroke="currentColor" fill="none"/><path d="M16 8 L8 16" stroke="currentColor"/></svg></div><h3>Competitive PvP</h3><p>Ranked battles, custom events, balanced combat.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/></svg></div><h3>Economy System</h3><p>Trade, grind, dominate the server economy.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg></div><h3>Unique Worlds</h3><p>Explore stunning custom maps & secrets.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg></div><h3>Custom Content</h3><p>Exclusive systems built for Fallen Halo.</p></div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.59V19h8.41l7.83-7.76z" stroke="currentColor" fill="none"/><path d="M16 8 L8 16" stroke="currentColor"/></svg></div>
+                    <h3>Unavailable</h3>
+                    <p>This feature is currently under development.</p>
+                </div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/></svg></div>
+                    <h3>Unavailable</h3>
+                    <p>This feature is currently under development.</p>
+                </div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg></div>
+                    <h3>Unavailable</h3>
+                    <p>This feature is currently under development.</p>
+                </div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg></div>
+                    <h3>Unavailable</h3>
+                    <p>This feature is currently under development.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- GALLERY -->
+    <!-- GALLERY - UNAVAILABLE -->
     <section id="gallery" class="fade-in">
         <div class="container">
-            <div class="section-title"><h2>Gallery</h2><p>A glimpse into Fallen Halo.</p></div>
+            <div class="section-title"><h2>Gallery</h2><p>Coming soon...</p></div>
             <div class="gallery-grid">
-                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="spawn"><div class="gallery-overlay"><h3>Gallery Image One</h3></div></div>
-                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="adventure"><div class="gallery-overlay"><h3>Gallery Image Two</h3></div></div>
-                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="community"><div class="gallery-overlay"><h3>Gallery Image Three</h3></div></div>
+                <div class="gallery-item glow-trigger">
+                    <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="placeholder">
+                    <div class="gallery-overlay"><h3>Coming Soon</h3></div>
+                </div>
+                <div class="gallery-item glow-trigger">
+                    <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="placeholder">
+                    <div class="gallery-overlay"><h3>Coming Soon</h3></div>
+                </div>
+                <div class="gallery-item glow-trigger">
+                    <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="placeholder">
+                    <div class="gallery-overlay"><h3>Coming Soon</h3></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- FAQ - UNAVAILABLE -->
     <section id="faq" class="fade-in">
         <div class="container">
-            <div class="section-title"><h2>FAQ</h2><p>Frequently asked questions.</p></div>
+            <div class="section-title"><h2>FAQ</h2><p>Coming soon...</p></div>
             <div class="faq-container">
-                <div class="faq-item"><div class="faq-question">Question 1 (Examples)<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><div class="faq-answer">No Answer Provided (Server Not Yet Released)</div></div>
-                <div class="faq-item"><div class="faq-question">Question 2 (Examples)<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><div class="faq-answer">No Answer Provided (Server Not Yet Released)</div></div>
-                <div class="faq-item"><div class="faq-question">Question 3 (Examples)<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><div class="faq-answer">No Answer Provided (Server Not Yet Released)</div></div>
+                <div class="faq-item">
+                    <div class="faq-question">When will this be available?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div>
+                    <div class="faq-answer">We're working hard to bring you an amazing experience. Stay tuned for updates!</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I stay updated?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div>
+                    <div class="faq-answer">Join our Discord server for the latest news and announcements!</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">When is the server launching?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div>
+                    <div class="faq-answer">Launch date will be announced soon. Join Discord to be the first to know!</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER with proper links -->
+    <!-- FOOTER -->
     <footer class="cool-footer fade-in">
         <div class="footer-inner">
             <div class="footer-brand">
                 <h3>FALLEN HALO NETWORK</h3>
                 <p>Beyond ordinary. A next-gen Minecraft realm where legends rise.</p>
                 <div class="social-icon-set">
-                    <a href="https://discord.gg/Xxh5DuqXgs" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="currentColor" fill="none"/></svg></a>
-                    <a href="https://fallenhalo.craftingstore.net/" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" fill="none"/><path d="M8 12h8M12 8v8" stroke="currentColor"/></svg></a>
+                    <a href="https://discord.gg/Xxh5DuqXgs" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                    </a>
+                    <a href="https://fallenhalo.craftingstore.net/" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M8 12h8M12 8v8"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
             <div class="footer-links-grid">
@@ -811,14 +914,14 @@ section{
 </main>
 
 <script>
-    // FAQ toggle
+    // FAQ toggle (still works but items are marked unavailable)
     document.querySelectorAll('.faq-item').forEach(item => {
         item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
     });
 
     // Click glow effect
     function createGlow(e) { let g=document.createElement('div'); g.className='click-glow'; g.style.left=e.clientX+'px'; g.style.top=e.clientY+'px'; document.body.appendChild(g); setTimeout(()=>g.remove(),850); }
-    document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a, .faq-item').forEach(el => el.addEventListener('click', createGlow));
+    document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a').forEach(el => el.addEventListener('click', createGlow));
 
     // fade-in observer
     document.querySelectorAll('.fade-in').forEach(el => {
@@ -838,8 +941,7 @@ section{
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
         });
         
-        // Hover effect for clickable elements
-        const clickables = document.querySelectorAll('a, button, .btn, .feature-card, .gallery-item, .faq-item, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a');
+        const clickables = document.querySelectorAll('a, button, .btn, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a');
         
         clickables.forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -862,7 +964,6 @@ section{
             });
         });
     } else {
-        // On mobile, remove custom cursor styles
         const cursor = document.querySelector('.custom-cursor');
         if (cursor) cursor.style.display = 'none';
         document.body.style.cursor = 'auto';
@@ -879,5 +980,6 @@ section{
     setTheme(localStorage.getItem('theme') === 'light');
     themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('light-mode')));
 </script>
+
 </body>
 </html>
