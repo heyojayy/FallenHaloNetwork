@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fallen Halo Network | SVG Icons & Gradient Theme</title>
+<title>Fallen Halo Network | Premium Minecraft Server</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -31,7 +31,6 @@
     --shadow: rgba(166,184,228,.15);
     --btn-hover: rgba(166,184,228,.12);
     --accent-glow: #a6b8e4;
-    --logo-filter: brightness(0) invert(1);
 }
 
 /* LIGHT MODE */
@@ -51,7 +50,6 @@ body.light-mode{
     --shadow: rgba(93,121,190,.2);
     --btn-hover: rgba(93,121,190,.12);
     --accent-glow: #5d79be;
-    --logo-filter: brightness(0) saturate(100%) invert(22%) sepia(32%) saturate(1237%) hue-rotate(197deg) brightness(94%) contrast(88%);
 }
 
 *{
@@ -86,7 +84,7 @@ body.light-mode::before {
     background: radial-gradient(ellipse at 70% 30%, var(--bg-mid) 0%, var(--bg-start) 60%, var(--bg-end) 100%);
 }
 
-/* floating orbs with gradient transition */
+/* floating orbs */
 .glow-bg{
     position:fixed;
     inset:0;
@@ -176,9 +174,10 @@ nav{
     flex-shrink: 0;
 }
 
-.logo svg{
+.logo img{
     width: 48px;
     height: 48px;
+    object-fit: contain;
     filter: drop-shadow(0 0 8px var(--shadow));
     transition: filter 0.3s;
 }
@@ -257,11 +256,6 @@ nav{
     transition: stroke 0.2s;
 }
 
-body.light-mode .theme-toggle svg.sun-icon{
-    fill: #fbbf24;
-    stroke: #d97706;
-}
-
 .theme-toggle:hover{
     transform: translateY(-2px);
     box-shadow: 0 6px 18px var(--shadow);
@@ -273,7 +267,7 @@ body.light-mode .theme-toggle svg.sun-icon{
     .nav-links { gap: 18px; }
     .nav-right { gap: 16px; }
     .logo .logo-text { font-size: 0.9rem; }
-    .logo svg { width: 38px; height: 38px; }
+    .logo img { width: 38px; height: 38px; }
 }
 @media (max-width: 550px) {
     .nav-links { gap: 12px; }
@@ -296,9 +290,10 @@ body.light-mode .theme-toggle svg.sun-icon{
 .hero-content{
     max-width: 1000px;
 }
-.hero-logo svg{
+.hero-logo img{
     width: 150px;
     height: 150px;
+    object-fit: contain;
     margin-bottom: 28px;
     animation: logoFloat 4.5s ease-in-out infinite;
     filter: drop-shadow(0 0 28px var(--shadow));
@@ -415,7 +410,6 @@ section{
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
-    color: white;
 }
 .feature-icon svg{
     width: 34px;
@@ -627,23 +621,11 @@ section{
     <div class="glow-sphere three"></div>
 </div>
 
-<!-- NAVBAR: LOGO FAR LEFT, BUTTONS FAR RIGHT (SVG ICONS) -->
+<!-- NAVBAR: LOGO (PNG) FAR LEFT, BUTTONS FAR RIGHT -->
 <nav>
     <div class="nav-container">
         <div class="logo">
-            <!-- SVG Logo - halo/crown theme that adapts color via currentColor -->
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="32" cy="32" r="28" stroke="url(#grad1)" stroke-width="2" fill="none"/>
-                <path d="M20 24 L26 18 L32 22 L38 18 L44 24 L40 34 L32 40 L24 34 L20 24Z" stroke="url(#grad1)" stroke-width="2" fill="rgba(255,255,255,0.05)"/>
-                <circle cx="32" cy="28" r="3" fill="url(#grad1)"/>
-                <path d="M32 40 L32 48" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
-                <defs>
-                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--gradient1-start)"/>
-                        <stop offset="100%" stop-color="var(--gradient2-start)"/>
-                    </linearGradient>
-                </defs>
-            </svg>
+            <img src="logo.png" alt="Fallen Halo Logo">
             <span class="logo-text">FALLEN HALO</span>
         </div>
         <div class="nav-right">
@@ -663,22 +645,11 @@ section{
 </nav>
 
 <main>
-    <!-- HERO SECTION with SVG logo -->
+    <!-- HERO SECTION with PNG logo -->
     <section class="hero fade-in visible">
         <div class="hero-content">
             <div class="hero-logo">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="42" stroke="url(#heroGrad)" stroke-width="2.5" fill="none"/>
-                    <path d="M30 38 L40 28 L50 34 L60 28 L70 38 L64 52 L50 62 L36 52 L30 38Z" stroke="url(#heroGrad)" stroke-width="2.5" fill="rgba(255,255,255,0.06)"/>
-                    <circle cx="50" cy="44" r="5" fill="url(#heroGrad)"/>
-                    <path d="M50 62 L50 74" stroke="url(#heroGrad)" stroke-width="3" stroke-linecap="round"/>
-                    <defs>
-                        <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="var(--gradient1-start)"/>
-                            <stop offset="100%" stop-color="var(--gradient2-start)"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
+                <img src="logo.png" alt="Fallen Halo Network Logo">
             </div>
             <h1>Fallen Halo Network</h1>
             <p>A premium Minecraft experience built for grinders, fighters, explorers, and legends.</p>
@@ -732,7 +703,7 @@ section{
         </div>
     </section>
 
-    <!-- FOOTER with SVG social icons -->
+    <!-- FOOTER -->
     <footer class="cool-footer fade-in">
         <div class="footer-inner">
             <div class="footer-brand">
@@ -766,11 +737,12 @@ section{
     document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a').forEach(el => el.addEventListener('click', createGlow));
 
     // fade-in observer
-    new IntersectionObserver((entries, obs) => { entries.forEach(e=>e.isIntersecting?e.target.classList.add('visible'):e.target.classList.remove('visible')); }, {threshold:0.12})
-    .observeMultiple = (els) => els.forEach(el => this.observe(el));
-    document.querySelectorAll('.fade-in').forEach(el => new IntersectionObserver(([e])=> e.isIntersecting ? e.target.classList.add('visible') : null, {threshold:0.12}).observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => {
+        const obs = new IntersectionObserver(([e]) => { if(e.isIntersecting) e.target.classList.add('visible'); }, {threshold:0.12});
+        obs.observe(el);
+    });
 
-    // THEME TOGGLE with SVG sun/moon morph
+    // THEME TOGGLE with SVG sun/moon
     const themeBtn = document.getElementById('themeToggleBtn');
     const sunSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
     const moonSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
