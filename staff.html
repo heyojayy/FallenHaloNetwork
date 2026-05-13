@@ -459,17 +459,6 @@ nav{
     line-height: 1.6;
 }
 
-.fade-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1);
-}
-
-.fade-scroll.fade-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 /* ========== MODERN COOL FOOTER ========== */
 .cool-footer{
     margin-top: 0;
@@ -611,14 +600,14 @@ nav{
 </nav>
 
 <main>
-    <section class="hero fade-scroll fade-visible">
+    <section class="hero">
         <div class="hero-content">
             <h1>Leadership Team</h1>
             <p>The dedicated individuals guiding Fallen Halo Network to greatness.</p>
         </div>
     </section>
 
-    <section class="staff-section fade-scroll">
+    <section class="staff-section">
         <div class="container">
             <div class="staff-grid" id="staff-grid"></div>
         </div>
@@ -626,7 +615,7 @@ nav{
 </main>
 
 <!-- FOOTER -->
-<footer class="cool-footer fade-scroll">
+<footer class="cool-footer">
     <div class="footer-inner">
         <div class="footer-brand">
             <h3>FALLEN HALO NETWORK</h3>
@@ -689,7 +678,7 @@ nav{
         
         for (const staff of staffMembers) {
             const card = document.createElement('div');
-            card.className = 'staff-card fade-scroll';
+            card.className = 'staff-card';
             card.setAttribute('data-rank', staff.rank);
             
             const headContainer = document.createElement('div');
@@ -740,6 +729,18 @@ nav{
             card.appendChild(infoDiv);
             grid.appendChild(card);
         }
-        
-        // Apply fade observer to new cards
-        const newFadeElements = documen
+    }
+    
+    renderStaffCards();
+
+    // Click glow effect
+    function createGlow(e) { 
+        let g = document.createElement('div'); 
+        g.className = 'click-glow'; 
+        g.style.left = e.clientX + 'px'; 
+        g.style.top = e.clientY + 'px'; 
+        document.body.appendChild(g); 
+        setTimeout(() => g.remove(), 850); 
+    }
+    
+    document.querySelectorAll('.glow-trigger, .btn, .the
