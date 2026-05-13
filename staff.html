@@ -526,42 +526,30 @@ nav{
 <script type="module">
     import * as THREE from 'three';
     
-    // Staff Data with custom colors - 100% reliable, no external API needed
+    // Staff Data
     const staffMembers = [
         { 
             name: "Ange1XDem0n", 
             rank: "Founder", 
             description: "Creator & Visionary behind Fallen Halo Network. Leading the server with passion and dedication since day one.",
-            primaryColor: "#ffd700",
-            secondaryColor: "#ffaa00",
-            accentColor: "#ff6600",
-            rankIcon: "👑",
-            armorTrim: "#ffcc44"
+            skinUser: "Ange1XDem0n"
         },
         { 
             name: "its_apex", 
             rank: "Executive", 
             description: "Executive Director managing operations, community growth, and strategic partnerships.",
-            primaryColor: "#ff4444",
-            secondaryColor: "#cc3333",
-            accentColor: "#ff8888",
-            rankIcon: "⚡",
-            armorTrim: "#ff6666"
+            skinUser: "atrillun"
         },
         { 
             name: "abwyss", 
             rank: "Head Management", 
             description: "Head of Management overseeing staff, player relations, and server quality assurance.",
-            primaryColor: "#44ff44",
-            secondaryColor: "#33cc33",
-            accentColor: "#88ff88",
-            rankIcon: "📋",
-            armorTrim: "#66ff66"
+            skinUser: "ibeella"
         }
     ];
 
-    // Create high-quality custom 3D character with unique color scheme
-    function createCustomModel(container, staff) {
+    // Create simple static Minecraft-style 3D model with skin texture
+    function createSkinModel(container, username) {
         container.innerHTML = '';
         
         // Setup Scene
@@ -572,245 +560,93 @@ nav{
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
         
-        // Enhanced Lighting
-        const ambientLight = new THREE.AmbientLight(0x404060);
+        // Simple lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene.add(ambientLight);
         
-        const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        const mainLight = new THREE.DirectionalLight(0xffffff, 1);
         mainLight.position.set(5, 10, 7);
         scene.add(mainLight);
         
-        const fillLight = new THREE.PointLight(0x4466cc, 0.5);
-        fillLight.position.set(-3, 2, 4);
+        const fillLight = new THREE.PointLight(0x88aaff, 0.4);
+        fillLight.position.set(-2, 2, 3);
         scene.add(fillLight);
-        
-        const backLight = new THREE.PointLight(0xffaa66, 0.3);
-        backLight.position.set(0, 3, -5);
-        scene.add(backLight);
-        
-        const rimLight = new THREE.PointLight(0xff8866, 0.35);
-        rimLight.position.set(2, 2, -3);
-        scene.add(rimLight);
-        
-        const topLight = new THREE.PointLight(0xffffff, 0.4);
-        topLight.position.set(0, 3, 0);
-        scene.add(topLight);
         
         // Create character group
         const character = new THREE.Group();
         
-        // Parse colors
-        const primaryColor = new THREE.Color(staff.primaryColor);
-        const secondaryColor = new THREE.Color(staff.secondaryColor);
-        const trimColor = new THREE.Color(staff.armorTrim);
+        // Load skin texture from reliable API
+        const skinUrl = `https://minotar.net/skin/${username}`;
+        const textureLoader = new THREE.TextureLoader();
         
-        // Body (base)
-        const bodyGeo = new THREE.BoxGeometry(0.75, 1.15, 0.6);
-        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x2c3e50, roughness: 0.35, metalness: 0.2 });
-        const body = new THREE.Mesh(bodyGeo, bodyMat);
+        // Create default materials in case skin fails to load
+        let skinMaterial = new THREE.MeshStandardMaterial({ color: 0x8B6914, roughness: 0.3 });
+        let clothingMaterial = new THREE.MeshStandardMaterial({ color: 0x2c3e50, roughness: 0.4 });
+        
+        // Try to load the skin
+        textureLoader.load(skinUrl, 
+            (texture) => {
+                // Success - apply skin texture
+                skinMaterial = new THREE.MeshStandardMaterial({ map: texture, roughness: 0.3 });
+                clothingMaterial = new THREE.MeshStandardMaterial({ map: texture, roughness: 0.4 });
+                
+                // Update materials on existing meshes
+                if (head) head.material = skinMaterial;
+                if (body) body.material = clothingMaterial;
+                if (leftArm) leftArm.material = clothingMaterial;
+                if (rightArm) rightArm.material = clothingMaterial;
+                if (leftLeg) leftLeg.material = clothingMaterial;
+                if (rightLeg) rightLeg.material = clothingMaterial;
+            },
+            undefined,
+            (error) => {
+                // Fallback - use default colors
+                console.log(`Could not load skin for ${username}, using default`);
+            }
+        );
+        
+        // Body
+        const bodyGeo = new THREE.BoxGeometry(0.7, 1.1, 0.5);
+        const body = new THREE.Mesh(bodyGeo, clothingMaterial);
         body.position.y = 0;
         character.add(body);
         
-        // Chestplate (custom rank color)
-        const chestGeo = new THREE.BoxGeometry(0.82, 0.92, 0.67);
-        const chestMat = new THREE.MeshStandardMaterial({ color: primaryColor, roughness: 0.25, metalness: 0.7, emissive: primaryColor, emissiveIntensity: 0.12 });
-        const chestplate = new THREE.Mesh(chestGeo, chestMat);
-        chestplate.position.y = 0.05;
-        character.add(chestplate);
-        
-        // Chest emblem
-        const emblemGeo = new THREE.SphereGeometry(0.12, 16, 16);
-        const emblemMat = new THREE.MeshStandardMaterial({ color: trimColor, metalness: 0.9, emissive: trimColor, emissiveIntensity: 0.2 });
-        const emblem = new THREE.Mesh(emblemGeo, emblemMat);
-        emblem.position.set(0, 0.05, 0.45);
-        character.add(emblem);
-        
         // Head
-        const headGeo = new THREE.BoxGeometry(0.72, 0.72, 0.72);
-        const headMat = new THREE.MeshStandardMaterial({ color: 0x8B6914, roughness: 0.2, metalness: 0.1 });
-        const head = new THREE.Mesh(headGeo, headMat);
-        head.position.y = 0.98;
+        const headGeo = new THREE.BoxGeometry(0.7, 0.7, 0.7);
+        const head = new THREE.Mesh(headGeo, skinMaterial);
+        head.position.y = 0.9;
         character.add(head);
         
-        // Face details - glowing eyes
-        const eyeGeometry = new THREE.SphereGeometry(0.08, 16, 16);
-        const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ffff, emissive: 0x00aaff, emissiveIntensity: 0.5 });
-        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-        leftEye.position.set(-0.18, 1.08, 0.37);
-        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-        rightEye.position.set(0.18, 1.08, 0.37);
-        character.add(leftEye);
-        character.add(rightEye);
-        
-        // Rank-specific head accessories
-        if (staff.rank === "Founder") {
-            // Epic Golden Crown
-            const crownBase = new THREE.CylinderGeometry(0.48, 0.52, 0.18, 8);
-            const crownMatGold = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.95, roughness: 0.15, emissive: 0xffaa00, emissiveIntensity: 0.3 });
-            const crown = new THREE.Mesh(crownBase, crownMatGold);
-            crown.position.y = 1.38;
-            character.add(crown);
-            
-            // Crown spikes
-            for (let i = 0; i < 5; i++) {
-                const angle = (i / 5) * Math.PI * 2;
-                const spikeGeo = new THREE.ConeGeometry(0.08, 0.2, 6);
-                const spike = new THREE.Mesh(spikeGeo, crownMatGold);
-                spike.position.set(Math.cos(angle) * 0.48, 1.47, Math.sin(angle) * 0.48);
-                character.add(spike);
-            }
-            
-            // Center jewel
-            const jewelMat = new THREE.MeshStandardMaterial({ color: 0xff3366, emissive: 0xff3366, emissiveIntensity: 0.4 });
-            const jewel = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), jewelMat);
-            jewel.position.set(0, 1.45, 0.48);
-            character.add(jewel);
-            
-            // Cape
-            const capeGeo = new THREE.BoxGeometry(0.9, 1.2, 0.08);
-            const capeMat = new THREE.MeshStandardMaterial({ color: 0x8B0000, metalness: 0.3, roughness: 0.5 });
-            const cape = new THREE.Mesh(capeGeo, capeMat);
-            cape.position.set(0, 0.1, -0.45);
-            character.add(cape);
-            
-        } else if (staff.rank === "Executive") {
-            // Executive helmet with visor
-            const helmetGeo = new THREE.BoxGeometry(0.76, 0.3, 0.76);
-            const helmetMat = new THREE.MeshStandardMaterial({ color: 0xcc3333, metalness: 0.8, roughness: 0.2 });
-            const helmet = new THREE.Mesh(helmetGeo, helmetMat);
-            helmet.position.y = 1.25;
-            character.add(helmet);
-            
-            // Visor
-            const visorGeo = new THREE.BoxGeometry(0.5, 0.1, 0.2);
-            const visorMat = new THREE.MeshStandardMaterial({ color: 0x00aaff, metalness: 0.9, emissive: 0x0088ff, emissiveIntensity: 0.3 });
-            const visor = new THREE.Mesh(visorGeo, visorMat);
-            visor.position.set(0, 1.22, 0.45);
-            character.add(visor);
-            
-            // Shoulder pads (larger)
-            const padGeo = new THREE.BoxGeometry(0.35, 0.2, 0.4);
-            const padMat = new THREE.MeshStandardMaterial({ color: 0xcc3333, metalness: 0.7 });
-            const leftPad = new THREE.Mesh(padGeo, padMat);
-            leftPad.position.set(-0.65, 0.7, 0);
-            const rightPad = new THREE.Mesh(padGeo, padMat);
-            rightPad.position.set(0.65, 0.7, 0);
-            character.add(leftPad);
-            character.add(rightPad);
-            
-        } else if (staff.rank === "Head Management") {
-            // Management headpiece with hologram
-            const headpieceGeo = new THREE.BoxGeometry(0.68, 0.15, 0.68);
-            const headpieceMat = new THREE.MeshStandardMaterial({ color: 0x22aa22, metalness: 0.6, emissive: 0x22ff22, emissiveIntensity: 0.2 });
-            const headpiece = new THREE.Mesh(headpieceGeo, headpieceMat);
-            headpiece.position.y = 1.28;
-            character.add(headpiece);
-            
-            // Holographic display on chest
-            const holoGeo = new THREE.BoxGeometry(0.3, 0.2, 0.05);
-            const holoMat = new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00ffcc, emissiveIntensity: 0.4 });
-            const holoDisplay = new THREE.Mesh(holoGeo, holoMat);
-            holoDisplay.position.set(0, 0.05, 0.48);
-            character.add(holoDisplay);
-        }
-        
         // Legs
-        const legGeo = new THREE.BoxGeometry(0.28, 0.55, 0.32);
-        const legMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 0.4, metalness: 0.3 });
-        const leftLeg = new THREE.Mesh(legGeo, legMat);
-        leftLeg.position.set(-0.22, -0.58, 0);
-        const rightLeg = new THREE.Mesh(legGeo, legMat);
-        rightLeg.position.set(0.22, -0.58, 0);
+        const legGeo = new THREE.BoxGeometry(0.25, 0.55, 0.25);
+        const leftLeg = new THREE.Mesh(legGeo, clothingMaterial);
+        leftLeg.position.set(-0.2, -0.55, 0);
+        const rightLeg = new THREE.Mesh(legGeo, clothingMaterial);
+        rightLeg.position.set(0.2, -0.55, 0);
         character.add(leftLeg);
         character.add(rightLeg);
         
-        // Boots with rank trim
-        const bootGeo = new THREE.BoxGeometry(0.34, 0.22, 0.4);
-        const bootMat = new THREE.MeshStandardMaterial({ color: trimColor, metalness: 0.6, roughness: 0.3 });
-        const leftBoot = new THREE.Mesh(bootGeo, bootMat);
-        leftBoot.position.set(-0.22, -0.85, 0);
-        const rightBoot = new THREE.Mesh(bootGeo, bootMat);
-        rightBoot.position.set(0.22, -0.85, 0);
-        character.add(leftBoot);
-        character.add(rightBoot);
-        
         // Arms
-        const armGeo = new THREE.BoxGeometry(0.26, 0.72, 0.28);
-        const armMat = new THREE.MeshStandardMaterial({ color: 0x2c3e50, roughness: 0.35 });
-        const leftArm = new THREE.Mesh(armGeo, armMat);
-        leftArm.position.set(-0.54, 0.28, 0);
-        const rightArm = new THREE.Mesh(armGeo, armMat);
-        rightArm.position.set(0.54, 0.28, 0);
+        const armGeo = new THREE.BoxGeometry(0.25, 0.7, 0.25);
+        const leftArm = new THREE.Mesh(armGeo, clothingMaterial);
+        leftArm.position.set(-0.5, 0.25, 0);
+        const rightArm = new THREE.Mesh(armGeo, clothingMaterial);
+        rightArm.position.set(0.5, 0.25, 0);
         character.add(leftArm);
         character.add(rightArm);
         
-        // Shoulder pauldrons with rank color
-        const pauldronGeo = new THREE.SphereGeometry(0.22, 8, 8);
-        const pauldronMat = new THREE.MeshStandardMaterial({ color: primaryColor, metalness: 0.7, emissive: primaryColor, emissiveIntensity: 0.1 });
-        const leftPaul = new THREE.Mesh(pauldronGeo, pauldronMat);
-        leftPaul.position.set(-0.65, 0.65, 0);
-        leftPaul.scale.set(0.7, 0.4, 0.6);
-        const rightPaul = new THREE.Mesh(pauldronGeo, pauldronMat);
-        rightPaul.position.set(0.65, 0.65, 0);
-        rightPaul.scale.set(0.7, 0.4, 0.6);
-        character.add(leftPaul);
-        character.add(rightPaul);
-        
-        // Glowing aura effect (particle system)
-        const auraParticles = [];
-        const auraCount = 12;
-        for (let i = 0; i < auraCount; i++) {
-            const particleGeo = new THREE.SphereGeometry(0.03, 6, 6);
-            const particleMat = new THREE.MeshStandardMaterial({ color: primaryColor, emissive: primaryColor, emissiveIntensity: 0.5 });
-            const particle = new THREE.Mesh(particleGeo, particleMat);
-            particle.userData = {
-                angle: (i / auraCount) * Math.PI * 2,
-                radius: 0.9,
-                speed: 0.5 + Math.random() * 0.5
-            };
-            character.add(particle);
-            auraParticles.push(particle);
-        }
-        
         scene.add(character);
         
-        // Position camera
-        camera.position.set(1.6, 1.3, 2.8);
-        camera.lookAt(0, 0.8, 0);
+        // Position camera to show full body
+        camera.position.set(1.2, 1.1, 2.2);
+        camera.lookAt(0, 0.5, 0);
         
-        // Animation
-        let time = 0;
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            time += 0.014;
-            
-            // Gentle floating animation
-            character.position.y = Math.sin(time * 1.6) * 0.045;
-            
-            // Subtle idle sway
-            character.rotation.y = Math.sin(time * 0.5) * 0.1;
-            
-            // Arm swing animation
-            const armSwing = Math.sin(time * 2.0) * 0.25;
-            leftArm.rotation.z = armSwing * 0.6;
-            rightArm.rotation.z = -armSwing * 0.6;
-            
-            // Animate aura particles
-            auraParticles.forEach((particle, idx) => {
-                const data = particle.userData;
-                data.angle += 0.02 * data.speed;
-                particle.position.x = Math.cos(data.angle) * data.radius;
-                particle.position.z = Math.sin(data.angle) * data.radius;
-                particle.position.y = 0.6 + Math.sin(time * 2 + idx) * 0.1;
-                const scale = 0.5 + Math.sin(time * 3 + idx) * 0.3;
-                particle.scale.set(scale, scale, scale);
-            });
-            
+        // Static render - just one frame then continuous (no animation)
+        function render() {
+            requestAnimationFrame(render);
             renderer.render(scene, camera);
         }
-        
-        animate();
+        render();
         
         // Handle resize
         const resizeObserver = new ResizeObserver(() => {
@@ -844,13 +680,13 @@ nav{
             
             if (staff.rank === 'Founder') {
                 rankClass = 'rank-badge-founder';
-                rankDisplay = `${staff.rankIcon} FOUNDER`;
+                rankDisplay = `👑 FOUNDER`;
             } else if (staff.rank === 'Executive') {
                 rankClass = 'rank-badge-executive';
-                rankDisplay = `${staff.rankIcon} EXECUTIVE`;
+                rankDisplay = `⚡ EXECUTIVE`;
             } else {
                 rankClass = 'rank-badge-head';
-                rankDisplay = `${staff.rankIcon} HEAD MANAGEMENT`;
+                rankDisplay = `📋 HEAD MANAGEMENT`;
             }
             
             infoDiv.innerHTML = `
@@ -863,9 +699,9 @@ nav{
             card.appendChild(infoDiv);
             grid.appendChild(card);
             
-            // Create custom 3D model
+            // Create 3D model with skin
             setTimeout(() => {
-                createCustomModel(modelDiv, staff);
+                createSkinModel(modelDiv, staff.skinUser);
             }, 100);
         }
     }
