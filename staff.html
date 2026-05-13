@@ -31,9 +31,12 @@
     --shadow: rgba(166,184,228,.15);
     --btn-hover: rgba(166,184,228,.12);
     --accent-glow: #a6b8e4;
-    --rank-founder: linear-gradient(135deg, #ffd700, #ffaa00);
-    --rank-executive: linear-gradient(135deg, #ff5555, #cc3333);
-    --rank-head: linear-gradient(135deg, #55ff55, #22aa22);
+    --rank-founder-start: #f7971e;
+    --rank-founder-end: #ffd200;
+    --rank-executive-start: #e65c00;
+    --rank-executive-end: #f9d423;
+    --rank-head-start: #00b4db;
+    --rank-head-end: #0083b0;
 }
 
 /* LIGHT MODE */
@@ -53,9 +56,12 @@ body.light-mode{
     --shadow: rgba(93,121,190,.2);
     --btn-hover: rgba(93,121,190,.12);
     --accent-glow: #5d79be;
-    --rank-founder: linear-gradient(135deg, #d4af37, #b8860b);
-    --rank-executive: linear-gradient(135deg, #dc3545, #a71d2a);
-    --rank-head: linear-gradient(135deg, #28a745, #1e7e34);
+    --rank-founder-start: #e6a017;
+    --rank-founder-end: #c9a03d;
+    --rank-executive-start: #c9510c;
+    --rank-executive-end: #d48a2c;
+    --rank-head-start: #0d8ba8;
+    --rank-head-end: #0c6b85;
 }
 
 *{
@@ -382,23 +388,22 @@ nav{
     object-fit: cover;
     image-rendering: crisp-edges;
     image-rendering: pixelated;
-    image-rendering: pixelated;
 }
 
 /* Rank glow effects */
 .staff-card[data-rank="Founder"] .head-bubble{
-    box-shadow: 0 0 30px rgba(255,215,0,0.5);
-    border-color: #ffd700;
+    box-shadow: 0 0 35px rgba(247,151,30,0.6);
+    border-color: #f7971e;
 }
 
 .staff-card[data-rank="Executive"] .head-bubble{
-    box-shadow: 0 0 30px rgba(255,85,85,0.5);
-    border-color: #ff5555;
+    box-shadow: 0 0 35px rgba(230,92,0,0.6);
+    border-color: #e65c00;
 }
 
 .staff-card[data-rank="Head Management"] .head-bubble{
-    box-shadow: 0 0 30px rgba(85,255,85,0.5);
-    border-color: #55ff55;
+    box-shadow: 0 0 35px rgba(0,180,219,0.6);
+    border-color: #00b4db;
 }
 
 .staff-info{
@@ -416,25 +421,33 @@ nav{
 .staff-rank{
     font-size: 0.8rem;
     font-weight: 700;
-    padding: 5px 14px;
+    padding: 6px 16px;
     border-radius: 30px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 14px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .rank-badge-founder{
-    background: var(--rank-founder);
+    background: linear-gradient(135deg, var(--rank-founder-start), var(--rank-founder-end));
     color: #1a1a2e;
 }
 .rank-badge-executive{
-    background: var(--rank-executive);
+    background: linear-gradient(135deg, var(--rank-executive-start), var(--rank-executive-end));
     color: white;
 }
 .rank-badge-head{
-    background: var(--rank-head);
-    color: #1a1a2e;
+    background: linear-gradient(135deg, var(--rank-head-start), var(--rank-head-end));
+    color: white;
+}
+
+.rank-icon{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
 }
 
 .staff-description{
@@ -545,29 +558,32 @@ nav{
 </footer>
 
 <script>
-    // Staff Data with Minecraft usernames for actual skins
+    // Staff Data with Minecraft usernames for 2D heads
     const staffMembers = [
         { 
             name: "Ange1XDem0n", 
             rank: "Founder", 
             description: "Creator & Visionary behind Fallen Halo Network. Leading the server with passion and dedication since day one.",
-            minecraftUsername: "Ange1XDem0n"
+            minecraftUsername: "Ange1XDem0n",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15 9H22L16 14L19 21L12 17L5 21L8 14L2 9H9L12 2Z"/></svg>`
         },
         { 
             name: "its_apex", 
             rank: "Executive", 
             description: "Executive Director managing operations, community growth, and strategic partnerships.",
-            minecraftUsername: "atrillun"
+            minecraftUsername: "atrillun",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>`
         },
         { 
             name: "abwyss", 
             rank: "Head Management", 
             description: "Head of Management overseeing staff, player relations, and server quality assurance.",
-            minecraftUsername: "ibeella"
+            minecraftUsername: "ibeella",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4M8 8H6M18 8H16M12 20L8 16H16L12 20Z" stroke="currentColor" fill="none"/><rect x="8" y="8" width="8" height="8" rx="2" stroke="currentColor" fill="none"/></svg>`
         }
     ];
 
-    // Render staff cards with actual Minecraft heads
+    // Render staff cards with 2D Minecraft heads
     function renderStaffCards() {
         const grid = document.getElementById('staff-grid');
         if (!grid) return;
@@ -586,10 +602,10 @@ nav{
             const bubble = document.createElement('div');
             bubble.className = 'head-bubble';
             
-            // Minecraft head image from mc-heads.net (reliable 3D head render)
+            // 2D Minecraft head image (face-only, 2D render)
             const headImg = document.createElement('img');
-            // Using mc-heads.net for beautiful 3D rendered heads
-            headImg.src = `https://mc-heads.net/head/${staff.minecraftUsername}/100`;
+            // Using 2D face render instead of 3D
+            headImg.src = `https://mc-heads.net/avatar/${staff.minecraftUsername}/100`;
             headImg.alt = `${staff.name}'s Minecraft head`;
             headImg.loading = "lazy";
             
@@ -610,18 +626,21 @@ nav{
             
             if (staff.rank === 'Founder') {
                 rankClass = 'rank-badge-founder';
-                rankDisplay = `👑 FOUNDER`;
+                rankDisplay = `FOUNDER`;
             } else if (staff.rank === 'Executive') {
                 rankClass = 'rank-badge-executive';
-                rankDisplay = `⚡ EXECUTIVE`;
+                rankDisplay = `EXECUTIVE`;
             } else {
                 rankClass = 'rank-badge-head';
-                rankDisplay = `📋 HEAD MANAGEMENT`;
+                rankDisplay = `HEAD MANAGEMENT`;
             }
             
             infoDiv.innerHTML = `
                 <div class="staff-name">${staff.name}</div>
-                <div class="staff-rank ${rankClass}">${rankDisplay}</div>
+                <div class="staff-rank ${rankClass}">
+                    ${staff.icon}
+                    ${rankDisplay}
+                </div>
                 <div class="staff-description">${staff.description}</div>
             `;
             
