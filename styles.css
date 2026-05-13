@@ -53,7 +53,6 @@ body{
     font-family:'Poppins',sans-serif;
     color:var(--text);
     overflow-x:hidden;
-    /* SMOOTH TRANSITION FOR ALL COLOR CHANGES */
     transition: color 0.4s cubic-bezier(0.2, 0.95, 0.3, 1.05);
 }
 
