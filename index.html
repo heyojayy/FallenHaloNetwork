@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -422,8 +423,6 @@ nav{
 
     transition:.35s ease;
 
-    isolation:isolate;
-
     backdrop-filter:blur(14px);
 
     background:var(--card);
@@ -433,6 +432,7 @@ nav{
 
 .btn:hover{
     transform:translateY(-5px);
+
     box-shadow:
     0 12px 35px var(--shadow);
 }
@@ -743,11 +743,6 @@ footer{
 /* FADE */
 /* ===================================== */
 
-
-<style>
-
-/* fade animation */
-
 .fade-in{
 
     opacity:0;
@@ -770,8 +765,6 @@ footer{
 
 }
 
-</style>
-    
 /* ===================================== */
 /* CLICK GLOW */
 /* ===================================== */
@@ -915,7 +908,7 @@ footer{
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero fade-in visible">
 
     <div class="hero-content">
 
@@ -946,7 +939,7 @@ footer{
 
 <!-- FEATURES -->
 
-<section id="features">
+<section id="features" class="fade-in">
 
     <div class="container">
 
@@ -962,7 +955,7 @@ footer{
 
         <div class="features-grid">
 
-            <div class="feature-card glow-trigger">
+            <div class="feature-card glow-trigger fade-in">
 
                 <div class="feature-icon">⚔</div>
 
@@ -975,7 +968,7 @@ footer{
 
             </div>
 
-            <div class="feature-card glow-trigger">
+            <div class="feature-card glow-trigger fade-in">
 
                 <div class="feature-icon">⛏</div>
 
@@ -988,7 +981,7 @@ footer{
 
             </div>
 
-            <div class="feature-card glow-trigger">
+            <div class="feature-card glow-trigger fade-in">
 
                 <div class="feature-icon">☁</div>
 
@@ -1001,7 +994,7 @@ footer{
 
             </div>
 
-            <div class="feature-card glow-trigger">
+            <div class="feature-card glow-trigger fade-in">
 
                 <div class="feature-icon">✦</div>
 
@@ -1022,7 +1015,7 @@ footer{
 
 <!-- GALLERY -->
 
-<section id="gallery">
+<section id="gallery" class="fade-in">
 
     <div class="container">
 
@@ -1038,7 +1031,7 @@ footer{
 
         <div class="gallery-grid">
 
-            <div class="gallery-item glow-trigger">
+            <div class="gallery-item glow-trigger fade-in">
 
                 <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop">
 
@@ -1048,7 +1041,7 @@ footer{
 
             </div>
 
-            <div class="gallery-item glow-trigger">
+            <div class="gallery-item glow-trigger fade-in">
 
                 <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop">
 
@@ -1058,7 +1051,7 @@ footer{
 
             </div>
 
-            <div class="gallery-item glow-trigger">
+            <div class="gallery-item glow-trigger fade-in">
 
                 <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop">
 
@@ -1076,7 +1069,7 @@ footer{
 
 <!-- FAQ -->
 
-<section id="faq">
+<section id="faq" class="fade-in">
 
     <div class="container">
 
@@ -1092,7 +1085,7 @@ footer{
 
         <div class="faq-container">
 
-            <div class="faq-item">
+            <div class="faq-item fade-in">
 
                 <div class="faq-question">
                     What version is the server on?
@@ -1105,7 +1098,7 @@ footer{
 
             </div>
 
-            <div class="faq-item">
+            <div class="faq-item fade-in">
 
                 <div class="faq-question">
                     Is the server pay-to-win?
@@ -1118,7 +1111,7 @@ footer{
 
             </div>
 
-            <div class="faq-item">
+            <div class="faq-item fade-in">
 
                 <div class="faq-question">
                     How do I join the community?
@@ -1139,7 +1132,7 @@ footer{
 
 <!-- FOOTER -->
 
-<footer>
+<footer class="fade-in">
 
     <div class="footer-container">
 
@@ -1220,11 +1213,37 @@ glowTargets.forEach(item => {
 
 });
 
+/* FADE IN / OUT */
+
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('visible');
+
+        } else {
+
+            entry.target.classList.remove('visible');
+
+        }
+
+    });
+
+},{
+    threshold:0.12
+});
+
+fadeElements.forEach(el => {
+    observer.observe(el);
+});
+
 /* THEME TOGGLE */
 
 const themeToggle = document.getElementById('themeToggle');
-
-/* load saved theme */
 
 if(localStorage.getItem('theme') === 'light'){
 
@@ -1237,8 +1256,6 @@ if(localStorage.getItem('theme') === 'light'){
 
 }
 
-/* toggle */
-
 themeToggle.addEventListener('click', () => {
 
     document.body.classList.toggle('light-mode');
@@ -1247,4 +1264,19 @@ themeToggle.addEventListener('click', () => {
 
         themeToggle.innerHTML = '🌙';
 
-    
+        localStorage.setItem('theme', 'light');
+
+    } else {
+
+        themeToggle.innerHTML = '☀';
+
+        localStorage.setItem('theme', 'dark');
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
