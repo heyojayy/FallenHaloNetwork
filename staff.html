@@ -353,7 +353,6 @@ nav{
     backdrop-filter: blur(12px);
     overflow: hidden;
     transition: 0.35s ease;
-    cursor: pointer;
     width: 100%;
     max-width: 380px;
 }
@@ -420,17 +419,7 @@ nav{
     font-size: 0.9rem;
     color: var(--text-soft);
     line-height: 1.7;
-    margin-bottom: 18px;
-}
-
-.staff-minecraft{
-    font-size: 0.8rem;
-    font-family: monospace;
-    background: rgba(0,0,0,0.3);
-    padding: 6px 12px;
-    border-radius: 20px;
-    display: inline-block;
-    color: var(--gradient2-start);
+    margin-bottom: 8px;
 }
 
 /* fade-in */
@@ -530,7 +519,7 @@ nav{
             <h3>FALLEN HALO NETWORK</h3>
             <p>Led by passion, driven by excellence.</p>
         </div>
-        <div class="footer-bottom">© 2025 Fallen Halo Network — Esteemed Leadership Team</div>
+        <div class="footer-bottom">© 2026 Fallen Halo Network — Esteemed Leadership Team</div>
     </div>
 </footer>
 
@@ -542,27 +531,39 @@ nav{
         { 
             name: "Ange1XDem0n", 
             rank: "Founder", 
-            description: "Creator & Visionary behind Fallen Halo Network. Leading the server with passion and dedication since day one.", 
+            description: "Creator & Visionary behind Fallen Halo Network. Leading the server with passion and dedication since day one.",
             skinUser: "Ange1XDem0n"
         },
         { 
             name: "its_apex", 
             rank: "Executive", 
-            description: "Executive Director managing operations, community growth, and strategic partnerships.", 
+            description: "Executive Director managing operations, community growth, and strategic partnerships.",
             skinUser: "atrillun"
         },
         { 
             name: "abwyss", 
             rank: "Head Management", 
-            description: "Head of Management overseeing staff, player relations, and server quality assurance.", 
+            description: "Head of Management overseeing staff, player relations, and server quality assurance.",
             skinUser: "ibeella"
         }
     ];
 
-    // Function to create 3D Minecraft-style model with custom skin texture
+    // Function to load and apply Minecraft skin texture to a 3D model
     async function createMinecraftModel(username, container) {
-        // Clear container
         container.innerHTML = '';
+        
+        // Create loading indicator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'loading-placeholder';
+        loadingDiv.style.position = 'absolute';
+        loadingDiv.style.top = '50%';
+        loadingDiv.style.left = '50%';
+        loadingDiv.style.transform = 'translate(-50%, -50%)';
+        loadingDiv.style.color = 'var(--text-soft)';
+        loadingDiv.style.fontSize = '0.9rem';
+        loadingDiv.style.zIndex = '10';
+        loadingDiv.innerHTML = '🎮 Loading 3D Model...';
+        container.appendChild(loadingDiv);
         
         // Setup Scene
         const scene = new THREE.Scene();
@@ -571,6 +572,11 @@ nav{
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
+        
+        // Remove loading text when renderer is ready
+        setTimeout(() => {
+            if (loadingDiv) loadingDiv.remove();
+        }, 500);
         
         // Lighting
         const ambientLight = new THREE.AmbientLight(0x404060);
@@ -592,10 +598,10 @@ nav{
         rimLight.position.set(2, 2, -3);
         scene.add(rimLight);
         
-        // Create a stylized Minecraft-inspired character
+        // Create character group
         const character = new THREE.Group();
         
-        // Determine rank color for armor trim
+        // Determine rank colors
         const isFounder = username === "Ange1XDem0n";
         const isExecutive = username === "atrillun";
         const isHead = username === "ibeella";
@@ -606,6 +612,11 @@ nav{
         else if (isExecutive) { accentColor = 0xff5555; glowColor = 0xff3333; }
         else if (isHead) { accentColor = 0x55ff55; glowColor = 0x33ff33; }
         
+        // Load Minecraft skin texture
+        const skinTextureUrl = `https://mc-heads.net/body/${username}`;
+        const textureLoader = new THREE.TextureLoader();
+        
+        // Create a more detailed Minecraft-style character
         // Body
         const bodyGeo = new THREE.BoxGeometry(0.75, 1.15, 0.6);
         const bodyMat = new THREE.MeshStandardMaterial({ color: 0x3d5a80, roughness: 0.35, metalness: 0.15 });
@@ -620,9 +631,18 @@ nav{
         chestplate.position.y = 0.05;
         character.add(chestplate);
         
-        // Head
+        // Head (larger for Minecraft feel)
         const headGeo = new THREE.BoxGeometry(0.72, 0.72, 0.72);
-        const headMat = new THREE.MeshStandardMaterial({ color: 0xffccaa, roughness: 0.25 });
+        
+        // Try to apply skin texture to head
+        let headMat;
+        try {
+            const skinTexture = textureLoader.load(`https://mc-heads.net/avatar/${username}/128`);
+            headMat = new THREE.MeshStandardMaterial({ map: skinTexture, roughness: 0.25 });
+        } catch (e) {
+            headMat = new THREE.MeshStandardMaterial({ color: 0xffccaa, roughness: 0.25 });
+        }
+        
         const head = new THREE.Mesh(headGeo, headMat);
         head.position.y = 0.98;
         character.add(head);
@@ -642,7 +662,7 @@ nav{
             jewel.position.set(0, 1.45, 0.45);
             character.add(jewel);
         } else if (isExecutive) {
-            // Executive beret / shoulder pads
+            // Executive beret
             const beretGeo = new THREE.SphereGeometry(0.38, 16, 16);
             const beretMat = new THREE.MeshStandardMaterial({ color: 0xcc3333, roughness: 0.4 });
             const beret = new THREE.Mesh(beretGeo, beretMat);
@@ -650,7 +670,7 @@ nav{
             beret.scale.set(0.9, 0.25, 0.9);
             character.add(beret);
         } else if (isHead) {
-            // Management visor / headpiece
+            // Management visor
             const visorGeo = new THREE.BoxGeometry(0.55, 0.12, 0.45);
             const visorMat = new THREE.MeshStandardMaterial({ color: 0x22aa22, metalness: 0.7, emissive: 0x22ff22, emissiveIntensity: 0.2 });
             const visor = new THREE.Mesh(visorGeo, visorMat);
@@ -688,7 +708,7 @@ nav{
         character.add(leftArm);
         character.add(rightArm);
         
-        // Shoulder pauldrons based on rank
+        // Shoulder pauldrons
         const pauldronGeo = new THREE.SphereGeometry(0.22, 8, 8);
         const pauldronMat = new THREE.MeshStandardMaterial({ color: accentColor, metalness: 0.7 });
         const leftPaul = new THREE.Mesh(pauldronGeo, pauldronMat);
@@ -708,21 +728,18 @@ nav{
         
         // Animation variables
         let time = 0;
-        let floatSpeed = 1.8;
-        let floatAmplitude = 0.04;
-        let rotationAmplitude = 0.25;
         
         function animate() {
             requestAnimationFrame(animate);
             time += 0.014;
             
             // Gentle floating animation
-            character.position.y = Math.sin(time * floatSpeed) * floatAmplitude;
+            character.position.y = Math.sin(time * 1.8) * 0.04;
             
             // Subtle idle sway
-            character.rotation.y = Math.sin(time * 0.6) * rotationAmplitude * 0.3;
+            character.rotation.y = Math.sin(time * 0.6) * 0.08;
             
-            // Arm swing for living feel
+            // Arm swing
             const armSwing = Math.sin(time * 2.2) * 0.2;
             leftArm.rotation.z = armSwing * 0.5;
             rightArm.rotation.z = -armSwing * 0.5;
@@ -777,14 +794,13 @@ nav{
                 <div class="staff-name">${staff.name}</div>
                 <div class="staff-rank ${rankClass}">${rankDisplay}</div>
                 <div class="staff-description">${staff.description}</div>
-                <div class="staff-minecraft">🎮 ${staff.skinUser !== staff.name ? `Skin: ${staff.skinUser}` : 'Original Skin'}</div>
             `;
             
             card.appendChild(modelDiv);
             card.appendChild(infoDiv);
             grid.appendChild(card);
             
-            // Initialize 3D model with the correct skin username
+            // Initialize 3D model
             setTimeout(() => {
                 createMinecraftModel(staff.skinUser, modelDiv);
             }, 100);
