@@ -5,69 +5,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fallen Halo Network</title>
+<title>Fallen Halo Network | Edge Nav & Gradient Transition</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 /* ===================================== */
-/* ROOT COLORS */
+/* ROOT COLORS + ANIMATED GRADIENT */
 /* ===================================== */
 
 :root{
-
-    --bg:#0d1016;
-    --bg2:#151b28;
-
-    --text:#ffffff;
-    --text-soft:#bcc6d8;
-
-    --card:rgba(255,255,255,.05);
-    --card-border:rgba(255,255,255,.08);
-
-    --navbar:rgba(10,10,15,.35);
-
-    --gradient1:#e2e6ee;
-    --gradient2:#a6b8e4;
-
-    --shadow:rgba(166,184,228,.18);
-
-    --glow1:#e2e6ee;
-    --glow2:#a6b8e4;
-    --glow3:#bcc9eb;
-
+    --bg-start: #0a0c12;
+    --bg-mid: #111827;
+    --bg-end: #0f172a;
+    --text: #ffffff;
+    --text-soft: #cbd5e1;
+    --card: rgba(255,255,255,.04);
+    --card-border: rgba(255,255,255,.07);
+    --navbar-bg: rgba(5,7,12,.65);
+    --gradient1-start: #e2e6ee;
+    --gradient1-end: #c5d3f0;
+    --gradient2-start: #a6b8e4;
+    --gradient2-end: #7a9ad6;
+    --shadow: rgba(166,184,228,.15);
+    --btn-hover: rgba(166,184,228,.12);
 }
 
 /* LIGHT MODE */
-
 body.light-mode{
-
-    --bg:#eef2f9;
-    --bg2:#dce5f7;
-
-    --text:#111827;
-    --text-soft:#4b5563;
-
-    --card:rgba(255,255,255,.75);
-    --card-border:rgba(0,0,0,.06);
-
-    --navbar:rgba(255,255,255,.55);
-
-    --gradient1:#8ca3dd;
-    --gradient2:#5d79be;
-
-    --shadow:rgba(93,121,190,.15);
-
-    --glow1:#8ca3dd;
-    --glow2:#5d79be;
-    --glow3:#a3b8e8;
-
+    --bg-start: #f0f4fa;
+    --bg-mid: #e8edf6;
+    --bg-end: #dfe6f2;
+    --text: #0f172a;
+    --text-soft: #334155;
+    --card: rgba(255,255,255,.8);
+    --card-border: rgba(0,0,0,.06);
+    --navbar-bg: rgba(255,255,255,.75);
+    --gradient1-start: #8ca3dd;
+    --gradient1-end: #6b8bc9;
+    --gradient2-start: #5d79be;
+    --gradient2-end: #4a61a3;
+    --shadow: rgba(93,121,190,.2);
+    --btn-hover: rgba(93,121,190,.12);
 }
-
-/* ===================================== */
-/* GLOBAL */
-/* ===================================== */
 
 *{
     margin:0;
@@ -83,918 +64,702 @@ body{
     font-family:'Poppins',sans-serif;
     color:var(--text);
     overflow-x:hidden;
+    transition: color 0.35s ease;
 }
 
-/* Theme transition overlay */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:99998;
-    pointer-events:none;
-    opacity:0;
-    transition:opacity .15s ease;
+/* ANIMATED GRADIENT BACKGROUND */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, var(--bg-mid) 0%, var(--bg-start) 50%, var(--bg-end) 100%);
+    z-index: -6;
+    transition: background 0.7s cubic-bezier(0.2, 0.95, 0.3, 1.05);
+    will-change: background;
 }
 
-body.theme-transitioning::before{
-    opacity:1;
+body.light-mode::before {
+    background: radial-gradient(ellipse at 70% 30%, var(--bg-mid) 0%, var(--bg-start) 60%, var(--bg-end) 100%);
 }
 
-/* remove mobile blue highlight */
-button,
-a,
-div{
-    -webkit-tap-highlight-color:transparent;
-}
-
-/* ===================================== */
-/* BACKGROUND — smooth CSS transitions  */
-/* ===================================== */
-
-.background{
+/* floating orbs with gradient transition */
+.glow-bg{
     position:fixed;
     inset:0;
     z-index:-5;
-    overflow:hidden;
-    background:radial-gradient(circle at top, var(--bg2) 0%, var(--bg) 60%);
-    transition:background 0.8s ease;
+    pointer-events:none;
 }
-
-.glow{
+.glow-sphere{
     position:absolute;
     border-radius:50%;
-    filter:blur(120px);
-    opacity:.45;
-    animation:float 12s ease-in-out infinite;
-    /* smooth color transitions */
-    transition:background 0.8s ease;
+    filter:blur(140px);
+    opacity:0.55;
+    transition: background 0.6s ease, transform 0.4s ease;
+    animation: floatOrb 18s infinite alternate ease-in-out;
 }
-
-.glow.one{
-    width:420px;
-    height:420px;
-    background:var(--glow1);
-    top:-120px;
+.glow-sphere.one{
+    width:550px;
+    height:550px;
+    background: var(--gradient1-start);
+    top:-180px;
     left:-120px;
 }
-
-.glow.two{
-    width:360px;
-    height:360px;
-    background:var(--glow2);
-    right:-120px;
-    top:20%;
-    animation-delay:2s;
+.glow-sphere.two{
+    width:500px;
+    height:500px;
+    background: var(--gradient2-start);
+    bottom:-120px;
+    right:-80px;
+    animation-delay: -5s;
+}
+.glow-sphere.three{
+    width:400px;
+    height:400px;
+    background: var(--gradient2-end);
+    bottom:15%;
+    left:15%;
+    opacity:0.35;
+    animation-delay: -10s;
+}
+body.light-mode .glow-sphere.one{
+    background: #b7c9f0;
+}
+body.light-mode .glow-sphere.two{
+    background: #6d8ed1;
+}
+body.light-mode .glow-sphere.three{
+    background: #8aa9df;
 }
 
-.glow.three{
-    width:300px;
-    height:300px;
-    background:var(--glow3);
-    bottom:-100px;
-    left:35%;
-    animation-delay:4s;
-}
-
-@keyframes float{
-    0%  { transform:translateY(0px) translateX(0px); }
-    50% { transform:translateY(-40px) translateX(25px); }
-    100%{ transform:translateY(0px) translateX(0px); }
-}
-
-/* ===================================== */
-/* PARTICLES */
-/* ===================================== */
-
-.particles{
-    position:absolute;
-    inset:0;
-}
-
-.particles span{
-    position:absolute;
-    width:4px;
-    height:4px;
-    border-radius:50%;
-    background:rgba(255,255,255,.6);
-    animation:particle linear infinite;
-    transition:background 0.8s ease;
-}
-
-body.light-mode .particles span{
-    background:rgba(93,121,190,.35);
-}
-
-@keyframes particle{
-    0%  { transform:translateY(110vh) scale(0); opacity:0; }
-    10% { opacity:1; }
-    100%{ transform:translateY(-10vh) scale(1); opacity:0; }
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.08); }
 }
 
 /* ===================================== */
-/* GRADIENT WIPE OVERLAY                 */
-/* ===================================== */
-
-#theme-wipe{
-    position:fixed;
-    inset:0;
-    z-index:99997;
-    pointer-events:none;
-    opacity:0;
-    background:linear-gradient(
-        135deg,
-        rgba(226,230,238,.55) 0%,
-        rgba(166,184,228,.45) 50%,
-        rgba(188,201,235,.35) 100%
-    );
-    transition:opacity .5s ease;
-}
-
-body.light-mode #theme-wipe{
-    background:linear-gradient(
-        135deg,
-        rgba(140,163,221,.4) 0%,
-        rgba(93,121,190,.35) 50%,
-        rgba(163,184,232,.3) 100%
-    );
-}
-
-#theme-wipe.active{
-    opacity:1;
-}
-
-/* ===================================== */
-/* NAVBAR                                */
+/* HORIZONTAL NAVBAR - EDGE ALIGNMENT */
 /* ===================================== */
 
 nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:999;
-    backdrop-filter:blur(18px);
-    background:var(--navbar);
-    border-bottom:1px solid var(--card-border);
-    transition:background 0.8s ease, border-color 0.8s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--card-border);
+    transition: background 0.3s, border-color 0.3s;
 }
 
 .nav-container{
-    max-width:1300px;
-    margin:auto;
-    padding:18px 25px;
-
-    /* logo far left, everything else far right */
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* KEY: pushes logo left, buttons right */
+    gap: 24px;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    font-size:1.15rem;
-    font-weight:700;
-    /* anchored to the far left naturally via flex */
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.2px;
+    flex-shrink: 0;
 }
 
 .logo img{
-    width:48px;
-    height:48px;
-    object-fit:contain;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px var(--shadow));
 }
 
-/* Right side: links + toggle together, pushed to far right */
+.logo span{
+    background: linear-gradient(135deg, var(--gradient1-start), var(--gradient2-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
 .nav-right{
-    display:flex;
-    align-items:center;
-    gap:25px;
-    margin-left:auto; /* ensures it always hugs the right edge */
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-shrink: 0;
 }
 
 .nav-links{
-    display:flex;
-    align-items:center;
-    gap:30px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
 }
 
 .nav-links a{
-    color:var(--text);
-    text-decoration:none;
-    font-weight:500;
-    position:relative;
-    transition:color 0.8s ease;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: 0.2s;
+    position: relative;
+    opacity: 0.9;
 }
 
 .nav-links a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-6px;
-    width:0%;
-    height:2px;
-    background:var(--gradient2);
-    transition:width .3s, background 0.8s ease;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gradient1-start), var(--gradient2-start));
+    transition: 0.3s;
 }
 
 .nav-links a:hover::after{
-    width:100%;
+    width: 100%;
 }
 
-/* ===================================== */
-/* THEME BUTTON                          */
-/* ===================================== */
+.nav-links a:hover{
+    opacity: 1;
+}
 
 .theme-toggle{
-    width:48px;
-    height:48px;
-    border-radius:14px;
-    border:1px solid var(--card-border);
-    background:var(--card);
-    color:var(--text);
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:1.2rem;
-    transition:
-        transform .3s ease,
-        background 0.8s ease,
-        border-color 0.8s ease,
-        color 0.8s ease;
-    backdrop-filter:blur(12px);
-    position:relative;
-    overflow:hidden;
+    width: 46px;
+    height: 46px;
+    border-radius: 30px;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: 0.25s ease;
+    backdrop-filter: blur(8px);
 }
 
 .theme-toggle:hover{
-    transform:translateY(-3px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--shadow);
 }
 
-/* Ripple inside button on click */
-.theme-toggle .ripple{
-    position:absolute;
-    inset:0;
-    border-radius:inherit;
-    background:radial-gradient(
-        circle,
-        rgba(166,184,228,.6),
-        transparent 70%
-    );
-    opacity:0;
-    transform:scale(0);
-    transition:transform .45s ease, opacity .45s ease;
-    pointer-events:none;
+/* responsive: stack on smaller screens? keep horizontal flow */
+@media (max-width: 680px) {
+    .nav-container {
+        padding: 12px 20px;
+        flex-wrap: wrap;
+    }
+    .nav-links {
+        gap: 18px;
+    }
+    .nav-right {
+        gap: 16px;
+    }
+    .logo span {
+        font-size: 0.9rem;
+    }
 }
 
-.theme-toggle.firing .ripple{
-    transform:scale(2.5);
-    opacity:1;
+@media (max-width: 550px) {
+    .nav-links {
+        gap: 12px;
+    }
+    .nav-links a {
+        font-size: 0.8rem;
+    }
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* main content push down */
+main {
+    padding-top: 0;
 }
 
 /* ===================================== */
-/* HERO */
+/* HERO & GLOBAL */
 /* ===================================== */
 
 .hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:130px 20px 80px;
+    min-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 20px 90px;
 }
-
 .hero-content{
-    max-width:950px;
+    max-width: 1000px;
 }
-
 .hero-logo{
-    width:150px;
-    margin-bottom:25px;
-    animation:logoFloat 4s ease-in-out infinite;
-    filter:drop-shadow(0 0 35px rgba(255,255,255,.2));
+    width: 150px;
+    margin-bottom: 28px;
+    animation: logoFloat 4.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 28px var(--shadow));
 }
-
 @keyframes logoFloat{
-    0%,100%{ transform:translateY(0px); }
-    50%    { transform:translateY(-12px); }
+    0%,100%{ transform:translateY(0px);}
+    50%{ transform:translateY(-14px);}
 }
-
 .hero h1{
-    font-size:5rem;
-    line-height:1;
-    margin-bottom:24px;
-    background:linear-gradient(90deg, var(--gradient1), var(--gradient2));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    transition:background 0.8s ease;
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 22px;
+    background: linear-gradient(125deg, var(--gradient1-start), var(--gradient2-start), var(--gradient1-end));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
 }
-
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
 .hero p{
-    font-size:1.08rem;
-    line-height:1.9;
-    color:var(--text-soft);
-    margin-bottom:42px;
-    transition:color 0.8s ease;
+    font-size: 1.12rem;
+    color: var(--text-soft);
+    margin-bottom: 48px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-/* ===================================== */
-/* BUTTONS */
-/* ===================================== */
-
-.hero-buttons{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
 .btn{
-    position:relative;
-    overflow:hidden;
-    padding:17px 36px;
-    border-radius:18px;
-    text-decoration:none;
-    font-weight:600;
-    color:var(--text);
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        background 0.8s ease,
-        border-color 0.8s ease,
-        color 0.8s ease;
-    backdrop-filter:blur(14px);
-    background:var(--card);
-    border:1px solid var(--card-border);
+    padding: 16px 38px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    transition: 0.25s ease;
+    display: inline-block;
 }
-
-.btn:hover{
-    transform:translateY(-5px);
-    box-shadow:0 12px 35px var(--shadow);
-}
-
 .btn-primary{
-    background:linear-gradient(
-        135deg,
-        rgba(226,230,238,.12),
-        rgba(166,184,228,.22)
-    );
+    background: linear-gradient(110deg, rgba(166,184,228,0.18), rgba(226,230,238,0.08));
+}
+.btn:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 18px 32px var(--shadow);
+}
+.hero-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
 }
 
-/* ===================================== */
-/* SECTIONS */
-/* ===================================== */
-
+/* sections */
 section{
-    padding:110px 20px;
+    padding: 100px 24px;
 }
-
 .container{
-    max-width:1250px;
-    margin:auto;
+    max-width: 1280px;
+    margin: auto;
 }
-
 .section-title{
-    text-align:center;
-    margin-bottom:70px;
+    text-align: center;
+    margin-bottom: 70px;
 }
-
 .section-title h2{
-    font-size:3rem;
-    margin-bottom:14px;
-    background:linear-gradient(90deg, var(--gradient1), var(--gradient2));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    font-size: 3rem;
+    background: linear-gradient(90deg, var(--gradient1-start), var(--gradient2-start));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 14px;
 }
-
 .section-title p{
-    color:var(--text-soft);
-    transition:color 0.8s ease;
+    color: var(--text-soft);
 }
-
-/* ===================================== */
-/* FEATURES */
-/* ===================================== */
-
 .features-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
 }
-
 .feature-card{
-    background:var(--card);
-    border:1px solid var(--card-border);
-    padding:35px;
-    border-radius:26px;
-    backdrop-filter:blur(16px);
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        background 0.8s ease,
-        border-color 0.8s ease;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    padding: 38px 30px;
+    border-radius: 36px;
+    backdrop-filter: blur(12px);
+    transition: 0.35s;
 }
-
 .feature-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 45px rgba(0,0,0,.12), 0 0 50px var(--shadow);
+    transform: translateY(-10px);
+    box-shadow: 0 22px 48px var(--shadow);
 }
-
 .feature-icon{
-    width:65px;
-    height:65px;
-    border-radius:18px;
-    background:linear-gradient(135deg, var(--gradient1), var(--gradient2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:1.5rem;
-    margin-bottom:22px;
-    transition:background 0.8s ease;
+    width: 68px;
+    height: 68px;
+    background: linear-gradient(145deg, var(--gradient1-start), var(--gradient2-start));
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: white;
 }
-
-.feature-card h3{
-    margin-bottom:14px;
-    font-size:1.3rem;
-}
-
-.feature-card p{
-    line-height:1.8;
-    color:var(--text-soft);
-    transition:color 0.8s ease;
-}
-
-/* ===================================== */
-/* GALLERY */
-/* ===================================== */
-
 .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
-
 .gallery-item{
-    position:relative;
-    overflow:hidden;
-    border-radius:24px;
-    height:240px;
-    border:1px solid var(--card-border);
-    transition:transform .35s ease, border-color 0.8s ease;
+    border-radius: 32px;
+    overflow: hidden;
+    height: 270px;
+    position: relative;
+    border: 1px solid var(--card-border);
+    transition: 0.3s;
 }
-
 .gallery-item:hover{
-    transform:translateY(-8px);
+    transform: translateY(-8px);
 }
-
 .gallery-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
 }
-
 .gallery-item:hover img{
-    transform:scale(1.08);
+    transform: scale(1.07);
 }
-
 .gallery-overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,.75), transparent);
-    display:flex;
-    align-items:flex-end;
-    padding:24px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    padding: 24px;
+    font-weight: 600;
+    color: white;
 }
-
-/* ===================================== */
-/* FAQ */
-/* ===================================== */
-
 .faq-container{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
-
 .faq-item{
-    background:var(--card);
-    border:1px solid var(--card-border);
-    border-radius:18px;
-    overflow:hidden;
-    transition:background 0.8s ease, border-color 0.8s ease;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 30px;
+    overflow: hidden;
 }
-
 .faq-question{
-    padding:24px 28px;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-weight:600;
-    user-select:none;
+    padding: 24px 30px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    cursor: pointer;
 }
-
-.faq-question span{
-    transition:transform .35s ease;
-}
-
 .faq-answer{
-    max-height:0;
-    overflow:hidden;
-    padding:0 28px;
-    color:var(--text-soft);
-    line-height:1.8;
-    opacity:0;
-    transition:
-        max-height .45s ease,
-        opacity .35s ease,
-        padding .35s ease,
-        color 0.8s ease;
+    max-height: 0;
+    padding: 0 30px;
+    opacity: 0;
+    overflow: hidden;
+    transition: 0.4s;
+    color: var(--text-soft);
 }
-
 .faq-item.active .faq-answer{
-    max-height:250px;
-    opacity:1;
-    padding:0 28px 24px;
+    max-height: 220px;
+    padding: 0 30px 28px;
+    opacity: 1;
 }
-
 .faq-item.active .faq-question span{
-    transform:rotate(45deg);
+    transform: rotate(45deg);
 }
 
-/* ===================================== */
-/* FOOTER */
-/* ===================================== */
-
-footer{
-    padding:50px 20px;
-    border-top:1px solid var(--card-border);
-    background:rgba(255,255,255,.02);
-    transition:border-color 0.8s ease, background 0.8s ease;
+/* ========== MODERN COOL FOOTER ========== */
+.cool-footer{
+    margin-top: 50px;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--card-border);
+    padding: 3.5rem 2rem 1.5rem;
+    transition: 0.3s;
+}
+.footer-inner{
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
+}
+.footer-brand h3{
+    font-size: 1.7rem;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--gradient1-start), var(--gradient2-start));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.footer-brand p{
+    max-width: 340px;
+    color: var(--text-soft);
+    line-height: 1.5;
+}
+.footer-links-grid{
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+}
+.footer-col h4{
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.footer-col a{
+    display: block;
+    color: var(--text-soft);
+    text-decoration: none;
+    margin: 12px 0;
+    transition: 0.2s;
+    font-size: 0.9rem;
+}
+.footer-col a:hover{
+    color: var(--gradient2-start);
+    transform: translateX(5px);
+}
+.social-icon-set{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+.social-icon-set a{
+    background: var(--card);
+    width: 44px;
+    height: 44px;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--card-border);
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.2s;
+}
+.social-icon-set a:hover{
+    transform: translateY(-4px);
+    background: var(--btn-hover);
+}
+.footer-bottom{
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--card-border);
+    font-size: 0.8rem;
+    color: var(--text-soft);
 }
 
-.footer-container{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    gap:30px;
-    flex-wrap:wrap;
-}
-
-.footer-left h3{
-    margin-bottom:12px;
-}
-
-.footer-left p{
-    color:var(--text-soft);
-    max-width:500px;
-    line-height:1.8;
-    transition:color 0.8s ease;
-}
-
-.footer-links{
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-}
-
-.footer-btn{
-    padding:13px 22px;
-    border-radius:14px;
-    text-decoration:none;
-    color:var(--text);
-    background:var(--card);
-    border:1px solid var(--card-border);
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        background 0.8s ease,
-        border-color 0.8s ease,
-        color 0.8s ease;
-    backdrop-filter:blur(12px);
-}
-
-.footer-btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 30px var(--shadow);
-}
-
-/* ===================================== */
-/* FADE */
-/* ===================================== */
-
+/* fade-in + click glow */
 .fade-in{
-    opacity:0;
-    transform:translateY(60px);
-    transition:opacity .9s ease, transform .9s ease;
-    will-change:opacity, transform;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s ease;
 }
-
 .fade-in.visible{
-    opacity:1;
-    transform:translateY(0px);
+    opacity: 1;
+    transform: translateY(0px);
 }
-
-/* ===================================== */
-/* CLICK GLOW */
-/* ===================================== */
-
 .click-glow{
-    position:fixed;
-    width:0;
-    height:0;
-    border-radius:50%;
-    pointer-events:none;
-    background:radial-gradient(circle, rgba(166,184,228,.35), transparent 70%);
-    transform:translate(-50%,-50%);
-    animation:glowBurst .85s ease-out forwards;
-    z-index:99999;
+    position: fixed;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(166,184,228,0.5), transparent 75%);
+    transform: translate(-50%, -50%);
+    animation: glowPop 0.85s ease-out forwards;
+    z-index: 10000;
 }
-
-@keyframes glowBurst{
-    0%  { width:0; height:0; opacity:1; }
-    100%{ width:550px; height:550px; opacity:0; }
+@keyframes glowPop{
+    0%{ width: 0px; height: 0px; opacity: 0.7; }
+    100%{ width: 500px; height: 500px; opacity: 0; }
 }
-
-/* ===================================== */
-/* RESPONSIVE */
-/* ===================================== */
-
-@media(max-width:900px){
-    .hero h1{ font-size:3.5rem; }
-    .nav-links{ gap:18px; }
-}
-
-@media(max-width:700px){
-    .nav-links{ display:none; }
-    .hero h1{ font-size:2.7rem; }
-    .hero-buttons{ flex-direction:column; }
-    .btn{ width:100%; }
-}
-
 </style>
 </head>
 <body>
 
-<!-- BACKGROUND -->
-<div class="background">
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
-
-    <div class="particles">
-        <span style="left:5%;  animation-duration:12s;"></span>
-        <span style="left:15%; animation-duration:18s;"></span>
-        <span style="left:25%; animation-duration:11s;"></span>
-        <span style="left:35%; animation-duration:15s;"></span>
-        <span style="left:45%; animation-duration:19s;"></span>
-        <span style="left:55%; animation-duration:13s;"></span>
-        <span style="left:65%; animation-duration:17s;"></span>
-        <span style="left:75%; animation-duration:10s;"></span>
-        <span style="left:85%; animation-duration:16s;"></span>
-        <span style="left:95%; animation-duration:14s;"></span>
-    </div>
+<div class="glow-bg">
+    <div class="glow-sphere one"></div>
+    <div class="glow-sphere two"></div>
+    <div class="glow-sphere three"></div>
 </div>
 
-<!-- GRADIENT WIPE OVERLAY -->
-<div id="theme-wipe"></div>
-
-<!-- NAVBAR -->
+<!-- NAVBAR: LOGO FAR LEFT, BUTTONS FAR RIGHT -->
 <nav>
     <div class="nav-container">
-
-        <!-- Logo — far left -->
         <div class="logo">
-            <img src="logo.png" alt="">
-            <span>Fallen Halo Network</span>
+            <img src="logo.png" alt="Fallen Halo" onerror="this.src='https://placehold.co/64x64/1e2a3e/ffffff?text=FH'">
+            <span>FALLEN HALO</span>
         </div>
-
-        <!-- Nav links + toggle — far right -->
         <div class="nav-right">
-
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#faq">FAQ</a>
             </div>
-
-            <button class="theme-toggle" id="themeToggle">
-                <span class="ripple"></span>
-                <span class="icon">☀</span>
-            </button>
-
+            <button class="theme-toggle" id="themeToggleBtn">☀️</button>
         </div>
-
     </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero fade-in visible">
-    <div class="hero-content">
-        <img src="logo.png" class="hero-logo" alt="">
-        <h1>Fallen Halo Network</h1>
-        <p>
-            A premium Minecraft experience built for grinders,
-            fighters, explorers, and legends.
-        </p>
-        <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Play Now</a>
-            <a href="#" class="btn">Join Discord</a>
+<main>
+    <!-- HERO -->
+    <section class="hero fade-in visible">
+        <div class="hero-content">
+            <img src="logo.png" class="hero-logo" alt="logo" onerror="this.src='https://placehold.co/150x150/2d3a5e/white?text=FH'">
+            <h1>Fallen Halo Network</h1>
+            <p>A premium Minecraft experience built for grinders, fighters, explorers, and legends.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">▶ PLAY NOW</a>
+                <a href="#" class="btn">💬 JOIN DISCORD</a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- FEATURES -->
-<section id="features" class="fade-in">
-    <div class="container">
-        <div class="section-title">
-            <h2>Features</h2>
-            <p>Built to deliver the best Minecraft experience.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card glow-trigger fade-in">
-                <div class="feature-icon">⚔</div>
-                <h3>Competitive PvP</h3>
-                <p>Ranked battles, custom events, and balanced combat.</p>
-            </div>
-            <div class="feature-card glow-trigger fade-in">
-                <div class="feature-icon">⛏</div>
-                <h3>Economy System</h3>
-                <p>Trade, grind, and dominate the server economy.</p>
-            </div>
-            <div class="feature-card glow-trigger fade-in">
-                <div class="feature-icon">☁</div>
-                <h3>Unique Worlds</h3>
-                <p>Explore stunning custom maps and hidden secrets.</p>
-            </div>
-            <div class="feature-card glow-trigger fade-in">
-                <div class="feature-icon">✦</div>
-                <h3>Custom Content</h3>
-                <p>Exclusive gameplay systems built for Fallen Halo.</p>
+    <!-- FEATURES -->
+    <section id="features" class="fade-in">
+        <div class="container">
+            <div class="section-title"><h2>Features</h2><p>Built to deliver the best Minecraft experience.</p></div>
+            <div class="features-grid">
+                <div class="feature-card glow-trigger"><div class="feature-icon">⚔️</div><h3>Competitive PvP</h3><p>Ranked battles, custom events, balanced combat.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon">⛏️</div><h3>Economy System</h3><p>Trade, grind, dominate the server economy.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon">🌍</div><h3>Unique Worlds</h3><p>Explore stunning custom maps & secrets.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon">✨</div><h3>Custom Content</h3><p>Exclusive systems built for Fallen Halo.</p></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- GALLERY -->
-<section id="gallery" class="fade-in">
-    <div class="container">
-        <div class="section-title">
-            <h2>Gallery</h2>
-            <p>A glimpse into Fallen Halo.</p>
-        </div>
-        <div class="gallery-grid">
-            <div class="gallery-item glow-trigger fade-in">
-                <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop">
-                <div class="gallery-overlay"><h3>Spawn Area</h3></div>
-            </div>
-            <div class="gallery-item glow-trigger fade-in">
-                <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop">
-                <div class="gallery-overlay"><h3>Adventure Zones</h3></div>
-            </div>
-            <div class="gallery-item glow-trigger fade-in">
-                <img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop">
-                <div class="gallery-overlay"><h3>Community Builds</h3></div>
+    <!-- GALLERY -->
+    <section id="gallery" class="fade-in">
+        <div class="container">
+            <div class="section-title"><h2>Gallery</h2><p>A glimpse into Fallen Halo.</p></div>
+            <div class="gallery-grid">
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="spawn"><div class="gallery-overlay"><h3>Spawn Area</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="adventure"><div class="gallery-overlay"><h3>Adventure Zones</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="community"><div class="gallery-overlay"><h3>Community Builds</h3></div></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- FAQ -->
-<section id="faq" class="fade-in">
-    <div class="container">
-        <div class="section-title">
-            <h2>FAQ</h2>
-            <p>Frequently asked questions.</p>
+    <!-- FAQ -->
+    <section id="faq" class="fade-in">
+        <div class="container">
+            <div class="section-title"><h2>FAQ</h2><p>Frequently asked questions.</p></div>
+            <div class="faq-container">
+                <div class="faq-item"><div class="faq-question">What version is the server on?<span>+</span></div><div class="faq-answer">Modern Minecraft versions 1.19 – 1.20+ are supported.</div></div>
+                <div class="faq-item"><div class="faq-question">Is the server pay-to-win?<span>+</span></div><div class="faq-answer">No, focused on fair gameplay. Only cosmetic extras.</div></div>
+                <div class="faq-item"><div class="faq-question">How do I join the community?<span>+</span></div><div class="faq-answer">Join our Discord server, link in footer. See you there!</div></div>
+            </div>
         </div>
-        <div class="faq-container">
-            <div class="faq-item fade-in">
-                <div class="faq-question">
-                    What version is the server on?
-                    <span>+</span>
+    </section>
+
+    <!-- COOL FOOTER with nice layout -->
+    <footer class="cool-footer fade-in">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>FALLEN HALO NETWORK</h3>
+                <p>Beyond ordinary. A next-gen Minecraft realm where legends rise.</p>
+                <div class="social-icon-set">
+                    <a href="#">🎮</a>
+                    <a href="#">💬</a>
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
                 </div>
-                <div class="faq-answer">The server supports modern Minecraft versions.</div>
             </div>
-            <div class="faq-item fade-in">
-                <div class="faq-question">
-                    Is the server pay-to-win?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">No. The server is focused on fair gameplay.</div>
-            </div>
-            <div class="faq-item fade-in">
-                <div class="faq-question">
-                    How do I join the community?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">Join our Discord server and meet the community.</div>
+            <div class="footer-links-grid">
+                <div class="footer-col"><h4>Explore</h4><a href="#features">Features</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></div>
+                <div class="footer-col"><h4>Community</h4><a href="#">Discord</a><a href="#">Forums</a><a href="#">Vote Now</a></div>
+                <div class="footer-col"><h4>Resources</h4><a href="#">Support</a><a href="#">Store</a><a href="#">Status</a></div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="fade-in">
-    <div class="footer-container">
-        <div class="footer-left">
-            <h3>Fallen Halo Network</h3>
-            <p>Built for players who want more than just another Minecraft server.</p>
+        <div class="footer-bottom">
+            © 2025 Fallen Halo Network — Crafted for adventurers & warriors.
         </div>
-        <div class="footer-links">
-            <a href="#" class="footer-btn">Discord</a>
-            <a href="#" class="footer-btn">Store</a>
-            <a href="#" class="footer-btn">Vote</a>
-            <a href="#" class="footer-btn">Support</a>
-        </div>
-    </div>
-</footer>
+    </footer>
+</main>
 
 <script>
-
-/* ===================================== */
-/* FAQ                                   */
-/* ===================================== */
-
-document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-question').addEventListener('click', () => {
-        item.classList.toggle('active');
+    // FAQ toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const q = item.querySelector('.faq-question');
+        q.addEventListener('click', () => item.classList.toggle('active'));
     });
-});
 
-/* ===================================== */
-/* CLICK GLOW                            */
-/* ===================================== */
-
-document.querySelectorAll('.glow-trigger').forEach(item => {
-    item.addEventListener('click', (e) => {
+    // Click glow effect
+    function createGlow(e) {
         const glow = document.createElement('div');
         glow.className = 'click-glow';
         glow.style.left = `${e.clientX}px`;
-        glow.style.top  = `${e.clientY}px`;
+        glow.style.top = `${e.clientY}px`;
         document.body.appendChild(glow);
         setTimeout(() => glow.remove(), 850);
+    }
+    document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a').forEach(el => {
+        el.addEventListener('click', (e) => createGlow(e));
     });
-});
 
-/* ===================================== */
-/* FADE IN / OUT                         */
-/* ===================================== */
+    // Fade-in observer
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) entry.target.classList.add('visible');
+            else entry.target.classList.remove('visible');
+        });
+    }, { threshold: 0.12 });
+    fadeElements.forEach(el => observer.observe(el));
 
-const fadeElements = document.querySelectorAll('.fade-in');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add('visible');
+    // THEME TOGGLE with gradient animation & localStorage
+    const themeBtn = document.getElementById('themeToggleBtn');
+    function setTheme(isLight) {
+        if(isLight) {
+            document.body.classList.add('light-mode');
+            themeBtn.innerHTML = '🌙';
+            localStorage.setItem('theme', 'light');
         } else {
-            entry.target.classList.remove('visible');
+            document.body.classList.remove('light-mode');
+            themeBtn.innerHTML = '☀️';
+            localStorage.setItem('theme', 'dark');
         }
+        // trigger reflow for gradient smoothness
+        document.body.style.transition = 'color 0.3s';
+    }
+    const saved = localStorage.getItem('theme');
+    if(saved === 'light') setTheme(true);
+    else setTheme(false);
+    
+    themeBtn.addEventListener('click', () => {
+        const isLight = document.body.classList.contains('light-mode');
+        setTheme(!isLight);
     });
-}, { threshold: 0.12 });
 
-fadeElements.forEach(el => observer.observe(el));
-
-/* ===================================== */
-/* THEME TOGGLE — gradient wipe effect   */
-/* ===================================== */
-
-const themeToggle = document.getElementById('themeToggle');
-const iconEl      = themeToggle.querySelector('.icon');
-const wipe        = document.getElementById('theme-wipe');
-
-// Init from saved preference
-if(localStorage.getItem('theme') === 'light'){
-    document.body.classList.add('light-mode');
-    iconEl.textContent = '🌙';
-} else {
-    iconEl.textContent = '☀';
-}
-
-themeToggle.addEventListener('click', () => {
-    const isGoingLight = !document.body.classList.contains('light-mode');
-
-    // 1 — button ripple
-    themeToggle.classList.add('firing');
-    setTimeout(() => themeToggle.classList.remove('firing'), 500);
-
-    // 2 — gradient wipe: flash in
-    wipe.classList.add('active');
-
-    setTimeout(() => {
-        // 3 — at peak opacity, swap the theme
-        document.body.classList.toggle('light-mode');
-        iconEl.textContent = isGoingLight ? '🌙' : '☀';
-        localStorage.setItem('theme', isGoingLight ? 'light' : 'dark');
-
-        // 4 — fade the wipe back out
-        wipe.classList.remove('active');
-    }, 300); // hold the flash briefly at full opacity before fading out
-});
-
+    // fix img fallback
+    document.querySelectorAll('img').forEach(img => {
+        img.onerror = function() {
+            if(!this.dataset.fixed){
+                this.src = 'https://placehold.co/150x150/2c3e55/white?text=FH';
+                this.dataset.fixed = 'true';
+            }
+        };
+    });
 </script>
 </body>
 </html>
