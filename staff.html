@@ -9,7 +9,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Three.js Library for 3D Minecraft Skins -->
+<!-- Three.js Library -->
 <script type="importmap">
     {
         "imports": {
@@ -526,44 +526,37 @@ nav{
 <script type="module">
     import * as THREE from 'three';
     
-    // Staff Data - Exactly 3 members as specified
+    // Staff Data
     const staffMembers = [
         { 
             name: "Ange1XDem0n", 
             rank: "Founder", 
             description: "Creator & Visionary behind Fallen Halo Network. Leading the server with passion and dedication since day one.",
-            skinUser: "Ange1XDem0n"
+            skinUser: "Ange1XDem0n",
+            accentColor: "#ffd700",
+            rankIcon: "👑"
         },
         { 
             name: "its_apex", 
             rank: "Executive", 
             description: "Executive Director managing operations, community growth, and strategic partnerships.",
-            skinUser: "atrillun"
+            skinUser: "atrillun",
+            accentColor: "#ff5555",
+            rankIcon: "⚡"
         },
         { 
             name: "abwyss", 
             rank: "Head Management", 
             description: "Head of Management overseeing staff, player relations, and server quality assurance.",
-            skinUser: "ibeella"
+            skinUser: "ibeella",
+            accentColor: "#55ff55",
+            rankIcon: "📋"
         }
     ];
 
-    // Function to load and apply Minecraft skin texture to a 3D model
-    async function createMinecraftModel(username, container) {
+    // Create a simple Minecraft-style character with skin texture
+    function createMinecraftModel(username, container, accentColor) {
         container.innerHTML = '';
-        
-        // Create loading indicator
-        const loadingDiv = document.createElement('div');
-        loadingDiv.className = 'loading-placeholder';
-        loadingDiv.style.position = 'absolute';
-        loadingDiv.style.top = '50%';
-        loadingDiv.style.left = '50%';
-        loadingDiv.style.transform = 'translate(-50%, -50%)';
-        loadingDiv.style.color = 'var(--text-soft)';
-        loadingDiv.style.fontSize = '0.9rem';
-        loadingDiv.style.zIndex = '10';
-        loadingDiv.innerHTML = '🎮 Loading 3D Model...';
-        container.appendChild(loadingDiv);
         
         // Setup Scene
         const scene = new THREE.Scene();
@@ -572,11 +565,6 @@ nav{
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
-        
-        // Remove loading text when renderer is ready
-        setTimeout(() => {
-            if (loadingDiv) loadingDiv.remove();
-        }, 500);
         
         // Lighting
         const ambientLight = new THREE.AmbientLight(0x404060);
@@ -601,22 +589,32 @@ nav{
         // Create character group
         const character = new THREE.Group();
         
-        // Determine rank colors
-        const isFounder = username === "Ange1XDem0n";
-        const isExecutive = username === "atrillun";
-        const isHead = username === "ibeella";
+        // Convert hex color to THREE.Color
+        const accentColorObj = new THREE.Color(accentColor);
         
-        let accentColor = 0x6b8bc9;
-        let glowColor = 0xa6b8e4;
-        if (isFounder) { accentColor = 0xffd700; glowColor = 0xffaa00; }
-        else if (isExecutive) { accentColor = 0xff5555; glowColor = 0xff3333; }
-        else if (isHead) { accentColor = 0x55ff55; glowColor = 0x33ff33; }
-        
-        // Load Minecraft skin texture
-        const skinTextureUrl = `https://mc-heads.net/body/${username}`;
+        // Load skin texture from reliable API (minotar.net - more reliable than mc-heads)
+        const skinUrl = `https://minotar.net/skin/${username}`;
         const textureLoader = new THREE.TextureLoader();
         
-        // Create a more detailed Minecraft-style character
+        // Create materials with fallback colors
+        let skinTexture = null;
+        
+        // Try to load the skin, but have fallback
+        const loadSkin = () => {
+            textureLoader.load(skinUrl, 
+                (texture) => {
+                    // Success - apply texture to head
+                    const headMat = new THREE.MeshStandardMaterial({ map: texture, roughness: 0.25 });
+                    head.material = headMat;
+                },
+                (error) => {
+                    // Fallback - use default skin color
+                    const fallbackMat = new THREE.MeshStandardMaterial({ color: 0xffccaa, roughness: 0.25 });
+                    head.material = fallbackMat;
+                }
+            );
+        };
+        
         // Body
         const bodyGeo = new THREE.BoxGeometry(0.75, 1.15, 0.6);
         const bodyMat = new THREE.MeshStandardMaterial({ color: 0x3d5a80, roughness: 0.35, metalness: 0.15 });
@@ -624,32 +622,26 @@ nav{
         body.position.y = 0;
         character.add(body);
         
-        // Chestplate / Armor accent
+        // Chestplate (armor)
         const chestGeo = new THREE.BoxGeometry(0.8, 0.9, 0.65);
-        const chestMat = new THREE.MeshStandardMaterial({ color: accentColor, roughness: 0.3, metalness: 0.6, emissive: glowColor, emissiveIntensity: 0.15 });
+        const chestMat = new THREE.MeshStandardMaterial({ color: accentColorObj, roughness: 0.3, metalness: 0.6, emissive: accentColorObj, emissiveIntensity: 0.15 });
         const chestplate = new THREE.Mesh(chestGeo, chestMat);
         chestplate.position.y = 0.05;
         character.add(chestplate);
         
-        // Head (larger for Minecraft feel)
+        // Head
         const headGeo = new THREE.BoxGeometry(0.72, 0.72, 0.72);
-        
-        // Try to apply skin texture to head
-        let headMat;
-        try {
-            const skinTexture = textureLoader.load(`https://mc-heads.net/avatar/${username}/128`);
-            headMat = new THREE.MeshStandardMaterial({ map: skinTexture, roughness: 0.25 });
-        } catch (e) {
-            headMat = new THREE.MeshStandardMaterial({ color: 0xffccaa, roughness: 0.25 });
-        }
-        
+        const headMat = new THREE.MeshStandardMaterial({ color: 0xffccaa, roughness: 0.25 });
         const head = new THREE.Mesh(headGeo, headMat);
         head.position.y = 0.98;
         character.add(head);
         
-        // Rank-specific head accessories
-        if (isFounder) {
-            // Crown for Founder
+        // Load skin texture
+        loadSkin();
+        
+        // Rank-specific accessories
+        if (staffMembers.find(s => s.skinUser === username)?.rank === "Founder") {
+            // Golden Crown
             const crownGeo = new THREE.CylinderGeometry(0.48, 0.52, 0.18, 8);
             const crownMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, roughness: 0.2, emissive: 0xffaa00, emissiveIntensity: 0.25 });
             const crown = new THREE.Mesh(crownGeo, crownMat);
@@ -661,16 +653,16 @@ nav{
             const jewel = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), jewelMat);
             jewel.position.set(0, 1.45, 0.45);
             character.add(jewel);
-        } else if (isExecutive) {
-            // Executive beret
+        } else if (staffMembers.find(s => s.skinUser === username)?.rank === "Executive") {
+            // Red Beret
             const beretGeo = new THREE.SphereGeometry(0.38, 16, 16);
             const beretMat = new THREE.MeshStandardMaterial({ color: 0xcc3333, roughness: 0.4 });
             const beret = new THREE.Mesh(beretGeo, beretMat);
             beret.position.y = 1.32;
             beret.scale.set(0.9, 0.25, 0.9);
             character.add(beret);
-        } else if (isHead) {
-            // Management visor
+        } else if (staffMembers.find(s => s.skinUser === username)?.rank === "Head Management") {
+            // Green Visor
             const visorGeo = new THREE.BoxGeometry(0.55, 0.12, 0.45);
             const visorMat = new THREE.MeshStandardMaterial({ color: 0x22aa22, metalness: 0.7, emissive: 0x22ff22, emissiveIntensity: 0.2 });
             const visor = new THREE.Mesh(visorGeo, visorMat);
@@ -688,9 +680,9 @@ nav{
         character.add(leftLeg);
         character.add(rightLeg);
         
-        // Boots with rank trim
+        // Boots
         const bootGeo = new THREE.BoxGeometry(0.32, 0.2, 0.38);
-        const bootMat = new THREE.MeshStandardMaterial({ color: accentColor, metalness: 0.5 });
+        const bootMat = new THREE.MeshStandardMaterial({ color: accentColorObj, metalness: 0.5 });
         const leftBoot = new THREE.Mesh(bootGeo, bootMat);
         leftBoot.position.set(-0.22, -0.85, 0);
         const rightBoot = new THREE.Mesh(bootGeo, bootMat);
@@ -710,7 +702,7 @@ nav{
         
         // Shoulder pauldrons
         const pauldronGeo = new THREE.SphereGeometry(0.22, 8, 8);
-        const pauldronMat = new THREE.MeshStandardMaterial({ color: accentColor, metalness: 0.7 });
+        const pauldronMat = new THREE.MeshStandardMaterial({ color: accentColorObj, metalness: 0.7 });
         const leftPaul = new THREE.Mesh(pauldronGeo, pauldronMat);
         leftPaul.position.set(-0.65, 0.65, 0);
         leftPaul.scale.set(0.7, 0.4, 0.6);
@@ -726,17 +718,17 @@ nav{
         camera.position.set(1.6, 1.3, 2.8);
         camera.lookAt(0, 0.8, 0);
         
-        // Animation variables
+        // Animation
         let time = 0;
         
         function animate() {
             requestAnimationFrame(animate);
             time += 0.014;
             
-            // Gentle floating animation
+            // Gentle floating
             character.position.y = Math.sin(time * 1.8) * 0.04;
             
-            // Subtle idle sway
+            // Idle sway
             character.rotation.y = Math.sin(time * 0.6) * 0.08;
             
             // Arm swing
@@ -757,7 +749,7 @@ nav{
         });
         resizeObserver.observe(container);
     }
-
+    
     // Render staff cards
     function renderStaffCards() {
         const grid = document.getElementById('staff-grid');
@@ -781,13 +773,13 @@ nav{
             
             if (staff.rank === 'Founder') {
                 rankClass = 'rank-badge-founder';
-                rankDisplay = '👑 FOUNDER';
+                rankDisplay = `${staff.rankIcon} FOUNDER`;
             } else if (staff.rank === 'Executive') {
                 rankClass = 'rank-badge-executive';
-                rankDisplay = '⚡ EXECUTIVE';
+                rankDisplay = `${staff.rankIcon} EXECUTIVE`;
             } else {
                 rankClass = 'rank-badge-head';
-                rankDisplay = '📋 HEAD MANAGEMENT';
+                rankDisplay = `${staff.rankIcon} HEAD MANAGEMENT`;
             }
             
             infoDiv.innerHTML = `
@@ -802,7 +794,7 @@ nav{
             
             // Initialize 3D model
             setTimeout(() => {
-                createMinecraftModel(staff.skinUser, modelDiv);
+                createMinecraftModel(staff.skinUser, modelDiv, staff.accentColor);
             }, 100);
         }
     }
