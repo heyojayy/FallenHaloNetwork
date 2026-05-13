@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fallen Halo Network | Edge Nav & Gradient Transition</title>
+<title>Fallen Halo Network | SVG Icons & Gradient Theme</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -30,6 +30,8 @@
     --gradient2-end: #7a9ad6;
     --shadow: rgba(166,184,228,.15);
     --btn-hover: rgba(166,184,228,.12);
+    --accent-glow: #a6b8e4;
+    --logo-filter: brightness(0) invert(1);
 }
 
 /* LIGHT MODE */
@@ -48,6 +50,8 @@ body.light-mode{
     --gradient2-end: #4a61a3;
     --shadow: rgba(93,121,190,.2);
     --btn-hover: rgba(93,121,190,.12);
+    --accent-glow: #5d79be;
+    --logo-filter: brightness(0) saturate(100%) invert(22%) sepia(32%) saturate(1237%) hue-rotate(197deg) brightness(94%) contrast(88%);
 }
 
 *{
@@ -158,7 +162,7 @@ nav{
     padding: 16px 32px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* KEY: pushes logo left, buttons right */
+    justify-content: space-between;
     gap: 24px;
 }
 
@@ -172,14 +176,14 @@ nav{
     flex-shrink: 0;
 }
 
-.logo img{
+.logo svg{
     width: 48px;
     height: 48px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px var(--shadow));
+    filter: drop-shadow(0 0 8px var(--shadow));
+    transition: filter 0.3s;
 }
 
-.logo span{
+.logo .logo-text{
     background: linear-gradient(135deg, var(--gradient1-start), var(--gradient2-end));
     -webkit-background-clip: text;
     background-clip: text;
@@ -235,14 +239,27 @@ nav{
     border-radius: 30px;
     border: 1px solid var(--card-border);
     background: var(--card);
-    color: var(--text);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
     transition: 0.25s ease;
     backdrop-filter: blur(8px);
+    padding: 0;
+}
+
+.theme-toggle svg{
+    width: 22px;
+    height: 22px;
+    stroke: var(--text);
+    stroke-width: 1.8;
+    fill: none;
+    transition: stroke 0.2s;
+}
+
+body.light-mode .theme-toggle svg.sun-icon{
+    fill: #fbbf24;
+    stroke: #d97706;
 }
 
 .theme-toggle:hover{
@@ -250,39 +267,18 @@ nav{
     box-shadow: 0 6px 18px var(--shadow);
 }
 
-/* responsive: stack on smaller screens? keep horizontal flow */
+/* responsive */
 @media (max-width: 680px) {
-    .nav-container {
-        padding: 12px 20px;
-        flex-wrap: wrap;
-    }
-    .nav-links {
-        gap: 18px;
-    }
-    .nav-right {
-        gap: 16px;
-    }
-    .logo span {
-        font-size: 0.9rem;
-    }
+    .nav-container { padding: 12px 20px; flex-wrap: wrap; }
+    .nav-links { gap: 18px; }
+    .nav-right { gap: 16px; }
+    .logo .logo-text { font-size: 0.9rem; }
+    .logo svg { width: 38px; height: 38px; }
 }
-
 @media (max-width: 550px) {
-    .nav-links {
-        gap: 12px;
-    }
-    .nav-links a {
-        font-size: 0.8rem;
-    }
-    .theme-toggle {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-/* main content push down */
-main {
-    padding-top: 0;
+    .nav-links { gap: 12px; }
+    .nav-links a { font-size: 0.8rem; }
+    .theme-toggle { width: 40px; height: 40px; }
 }
 
 /* ===================================== */
@@ -300,11 +296,13 @@ main {
 .hero-content{
     max-width: 1000px;
 }
-.hero-logo{
+.hero-logo svg{
     width: 150px;
+    height: 150px;
     margin-bottom: 28px;
     animation: logoFloat 4.5s ease-in-out infinite;
     filter: drop-shadow(0 0 28px var(--shadow));
+    transition: filter 0.3s;
 }
 @keyframes logoFloat{
     0%,100%{ transform:translateY(0px);}
@@ -343,7 +341,16 @@ main {
     border: 1px solid var(--card-border);
     color: var(--text);
     transition: 0.25s ease;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.btn svg{
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
 }
 .btn-primary{
     background: linear-gradient(110deg, rgba(166,184,228,0.18), rgba(226,230,238,0.08));
@@ -407,9 +414,15 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
     margin-bottom: 24px;
     color: white;
+}
+.feature-icon svg{
+    width: 34px;
+    height: 34px;
+    stroke: white;
+    stroke-width: 1.7;
+    fill: none;
 }
 .gallery-grid{
     display: grid;
@@ -466,6 +479,13 @@ section{
     font-weight: 600;
     cursor: pointer;
 }
+.faq-question svg{
+    width: 20px;
+    height: 20px;
+    stroke: var(--text);
+    stroke-width: 2;
+    transition: transform 0.35s ease;
+}
 .faq-answer{
     max-height: 0;
     padding: 0 30px;
@@ -479,7 +499,7 @@ section{
     padding: 0 30px 28px;
     opacity: 1;
 }
-.faq-item.active .faq-question span{
+.faq-item.active .faq-question svg{
     transform: rotate(45deg);
 }
 
@@ -549,10 +569,14 @@ section{
     align-items: center;
     justify-content: center;
     border: 1px solid var(--card-border);
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: var(--text);
     transition: 0.2s;
+}
+.social-icon-set a svg{
+    width: 22px;
+    height: 22px;
+    stroke: var(--text);
+    stroke-width: 1.7;
+    fill: none;
 }
 .social-icon-set a:hover{
     transform: translateY(-4px);
@@ -583,10 +607,11 @@ section{
     height: 0;
     border-radius: 50%;
     pointer-events: none;
-    background: radial-gradient(circle, rgba(166,184,228,0.5), transparent 75%);
+    background: radial-gradient(circle, var(--accent-glow), transparent 75%);
     transform: translate(-50%, -50%);
     animation: glowPop 0.85s ease-out forwards;
     z-index: 10000;
+    opacity: 0.6;
 }
 @keyframes glowPop{
     0%{ width: 0px; height: 0px; opacity: 0.7; }
@@ -602,12 +627,24 @@ section{
     <div class="glow-sphere three"></div>
 </div>
 
-<!-- NAVBAR: LOGO FAR LEFT, BUTTONS FAR RIGHT -->
+<!-- NAVBAR: LOGO FAR LEFT, BUTTONS FAR RIGHT (SVG ICONS) -->
 <nav>
     <div class="nav-container">
         <div class="logo">
-            <img src="logo.png" alt="Fallen Halo" onerror="this.src='https://placehold.co/64x64/1e2a3e/ffffff?text=FH'">
-            <span>FALLEN HALO</span>
+            <!-- SVG Logo - halo/crown theme that adapts color via currentColor -->
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="28" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 24 L26 18 L32 22 L38 18 L44 24 L40 34 L32 40 L24 34 L20 24Z" stroke="url(#grad1)" stroke-width="2" fill="rgba(255,255,255,0.05)"/>
+                <circle cx="32" cy="28" r="3" fill="url(#grad1)"/>
+                <path d="M32 40 L32 48" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--gradient1-start)"/>
+                        <stop offset="100%" stop-color="var(--gradient2-start)"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="logo-text">FALLEN HALO</span>
         </div>
         <div class="nav-right">
             <div class="nav-links">
@@ -615,21 +652,45 @@ section{
                 <a href="#gallery">Gallery</a>
                 <a href="#faq">FAQ</a>
             </div>
-            <button class="theme-toggle" id="themeToggleBtn">☀️</button>
+            <button class="theme-toggle" id="themeToggleBtn">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </button>
         </div>
     </div>
 </nav>
 
 <main>
-    <!-- HERO -->
+    <!-- HERO SECTION with SVG logo -->
     <section class="hero fade-in visible">
         <div class="hero-content">
-            <img src="logo.png" class="hero-logo" alt="logo" onerror="this.src='https://placehold.co/150x150/2d3a5e/white?text=FH'">
+            <div class="hero-logo">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="42" stroke="url(#heroGrad)" stroke-width="2.5" fill="none"/>
+                    <path d="M30 38 L40 28 L50 34 L60 28 L70 38 L64 52 L50 62 L36 52 L30 38Z" stroke="url(#heroGrad)" stroke-width="2.5" fill="rgba(255,255,255,0.06)"/>
+                    <circle cx="50" cy="44" r="5" fill="url(#heroGrad)"/>
+                    <path d="M50 62 L50 74" stroke="url(#heroGrad)" stroke-width="3" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--gradient1-start)"/>
+                            <stop offset="100%" stop-color="var(--gradient2-start)"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
             <h1>Fallen Halo Network</h1>
             <p>A premium Minecraft experience built for grinders, fighters, explorers, and legends.</p>
             <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">▶ PLAY NOW</a>
-                <a href="#" class="btn">💬 JOIN DISCORD</a>
+                <a href="#" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" fill-opacity="0.2"/></svg>
+                    PLAY NOW
+                </a>
+                <a href="#" class="btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    JOIN DISCORD
+                </a>
             </div>
         </div>
     </section>
@@ -639,10 +700,10 @@ section{
         <div class="container">
             <div class="section-title"><h2>Features</h2><p>Built to deliver the best Minecraft experience.</p></div>
             <div class="features-grid">
-                <div class="feature-card glow-trigger"><div class="feature-icon">⚔️</div><h3>Competitive PvP</h3><p>Ranked battles, custom events, balanced combat.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon">⛏️</div><h3>Economy System</h3><p>Trade, grind, dominate the server economy.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon">🌍</div><h3>Unique Worlds</h3><p>Explore stunning custom maps & secrets.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon">✨</div><h3>Custom Content</h3><p>Exclusive systems built for Fallen Halo.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.59V19h8.41l7.83-7.76z" stroke="currentColor" fill="none"/><path d="M16 8 L8 16" stroke="currentColor"/></svg></div><h3>Competitive PvP</h3><p>Ranked battles, custom events, balanced combat.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/></svg></div><h3>Economy System</h3><p>Trade, grind, dominate the server economy.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg></div><h3>Unique Worlds</h3><p>Explore stunning custom maps & secrets.</p></div>
+                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg></div><h3>Custom Content</h3><p>Exclusive systems built for Fallen Halo.</p></div>
             </div>
         </div>
     </section>
@@ -664,24 +725,24 @@ section{
         <div class="container">
             <div class="section-title"><h2>FAQ</h2><p>Frequently asked questions.</p></div>
             <div class="faq-container">
-                <div class="faq-item"><div class="faq-question">What version is the server on?<span>+</span></div><div class="faq-answer">Modern Minecraft versions 1.19 – 1.20+ are supported.</div></div>
-                <div class="faq-item"><div class="faq-question">Is the server pay-to-win?<span>+</span></div><div class="faq-answer">No, focused on fair gameplay. Only cosmetic extras.</div></div>
-                <div class="faq-item"><div class="faq-question">How do I join the community?<span>+</span></div><div class="faq-answer">Join our Discord server, link in footer. See you there!</div></div>
+                <div class="faq-item"><div class="faq-question">What version is the server on?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><div class="faq-answer">Modern Minecraft versions 1.19 – 1.20+ are supported.</div></div>
+                <div class="faq-item"><div class="faq-question">Is the server pay-to-win?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><div class="faq-answer">No, focused on fair gameplay. Only cosmetic extras.</div></div>
+                <div class="faq-item"><div class="faq-question">How do I join the community?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><div class="faq-answer">Join our Discord server, link in footer. See you there!</div></div>
             </div>
         </div>
     </section>
 
-    <!-- COOL FOOTER with nice layout -->
+    <!-- FOOTER with SVG social icons -->
     <footer class="cool-footer fade-in">
         <div class="footer-inner">
             <div class="footer-brand">
                 <h3>FALLEN HALO NETWORK</h3>
                 <p>Beyond ordinary. A next-gen Minecraft realm where legends rise.</p>
                 <div class="social-icon-set">
-                    <a href="#">🎮</a>
-                    <a href="#">💬</a>
-                    <a href="#">📘</a>
-                    <a href="#">🐦</a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M22 2L15 9M22 2l-7 7M22 2v6M15 9l-7-7M15 9L8 2M2 2l7 7M2 2h6M2 2v6M9 15l7 7M9 15l-7 7M9 15v6M16 16l6 6M16 16h6M16 16v6" stroke="currentColor"/></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M21 8v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5z"/></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.3 9 4.5 0-2 .8-4 2.3-5.5 2-2 5.3-2 7.3 0z"/></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg></a>
                 </div>
             </div>
             <div class="footer-links-grid">
@@ -690,76 +751,35 @@ section{
                 <div class="footer-col"><h4>Resources</h4><a href="#">Support</a><a href="#">Store</a><a href="#">Status</a></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            © 2025 Fallen Halo Network — Crafted for adventurers & warriors.
-        </div>
+        <div class="footer-bottom">© 2025 Fallen Halo Network — Crafted for adventurers & warriors.</div>
     </footer>
 </main>
 
 <script>
     // FAQ toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const q = item.querySelector('.faq-question');
-        q.addEventListener('click', () => item.classList.toggle('active'));
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
     });
 
     // Click glow effect
-    function createGlow(e) {
-        const glow = document.createElement('div');
-        glow.className = 'click-glow';
-        glow.style.left = `${e.clientX}px`;
-        glow.style.top = `${e.clientY}px`;
-        document.body.appendChild(glow);
-        setTimeout(() => glow.remove(), 850);
-    }
-    document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a').forEach(el => {
-        el.addEventListener('click', (e) => createGlow(e));
-    });
+    function createGlow(e) { let g=document.createElement('div'); g.className='click-glow'; g.style.left=e.clientX+'px'; g.style.top=e.clientY+'px'; document.body.appendChild(g); setTimeout(()=>g.remove(),850); }
+    document.querySelectorAll('.glow-trigger, .btn, .theme-toggle, .social-icon-set a, .footer-col a, .nav-links a').forEach(el => el.addEventListener('click', createGlow));
 
-    // Fade-in observer
-    const fadeElements = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) entry.target.classList.add('visible');
-            else entry.target.classList.remove('visible');
-        });
-    }, { threshold: 0.12 });
-    fadeElements.forEach(el => observer.observe(el));
+    // fade-in observer
+    new IntersectionObserver((entries, obs) => { entries.forEach(e=>e.isIntersecting?e.target.classList.add('visible'):e.target.classList.remove('visible')); }, {threshold:0.12})
+    .observeMultiple = (els) => els.forEach(el => this.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => new IntersectionObserver(([e])=> e.isIntersecting ? e.target.classList.add('visible') : null, {threshold:0.12}).observe(el));
 
-    // THEME TOGGLE with gradient animation & localStorage
+    // THEME TOGGLE with SVG sun/moon morph
     const themeBtn = document.getElementById('themeToggleBtn');
-    function setTheme(isLight) {
-        if(isLight) {
-            document.body.classList.add('light-mode');
-            themeBtn.innerHTML = '🌙';
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.body.classList.remove('light-mode');
-            themeBtn.innerHTML = '☀️';
-            localStorage.setItem('theme', 'dark');
-        }
-        // trigger reflow for gradient smoothness
-        document.body.style.transition = 'color 0.3s';
+    const sunSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
+    const moonSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    function setTheme(isLight){ 
+        if(isLight){ document.body.classList.add('light-mode'); themeBtn.innerHTML = moonSvg; localStorage.setItem('theme','light'); } 
+        else { document.body.classList.remove('light-mode'); themeBtn.innerHTML = sunSvg; localStorage.setItem('theme','dark'); }
     }
-    const saved = localStorage.getItem('theme');
-    if(saved === 'light') setTheme(true);
-    else setTheme(false);
-    
-    themeBtn.addEventListener('click', () => {
-        const isLight = document.body.classList.contains('light-mode');
-        setTheme(!isLight);
-    });
-
-    // fix img fallback
-    document.querySelectorAll('img').forEach(img => {
-        img.onerror = function() {
-            if(!this.dataset.fixed){
-                this.src = 'https://placehold.co/150x150/2c3e55/white?text=FH';
-                this.dataset.fixed = 'true';
-            }
-        };
-    });
+    setTheme(localStorage.getItem('theme') === 'light');
+    themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('light-mode')));
 </script>
 </body>
 </html>
