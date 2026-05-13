@@ -60,7 +60,6 @@ body.light-mode{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    cursor: none;
 }
 
 html{
@@ -72,65 +71,6 @@ body{
     color:var(--text);
     overflow-x:hidden;
     transition: color 0.35s ease;
-}
-
-/* Disable custom cursor on mobile/touch devices */
-@media (max-width: 768px) {
-    * {
-        cursor: auto !important;
-    }
-    .custom-cursor {
-        display: none !important;
-    }
-}
-
-/* Custom Cursor Styles */
-.custom-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease-out;
-}
-
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--gradient2-start);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: width 0.2s, height 0.2s, background 0.2s;
-}
-
-.cursor-ring {
-    width: 32px;
-    height: 32px;
-    border: 2px solid var(--gradient2-start);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: width 0.3s, height 0.3s, border-color 0.2s, border-width 0.2s;
-}
-
-/* Hover effect for clickable elements */
-a:hover ~ .custom-cursor .cursor-ring,
-button:hover ~ .custom-cursor .cursor-ring,
-.btn:hover ~ .custom-cursor .cursor-ring {
-    width: 48px;
-    height: 48px;
-    border-color: var(--gradient1-start);
-    border-width: 3px;
-}
-
-a:hover ~ .custom-cursor .cursor-dot,
-button:hover ~ .custom-cursor .cursor-dot,
-.btn:hover ~ .custom-cursor .cursor-dot {
-    width: 12px;
-    height: 12px;
-    background: var(--gradient1-start);
 }
 
 /* ANIMATED GRADIENT BACKGROUND */
@@ -725,12 +665,6 @@ section{
     <div class="glow-sphere three"></div>
 </div>
 
-<!-- Custom Cursor (Desktop only) -->
-<div class="custom-cursor">
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-</div>
-
 <!-- NAVBAR -->
 <nav>
     <div class="nav-container">
@@ -798,4 +732,29 @@ section{
                     <p>Explore stunning custom maps & secrets.</p>
                 </div>
                 <div class="feature-card glow-trigger">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="c
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg></div>
+                    <h3>Custom Content</h3>
+                    <p>Exclusive systems built for Fallen Halo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="fade-scroll">
+        <div class="container">
+            <div class="section-title"><h2>Gallery</h2><p id="gallery-subtitle">A glimpse into Fallen Halo.</p></div>
+            <div class="gallery-grid">
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="spawn"><div class="gallery-overlay"><h3>Spawn Area</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="adventure"><div class="gallery-overlay"><h3>Adventure Zones</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="community"><div class="gallery-overlay"><h3>Community Builds</h3></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="fade-scroll">
+        <div class="container">
+            <div class="section-title"><h2>FAQ</h2><p id="faq-subtitle">Frequently asked questions.</p></div>
+            <div class="faq-container">
+ 
