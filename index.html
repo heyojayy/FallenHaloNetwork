@@ -7,6 +7,10 @@
 
 <title>Fallen Halo Network | Premium Minecraft Server</title>
 
+<!-- favicon / tab icon -->
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="shortcut icon" href="logo.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -56,7 +60,6 @@ body.light-mode{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    cursor: none;
 }
 
 html{
@@ -67,69 +70,7 @@ body{
     font-family:'Poppins',sans-serif;
     color:var(--text);
     overflow-x:hidden;
-    transition: color 0.35s ease;
-}
-
-/* Disable custom cursor on mobile/touch devices */
-@media (max-width: 768px) {
-    * {
-        cursor: auto !important;
-    }
-    .custom-cursor {
-        display: none !important;
-    }
-}
-
-/* Custom Cursor Styles */
-.custom-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease-out;
-}
-
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--gradient2-start);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: width 0.2s, height 0.2s, background 0.2s;
-}
-
-.cursor-ring {
-    width: 32px;
-    height: 32px;
-    border: 2px solid var(--gradient2-start);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: width 0.3s, height 0.3s, border-color 0.2s, border-width 0.2s;
-}
-
-/* Hover effect for clickable elements */
-a:hover ~ .custom-cursor .cursor-ring,
-button:hover ~ .custom-cursor .cursor-ring,
-.btn:hover ~ .custom-cursor .cursor-ring,
-.feature-card:hover ~ .custom-cursor .cursor-ring,
-.gallery-item:hover ~ .custom-cursor .cursor-ring,
-.faq-item:hover ~ .custom-cursor .cursor-ring {
-    width: 48px;
-    height: 48px;
-    border-color: var(--gradient1-start);
-    border-width: 3px;
-}
-
-a:hover ~ .custom-cursor .cursor-dot,
-button:hover ~ .custom-cursor .cursor-dot,
-.btn:hover ~ .custom-cursor .cursor-dot {
-    width: 12px;
-    height: 12px;
-    background: var(--gradient1-start);
+    transition: color 0.35s ease, background 0.35s ease;
 }
 
 /* ANIMATED GRADIENT BACKGROUND */
@@ -458,6 +399,7 @@ section{
 .section-title p{
     color: var(--text-soft);
 }
+
 .features-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -493,6 +435,24 @@ section{
     stroke-width: 1.7;
     fill: none;
 }
+
+/* Unavailable Mode Styles */
+.unavailable-mode .feature-card,
+.unavailable-mode .gallery-item,
+.unavailable-mode .faq-item {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.unavailable-mode .feature-card h3 {
+    color: var(--text-soft);
+}
+
+.unavailable-mode .gallery-item img {
+    filter: grayscale(0.5);
+}
+
 .gallery-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -529,6 +489,7 @@ section{
     font-weight: 600;
     color: white;
 }
+
 .faq-container{
     max-width: 800px;
     margin: auto;
@@ -572,6 +533,18 @@ section{
 }
 .faq-item.active .faq-question svg{
     transform: rotate(45deg);
+}
+
+/* fade-in/out animation for scroll - FIXED */
+.fade-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+
+.fade-scroll.fade-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ========== MODERN COOL FOOTER ========== */
@@ -656,9 +629,6 @@ section{
     transform: translateY(-4px);
     background: var(--btn-hover);
 }
-.social-icon-set a:hover svg{
-    stroke: url(#gradientStroke);
-}
 .footer-bottom{
     text-align: center;
     margin-top: 3rem;
@@ -668,16 +638,7 @@ section{
     color: var(--text-soft);
 }
 
-/* fade-in + click glow */
-.fade-in{
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.1), transform 0.8s ease;
-}
-.fade-in.visible{
-    opacity: 1;
-    transform: translateY(0px);
-}
+/* click glow */
 .click-glow{
     position: fixed;
     width: 0;
@@ -702,12 +663,6 @@ section{
     <div class="glow-sphere one"></div>
     <div class="glow-sphere two"></div>
     <div class="glow-sphere three"></div>
-</div>
-
-<!-- Custom Cursor (Desktop only) -->
-<div class="custom-cursor">
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
 </div>
 
 <!-- NAVBAR -->
@@ -735,8 +690,8 @@ section{
 </nav>
 
 <main>
-    <!-- HERO -->
-    <section class="hero fade-in visible">
+    <!-- HERO - always visible -->
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-logo">
                 <img src="logo.png" alt="Fallen Halo Network Logo">
@@ -756,23 +711,48 @@ section{
         </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features" class="fade-in">
+    <!-- FEATURES - with fade scroll -->
+    <section id="features" class="fade-scroll">
         <div class="container">
-            <div class="section-title"><h2>Features</h2><p>Built to deliver the best Minecraft experience.</p></div>
+            <div class="section-title"><h2>Features</h2><p id="features-subtitle">Built to deliver the best Minecraft experience.</p></div>
             <div class="features-grid">
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.59V19h8.41l7.83-7.76z" stroke="currentColor" fill="none"/><path d="M16 8 L8 16" stroke="currentColor"/></svg></div><h3>Competitive PvP</h3><p>Ranked battles, custom events, balanced combat.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/></svg></div><h3>Economy System</h3><p>Trade, grind, dominate the server economy.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg></div><h3>Unique Worlds</h3><p>Explore stunning custom maps & secrets.</p></div>
-                <div class="feature-card glow-trigger"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg></div><h3>Custom Content</h3><p>Exclusive systems built for Fallen Halo.</p></div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.59V19h8.41l7.83-7.76z" stroke="currentColor" fill="none"/><path d="M16 8 L8 16" stroke="currentColor"/></svg></div>
+                    <h3>Competitive PvP</h3>
+                    <p>Ranked battles, custom events, balanced combat.</p>
+                </div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/></svg></div>
+                    <h3>Economy System</h3>
+                    <p>Trade, grind, dominate the server economy.</p>
+                </div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor"/><circle cx="12" cy="12" r="10" stroke="currentColor"/></svg></div>
+                    <h3>Unique Worlds</h3>
+                    <p>Explore stunning custom maps & secrets.</p>
+                </div>
+                <div class="feature-card glow-trigger">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg></div>
+                    <h3>Custom Content</h3>
+                    <p>Exclusive systems built for Fallen Halo.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- GALLERY -->
-    <section id="gallery" class="fade-in">
+    <!-- GALLERY - with fade scroll -->
+    <section id="gallery" class="fade-scroll">
         <div class="container">
-            <div class="section-title"><h2>Gallery</h2><p>A glimpse into Fallen Halo.</p></div>
+            <div class="section-title"><h2>Gallery</h2><p id="gallery-subtitle">A glimpse into Fallen Halo.</p></div>
             <div class="gallery-grid">
                 <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1400&auto=format&fit=crop" alt="spawn"><div class="gallery-overlay"><h3>Spawn Area</h3></div></div>
-    
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1400&auto=format&fit=crop" alt="adventure"><div class="gallery-overlay"><h3>Adventure Zones</h3></div></div>
+                <div class="gallery-item glow-trigger"><img src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1400&auto=format&fit=crop" alt="community"><div class="gallery-overlay"><h3>Community Builds</h3></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ - with fade scroll -->
+    <section id="faq" class="fade-scroll">
+        <div class="container">
+            <div class="section-title"><h2>FAQ</h2><p id="faq-subtitle">Frequently asked
