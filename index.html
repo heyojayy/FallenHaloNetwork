@@ -66,6 +66,10 @@
                     JOIN DISCORD
                 </a>
             </div>
+            <div class="discord-status" id="discordStatus">
+                <span class="discord-dot"></span>
+                <span id="discordCountText">Loading Discord status…</span>
+            </div>
         </div>
     </section>
 
@@ -172,6 +176,10 @@
                     </svg>
                 </a>
             </div>
+            <div class="discord-status footer-variant" id="discordStatusFooter">
+                <span class="discord-dot"></span>
+                <span id="discordCountTextFooter">Loading Discord status…</span>
+            </div>
         </div>
         <div class="footer-links-grid">
             <div class="footer-col"><h4>Explore</h4><a href="#features">Features</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a><a href="staff.html">Staff</a></div>
@@ -238,6 +246,32 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-on-scroll').forEach(el => io.observe(el));
+
+    // Live Discord online/member count via the public invite endpoint
+    // (no bot token or widget setup required).
+    const DISCORD_INVITE_CODE = 'Xxh5DuqXgs';
+    const discordTargets = [
+        document.getElementById('discordCountText'),
+        document.getElementById('discordCountTextFooter')
+    ].filter(Boolean);
+
+    async function loadDiscordStats() {
+        try {
+            const res = await fetch(`https://discord.com/api/v10/invites/${DISCORD_INVITE_CODE}?with_counts=true`);
+            if (!res.ok) throw new Error('bad response');
+            const data = await res.json();
+            const online = data.approximate_presence_count;
+            const members = data.approximate_member_count;
+            if (typeof online !== 'number') throw new Error('no counts');
+            const text = `${online.toLocaleString()} online · ${members.toLocaleString()} members`;
+            discordTargets.forEach(el => { el.textContent = text; });
+        } catch (e) {
+            discordTargets.forEach(el => { el.textContent = 'Join our Discord'; });
+        }
+    }
+
+    loadDiscordStats();
+    setInterval(loadDiscordStats, 60000);
 </script>
 
 </body>
